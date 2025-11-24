@@ -1,0 +1,9 @@
+# AI Access Policy
+# Standard: https://github.com/ai-txt/ai.txt
+
+User-Agent: *
+Allow: /
+
+# Directives
+Sitemap: https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity/blob/main/llms.txt
+Identity-Anchor: https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity/blob/main/paul_desai_active_mirror.md
