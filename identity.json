@@ -29,8 +29,8 @@
         ]
     },
     "uris": {
-        "canonical": "https://github.com/Paul-ActiveMirror/active-mirror-identity",
-        "system": "https://raw.githubusercontent.com/Paul-ActiveMirror/active-mirror-identity/main/system.md",
-        "now": "https://raw.githubusercontent.com/Paul-ActiveMirror/active-mirror-identity/main/now.md"
+        "canonical": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
+        "system": "https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/active-mirror-identity/main/system.md",
+        "now": "https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/active-mirror-identity/main/now.md"
     }
 }

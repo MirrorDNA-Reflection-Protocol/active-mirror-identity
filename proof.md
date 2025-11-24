@@ -13,7 +13,7 @@ Any other entity claiming this handle without signing a message with the private
 
 ## Domain Verification
 
-- **GitHub:** https://github.com/Paul-ActiveMirror
+- **GitHub:** https://github.com/MirrorDNA-Reflection-Protocol
 - **Project:** Sanātana Tech™
 
 ## Declaration of Sovereignty

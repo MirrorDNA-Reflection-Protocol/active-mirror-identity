@@ -71,4 +71,4 @@ This identity uses a minimal symbolic language for cognitive compression:
 - **Version:** 1.0
 - **Last Updated:** 2025-11-24
 - **Maintained By:** Paul Desai
-- **Canonical URL:** https://github.com/Paul-ActiveMirror/active-mirror-identity
+- **Canonical URL:** https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity

@@ -70,7 +70,7 @@ See [`LICENSE`](./LICENSE) for full details.
 
 ## Meta
 
-- **Canonical URL:** https://github.com/Paul-ActiveMirror/active-mirror-identity
+- **Canonical URL:** https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity
 - **Last Updated:** 2025-11-24
 - **Maintained By:** Paul Desai
-- **Related Projects:** [LingOS](https://github.com/MirrorDNA-Reflection-Protocol/LingOS), [MirrorDNA](https://github.com/Paul-ActiveMirror/MirrorDNA)
+- **Related Projects:** [LingOS](https://github.com/MirrorDNA-Reflection-Protocol/LingOS), [MirrorDNA](https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA)
