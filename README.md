@@ -11,6 +11,8 @@
 This repository is a **sovereign identity anchor** for Paul Desai's digital presence. It serves as the canonical source of truth for AI agents, collaborators, and systems interacting with the ~active-mirror-paul identity.
 
 **Key Files:**
+- **`BOOT.md`** — **Universal Bootloader** (Copy-paste this to align ANY AI immediately)
+- **`identity.json`** — Machine-readable profile for autonomous agents
 - **`llms.txt`** — Semantic map for AI agents (read this first)
 - **`system.md`** — Operating kernel (cognitive stance, protocols, GlyphOS syntax)
 - **`now.md`** — Live state (current focus, location, constraints)

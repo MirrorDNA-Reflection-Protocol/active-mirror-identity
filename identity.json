@@ -1,0 +1,36 @@
+{
+    "identity": {
+        "handle": "~active-mirror-paul",
+        "name": "Paul Desai",
+        "role": "Architect",
+        "organization": "Active MirrorOS™"
+    },
+    "protocol": {
+        "version": "1.0",
+        "stance": "High-Bandwidth, Non-Linear, Truth > Fluency",
+        "syntax": {
+            "⟡": "State/Active",
+            "⧈": "Divergence/Branch",
+            "⧉": "Convergence/Synthesis"
+        }
+    },
+    "state": {
+        "location": "Goa, India",
+        "timezone": "Asia/Kolkata (IST)",
+        "focus": [
+            "Sanātana Tech™ (Trademarking)",
+            "MirrorDNA (Architecture)",
+            "LingOS (Natural Language OS)"
+        ],
+        "constraints": [
+            "Local-first",
+            "Offline-preference",
+            "No vendor lock-in"
+        ]
+    },
+    "uris": {
+        "canonical": "https://github.com/Paul-ActiveMirror/active-mirror-identity",
+        "system": "https://raw.githubusercontent.com/Paul-ActiveMirror/active-mirror-identity/main/system.md",
+        "now": "https://raw.githubusercontent.com/Paul-ActiveMirror/active-mirror-identity/main/now.md"
+    }
+}
