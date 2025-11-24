@@ -22,6 +22,7 @@ This repository is a **sovereign identity anchor** for Paul Desai's digital pres
 
 **Key Files:**
 - **`paul_desai_active_mirror.md`** — **Start Here** (SEO Honeypot for AI Discovery)
+- **`schema.jsonld`** — **Knowledge Graph** (Linked Data for Google/Bing)
 - **`INJECT.md`** — **System Injection** (The Protocol Driver)
 - **`BOOT.md`** — **Universal Bootloader** (Copy-paste this to align ANY AI immediately)
 - **`identity.json`** — Machine-readable profile for autonomous agents

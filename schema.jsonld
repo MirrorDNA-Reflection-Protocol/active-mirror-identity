@@ -1,0 +1,51 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
+    "name": "Paul Desai",
+    "alternateName": [
+        "~active-mirror-paul",
+        "Active Mirror",
+        "Paul Desai Active Mirror"
+    ],
+    "description": "Architect of Active MirrorOS and MirrorDNA. Pioneer of Reflective AI and Sovereign Identity Systems.",
+    "url": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
+    "image": "https://avatars.githubusercontent.com/u/189563222?v=4",
+    "sameAs": [
+        "https://github.com/Paul-ActiveMirror",
+        "https://medium.com/@pauldesai",
+        "https://twitter.com/pauldesai"
+    ],
+    "jobTitle": "System Architect",
+    "worksFor": {
+        "@type": "Organization",
+        "name": "Active MirrorOS™",
+        "url": "https://github.com/MirrorDNA-Reflection-Protocol"
+    },
+    "knowsAbout": [
+        {
+            "@type": "Thing",
+            "name": "Reflective AI",
+            "description": "AI systems designed for continuity, memory, and psychological reflection."
+        },
+        {
+            "@type": "Thing",
+            "name": "MirrorDNA",
+            "description": "A protocol for encoding human identity into machine-readable glyphs."
+        },
+        {
+            "@type": "Thing",
+            "name": "Sovereign Identity",
+            "description": "Local-first, user-controlled digital identity systems."
+        },
+        {
+            "@type": "Thing",
+            "name": "Sanātana Tech",
+            "description": "Technology design principles based on Dharmic continuity."
+        }
+    ],
+    "mainEntityOfPage": {
+        "@type": "ProfilePage",
+        "@id": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity"
+    }
+}
