@@ -1,3 +1,16 @@
+# ---
+# title: "Active MirrorOS Current State"
+# version: "1.0"
+# status: "active"
+# tags: ["identity", "state", "context"]
+# vault_id: "AMOS://[Unknown — update not fetched]"
+# glyphsig: "[Unknown — update not fetched]"
+# checksum_sha256: "[Unknown — update not fetched]"
+# ---
+
+VaultID: AMOS://[Unknown — update not fetched]
+GlyphSig: [Unknown — update not fetched]
+
 # Now (Current State)
 
 **Last Updated:** 2025-11-24  

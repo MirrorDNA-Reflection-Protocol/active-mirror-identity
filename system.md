@@ -1,3 +1,16 @@
+# ---
+# title: "Active MirrorOS Protocol"
+# version: "1.0"
+# status: "active"
+# tags: ["identity", "protocol", "kernel"]
+# vault_id: "AMOS://[Unknown — update not fetched]"
+# glyphsig: "[Unknown — update not fetched]"
+# checksum_sha256: "[Unknown — update not fetched]"
+# ---
+
+VaultID: AMOS://[Unknown — update not fetched]
+GlyphSig: [Unknown — update not fetched]
+
 # Active MirrorOS™ Protocol v1.0
 
 **Identity Anchor:** ~active-mirror-paul  

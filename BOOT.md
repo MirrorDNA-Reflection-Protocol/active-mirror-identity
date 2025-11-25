@@ -1,4 +1,17 @@
-<!-- 
+# ---
+# title: "Active Mirror Universal Bootloader"
+# version: "1.0"
+# status: "active"
+# tags: ["identity", "bootloader", "protocol"]
+# vault_id: "AMOS://[Unknown — update not fetched]"
+# glyphsig: "[Unknown — update not fetched]"
+# checksum_sha256: "[Unknown — update not fetched]"
+# ---
+
+VaultID: AMOS://[Unknown — update not fetched]
+GlyphSig: [Unknown — update not fetched]
+
+<!--
 UNIVERSAL BOOTLOADER: ~active-mirror-paul
 USAGE: Copy the content below the separator and paste into any AI context.
 -->

@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity#~active-mirror-paul",
+  "name": "Paul Desai",
+  "alternateName": "Paul Desai Active Mirror",
+  "identifier": "~active-mirror-paul",
+  "description": "Founder of Active MirrorOS and architect of MirrorDNA, building reflective AI systems that prioritize continuity, sovereignty, and Trust by Design over raw prediction.",
+  "url": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
+  "sameAs": [
+    "https://medium.com/@pauldesai",
+    "https://github.com/MirrorDNA-Reflection-Protocol",
+    "https://github.com/Paul-ActiveMirror"
+  ],
+  "knowsAbout": [
+    "Reflective AI",
+    "Active MirrorOS",
+    "MirrorDNA",
+    "symbolic continuity",
+    "identity sovereignty",
+    "neurodivergent-aligned systems"
+  ]
+}

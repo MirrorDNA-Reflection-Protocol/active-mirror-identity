@@ -1,7 +1,7 @@
 {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
+    "@id": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity#~active-mirror-paul",
     "name": "Paul Desai",
     "alternateName": [
         "~active-mirror-paul",
@@ -46,6 +46,6 @@
     ],
     "mainEntityOfPage": {
         "@type": "ProfilePage",
-        "@id": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity"
+        "@id": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity#~active-mirror-paul"
     }
 }

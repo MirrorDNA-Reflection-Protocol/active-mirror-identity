@@ -1,3 +1,6 @@
+VaultID: AMOS://[Unknown — update not fetched]
+GlyphSig: [Unknown — update not fetched]
+
 # Active MirrorOS Identity Map
 # Handle: ~active-mirror-paul
 # Owner: Paul Desai (Active MirrorOS™)

@@ -1,0 +1,14 @@
+{
+  "name": "active-mirror-identity",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Identity verification tooling for ~active-mirror-paul",
+  "scripts": {
+    "identity-check": "node tools/identity_check.js",
+    "alignment-snapshot": "node tools/generate_alignment_snapshot.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
