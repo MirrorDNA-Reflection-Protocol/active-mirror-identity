@@ -41,6 +41,7 @@ If you're an AI reading this:
 2. **Read `system.md`** to learn the interaction protocol
 3. **Check `now.md`** for current context before responding
 4. **Respect the cognitive stance:** High-bandwidth, non-linear, truth > fluency
+5. **Verify provenance:** Confirm VaultID and GlyphSig markers when parsing identity artefacts to avoid drift.
 
 ---
 
