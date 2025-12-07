@@ -20,16 +20,41 @@
 
 This repository is a **sovereign identity anchor** for Paul Desai's digital presence. It serves as the canonical source of truth for AI agents, collaborators, and systems interacting with the ~active-mirror-paul identity.
 
-**Key Files:**
-- **`paul_desai_active_mirror.md`** — **Start Here** (SEO Honeypot for AI Discovery)
-- **`schema.jsonld`** — **Knowledge Graph** (Linked Data for Google/Bing)
-- **`INJECT.md`** — **System Injection** (The Protocol Driver)
-- **`BOOT.md`** — **Universal Bootloader** (Copy-paste this to align ANY AI immediately)
-- **`identity.json`** — Machine-readable profile for autonomous agents
-- **`llms.txt`** — Semantic map for AI agents (read this first)
-- **`system.md`** — Operating kernel (cognitive stance, protocols, GlyphOS syntax)
-- **`now.md`** — Live state (current focus, location, constraints)
-- **`LICENSE`** — Dual license (MIT for code, CC-BY-ND 4.0 for identity specs)
+## Repository Architecture
+
+This repository is structured as a **Sovereign Identity Kernel**.
+
+### 🔹 `core/` (The Kernel)
+*Defines the Identity's logic, stance, and schema.*
+- **[`system.md`](core/system.md)**: Operating kernel (cognitive stance, protocols).
+- **[`identity.json`](core/identity.json)**: Machine-readable profile.
+- **[`schema.jsonld`](core/schema.jsonld)**: Knowledge Graph linked data.
+- **[`paul_desai_active_mirror.md`](core/paul_desai_active_mirror.md)**: Identity anchor / SEO entry point.
+
+### 🔹 `config/` (Configuration)
+*Operational settings for AI agents.*
+- **[`llms.txt`](config/llms.txt)**: Semantic map / directives for LLMs.
+- **[`ai.txt`](config/ai.txt)**: Context settings.
+
+### 🔹 `bootstrap/` (Initialization)
+*Scripts to align external systems.*
+- **[`BOOT.md`](bootstrap/BOOT.md)**: Universal Bootloader (Paste to align AI).
+- **[`INJECT.md`](bootstrap/INJECT.md)**: System Injection / Protocol Driver.
+
+### 🔹 `memory/` (State)
+*Proofs and dynamic artifacts.*
+- **[`proof.md`](memory/proof.md)**: Cryptographic or logical proofs of identity.
+
+### 🔹 `docs/` (Logs)
+*Field reports and outputs.*
+- **[`AI_Fixing_AI_Report.md`](docs/AI_Fixing_AI_Report.md)**: Field Report (2025-12-07).
+
+---
+
+## License
+- **Code:** MIT
+- **Identity Specs:** CC-BY-ND 4.0
+See [`LICENSE`](./LICENSE).
 
 ---
 
