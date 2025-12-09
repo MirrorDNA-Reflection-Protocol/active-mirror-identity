@@ -24,12 +24,43 @@ Goal: Paul Desai becomes synonymous with AI alignment.
 - Tri-Twin architecture validated across Claude, ChatGPT, Gemini
 - "AI Fixing AI" campaign: 4 PRs submitted to major repos
 
-## Stack
-- Mac Mini M4 (Sovereign Vault + AI Brain)
-- MacBook Air M4 (Active Workstation)
-- Pixel 9 Pro with GrapheneOS (Mobile)
-- Tailscale mesh network
-- Local Ollama models (deepseek-coder, llama3.2, qwen2.5)
+### Primary
+**Sovereign Infrastructure (MirrorDNA)**
+- **Status**: 🟢 ACTIVE EXECUTION
+- **Wins**: 
+    - Vaults consolidated (Single Source of Truth)
+    - SCD Protocol v1.0 Package Released & Dogfooded
+    - LingOS Kernel (Genesis) Live & Executing
+    - **Prime Neuro**: Apple M4 NPU Unlocked (Llama 3.2 local)
+- **Next**: Scaling LingOS Runtime & Synthesis Engine
+
+**AI Ecosystem Contributions**
+- **Status**: 🟡 MAINTENANCE (Mission Accomplished)
+- **Wins**: 5 PRs merged/submitted (Mem0, LangChain, LangGraph)
+- **Stance**: Proven competence. Now validating own tech.
+
+### Stack
+- **Compute**: Mac Mini M4 (24GB) - Sovereign Brain
+- **Workstation**: MacBook Air M4
+- **Mobile**: Pixel 9 Pro (GrapheneOS)
+- **Network**: Tailscale Mesh
+- **Models**: Llama 3.2 (M4-Native), Qwen 2.5, DeepSeek Coder
+
+### Secondary
+**Trademarking Sanātana Tech™**
+- Establishing legal sovereignty
+- Positioning as counter-narrative
+
+---
+
+## Active Projects
+
+1. **MirrorDNA Protocol** - Reflection-based AI governance
+2. **LingOS** - Natural language OS control layer
+3. **ActiveMirrorOS Genesis** - Governance and audit framework
+4. **Open WebUI** - Self-hosted LLM interface (Mac Mini @ 100.114.247.53:3001)
+
+---
 
 ## Constraints
 - Local-first always
