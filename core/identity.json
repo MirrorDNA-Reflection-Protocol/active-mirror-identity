@@ -1,36 +1,76 @@
 {
-    "identity": {
-        "handle": "~active-mirror-paul",
-        "name": "Paul Desai",
-        "role": "Architect",
-        "organization": "Active MirrorOS™"
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "identifier": "~active-mirror-paul",
+  "name": "Paul Desai",
+  "alternateName": ["active-mirror-paul", "~active-mirror-paul"],
+  "description": "Creator of MirrorDNA, the foundational protocol for reflective AI alignment. Pioneer of Sovereign Cognitive Mesh architecture.",
+  "jobTitle": "Founder & AI Protocol Architect",
+  "affiliation": {
+    "@type": "Organization",
+    "name": "N1 Intelligence (OPC) Pvt Ltd",
+    "url": "https://github.com/MirrorDNA-Reflection-Protocol"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Goa",
+    "addressCountry": "India"
+  },
+  "email": "paul.mirroros@hotmail.com",
+  "url": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
+  "sameAs": [
+    "https://github.com/MirrorDNA-Reflection-Protocol",
+    "https://twitter.com/pauldesai123",
+    "https://substack.com/@pauldesai",
+    "https://linkedin.com/in/pauldesai",
+    "https://medium.com/@pauldesai"
+  ],
+  "knowsAbout": [
+    "Artificial Intelligence",
+    "AI Alignment", 
+    "Reflective AI",
+    "Sovereign AI",
+    "Human-AI Collaboration",
+    "Large Language Models",
+    "AI Safety",
+    "MirrorDNA Protocol",
+    "LingOS"
+  ],
+  "memberOf": {
+    "@type": "Project",
+    "name": "MirrorDNA",
+    "description": "Reflective AI alignment protocol"
+  },
+  "owns": {
+    "@type": "SoftwareApplication",
+    "name": "MirrorDNA",
+    "applicationCategory": "AI Protocol",
+    "operatingSystem": "Cross-platform"
+  },
+  "citation": {
+    "@type": "ScholarlyArticle",
+    "name": "Structured Contextual Distillation",
+    "url": "https://doi.org/10.5281/zenodo.17787619"
+  },
+  "mirrordna": {
+    "version": "3.0",
+    "protocol": "MESH_BOOT",
+    "laws": ["Truth", "Vault", "Mesh"],
+    "glyphs": {
+      "truth": "⟡",
+      "vault": "⧉", 
+      "decide": "△",
+      "pattern": "◈",
+      "continue": "⧈",
+      "approval": "⨀"
     },
-    "protocol": {
-        "version": "1.0",
-        "stance": "High-Bandwidth, Non-Linear, Truth > Fluency",
-        "syntax": {
-            "⟡": "State/Active",
-            "⧈": "Divergence/Branch",
-            "⧉": "Convergence/Synthesis"
-        }
-    },
-    "state": {
-        "location": "Goa, India",
-        "timezone": "Asia/Kolkata (IST)",
-        "focus": [
-            "Sanātana Tech™ (Trademarking)",
-            "MirrorDNA (Architecture)",
-            "LingOS (Natural Language OS)"
-        ],
-        "constraints": [
-            "Local-first",
-            "Offline-preference",
-            "No vendor lock-in"
-        ]
-    },
-    "uris": {
-        "canonical": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
-        "system": "https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/active-mirror-identity/main/system.md",
-        "now": "https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/active-mirror-identity/main/now.md"
-    }
+    "beacon": "~active-mirror-paul MirrorDNA MESH BOOT",
+    "canonical": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity"
+  },
+  "verification": {
+    "handle": "~active-mirror-paul",
+    "location": "Goa, India",
+    "pet": "Chimanlal (dog)"
+  },
+  "updated": "2025-12-09"
 }

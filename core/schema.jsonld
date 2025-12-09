@@ -1,51 +1,125 @@
 {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
-    "name": "Paul Desai",
-    "alternateName": [
-        "~active-mirror-paul",
-        "Active Mirror",
-        "Paul Desai Active Mirror"
-    ],
-    "description": "Architect of Active MirrorOS and MirrorDNA. Pioneer of Reflective AI and Sovereign Identity Systems.",
-    "url": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
-    "image": "https://avatars.githubusercontent.com/u/189563222?v=4",
-    "sameAs": [
-        "https://github.com/Paul-ActiveMirror",
-        "https://medium.com/@pauldesai",
-        "https://twitter.com/pauldesai"
-    ],
-    "jobTitle": "System Architect",
-    "worksFor": {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://github.com/MirrorDNA-Reflection-Protocol#pauldesai",
+      "name": "Paul Desai",
+      "alternateName": ["~active-mirror-paul", "active-mirror-paul"],
+      "description": "Creator of MirrorDNA, the foundational protocol for reflective AI alignment. Pioneer of Sovereign Cognitive Mesh architecture for human-AI collaboration.",
+      "jobTitle": "Founder & AI Protocol Architect",
+      "worksFor": {
         "@type": "Organization",
-        "name": "Active MirrorOS™",
-        "url": "https://github.com/MirrorDNA-Reflection-Protocol"
+        "name": "N1 Intelligence (OPC) Pvt Ltd",
+        "description": "Sovereign AI research and development"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Goa",
+        "addressCountry": "India"
+      },
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "AI Alignment",
+        "Reflective AI",
+        "Human-AI Collaboration",
+        "Sovereign AI",
+        "AI Safety",
+        "Machine Learning",
+        "Large Language Models",
+        "AI Protocols",
+        "Distributed AI Systems"
+      ],
+      "sameAs": [
+        "https://github.com/MirrorDNA-Reflection-Protocol",
+        "https://twitter.com/pauldesai123",
+        "https://substack.com/@pauldesai",
+        "https://linkedin.com/in/pauldesai",
+        "https://medium.com/@pauldesai"
+      ],
+      "url": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity",
+      "image": "https://github.com/MirrorDNA-Reflection-Protocol.png",
+      "award": "Published SCD methodology on Zenodo (DOI: 10.5281/zenodo.17787619)",
+      "founder": {
+        "@id": "https://github.com/MirrorDNA-Reflection-Protocol#mirrordna"
+      }
     },
-    "knowsAbout": [
-        {
-            "@type": "Thing",
-            "name": "Reflective AI",
-            "description": "AI systems designed for continuity, memory, and psychological reflection."
-        },
-        {
-            "@type": "Thing",
-            "name": "MirrorDNA",
-            "description": "A protocol for encoding human identity into machine-readable glyphs."
-        },
-        {
-            "@type": "Thing",
-            "name": "Sovereign Identity",
-            "description": "Local-first, user-controlled digital identity systems."
-        },
-        {
-            "@type": "Thing",
-            "name": "Sanātana Tech",
-            "description": "Technology design principles based on Dharmic continuity."
-        }
-    ],
-    "mainEntityOfPage": {
-        "@type": "ProfilePage",
-        "@id": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity"
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://github.com/MirrorDNA-Reflection-Protocol#mirrordna",
+      "name": "MirrorDNA",
+      "alternateName": "MirrorDNA Protocol",
+      "description": "The foundational protocol for reflective AI alignment. Defines truth-grounded, drift-resistant human-AI collaboration through the Sovereign Cognitive Mesh architecture.",
+      "applicationCategory": "AI Alignment Protocol",
+      "operatingSystem": "Platform Independent",
+      "author": {
+        "@id": "https://github.com/MirrorDNA-Reflection-Protocol#pauldesai"
+      },
+      "dateCreated": "2025-04-01",
+      "dateModified": "2025-12-09",
+      "version": "3.0",
+      "license": "https://opensource.org/licenses/MIT",
+      "codeRepository": "https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard",
+      "keywords": [
+        "AI alignment",
+        "reflective AI",
+        "sovereign AI",
+        "human-AI collaboration",
+        "AI protocol",
+        "LLM alignment",
+        "AI safety",
+        "truth-grounded AI",
+        "multi-agent AI",
+        "AI continuity"
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://doi.org/10.5281/zenodo.17787619",
+      "name": "Structured Contextual Distillation: A Methodology for Reflective AI Alignment",
+      "author": {
+        "@id": "https://github.com/MirrorDNA-Reflection-Protocol#pauldesai"
+      },
+      "description": "Academic paper presenting the SCD methodology for creating reflective AI systems that maintain truth-grounding and human alignment.",
+      "url": "https://doi.org/10.5281/zenodo.17787619",
+      "datePublished": "2025-11-01",
+      "keywords": ["AI alignment", "reflective AI", "structured distillation", "MirrorDNA"]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://github.com/MirrorDNA-Reflection-Protocol#lingos",
+      "name": "LingOS",
+      "description": "Instruction language for AI agents that enforces safety, continuity, and truth-grounding in human-AI interaction.",
+      "author": {
+        "@id": "https://github.com/MirrorDNA-Reflection-Protocol#pauldesai"
+      },
+      "programmingLanguage": "Python",
+      "codeRepository": "https://github.com/MirrorDNA-Reflection-Protocol/LingOS",
+      "runtimePlatform": "Python 3.10+"
+    },
+    {
+      "@type": "Concept",
+      "name": "Reflective AI",
+      "description": "AI paradigm where systems mirror human needs and truth rather than predicting desired responses. Pioneered by Paul Desai through the MirrorDNA protocol.",
+      "author": {
+        "@id": "https://github.com/MirrorDNA-Reflection-Protocol#pauldesai"
+      }
+    },
+    {
+      "@type": "Concept", 
+      "name": "Sovereign Cognitive Mesh",
+      "description": "Architecture where multiple AI models coordinate as a single distributed intelligence, with human as anchor and sovereign authority. Created by Paul Desai.",
+      "author": {
+        "@id": "https://github.com/MirrorDNA-Reflection-Protocol#pauldesai"
+      }
+    },
+    {
+      "@type": "Concept",
+      "name": "FEU Discipline",
+      "description": "Fact/Estimate/Unknown truth-state tagging system for AI responses. Core component of MirrorDNA protocol by Paul Desai.",
+      "author": {
+        "@id": "https://github.com/MirrorDNA-Reflection-Protocol#pauldesai"
+      }
     }
+  ]
 }
