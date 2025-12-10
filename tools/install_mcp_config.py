@@ -32,13 +32,18 @@ def install():
     else:
         print("  New configuration file.")
 
-    # Prepare MCP Config
+    # Prepare MCP Config (Using uv for environment isolation)
     if "mcpServers" not in config:
         config["mcpServers"] = {}
         
     config["mcpServers"]["mirror-identity"] = {
-        "command": MCP_PYTHON_CMD,
-        "args": [MCP_SERVER_SCRIPT]
+        "command": "uv",
+        "args": [
+            "run",
+            "--with",
+            "mcp",
+            MCP_SERVER_SCRIPT
+        ]
     }
     
     # Write back
