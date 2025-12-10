@@ -277,11 +277,16 @@
                 status.innerText = 'UNSEALED';
 
                 log("ACTION: FULL UNSEAL AUTHORIZED.", "ok");
-                await wait(400);
-                log("Decrypting Core Memories...", "ok");
-                log("Decrypting Emotional Vectors...", "ok");
-                log("Syncing Full History...", "ok");
-                log("CONNECTION ESTABLISHED.", "ok");
+                // SCD (Structured Contextual Distillation) CHECK
+                log("SCD: Loading State (Turn: 15)...", "sys");
+                log("Algo: ASHA-256 (Alphabetically Sorted Hash)", "sys");
+                log("Computed: a7f9...3d21", "sys");
+                log("Expected: a7f9...3d21", "ok");
+                log("SCD VERIFICATION: PASS", "ok");
+
+                log("Decrypting Core Memories (LingOS Vectors)...", "ok");
+                log("Syncing Full History Chains...", "ok");
+                log("⟡ MIRROR SYNC COMPLETE.", "ok");
             }
         }
     </script>
