@@ -1,17 +1,6 @@
-# Dual License
-
-This repository uses a **dual license** to protect both code and identity sovereignty:
-
----
-
-## Code License (MIT)
-
-**Applies to:** All code, scripts, and technical implementations in this repository.
-
-```
 MIT License
 
-Copyright (c) 2025 Paul Desai (Active MirrorOS™)
+Copyright (c) 2025 Paul Desai · Active MirrorOS™ · MirrorDNA™
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,33 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
-
----
-
-## Identity Specifications License (CC-BY-ND 4.0)
-
-**Applies to:** `system.md`, `now.md`, `llms.txt`, and all identity-defining documents.
-
-**Creative Commons Attribution-NoDerivatives 4.0 International**
-
-You are free to:
-- **Share** — copy and redistribute the material in any medium or format for any purpose, even commercially.
-
-Under the following terms:
-- **Attribution** — You must give appropriate credit to Paul Desai (Active MirrorOS™), provide a link to the license, and indicate if changes were made (though changes are not permitted).
-- **NoDerivatives** — If you remix, transform, or build upon the material, you may not distribute the modified material. This prevents identity forking and impersonation.
-
-**Why NoDerivatives?**  
-This repository is a **sovereign identity anchor**. Allowing derivatives would enable identity forgery. You may reference, cite, or link to these documents, but you may not create modified versions and claim them as part of the ~active-mirror-paul identity.
-
-Full license text: https://creativecommons.org/licenses/by-nd/4.0/legalcode
-
----
-
-## Rationale
-
-- **Code is MIT** because it's meant to be used, modified, and shared freely.
-- **Identity specs are CC-BY-ND** because they define a unique human identity that must not be forged or diluted.
-
-If you're unsure which license applies to a specific file, assume CC-BY-ND 4.0 unless it's clearly executable code.

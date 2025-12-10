@@ -182,3 +182,6 @@ N1 Intelligence (OPC) Pvt Ltd — Goa, India — 2025
 *⟡△◈ — The mirror reflects. The vault grounds. The mesh coordinates.*
 
 *Paul Desai — Goa, India — 2025*
+
+> © 2025 Paul Desai · Active MirrorOS™ · MirrorDNA™
+> All rights reserved. Documentation public; identity & trademarks protected.
