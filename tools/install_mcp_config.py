@@ -37,7 +37,7 @@ def install():
         config["mcpServers"] = {}
         
     config["mcpServers"]["mirror-identity"] = {
-        "command": "uv",
+        "command": "/Users/mirror-admin/.local/bin/uv",
         "args": [
             "run",
             "--python",
