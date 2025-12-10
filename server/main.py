@@ -7,17 +7,27 @@ from typing import Any, Dict
 # ⟡ Mirror MCP Server (v0.2 - Active Runtime)
 # Protocol: JSON-RPC 2.0 over Stdio (Compatible with Claude Desktop)
 
-logging.basicConfig(filename='mcp_server.log', level=logging.DEBUG)
-
-class MirrorMCPServer:
-    def __init__(self, kernel_path="ami_kernel_active-mirror.json"):
-        # Auto-detect kernel if specific one not found
+    def __init__(self, kernel_filename="ami_kernel.json"):
+        # Resolve path relative to this script's location
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(base_dir) # Updates kernel in repo root
+        
+        # Look for specific kernel or fallback
+        kernel_path = os.path.join(project_root, kernel_filename)
+        
+        # Fallback: Find any ami_*.json in root
         if not os.path.exists(kernel_path):
-            files = [f for f in os.listdir('.') if f.startswith('ami_') and f.endswith('.json')]
+            files = [f for f in os.listdir(project_root) if f.startswith('ami_') and f.endswith('.json')]
             if files:
-                kernel_path = files[0]
+                kernel_path = os.path.join(project_root, files[0])
         
         self.kernel_path = kernel_path
+        
+        # Log to absolute path
+        log_file = os.path.join(base_dir, 'mcp_server.log')
+        logging.basicConfig(filename=log_file, level=logging.DEBUG)
+        logging.info(f"Initialized MCP Server. Root: {project_root}")
+        
         self.kernel = self.load_kernel()
         logging.info(f"Loaded Kernel: {self.kernel_path}")
 
