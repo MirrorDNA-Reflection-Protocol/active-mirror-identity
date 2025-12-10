@@ -40,6 +40,8 @@ def install():
         "command": "uv",
         "args": [
             "run",
+            "--python",
+            "3.12",
             "--with",
             "mcp",
             MCP_SERVER_SCRIPT
