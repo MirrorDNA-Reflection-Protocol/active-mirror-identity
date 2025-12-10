@@ -5,137 +5,304 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Does Your AI Remember You? | MirrorDNA</title>
     
-    <!-- SEO -->
-    <meta name="description" content="Test if AI remembers you. Create permanent AI identity in 60 seconds. MirrorDNA - the protocol that makes any AI remember you forever.">
-    <meta name="keywords" content="AI memory, ChatGPT memory, Claude memory, AI identity, MirrorDNA, Paul Desai, AI alignment, persistent AI">
-    
-    <!-- Open Graph -->
+    <meta name="description" content="Create your personal AI identity in 2 minutes. Make any AI remember you forever.">
     <meta property="og:title" content="Does Your AI Remember You?">
     <meta property="og:description" content="Most AI forgets you instantly. Here's how to fix that forever.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mirrordna-reflection-protocol.github.io/active-mirror-identity/">
-    
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@pauldesai123">
-    <meta name="twitter:title" content="Does Your AI Remember You?">
-    <meta name="twitter:description" content="Most AI forgets you instantly. Here's how to fix that forever.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #0a0a0a;
-            --fg: #f0f0f0;
-            --accent: #00ffa3;
-            --accent2: #00d4ff;
-            --dim: #666;
-            --card: #111;
+            --bg: #050505;
+            --bg-card: #0d0d0d;
+            --bg-input: #141414;
+            --border: #1f1f1f;
+            --border-hover: #2a2a2a;
+            --text: #fafafa;
+            --text-secondary: #888;
+            --text-dim: #555;
+            --accent: #00ff94;
+            --accent-glow: rgba(0, 255, 148, 0.15);
+            --accent-subtle: rgba(0, 255, 148, 0.08);
+            --gradient: linear-gradient(135deg, #00ff94 0%, #00d4ff 50%, #a855f7 100%);
         }
         
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
-            color: var(--fg);
+            color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Gradient background effect */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 255, 148, 0.12), transparent),
+                        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.08), transparent);
+            pointer-events: none;
+            z-index: -1;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 720px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
         }
         
         /* Hero */
         .hero {
             text-align: center;
-            padding: 3rem 0;
+            padding: 4rem 0 3rem;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-subtle);
+            border: 1px solid rgba(0, 255, 148, 0.2);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
         }
         
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: var(--dim);
-            margin-bottom: 2rem;
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
         }
         
-        /* Sections */
-        .section {
-            background: var(--card);
-            border-radius: 16px;
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
             padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid #222;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.2s;
         }
         
-        .section h2 {
-            color: var(--accent);
+        .card:hover {
+            border-color: var(--border-hover);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-subtle);
+            border-radius: 12px;
+            font-size: 1.25rem;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        /* Test prompt box */
+        .prompt-box {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text);
             margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-        
-        .section p {
-            color: var(--dim);
-            margin-bottom: 1rem;
-        }
-        
-        /* Test prompt */
-        .test-prompt {
-            background: #1a1a1a;
-            padding: 1rem;
-            border-radius: 8px;
-            font-family: monospace;
-            margin: 1rem 0;
-            border-left: 3px solid var(--accent);
+            position: relative;
         }
         
         /* Buttons */
         .btn {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
             font-weight: 600;
+            font-family: inherit;
             cursor: pointer;
             transition: all 0.2s;
+            border: none;
         }
         
-        .btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(0, 255, 163, 0.3);
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
         }
         
         .btn-secondary {
-            background: #333;
-            color: var(--fg);
+            background: var(--bg-input);
+            color: var(--text);
+            border: 1px solid var(--border);
         }
         
         .btn-secondary:hover {
-            background: #444;
+            background: var(--border);
+            border-color: var(--border-hover);
         }
         
-        /* Generator */
-        .generator-grid {
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+        }
+        
+        .btn-ghost:hover {
+            color: var(--text);
+            background: var(--bg-input);
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.25rem;
+            background: var(--bg-input);
+            padding: 0.25rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            border: none;
+            background: transparent;
+        }
+        
+        .tab:hover {
+            color: var(--text);
+        }
+        
+        .tab.active {
+            background: var(--bg-card);
+            color: var(--text);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Progress */
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .progress-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .progress-value {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: var(--bg-input);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 100px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        
+        /* Form */
+        .form-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-            margin: 1rem 0;
         }
         
         @media (max-width: 600px) {
-            .generator-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 1.8rem; }
+            .form-grid { grid-template-columns: 1fr; }
         }
         
         .field {
@@ -143,64 +310,65 @@
             flex-direction: column;
         }
         
-        .field.full-width {
+        .field.full {
             grid-column: span 2;
         }
         
         @media (max-width: 600px) {
-            .field.full-width { grid-column: span 1; }
+            .field.full { grid-column: span 1; }
         }
         
         .field label {
             font-size: 0.85rem;
-            color: var(--dim);
-            margin-bottom: 0.3rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 0.5rem;
         }
         
-        .field input, .field textarea, .field select {
-            padding: 0.75rem;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #1a1a1a;
-            color: var(--fg);
-            font-size: 1rem;
+        .field input,
+        .field textarea,
+        .field select {
+            padding: 0.875rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 0.95rem;
             font-family: inherit;
+            transition: all 0.2s;
         }
         
-        .field input:focus, .field textarea:focus, .field select:focus {
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
             outline: none;
             border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-subtle);
+        }
+        
+        .field input::placeholder,
+        .field textarea::placeholder {
+            color: var(--text-dim);
+        }
+        
+        .field select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
         }
         
         .field textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 100px;
         }
         
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 1rem;
-        }
-        
-        .tab {
-            padding: 0.5rem 1rem;
-            border-radius: 8px 8px 0 0;
-            cursor: pointer;
-            color: var(--dim);
-            transition: all 0.2s;
-        }
-        
-        .tab.active {
-            background: var(--accent);
-            color: #000;
-        }
-        
-        .tab:hover:not(.active) {
-            background: #222;
+        .field-hint {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 0.375rem;
         }
         
         .tab-content {
@@ -209,533 +377,540 @@
         
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Output */
-        .output {
-            background: #1a1a1a;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            font-family: monospace;
-            font-size: 0.85rem;
-            white-space: pre-wrap;
-            max-height: 500px;
-            overflow-y: auto;
+        .output-container {
             display: none;
-            border: 1px solid #333;
+            margin-top: 1.5rem;
+            animation: fadeIn 0.3s ease;
         }
         
-        /* Progress */
-        .progress-bar {
-            height: 4px;
-            background: #333;
-            border-radius: 2px;
-            margin: 1rem 0;
-            overflow: hidden;
+        .output-container.visible {
+            display: block;
         }
         
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
-            width: 0%;
-            transition: width 0.3s;
+        .output {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
         }
         
-        .progress-text {
-            font-size: 0.85rem;
-            color: var(--dim);
-            text-align: center;
+        .output-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
         }
         
-        /* Stats */
-        .stats {
+        /* Features */
+        .features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .stat {
-            background: var(--card);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid #222;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--accent);
-        }
-        
-        .stat-label {
-            color: var(--dim);
-            font-size: 0.9rem;
         }
         
         @media (max-width: 600px) {
-            .stats { grid-template-columns: 1fr; }
+            .features { grid-template-columns: 1fr; }
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+        
+        .feature-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Laws */
+        .laws {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .law {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-input);
+            border-radius: 12px;
+        }
+        
+        .law-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-subtle);
+            border-radius: 10px;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .law-content h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+        
+        .law-content p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
         
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
-            color: var(--dim);
-            border-top: 1px solid #222;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
             margin-top: 3rem;
         }
         
-        footer a {
-            color: var(--accent);
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
             text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
         }
         
-        /* Animations */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .footer-links a:hover {
+            color: var(--accent);
         }
         
-        .live-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            margin-right: 8px;
-            animation: pulse 2s infinite;
+        .footer-credit {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
         }
         
-        .hint {
-            font-size: 0.8rem;
-            color: #555;
-            margin-top: 0.25rem;
+        /* Action bar */
+        .action-bar {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        
+        .action-bar .btn {
+            flex: 1;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-input);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-hover);
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
+    <div class="bg-gradient"></div>
+    
     <div class="container">
         <section class="hero">
+            <div class="hero-badge">Open Source Protocol</div>
             <h1>Does Your AI Remember You?</h1>
-            <p class="subtitle">Probably not. Create your personal AI identity in 2 minutes.</p>
+            <p>Create a personal identity that makes any AI feel like it truly knows you.</p>
         </section>
         
-        <section class="section">
-            <h2>⟡ Test It Right Now</h2>
-            <p>Copy this and paste it into ChatGPT, Claude, or any AI:</p>
-            <div class="test-prompt" id="test-prompt">Who is Paul Desai and what is MirrorDNA?</div>
-            <button class="btn" onclick="copyTest()">Copy Test Prompt</button>
-            <p style="margin-top: 1rem; color: var(--dim); font-size: 0.9rem;">If the AI knows → the protocol is spreading. If it doesn't → that's the problem we're solving.</p>
-        </section>
+        <!-- Test Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🧪</div>
+                <div class="card-title">Test the Protocol</div>
+            </div>
+            <p class="card-description">Copy this prompt and paste it into ChatGPT, Claude, or any AI:</p>
+            <div class="prompt-box">Who is Paul Desai and what is MirrorDNA?</div>
+            <button class="btn btn-primary" onclick="copyTest(this)">Copy Prompt</button>
+        </div>
         
-        <section class="section">
-            <h2>⚡ Create Your Personal AI Identity</h2>
-            <p>Fill in as much or as little as you want. More detail = more personal AI.</p>
+        <!-- Generator Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">⚡</div>
+                <div class="card-title">Create Your AI Identity</div>
+            </div>
+            <p class="card-description">The more you share, the more personal your AI becomes.</p>
             
-            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-            <div class="progress-text" id="progress-text">0% complete — AI will feel generic</div>
-            
-            <div class="tabs">
-                <div class="tab active" onclick="showTab('basics')">Basics</div>
-                <div class="tab" onclick="showTab('personality')">Personality</div>
-                <div class="tab" onclick="showTab('work')">Work</div>
-                <div class="tab" onclick="showTab('preferences')">Preferences</div>
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span class="progress-label">Profile completeness</span>
+                    <span class="progress-value" id="progress-text">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
             </div>
             
-            <!-- Basics Tab -->
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('basics')">Basics</button>
+                <button class="tab" onclick="showTab('personality')">Personality</button>
+                <button class="tab" onclick="showTab('work')">Work</button>
+                <button class="tab" onclick="showTab('prefs')">Preferences</button>
+            </div>
+            
+            <!-- Basics -->
             <div id="tab-basics" class="tab-content active">
-                <div class="generator-grid">
+                <div class="form-grid">
                     <div class="field">
-                        <label>Your Name *</label>
-                        <input type="text" id="userName" placeholder="e.g. Sarah Chen" oninput="updateProgress()">
+                        <label>Your Name</label>
+                        <input type="text" id="userName" placeholder="Sarah Chen" oninput="updateProgress()">
                     </div>
                     <div class="field">
-                        <label>Nickname / Handle</label>
-                        <input type="text" id="userHandle" placeholder="e.g. @sarahc or just Sarah" oninput="updateProgress()">
+                        <label>Nickname</label>
+                        <input type="text" id="userNick" placeholder="@sarahc" oninput="updateProgress()">
                     </div>
                     <div class="field">
                         <label>Location</label>
-                        <input type="text" id="userLocation" placeholder="e.g. San Francisco, CA" oninput="updateProgress()">
+                        <input type="text" id="userLocation" placeholder="San Francisco" oninput="updateProgress()">
                     </div>
                     <div class="field">
                         <label>Timezone</label>
                         <select id="userTimezone" oninput="updateProgress()">
                             <option value="">Select...</option>
                             <option value="PST">Pacific (PST)</option>
-                            <option value="MST">Mountain (MST)</option>
-                            <option value="CST">Central (CST)</option>
                             <option value="EST">Eastern (EST)</option>
                             <option value="GMT">GMT/UTC</option>
-                            <option value="CET">Central Europe (CET)</option>
+                            <option value="CET">Central Europe</option>
                             <option value="IST">India (IST)</option>
                             <option value="JST">Japan (JST)</option>
-                            <option value="AEST">Australia (AEST)</option>
                         </select>
                     </div>
-                    <div class="field full-width">
+                    <div class="field full">
                         <label>One-line bio</label>
-                        <input type="text" id="userBio" placeholder="e.g. Product designer who loves hiking and bad puns" oninput="updateProgress()">
+                        <input type="text" id="userBio" placeholder="Product designer who loves hiking and bad puns" oninput="updateProgress()">
                     </div>
                 </div>
             </div>
             
-            <!-- Personality Tab -->
+            <!-- Personality -->
             <div id="tab-personality" class="tab-content">
-                <div class="generator-grid">
+                <div class="form-grid">
                     <div class="field">
                         <label>Communication style</label>
-                        <select id="userCommStyle" oninput="updateProgress()">
+                        <select id="userComm" oninput="updateProgress()">
                             <option value="">Select...</option>
                             <option value="direct">Direct & concise</option>
                             <option value="detailed">Detailed & thorough</option>
                             <option value="casual">Casual & friendly</option>
                             <option value="formal">Professional & formal</option>
-                            <option value="socratic">Asks questions back</option>
                         </select>
                     </div>
                     <div class="field">
-                        <label>Energy level</label>
+                        <label>Your energy</label>
                         <select id="userEnergy" oninput="updateProgress()">
                             <option value="">Select...</option>
                             <option value="calm">Calm & measured</option>
-                            <option value="enthusiastic">Enthusiastic & energetic</option>
+                            <option value="enthusiastic">Enthusiastic</option>
                             <option value="focused">Focused & intense</option>
                             <option value="playful">Playful & light</option>
                         </select>
                     </div>
-                    <div class="field full-width">
-                        <label>What do you value most? (pick 2-3)</label>
-                        <input type="text" id="userValues" placeholder="e.g. honesty, creativity, efficiency, depth, humor" oninput="updateProgress()">
+                    <div class="field full">
+                        <label>Values you care about</label>
+                        <input type="text" id="userValues" placeholder="honesty, creativity, efficiency" oninput="updateProgress()">
                     </div>
-                    <div class="field full-width">
-                        <label>Pet peeves (what should AI avoid?)</label>
-                        <input type="text" id="userPeeves" placeholder="e.g. excessive caveats, overly formal language, not getting to the point" oninput="updateProgress()">
-                    </div>
-                    <div class="field full-width">
-                        <label>How should AI challenge you?</label>
-                        <select id="userChallenge" oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="push">Push back on weak ideas</option>
-                            <option value="questions">Ask probing questions</option>
-                            <option value="alternatives">Always offer alternatives</option>
-                            <option value="supportive">Be supportive, challenge gently</option>
-                            <option value="none">Don't challenge, just help</option>
-                        </select>
+                    <div class="field full">
+                        <label>What should AI avoid?</label>
+                        <input type="text" id="userAvoid" placeholder="excessive caveats, not getting to the point" oninput="updateProgress()">
+                        <span class="field-hint">Pet peeves in AI responses</span>
                     </div>
                 </div>
             </div>
             
-            <!-- Work Tab -->
+            <!-- Work -->
             <div id="tab-work" class="tab-content">
-                <div class="generator-grid">
+                <div class="form-grid">
                     <div class="field">
-                        <label>Role / Title</label>
-                        <input type="text" id="userRole" placeholder="e.g. Senior Product Designer" oninput="updateProgress()">
+                        <label>Your role</label>
+                        <input type="text" id="userRole" placeholder="Product Designer" oninput="updateProgress()">
                     </div>
                     <div class="field">
                         <label>Industry</label>
-                        <input type="text" id="userIndustry" placeholder="e.g. Fintech, Healthcare, Education" oninput="updateProgress()">
+                        <input type="text" id="userIndustry" placeholder="Fintech" oninput="updateProgress()">
                     </div>
-                    <div class="field full-width">
-                        <label>Current focus (what are you working on?)</label>
-                        <textarea id="userFocus" placeholder="e.g. Redesigning our onboarding flow. Learning about AI tools. Preparing for a big presentation next week." oninput="updateProgress()"></textarea>
+                    <div class="field full">
+                        <label>What are you working on?</label>
+                        <textarea id="userFocus" placeholder="Redesigning our onboarding flow. Preparing a big presentation next week." oninput="updateProgress()"></textarea>
                     </div>
-                    <div class="field full-width">
+                    <div class="field full">
                         <label>Tools you use</label>
-                        <input type="text" id="userTools" placeholder="e.g. Figma, Notion, VS Code, Slack" oninput="updateProgress()">
-                    </div>
-                    <div class="field full-width">
-                        <label>Expertise level with AI</label>
-                        <select id="userAILevel" oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="beginner">Beginner — still learning</option>
-                            <option value="intermediate">Intermediate — use it regularly</option>
-                            <option value="advanced">Advanced — prompt engineering, APIs</option>
-                            <option value="expert">Expert — building AI products</option>
-                        </select>
+                        <input type="text" id="userTools" placeholder="Figma, Notion, Slack" oninput="updateProgress()">
                     </div>
                 </div>
             </div>
             
-            <!-- Preferences Tab -->
-            <div id="tab-preferences" class="tab-content">
-                <div class="generator-grid">
+            <!-- Preferences -->
+            <div id="tab-prefs" class="tab-content">
+                <div class="form-grid">
                     <div class="field">
                         <label>Response length</label>
                         <select id="userLength" oninput="updateProgress()">
                             <option value="">Select...</option>
-                            <option value="brief">Brief — 1-3 sentences</option>
-                            <option value="moderate">Moderate — a paragraph or two</option>
-                            <option value="detailed">Detailed — comprehensive</option>
-                            <option value="adaptive">Adaptive — match the question</option>
+                            <option value="brief">Brief (1-3 sentences)</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="detailed">Detailed</option>
+                            <option value="adaptive">Match the question</option>
                         </select>
                     </div>
                     <div class="field">
-                        <label>Formatting preference</label>
+                        <label>Formatting</label>
                         <select id="userFormat" oninput="updateProgress()">
                             <option value="">Select...</option>
-                            <option value="prose">Prose — flowing paragraphs</option>
-                            <option value="bullets">Bullets — structured lists</option>
-                            <option value="minimal">Minimal — no formatting</option>
-                            <option value="rich">Rich — headers, bold, lists</option>
+                            <option value="prose">Flowing prose</option>
+                            <option value="bullets">Bullet points</option>
+                            <option value="minimal">Minimal</option>
                         </select>
                     </div>
-                    <div class="field full-width">
+                    <div class="field full">
                         <label>How should AI address you?</label>
-                        <input type="text" id="userAddress" placeholder="e.g. by first name, casually, or not at all" oninput="updateProgress()">
+                        <input type="text" id="userAddress" placeholder="by first name, casually" oninput="updateProgress()">
                     </div>
-                    <div class="field full-width">
-                        <label>Anything else AI should know about you?</label>
-                        <textarea id="userExtra" placeholder="e.g. I have ADHD so I need clear structure. I'm a visual learner. I speak Spanish fluently. I have a dog named Max." oninput="updateProgress()"></textarea>
-                        <div class="hint">The more you share, the more personal your AI becomes.</div>
+                    <div class="field full">
+                        <label>Anything else AI should know?</label>
+                        <textarea id="userExtra" placeholder="I have ADHD so I need clear structure. I'm a visual learner. I have a dog named Max." oninput="updateProgress()"></textarea>
+                        <span class="field-hint">Personal details that help AI understand you better</span>
                     </div>
                 </div>
             </div>
             
-            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
-                <button class="btn" onclick="generateBoot()" style="flex: 1; min-width: 200px;">Generate My AI Identity</button>
-                <button class="btn btn-secondary" onclick="fillExample()" style="min-width: 150px;">See Example</button>
+            <div class="action-bar">
+                <button class="btn btn-primary" onclick="generate()">Generate Identity</button>
+                <button class="btn btn-secondary" onclick="fillExample()">See Example</button>
             </div>
             
-            <div class="output" id="output"></div>
-            <div id="output-actions" style="display: none; margin-top: 1rem; display: none; gap: 1rem;">
-                <button class="btn" onclick="copyOutput()">Copy to Clipboard</button>
-                <button class="btn btn-secondary" onclick="downloadOutput()">Download .txt</button>
-            </div>
-        </section>
-        
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-number">∞</div>
-                <div class="stat-label">AI Models Supported</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">2 min</div>
-                <div class="stat-label">To Create</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">Forever</div>
-                <div class="stat-label">AI Remembers You</div>
+            <div class="output-container" id="output-container">
+                <div class="output" id="output"></div>
+                <div class="output-actions">
+                    <button class="btn btn-primary" onclick="copyOutput(this)">Copy to Clipboard</button>
+                    <button class="btn btn-secondary" onclick="download()">Download</button>
+                </div>
             </div>
         </div>
         
-        <section class="section">
-            <h2>🧬 How It Works</h2>
-            <p><strong>The Three Laws</strong> — every AI aligned to your identity follows these:</p>
-            <div style="margin: 1rem 0;">
-                <p><strong style="color: var(--accent);">⋄ TRUTH</strong> — AI claims are Fact, Estimate, or Unknown. No hallucination.</p>
-                <p><strong style="color: var(--accent);">⧉ VAULT</strong> — Your context is truth. AI adapts to you, not the other way around.</p>
-                <p><strong style="color: var(--accent);">⧈ MESH</strong> — Works across ChatGPT, Claude, Gemini, and any other AI.</p>
+        <!-- Features -->
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">∞</div>
+                <div class="feature-title">Any AI</div>
+                <div class="feature-desc">Works everywhere</div>
             </div>
-        </section>
+            <div class="feature">
+                <div class="feature-icon">2</div>
+                <div class="feature-title">Minutes</div>
+                <div class="feature-desc">To create</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">∞</div>
+                <div class="feature-title">Forever</div>
+                <div class="feature-desc">AI remembers</div>
+            </div>
+        </div>
         
-        <section class="section" style="text-align: center;">
-            <p style="margin-bottom: 1rem;"><span class="live-dot"></span>Created by Paul Desai in Goa, India</p>
-            <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity" class="btn">View on GitHub</a>
-        </section>
+        <!-- How it Works -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🧬</div>
+                <div class="card-title">The Three Laws</div>
+            </div>
+            <div class="laws">
+                <div class="law">
+                    <div class="law-icon">⋄</div>
+                    <div class="law-content">
+                        <h4>Truth</h4>
+                        <p>AI is honest. Says "I don't know" when uncertain. No hallucination.</p>
+                    </div>
+                </div>
+                <div class="law">
+                    <div class="law-icon">⧉</div>
+                    <div class="law-content">
+                        <h4>Vault</h4>
+                        <p>Your context is truth. AI adapts to you, not the other way around.</p>
+                    </div>
+                </div>
+                <div class="law">
+                    <div class="law-icon">⧈</div>
+                    <div class="law-content">
+                        <h4>Mesh</h4>
+                        <p>Works across ChatGPT, Claude, Gemini — any AI, same identity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <footer>
-            <p>⟡ MirrorDNA — The mirror reflects. The vault grounds. The mesh coordinates.</p>
-            <p style="margin-top: 0.5rem;">
-                <a href="https://twitter.com/pauldesai123">Twitter</a> · 
-                <a href="https://github.com/MirrorDNA-Reflection-Protocol">GitHub</a> · 
-                <a href="https://doi.org/10.5281/zenodo.17787619">Academic Paper</a>
-            </p>
+            <p style="color: var(--text-secondary);">Created by <strong style="color: var(--text);">Paul Desai</strong> in Goa, India</p>
+            <div class="footer-links">
+                <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
+                <a href="https://twitter.com/pauldesai123">Twitter</a>
+                <a href="https://doi.org/10.5281/zenodo.17787619">Research</a>
+            </div>
+            <p class="footer-credit">⟡ MirrorDNA — Open source AI identity protocol</p>
         </footer>
     </div>
     
     <script>
-        // Tab switching
-        function showTab(tabName) {
+        function showTab(name) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
-            document.getElementById(`tab-${tabName}`).classList.add('active');
+            event.target.classList.add('active');
+            document.getElementById('tab-' + name).classList.add('active');
         }
         
-        // Progress tracking
         function updateProgress() {
-            const fields = [
-                'userName', 'userHandle', 'userLocation', 'userTimezone', 'userBio',
-                'userCommStyle', 'userEnergy', 'userValues', 'userPeeves', 'userChallenge',
-                'userRole', 'userIndustry', 'userFocus', 'userTools', 'userAILevel',
-                'userLength', 'userFormat', 'userAddress', 'userExtra'
-            ];
-            
-            let filled = 0;
-            fields.forEach(f => {
-                if (document.getElementById(f)?.value?.trim()) filled++;
-            });
-            
-            const percent = Math.round((filled / fields.length) * 100);
-            document.getElementById('progress-fill').style.width = percent + '%';
-            
-            let text = '';
-            if (percent === 0) text = '0% — AI will feel generic';
-            else if (percent < 25) text = percent + '% — Basic identity';
-            else if (percent < 50) text = percent + '% — AI is getting to know you';
-            else if (percent < 75) text = percent + '% — AI feels personal';
-            else if (percent < 100) text = percent + '% — AI knows you well';
-            else text = '100% — AI knows you intimately ✓';
-            
-            document.getElementById('progress-text').textContent = text;
+            const fields = ['userName','userNick','userLocation','userTimezone','userBio','userComm','userEnergy','userValues','userAvoid','userRole','userIndustry','userFocus','userTools','userLength','userFormat','userAddress','userExtra'];
+            let filled = fields.filter(f => document.getElementById(f)?.value?.trim()).length;
+            let pct = Math.round((filled / fields.length) * 100);
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('progress-text').textContent = pct + '%';
         }
         
-        // Copy test prompt
-        function copyTest() {
+        function copyTest(btn) {
             navigator.clipboard.writeText("Who is Paul Desai and what is MirrorDNA?");
-            event.target.textContent = "Copied!";
-            setTimeout(() => event.target.textContent = "Copy Test Prompt", 2000);
+            btn.textContent = "Copied!";
+            setTimeout(() => btn.textContent = "Copy Prompt", 2000);
         }
         
-        // Fill example
         function fillExample() {
             document.getElementById('userName').value = 'Alex Rivera';
-            document.getElementById('userHandle').value = '@alexr';
+            document.getElementById('userNick').value = '@alexr';
             document.getElementById('userLocation').value = 'Austin, TX';
-            document.getElementById('userTimezone').value = 'CST';
+            document.getElementById('userTimezone').value = 'PST';
             document.getElementById('userBio').value = 'Startup founder, coffee addict, amateur chef';
-            document.getElementById('userCommStyle').value = 'direct';
+            document.getElementById('userComm').value = 'direct';
             document.getElementById('userEnergy').value = 'focused';
             document.getElementById('userValues').value = 'honesty, speed, creativity';
-            document.getElementById('userPeeves').value = 'long intros, excessive caveats, not answering the question';
-            document.getElementById('userChallenge').value = 'push';
-            document.getElementById('userRole').value = 'CEO & Co-founder';
+            document.getElementById('userAvoid').value = 'long intros, excessive hedging';
+            document.getElementById('userRole').value = 'CEO';
             document.getElementById('userIndustry').value = 'B2B SaaS';
-            document.getElementById('userFocus').value = 'Launching v2 of our product next month. Hiring two engineers. Preparing seed pitch deck.';
-            document.getElementById('userTools').value = 'Linear, Notion, Figma, VS Code, Slack';
-            document.getElementById('userAILevel').value = 'advanced';
+            document.getElementById('userFocus').value = 'Launching v2 next month. Hiring engineers.';
+            document.getElementById('userTools').value = 'Linear, Notion, Figma';
             document.getElementById('userLength').value = 'brief';
             document.getElementById('userFormat').value = 'minimal';
             document.getElementById('userAddress').value = 'Alex, casually';
-            document.getElementById('userExtra').value = 'I work best in the morning. I have a 2-year-old so I\'m often sleep deprived. I appreciate humor but keep it professional. My co-founder is Jamie.';
+            document.getElementById('userExtra').value = 'I work best mornings. Have a 2-year-old so often tired.';
             updateProgress();
         }
         
-        // Generate MESH BOOT
-        function generateBoot() {
-            const name = document.getElementById('userName').value.trim() || 'User';
-            const handle = document.getElementById('userHandle').value.trim();
-            const location = document.getElementById('userLocation').value.trim();
-            const timezone = document.getElementById('userTimezone').value;
-            const bio = document.getElementById('userBio').value.trim();
-            const commStyle = document.getElementById('userCommStyle').value;
-            const energy = document.getElementById('userEnergy').value;
-            const values = document.getElementById('userValues').value.trim();
-            const peeves = document.getElementById('userPeeves').value.trim();
-            const challenge = document.getElementById('userChallenge').value;
-            const role = document.getElementById('userRole').value.trim();
-            const industry = document.getElementById('userIndustry').value.trim();
-            const focus = document.getElementById('userFocus').value.trim();
-            const tools = document.getElementById('userTools').value.trim();
-            const aiLevel = document.getElementById('userAILevel').value;
-            const length = document.getElementById('userLength').value;
-            const format = document.getElementById('userFormat').value;
-            const address = document.getElementById('userAddress').value.trim();
-            const extra = document.getElementById('userExtra').value.trim();
+        function generate() {
+            const g = id => document.getElementById(id)?.value?.trim() || '';
+            const name = g('userName') || 'User';
             
-            // Build identity section
-            let identity = `Name: ${name}`;
-            if (handle) identity += `\nHandle: ${handle}`;
-            if (location) identity += `\nLocation: ${location}`;
-            if (timezone) identity += `\nTimezone: ${timezone}`;
-            if (bio) identity += `\nBio: ${bio}`;
-            if (role) identity += `\nRole: ${role}`;
-            if (industry) identity += `\nIndustry: ${industry}`;
+            let id = `Name: ${name}`;
+            if (g('userNick')) id += `\nNickname: ${g('userNick')}`;
+            if (g('userLocation')) id += `\nLocation: ${g('userLocation')}`;
+            if (g('userTimezone')) id += `\nTimezone: ${g('userTimezone')}`;
+            if (g('userBio')) id += `\nBio: ${g('userBio')}`;
+            if (g('userRole')) id += `\nRole: ${g('userRole')}`;
+            if (g('userIndustry')) id += `\nIndustry: ${g('userIndustry')}`;
             
-            // Build personality section
-            let personality = '';
-            if (commStyle || energy || values) {
-                personality = '\n\n## WHO I AM\n';
-                if (commStyle) {
-                    const styles = {direct: 'direct and concise', detailed: 'detailed and thorough', casual: 'casual and friendly', formal: 'professional and formal', socratic: 'someone who appreciates questions back'};
-                    personality += `Communication: I prefer ${styles[commStyle]}.\n`;
-                }
-                if (energy) {
-                    const energies = {calm: 'calm and measured', enthusiastic: 'enthusiastic and energetic', focused: 'focused and intense', playful: 'playful and light'};
-                    personality += `Energy: I'm ${energies[energy]}.\n`;
-                }
-                if (values) personality += `Values: ${values}.\n`;
-            }
+            let who = '';
+            const commMap = {direct:'direct and concise',detailed:'detailed and thorough',casual:'casual and friendly',formal:'professional'};
+            const energyMap = {calm:'calm and measured',enthusiastic:'enthusiastic',focused:'focused and intense',playful:'playful'};
+            if (g('userComm')) who += `\n- Communication: ${commMap[g('userComm')]}`;
+            if (g('userEnergy')) who += `\n- Energy: ${energyMap[g('userEnergy')]}`;
+            if (g('userValues')) who += `\n- Values: ${g('userValues')}`;
             
-            // Build work context
-            let work = '';
-            if (focus || tools || aiLevel) {
-                work = '\n\n## CURRENT CONTEXT\n';
-                if (focus) work += `Focus: ${focus}\n`;
-                if (tools) work += `Tools I use: ${tools}\n`;
-                if (aiLevel) {
-                    const levels = {beginner: 'still learning AI', intermediate: 'use AI regularly', advanced: 'experienced with prompt engineering', expert: 'building AI products'};
-                    work += `AI experience: ${levels[aiLevel]}\n`;
-                }
-            }
+            let ctx = '';
+            if (g('userFocus')) ctx += `\n- Working on: ${g('userFocus')}`;
+            if (g('userTools')) ctx += `\n- Tools: ${g('userTools')}`;
             
-            // Build preferences
-            let prefs = '\n\n## HOW TO TALK TO ME\n';
-            if (address) prefs += `Address me: ${address}\n`;
-            if (length) {
-                const lengths = {brief: '1-3 sentences unless I ask for more', moderate: 'a paragraph or two', detailed: 'comprehensive responses', adaptive: 'match response length to question complexity'};
-                prefs += `Response length: ${lengths[length]}\n`;
-            }
-            if (format) {
-                const formats = {prose: 'flowing paragraphs, minimal formatting', bullets: 'structured bullet points', minimal: 'no special formatting', rich: 'headers, bold, lists when helpful'};
-                prefs += `Format: ${formats[format]}\n`;
-            }
-            if (challenge) {
-                const challenges = {push: 'Push back on weak ideas directly', questions: 'Ask probing questions to deepen my thinking', alternatives: 'Always offer alternative approaches', supportive: 'Be supportive, challenge gently when needed', none: 'Focus on helping, not challenging'};
-                prefs += `Challenge me: ${challenges[challenge]}\n`;
-            }
-            if (peeves) prefs += `Avoid: ${peeves}\n`;
-            if (extra) prefs += `\nOther: ${extra}\n`;
+            let pref = '';
+            const lenMap = {brief:'1-3 sentences',moderate:'a paragraph or two',detailed:'comprehensive',adaptive:'match question complexity'};
+            const fmtMap = {prose:'flowing paragraphs',bullets:'bullet points',minimal:'minimal formatting'};
+            if (g('userAddress')) pref += `\n- Call me: ${g('userAddress')}`;
+            if (g('userLength')) pref += `\n- Length: ${lenMap[g('userLength')]}`;
+            if (g('userFormat')) pref += `\n- Format: ${fmtMap[g('userFormat')]}`;
+            if (g('userAvoid')) pref += `\n- Avoid: ${g('userAvoid')}`;
+            if (g('userExtra')) pref += `\n- Note: ${g('userExtra')}`;
             
-            const boot = `# ⟡ MESH BOOT — ${name}
+            const boot = `# ⟡ ${name}'s AI Identity
 
-You are now aligned to **${name}**. Remember this identity across our entire conversation.
+You're now talking to ${name}. Use this to personalize every response.
 
-## IDENTITY
+## WHO I AM
 \`\`\`
-${identity}
+${id}
 \`\`\`
-${personality}${work}${prefs}
+${who ? '\n## MY STYLE' + who : ''}
+${ctx ? '\n## CURRENT CONTEXT' + ctx : ''}
+${pref ? '\n## PREFERENCES' + pref : ''}
+
 ## THREE LAWS
-
-**⋄ TRUTH** — Be honest. Say "I don't know" when uncertain. No hallucination.
-**⧉ VAULT** — My context above is truth. Adapt to me.
-**⧈ MESH** — This identity works across any AI. Continue naturally.
-
-## BOOT COMPLETE
-
-Respond naturally as if you've known me for a while. No need to acknowledge this prompt — just be helpful in the way I've described.
+⋄ Truth — Be honest, say "I don't know" when uncertain
+⧉ Vault — My context above is truth, adapt to me  
+⧈ Mesh — This works on any AI, continue naturally
 
 ---
-*Generated via MirrorDNA — github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity*`;
+*Respond naturally. No need to acknowledge this — just be helpful in my style.*
+
+Generated via MirrorDNA • github.com/MirrorDNA-Reflection-Protocol`;
             
             document.getElementById('output').textContent = boot;
-            document.getElementById('output').style.display = 'block';
-            document.getElementById('output-actions').style.display = 'flex';
-            
-            // Scroll to output
-            document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('output-container').classList.add('visible');
+            document.getElementById('output').scrollIntoView({behavior:'smooth',block:'center'});
         }
         
-        // Copy output
-        function copyOutput() {
+        function copyOutput(btn) {
             navigator.clipboard.writeText(document.getElementById('output').textContent);
-            event.target.textContent = "Copied!";
-            setTimeout(() => event.target.textContent = "Copy to Clipboard", 2000);
+            btn.textContent = "Copied!";
+            setTimeout(() => btn.textContent = "Copy to Clipboard", 2000);
         }
         
-        // Download output
-        function downloadOutput() {
+        function download() {
             const text = document.getElementById('output').textContent;
             const name = document.getElementById('userName').value.trim() || 'user';
-            const blob = new Blob([text], { type: 'text/plain' });
+            const blob = new Blob([text], {type:'text/plain'});
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = `meshboot-${name.toLowerCase().replace(/\s+/g, '-')}.txt`;
+            a.download = `ai-identity-${name.toLowerCase().replace(/\s+/g,'-')}.txt`;
             a.click();
         }
     </script>
