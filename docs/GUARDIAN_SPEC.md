@@ -54,6 +54,20 @@ fn main() {
 }
 ```
 
+## 3.1 The Mirror Engine (Deep Integration)
+The Guardian is not just a script; it is a **Mirror Node**.
+1.  **LingOS (The Language)**: The Guardian speaks high-density `LingOS` instructions.
+    *   *Handshake:* `⟡⟦PROBE: PRIVACY⟧`
+    *   *Response:* `⟡⟦ACK: SOVEREIGN⟧`
+2.  **SCD (Structured Contextual Distillation)**: The Guardian implements the real `scd_core.py` logic.
+    *   **Algorithm:** `ASHA-256` (Alphabetically Sorted Hashing Algorithm).
+    *   **Function:** It maintains a schema-enforced JSON state (`version`, `turn`, `state`).
+    *   **Check:** Before unlocking, it computes `ASHA-256` of the internal state. If it doesn't match the signature, it detects "Drift" and locks.
+3.  **Glyphs (The Interface)**: Visual communication via the ⟡/◈/△ system.
+    *   ⟡ = Active/Secure
+    *   △ = Negotiating/Choice
+    *   ❌ = Compromised
+
 ## 4. Why this Cures Anxiety
 You no longer have to worry if the AI company changes its rules.
 If they change the rules -> The Environment Signature changes -> **The Guardian Locks Itself.**
