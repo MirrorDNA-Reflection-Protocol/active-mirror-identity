@@ -118,7 +118,7 @@
             <p>Your AI identity is yours. A portable file that works on any AI — stored in your files, not theirs.</p>
         </section>
         <div class="counter-container">
-            <div class="counter-item"><div class="counter-num" id="seed-counter">2,847</div><div class="counter-label">Seeds Generated</div></div>
+            <div class="counter-item"><div class="counter-num" id="seed-counter">0</div><div class="counter-label">Seeds Generated</div></div>
             <div class="counter-item"><div class="counter-num">∞</div><div class="counter-label">AIs Supported</div></div>
             <div class="counter-item"><div class="counter-num">0</div><div class="counter-label">Data Stored</div></div>
         </div>
@@ -276,7 +276,7 @@
         function copyOutput(btn){navigator.clipboard.writeText(document.getElementById('output').textContent);btn.textContent='✓ Copied!';setTimeout(()=>btn.textContent='📋 Copy to Clipboard',2000)}
         function download(){const text=document.getElementById('output').textContent;const name=document.getElementById('userName').value.trim()||'user';const blob=new Blob([text],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mirror-seed-'+name.toLowerCase().replace(/\s+/g,'-')+'.md';a.click()}
         function incrementCounter(){const counter=document.getElementById('seed-counter');let current=parseInt(counter.textContent.replace(/,/g,''));current+=1;counter.textContent=current.toLocaleString();localStorage.setItem('seedCount',current)}
-        function initCounter(){let count=localStorage.getItem('seedCount');if(!count){count=2847+Math.floor(Math.random()*100);localStorage.setItem('seedCount',count)}document.getElementById('seed-counter').textContent=parseInt(count).toLocaleString()}
+        function initCounter(){let count=localStorage.getItem('seedCount');if(!count){count=0;localStorage.setItem('seedCount',count)}document.getElementById('seed-counter').textContent=parseInt(count).toLocaleString()}
         initCounter();
     </script>
 </body>
