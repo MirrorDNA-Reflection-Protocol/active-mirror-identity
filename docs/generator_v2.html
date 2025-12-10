@@ -531,6 +531,98 @@
             color: var(--text)
         }
 
+        /* Modals */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            animation: fadeIn .2s ease
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5)
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .modal-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.25rem;
+            line-height: 1
+        }
+
+        .close-btn:hover {
+            color: var(--text)
+        }
+
+        .modal-content {
+            padding: 1.5rem;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            color: var(--text-secondary)
+        }
+
+        .modal-content h3 {
+            color: var(--text);
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 1rem
+        }
+
+        .modal-content h3:first-child {
+            margin-top: 0
+        }
+
+        .modal-content p {
+            margin-bottom: 1rem
+        }
+
+        .modal-content ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem
+        }
+
+        .modal-content li {
+            margin-bottom: 0.5rem
+        }
+
         .step-text p {
             font-size: 0.8rem;
             color: var(--text-secondary);
@@ -559,6 +651,25 @@
             border-top: 1px solid var(--border);
             padding-top: 2rem;
             width: 100%
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            cursor: pointer;
+            text-decoration: none;
+            transition: color .2s
+        }
+
+        .footer-link:hover {
+            color: var(--accent)
         }
     </style>
 </head>
@@ -614,8 +725,17 @@
         <div id="section-create" class="section-content active">
             <div class="card" id="generator">
                 <div class="card-header">
-                    <div class="card-icon">⟡</div>
-                    <div class="card-title">Identity & Context</div>
+                    <div style="display:flex;align-items:center;gap:0.75rem">
+                        <div class="card-icon">⟡</div>
+                        <div class="card-title">Identity & Context</div>
+                    </div>
+                    <div style="margin-left:auto">
+                        <label
+                            style="font-size:0.85rem;color:var(--text-secondary);display:flex;align-items:center;gap:0.5rem;cursor:pointer">
+                            <input type="checkbox" onchange="togglePro(this)" style="accent-color:var(--accent)"> Pro
+                            Mode
+                        </label>
+                    </div>
                 </div>
                 <div class="tabs">
                     <button class="tab active" onclick="showTab('basics')">Basics</button>
@@ -660,6 +780,13 @@
 
                 <div class="output-container" id="output-container">
                     <div class="output" id="output"></div>
+                    <div id="pro-inspector"
+                        style="display:none;margin-top:1rem;border-top:1px dashed var(--border);padding-top:1rem">
+                        <div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:0.5rem;font-weight:600">
+                            PRO INSPECTOR (METADATA)</div>
+                        <div class="output" id="output-meta" style="font-size:0.75rem;color:var(--text-dim)"></div>
+                    </div>
+
                     <div class="instruction-box">
                         <h4>🔒 Cryptographically Signed</h4>
                         <p style="font-size:0.9rem;color:var(--text-secondary)">This seed contains a hidden SHA-256
@@ -703,10 +830,80 @@
             <div class="ecosystem-breadcrumb">
                 <span>Active MirrorOS</span> <span class="sep">·</span> <span>v2.0.0-beta</span>
             </div>
-            <div style="margin-top:1rem;font-size:0.8rem">
-                Identity belongs to the user.
+            <div class="footer-links">
+                <a onclick="openModal('faq')" class="footer-link">FAQ</a>
+                <a onclick="openModal('privacy')" class="footer-link">Privacy (Zero-Data)</a>
+                <a onclick="openModal('legal')" class="footer-link">Terms & Safety</a>
+                <a href="https://github.com" target="_blank" class="footer-link">GitHub</a>
+            </div>
+            <div style="margin-top:1.5rem;font-size:0.8rem">
+                Identity belongs to the user. The mirror reflects, it does not predict.
             </div>
         </footer>
+    </div>
+
+    <!-- MODALS -->
+    <div id="modal-faq" class="modal-overlay" onclick="if(event.target===this)closeModal('faq')">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title"><span class="glyph">?</span> Frequently Asked Questions</div>
+                <button class="close-btn" onclick="closeModal('faq')">×</button>
+            </div>
+            <div class="modal-content">
+                <h3>What is a Mirror Seed?</h3>
+                <p>A portable identity file (Markdown) that you can paste into any AI (ChatGPT, Claude, etc.) to
+                    instantly align it with your context, style, and memory.</p>
+
+                <h3>Why is it "Signed"?</h3>
+                <p>We embed a SHA-256 checksum in the file header. This allows you to verify later that the file hasn't
+                    been accidentally edited or corrupted.</p>
+
+                <h3>Is this compatible with all AIs?</h3>
+                <p>Yes. The seed is just text (Markdown). The "Encryption" is for verification only—the content itself
+                    is readable by any LLM.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-privacy" class="modal-overlay" onclick="if(event.target===this)closeModal('privacy')">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title"><span class="glyph">🔒</span> Zero-Data Privacy Guarantee</div>
+                <button class="close-btn" onclick="closeModal('privacy')">×</button>
+            </div>
+            <div class="modal-content">
+                <p><strong>This tool runs 100% in your browser.</strong></p>
+                <ul>
+                    <li>No data is sent to any server.</li>
+                    <li>No cookies are used for tracking.</li>
+                    <li>We do not store your seed.</li>
+                </ul>
+                <p>The SHA-256 calculation happens locally using the Web Crypto API. You can disconnect from the
+                    internet and this tool will still work perfectly.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-legal" class="modal-overlay" onclick="if(event.target===this)closeModal('legal')">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title"><span class="glyph">⚖️</span> Terms & Safety</div>
+                <button class="close-btn" onclick="closeModal('legal')">×</button>
+            </div>
+            <div class="modal-content">
+                <h3>Disclaimer</h3>
+                <p>The Mirror Seed Protocol is provided "as is", without warranty of any kind. While we design for
+                    safety (e.g., injection resistance), we cannot guarantee how third-party AI models will interpret
+                    the seed.</p>
+
+                <h3>Prompt Injection Risk</h3>
+                <p>This tool sanitizes inputs against common injection patterns, but no sanitizer is perfect. Always
+                    review your seed file before pasting it into an AI.</p>
+
+                <h3>License</h3>
+                <p>MIT License — You are free to fork, modify, and distribute this software.</p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -731,6 +928,16 @@
             const hashBuffer = await crypto.subtle.digest('SHA-256', data);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             return 'sha256:' + hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // New Modal Functions
+        function openModal(id) { document.getElementById('modal-' + id).classList.add('active'); }
+        function closeModal(id) { document.getElementById('modal-' + id).classList.remove('active'); }
+
+        // Pro Mode
+        function togglePro(cb) {
+            const el = document.getElementById('pro-inspector');
+            el.style.display = cb.checked ? 'block' : 'none';
         }
 
         async function generate() {
@@ -771,6 +978,10 @@
 
             document.getElementById('output').textContent = fullSeed;
             document.getElementById('output-container').classList.add('visible');
+
+            // Pro Mode Update
+            document.getElementById('output-meta').textContent = frontmatter;
+
             document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
