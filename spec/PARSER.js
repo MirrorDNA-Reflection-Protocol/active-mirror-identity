@@ -8,6 +8,18 @@
  * @see https://activemirror.ai
  */
 
+// Environment shim for crypto
+let cryptoObj;
+if (typeof crypto !== 'undefined') {
+  cryptoObj = crypto;
+} else if (typeof require !== 'undefined') {
+  try {
+    cryptoObj = require('crypto').webcrypto || require('crypto');
+  } catch (e) {
+    console.warn('Crypto module not found');
+  }
+}
+
 class MirrorSeedParser {
   static VERSION = '1.0.0';
   static PROTOCOL_PREFIX = 'MirrorDNA-Seed-';
@@ -40,10 +52,10 @@ class MirrorSeedParser {
     // Injection check
     const injectionResult = this.detectInjection(text);
     if (!injectionResult.safe) {
-      return { 
-        valid: false, 
-        error: 'Potential injection detected', 
-        pattern: injectionResult.pattern 
+      return {
+        valid: false,
+        error: 'Potential injection detected',
+        pattern: injectionResult.pattern
       };
     }
 
@@ -61,9 +73,9 @@ class MirrorSeedParser {
       // Validate required fields
       const required = ['version', 'seed_id', 'generated', 'protocol'];
       const missing = required.filter(f => !frontmatter[f]);
-      
+
       if (missing.length > 0) {
-        return { 
+        return {
           valid: true,
           warning: `Missing fields: ${missing.join(', ')}`,
           frontmatter,
@@ -74,7 +86,7 @@ class MirrorSeedParser {
 
       // Validate protocol
       if (!frontmatter.protocol.startsWith(this.PROTOCOL_PREFIX)) {
-        return { 
+        return {
           valid: true,
           warning: `Unknown protocol: ${frontmatter.protocol}`,
           frontmatter,
@@ -103,7 +115,7 @@ class MirrorSeedParser {
   static parseSimpleSeed(text) {
     const sections = this.parseSections(text);
     const seedIdMatch = text.match(/seed-[a-z0-9]+/);
-    
+
     return {
       valid: true,
       simple: true,
@@ -139,17 +151,17 @@ class MirrorSeedParser {
     const result = {};
     const lines = yamlText.trim().split('\n');
     let currentKey = null;
-    
+
     for (const line of lines) {
       // Skip comments and empty lines
       if (line.trim().startsWith('#') || !line.trim()) continue;
-      
+
       // Match key: value pairs
       const match = line.match(/^(\s*)([a-z_]+):\s*(.*)$/i);
       if (match) {
         const [, spaces, key, value] = match;
         const indent = spaces.length;
-        
+
         if (indent === 0) {
           if (value && value !== '') {
             // Simple value - strip quotes
@@ -167,7 +179,7 @@ class MirrorSeedParser {
         }
       }
     }
-    
+
     return result;
   }
 
@@ -178,7 +190,7 @@ class MirrorSeedParser {
     const sections = {};
     const regex = /^## (.+)$/gm;
     const matches = [...content.matchAll(regex)];
-    
+
     for (let i = 0; i < matches.length; i++) {
       const sectionName = matches[i][1]
         .toLowerCase()
@@ -187,13 +199,13 @@ class MirrorSeedParser {
       const startIndex = matches[i].index + matches[i][0].length;
       const endIndex = matches[i + 1]?.index || content.length;
       const sectionContent = content.slice(startIndex, endIndex).trim();
-      
+
       sections[sectionName] = {
         raw: sectionContent,
         fields: this.parseFields(sectionContent)
       };
     }
-    
+
     return sections;
   }
 
@@ -203,7 +215,7 @@ class MirrorSeedParser {
   static parseFields(sectionContent) {
     const fields = {};
     const lines = sectionContent.split('\n');
-    
+
     for (const line of lines) {
       // Match "Key: Value" or "- Key: Value" patterns
       const match = line.match(/^[-*]?\s*([A-Za-z_]+):\s*(.+)$/);
@@ -212,7 +224,7 @@ class MirrorSeedParser {
         fields[key.toLowerCase()] = value.trim();
       }
     }
-    
+
     return fields;
   }
 
@@ -221,7 +233,7 @@ class MirrorSeedParser {
    */
   static getWarnings(frontmatter, sections) {
     const warnings = [];
-    
+
     // Check for missing recommended sections
     const recommended = ['identity', 'style', 'preferences', 'ai_instructions'];
     for (const section of recommended) {
@@ -234,7 +246,7 @@ class MirrorSeedParser {
     if (frontmatter.version !== this.VERSION) {
       const seedMajor = parseInt(frontmatter.version?.split('.')[0] || '1');
       const parserMajor = parseInt(this.VERSION.split('.')[0]);
-      
+
       if (seedMajor > parserMajor) {
         warnings.push(`Seed uses newer protocol (v${frontmatter.version}). Some features may not work.`);
       }
@@ -256,7 +268,10 @@ class MirrorSeedParser {
   static async computeChecksum(content) {
     const encoder = new TextEncoder();
     const data = encoder.encode(content);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    if (!cryptoObj || !cryptoObj.subtle) {
+      throw new Error('Crypto API not available');
+    }
+    const hashBuffer = await cryptoObj.subtle.digest('SHA-256', data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     return 'sha256:' + hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   }
@@ -271,12 +286,12 @@ class MirrorSeedParser {
 
     const computed = await this.computeChecksum(parsedSeed.content);
     const declared = parsedSeed.frontmatter.integrity.checksum;
-    
+
     if (computed === declared) {
       return { valid: true };
     } else {
-      return { 
-        valid: false, 
+      return {
+        valid: false,
         reason: 'Checksum mismatch - seed may have been modified',
         declared,
         computed
@@ -299,7 +314,7 @@ class MirrorSeedParser {
   static generate(identity, options = {}) {
     const seedId = this.generateSeedId();
     const now = new Date().toISOString();
-    
+
     const frontmatter = {
       version: this.VERSION,
       seed_id: seedId,
@@ -314,7 +329,7 @@ class MirrorSeedParser {
     };
 
     const content = this.buildContent(identity);
-    
+
     return {
       frontmatter,
       content,
@@ -404,4 +419,66 @@ if (typeof module !== 'undefined' && module.exports) {
 // Export for ES modules
 if (typeof exports !== 'undefined') {
   exports.MirrorSeedParser = MirrorSeedParser;
+}
+
+// CLI Runner
+if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.main === module) {
+  const fs = require('fs');
+  const path = require('path');
+
+  async function runCLI() {
+    const args = process.argv.slice(2);
+    if (args.length === 0 || args.includes('--help')) {
+      console.log('Mirror Seed Parser CLI');
+      console.log('Usage: node PARSER.js <file_path> [options]');
+      console.log('Options:');
+      console.log('  --verify     Verify integrity and strict parsing');
+      console.log('  --checksum   Compute and print checksum for file');
+      return;
+    }
+
+    const mode = args.includes('--checksum') ? 'checksum' : 'verify';
+    const cleanArgs = args.filter(a => !a.startsWith('--'));
+
+    for (const filePath of cleanArgs) {
+      console.log(`\n⟡ Processing: ${filePath}`);
+      try {
+        const content = fs.readFileSync(filePath, 'utf8');
+
+        if (mode === 'checksum') {
+          // Compute
+          let contentToHash = content;
+          // If it has frontmatter, try to strip it to get just body
+          const parts = content.split(/^---$/m);
+          if (parts.length >= 3) {
+            contentToHash = parts.slice(2).join('---').trim();
+          }
+          const checksum = await MirrorSeedParser.computeChecksum(contentToHash);
+          console.log(`  SHA-256: ${checksum}`);
+        } else {
+          // Verify
+          const result = MirrorSeedParser.parse(content);
+          if (result.valid) {
+            console.log('  ✅ VALID');
+            if (result.warnings && result.warnings.length > 0) {
+              result.warnings.forEach(w => console.log(`  ⚠️ Warning: ${w}`));
+            }
+            const integrity = await MirrorSeedParser.validateChecksum(result);
+            if (integrity.valid) {
+              console.log('  🔒 Integrity Check: PASS');
+            } else {
+              console.log(`  ❌ Integrity Check: FAIL (${integrity.reason})`);
+            }
+          } else {
+            console.log(`  ❌ INVALID: ${result.error}`);
+            if (result.pattern) console.log(`     Pattern: ${result.pattern}`);
+          }
+        }
+      } catch (err) {
+        console.error(`  ❌ Error: ${err.message}`);
+      }
+    }
+  }
+
+  runCLI();
 }

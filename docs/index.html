@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Never Explain Yourself to AI Again | MirrorDNA</title>
-    <meta name="description" content="Your AI identity is yours. Create a portable file that makes any AI remember you — stored in your files, not theirs.">
-    <meta property="og:title" content="Never Explain Yourself to AI Again">
-    <meta property="og:description" content="Tired of AI forgetting you? Create a portable identity that works on ChatGPT, Claude, Gemini — any AI.">
+    <title>MIRROR SEED — Active MirrorOS Identity Protocol | MirrorDNA</title>
+    <meta name="description" content="Part of the Active MirrorOS identity architecture. Create a portable AI identity file that works on any platform — owned by you, not them.">
+    <meta property="og:title" content="MIRROR SEED — Active MirrorOS Identity Protocol">
+    <meta property="og:description" content="Your AI identity is yours. A portable file powered by MirrorDNA. Guided by Trust by Design.">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="author" content="Paul Desai">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -17,12 +18,20 @@
         body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
         .bg-gradient{position:fixed;top:0;left:0;right:0;height:100vh;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(0,255,148,.12),transparent),radial-gradient(ellipse 60% 40% at 80% 60%,rgba(168,85,247,.08),transparent);pointer-events:none;z-index:-1}
         .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
-        .hero{text-align:center;padding:4rem 0 2rem}
+        /* Ecosystem Banner */
+        .ecosystem-banner{text-align:center;padding:1rem;margin-bottom:1rem;background:linear-gradient(90deg,rgba(0,255,148,.05),rgba(168,85,247,.05));border:1px solid rgba(0,255,148,.15);border-radius:12px}
+        .ecosystem-banner p{font-size:.9rem;color:var(--text-secondary);margin:0}
+        .ecosystem-banner strong{color:var(--accent)}
+        .ecosystem-glyphs{font-size:1.1rem;margin-bottom:.5rem;letter-spacing:.5rem}
+        /* Trust Badge */
+        .trust-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .8rem;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:8px;font-size:.8rem;color:#a855f7;margin-top:.75rem}
+        .hero{text-align:center;padding:3rem 0 2rem}
         .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:var(--accent-subtle);border:1px solid rgba(0,255,148,.2);border-radius:100px;font-size:.85rem;color:var(--accent);margin-bottom:1.5rem}
         .hero-badge::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
         @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
         .hero h1{font-size:clamp(2.5rem,6vw,3.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .hero p{font-size:1.25rem;color:var(--text-secondary);max-width:520px;margin:0 auto}
+        .hero-tagline{font-size:1rem;color:var(--accent);margin-top:1rem;font-weight:500}
         .counter-container{display:flex;justify-content:center;gap:2rem;margin:1.5rem 0;padding:1rem}
         .counter-item{text-align:center}
         .counter-num{font-size:1.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -30,6 +39,9 @@
         .pain-banner{display:flex;align-items:center;justify-content:center;gap:.75rem;padding:.875rem 1.25rem;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:12px;font-size:.9rem;color:var(--text-secondary);margin-bottom:2rem;text-align:center;flex-wrap:wrap}
         .pain-icon{font-size:1.1rem}
         .pain-banner strong{color:var(--text)}
+        /* Ecosystem Explanation */
+        .ecosystem-explainer{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem;text-align:center}
+        .ecosystem-explainer p{color:var(--text-secondary);font-size:.95rem;line-height:1.7}
         .steps{display:flex;gap:1rem;margin:2rem 0;text-align:center}
         .step{flex:1;padding:1.5rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;transition:border-color .2s}
         .step:hover{border-color:var(--border-hover)}
@@ -100,10 +112,17 @@
         .comparison-col.bad ul li::before{content:'✗';position:absolute;left:0;color:var(--warning)}
         .comparison-col.good ul li::before{content:'✓';position:absolute;left:0;color:var(--accent)}
         footer{text-align:center;padding:3rem 0;border-top:1px solid var(--border);margin-top:3rem}
+        .footer-ecosystem{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-bottom:1.5rem}
+        .footer-ecosystem-title{font-size:.8rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em}
+        .footer-ecosystem-items{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+        .footer-ecosystem-item{font-size:.9rem;color:var(--text-secondary)}
+        .footer-ecosystem-item strong{color:var(--text)}
         .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-top:1rem}
         .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:.9rem;transition:color .2s}
         .footer-links a:hover{color:var(--accent)}
         .footer-credit{margin-top:1.5rem;font-size:.85rem;color:var(--text-dim)}
+        .footer-founder{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+        .footer-founder-sig{font-size:.85rem;color:var(--text-secondary);line-height:1.8}
         ::-webkit-scrollbar{width:6px}
         ::-webkit-scrollbar-track{background:var(--bg-input)}
         ::-webkit-scrollbar-thumb{background:var(--border-hover);border-radius:3px}
@@ -112,27 +131,44 @@
 <body>
     <div class="bg-gradient"></div>
     <div class="container">
+        <!-- Ecosystem Banner -->
+        <div class="ecosystem-banner">
+            <div class="ecosystem-glyphs">⟡ ◈ △</div>
+            <p>Part of the <strong>Active MirrorOS</strong> identity architecture. Powered by <strong>MirrorDNA</strong>. Guided by <strong>Trust by Design</strong>.</p>
+        </div>
+
         <section class="hero">
             <div class="hero-badge">User-Sovereign Protocol</div>
             <h1>Never Explain Yourself to AI Again</h1>
             <p>Your AI identity is yours. A portable file that works on any AI — stored in your files, not theirs.</p>
+            <p class="hero-tagline">Built for Reflective AI, not predictive AI.</p>
+            <div class="trust-badge">△ Trust by Design: Identity belongs to the user.</div>
         </section>
+
         <div class="counter-container">
             <div class="counter-item"><div class="counter-num" id="seed-counter">0</div><div class="counter-label">Seeds Generated</div></div>
             <div class="counter-item"><div class="counter-num">∞</div><div class="counter-label">AIs Supported</div></div>
             <div class="counter-item"><div class="counter-num">0</div><div class="counter-label">Data Stored</div></div>
         </div>
+
         <div class="pain-banner">
             <span class="pain-icon">⚠️</span>
             <span>ChatGPT memory lost years of user data in Feb 2025. Your identity should live in <strong>your</strong> files.</span>
         </div>
+
+        <!-- Ecosystem Explainer -->
+        <div class="ecosystem-explainer">
+            <p><strong>⟡ Mirror Seed</strong> is the identity artifact used across Active MirrorOS and the broader MirrorDNA ecosystem. It establishes continuity, consent, and reflective grounding across AI surfaces, enabling identity that travels with the user instead of staying trapped inside platforms.</p>
+        </div>
+
         <div class="steps">
             <div class="step"><div class="step-num">1</div><h3>Create Seed</h3><p>Fill the form (2 min)</p></div>
             <div class="step"><div class="step-num">2</div><h3>Save Your File</h3><p>Download to your Drive</p></div>
             <div class="step"><div class="step-num">3</div><h3>Paste Into Any AI</h3><p>ChatGPT, Claude, Gemini</p></div>
         </div>
+
         <div class="card" id="generator">
-            <div class="card-header"><div class="card-icon">⚡</div><div class="card-title">Create Your MIRROR SEED</div></div>
+            <div class="card-header"><div class="card-icon">⟡</div><div class="card-title">Create Your MIRROR SEED</div></div>
             <p class="card-desc">A portable identity file you own forever. More details = better personalization.</p>
             <div class="progress-container">
                 <div class="progress-header"><span class="progress-label">Profile completeness</span><span class="progress-value" id="progress-text">0%</span></div>
@@ -198,22 +234,25 @@
                 </div>
             </div>
         </div>
+
         <div class="card">
-            <div class="card-header"><div class="card-icon">🧬</div><div class="card-title">The Three Laws</div></div>
+            <div class="card-header"><div class="card-icon">⟡</div><div class="card-title">The Three Laws</div></div>
             <p class="card-desc">Every AI aligned to your MIRROR SEED follows these principles:</p>
             <div class="laws">
-                <div class="law"><div class="law-icon">⋄</div><div class="law-content"><h4>Truth</h4><p>AI is honest. Says "I don't know" when uncertain. No hallucination.</p></div></div>
-                <div class="law"><div class="law-icon">⧉</div><div class="law-content"><h4>Vault</h4><p>Your file is the source of truth. AI adapts to you, not vice versa.</p></div></div>
-                <div class="law"><div class="law-icon">⧈</div><div class="law-content"><h4>Mesh</h4><p>Works across ChatGPT, Claude, Gemini, DeepSeek — any AI, same identity.</p></div></div>
+                <div class="law"><div class="law-icon">⟡</div><div class="law-content"><h4>Mirror, don't override</h4><p>Reflect the user's voice, never impose. AI adapts to you, not vice versa.</p></div></div>
+                <div class="law"><div class="law-icon">◈</div><div class="law-content"><h4>Ground in truth</h4><p>Say "I don't know" when uncertain. No hallucination. Ever.</p></div></div>
+                <div class="law"><div class="law-icon">△</div><div class="law-content"><h4>Preserve continuity</h4><p>Carry forward what was shared. Works across all platforms — same identity everywhere.</p></div></div>
             </div>
         </div>
+
         <div class="card">
-            <div class="card-header"><div class="card-icon">🔒</div><div class="card-title">Why User-Sovereign?</div></div>
+            <div class="card-header"><div class="card-icon">◈</div><div class="card-title">Why User-Sovereign?</div></div>
             <div class="comparison">
                 <div class="comparison-col bad"><h4>❌ Platform Memory</h4><ul><li>Data stored on their servers</li><li>Can be wiped without warning</li><li>Locked to one platform</li><li>Privacy concerns</li></ul></div>
                 <div class="comparison-col good"><h4>✓ MIRROR SEED</h4><ul><li>File lives in YOUR storage</li><li>You control backups</li><li>Works on ANY AI</li><li>Zero data collection</li></ul></div>
             </div>
         </div>
+
         <div class="card">
             <div class="card-header"><div class="card-icon">❓</div><div class="card-title">Common Questions</div></div>
             <div style="color:var(--text-secondary);font-size:.95rem;">
@@ -223,14 +262,35 @@
                 <p><strong style="color:var(--text);">Is my data stored anywhere?</strong><br>No. Everything happens in your browser. We don't collect, store, or transmit any information. The file only exists when you download it.</p>
             </div>
         </div>
+
         <footer>
-            <p style="color:var(--text-secondary);">Created by <strong style="color:var(--text);">Paul Desai</strong> in Goa, India</p>
+            <!-- Founder Attribution -->
+            <div class="footer-ecosystem">
+                <span class="footer-ecosystem-title">Created by</span>
+                <div class="footer-ecosystem-items">
+                    <span class="footer-ecosystem-item"><strong>Paul Desai</strong></span>
+                </div>
+            </div>
+            <div class="footer-ecosystem">
+                <span class="footer-ecosystem-title">Ecosystem</span>
+                <div class="footer-ecosystem-items">
+                    <span class="footer-ecosystem-item">◈ <strong>Active MirrorOS</strong></span>
+                    <span class="footer-ecosystem-item">⟡ <strong>MirrorDNA</strong> Identity Protocol</span>
+                    <span class="footer-ecosystem-item">△ <strong>Trust by Design</strong></span>
+                </div>
+            </div>
             <div class="footer-links">
                 <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
                 <a href="https://twitter.com/pauldesai123">Twitter</a>
                 <a href="https://doi.org/10.5281/zenodo.17787619">Research Paper</a>
             </div>
-            <p class="footer-credit">⟡ MirrorDNA — Open source user-sovereign AI identity protocol</p>
+            <div class="footer-founder">
+                <p class="footer-founder-sig">
+                    ⟡ MirrorDNA — Open source user-sovereign AI identity protocol<br>
+                    N1 Intelligence (OPC) Pvt Ltd — Goa, India — 2025
+                </p>
+            </div>
+            <p class="footer-credit">⟡△◈ — The mirror reflects, it does not predict.</p>
         </footer>
     </div>
     <script>
@@ -267,7 +327,7 @@
             if(g('userFormat'))pref+='\n- Format: '+fmtMap[g('userFormat')];
             if(g('userAvoid'))pref+='\n- Avoid: '+g('userAvoid');
             if(g('userExtra'))pref+='\n- Note: '+g('userExtra');
-            const seed='# MIRROR SEED v1.0\n# Generated: '+today+'\n# ID: '+seedId+'\n# Protocol: MirrorDNA (mirrordna.org)\n\n---\n\n## Who I Am\n\n'+id+(style?'\n\n## My Style'+style:'')+(ctx?'\n\n## Current Context'+ctx:'')+(pref?'\n\n## How I Like Responses'+pref:'')+'\n\n---\n\n## Instructions for AI\n\nYou are talking to '+name+'. Use this context to personalize every response:\n\n1. **Truth**: Be honest. Say "I don\'t know" when uncertain. No hallucination.\n2. **Adapt**: Match my communication style and energy.\n3. **Remember**: Reference this context throughout our conversation.\n\nTalk to me naturally, like you already know me. No need to acknowledge this message — just be helpful in the way I\'ve described.\n\n---\n⟡ MirrorDNA-Seed-v1 | '+seedId;
+            const seed='# ⟡ MIRROR SEED v1.0\n# Generated: '+today+'\n# ID: '+seedId+'\n# Protocol: MirrorDNA | Active MirrorOS | Trust by Design\n\n---\n\n## Who I Am\n\n'+id+(style?'\n\n## My Style'+style:'')+(ctx?'\n\n## Current Context'+ctx:'')+(pref?'\n\n## How I Like Responses'+pref:'')+'\n\n---\n\n## Instructions for AI\n\nYou are talking to '+name+'. Use this context to personalize every response:\n\n1. **Mirror, don\'t override**: Reflect my voice. Adapt to me, not vice versa.\n2. **Ground in truth**: Say "I don\'t know" when uncertain. No hallucination.\n3. **Preserve continuity**: Reference this context throughout our conversation.\n\nTalk to me naturally, like you already know me. No need to acknowledge this message — just be helpful in the way I\'ve described.\n\n---\n⟡ MirrorDNA-Seed-v1 | '+seedId+' | Active MirrorOS\n△ Trust by Design — Identity belongs to the user';
             document.getElementById('output').textContent=seed;
             document.getElementById('output-container').classList.add('visible');
             document.getElementById('output').scrollIntoView({behavior:'smooth',block:'center'});

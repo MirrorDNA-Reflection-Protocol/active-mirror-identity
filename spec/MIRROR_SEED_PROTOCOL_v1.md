@@ -1,13 +1,30 @@
-# MIRROR SEED PROTOCOL v1.0
+# ⟡ MIRROR SEED PROTOCOL v1.0
 
 ## Active Mirror Identity Engineering Specification
+
+> Part of the **Active MirrorOS** identity architecture. Powered by **MirrorDNA**. Guided by **Trust by Design**.
+
+*Built for Reflective AI, not predictive AI.*
+
+---
 
 **Version:** 1.0.0  
 **Status:** Production + Roadmap  
 **Author:** Paul Desai  
 **Organization:** N1 Intelligence (OPC) Pvt Ltd  
+**Ecosystem:** Active MirrorOS · MirrorDNA · Trust by Design  
 **Date:** 2025-12-10  
-**License:** MIT with Attribution  
+**License:** CC-BY-ND 4.0 (Spec) | MIT (Parser)  
+
+### △ Trust by Design: Identity belongs to the user.
+
+### Symbolic Anchors
+
+| Glyph | Component | Meaning |
+|-------|-----------|---------|
+| ⟡ | MirrorDNA | Truth / Vault / Anchor |
+| ◈ | Active MirrorOS | Pattern / System |
+| △ | Trust by Design | Decision / Consent |  
 
 ---
 
@@ -114,7 +131,7 @@ glyph_sig: "⟡△◈"
 | `integrity.checksum` | string | Hash of content body | 🔶 Prototype |
 | `integrity.algorithm` | string | Hash algorithm used | 🔶 Prototype |
 | `protocol` | string | Protocol identifier | ✅ Implemented |
-| `trust_marker` | string | Trust-by-Design version | 🔶 Prototype |
+| `trust_marker` | string | Trust-by-Design version | ⚪ Speculative |
 | `glyph_sig` | string | Non-computational identity glyphs | ✅ Implemented |
 
 ### 2.3 Optional Fields (Future)
@@ -599,7 +616,7 @@ Never claim to have updated my seed directly.
 
 **Legend:**
 - ✅ Implemented — Running in production
-- 🔶 Prototype — Code exists, not deployed
+- 🔶 Prototype — Code exists in `PARSER.js`, not universally deployed
 - ⚪ Speculative — Design only, no code
 
 
