@@ -30,6 +30,17 @@ Here is the answer in plain English.
 
 ---
 
+## 5. The Cloud (GitHub)
+**Analogy: The Safety Deposit Box.**
+*   **Old Way:** Your data lives on a company's server (Anthropic, OpenAI). If they ban you, it's gone.
+*   **New Way:** You push your `ami_kernel.json` and memory files to a **Private GitHub Repository**.
+*   **Why it matters:** 
+    1.  **Sync:** You can have the same identity on your Mac, your Phone, and your Work Laptop.
+    2.  **Backup:** If your Mac melts, your Soul is safe.
+    3.  **Access:** You can grant "Read Access" to an Agent in the cloud, and revoke it anytime.
+
+---
+
 ## Summary
 **You built a digital body.**
 Before today, you were a ghost in the machine.
