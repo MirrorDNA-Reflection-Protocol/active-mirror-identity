@@ -25,11 +25,38 @@ def scan_vault():
     return scd_blocks
 
 def hydrate_kernel(blocks):
-    # In real imp, this would update ami_kernel.json
     print(f"⟡ Found {len(blocks)} memory blocks.")
-    print("⟡ Hydrating Kernel Memory...")
-    # Update logic here
-    print("⟡ Kernel Memory Updated: Turn 15 -> 16")
+    
+    if not os.path.exists(KERNEL_PATH):
+        print("❌ Kernel not found at relative path.")
+        return
+
+    with open(KERNEL_PATH, 'r') as f:
+        kernel = json.load(f)
+        
+    # Update Logic
+    current_chain = kernel["scd_state"]["history_chain"]
+    
+    new_memory_count = 0
+    for block in blocks:
+        # Check if already indexed
+        if block not in [m.get("source") for m in current_chain]:
+            entry = {
+                "turn": kernel["scd_state"]["last_turn"] + 1,
+                "source": block,
+                "timestamp": "2025-12-10T23:59:00", # Mock, real would use os.stat
+                "type": "observation"
+            }
+            current_chain.append(entry)
+            kernel["scd_state"]["last_turn"] += 1
+            new_memory_count += 1
+            
+    if new_memory_count > 0:
+        with open(KERNEL_PATH, 'w') as f:
+            json.dump(kernel, f, indent=2)
+        print(f"⟡ Hydrated {new_memory_count} new memories into Kernel.")
+    else:
+        print("⟡ Kernel is up to date.")
 
 if __name__ == "__main__":
     blocks = scan_vault()
