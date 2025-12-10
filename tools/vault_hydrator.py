@@ -5,8 +5,10 @@ import re
 # ⟡ Vault Hydrator (Week 3)
 # Scans Obsidian Vault for SCD State and hydrates the Kernel.
 
-VAULT_PATH = os.path.expanduser("~/Obsidian/MirrorDNA-Vault")
-KERNEL_PATH = "../ami_kernel.json"
+VAULT_PATH = os.path.expanduser("~/Documents/Obsidian/MirrorDNA-Vault")
+# Auto-detect kernel
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BASE_DIR)
 
 def scan_vault():
     print(f"⟡ Scanning Vault: {VAULT_PATH}")
@@ -24,14 +26,29 @@ def scan_vault():
                         scd_blocks.append(file)
     return scd_blocks
 
+def get_kernel_path():
+    # Priority 1: Check for ami_active-mirror.json
+    target = os.path.join(PROJECT_ROOT, "ami_active-mirror.json")
+    if os.path.exists(target):
+        return target
+        
+    # Priority 2: Check for any ami_*.json
+    files = [f for f in os.listdir(PROJECT_ROOT) if f.startswith('ami_') and f.endswith('.json')]
+    if files:
+        return os.path.join(PROJECT_ROOT, files[0])
+        
+    return os.path.join(PROJECT_ROOT, "ami_kernel.json")
+
 def hydrate_kernel(blocks):
     print(f"⟡ Found {len(blocks)} memory blocks.")
     
-    if not os.path.exists(KERNEL_PATH):
-        print("❌ Kernel not found at relative path.")
+    kernel_path = get_kernel_path()
+    if not os.path.exists(kernel_path):
+        print(f"❌ Kernel not found at: {kernel_path}")
         return
 
-    with open(KERNEL_PATH, 'r') as f:
+    print(f"⟡ Hydrating Kernel: {os.path.basename(kernel_path)}")
+    with open(kernel_path, 'r') as f:
         kernel = json.load(f)
         
     # Update Logic
@@ -52,7 +69,7 @@ def hydrate_kernel(blocks):
             new_memory_count += 1
             
     if new_memory_count > 0:
-        with open(KERNEL_PATH, 'w') as f:
+        with open(kernel_path, 'w') as f:
             json.dump(kernel, f, indent=2)
         print(f"⟡ Hydrated {new_memory_count} new memories into Kernel.")
     else:

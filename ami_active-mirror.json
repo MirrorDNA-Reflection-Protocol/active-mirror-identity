@@ -1,41 +1,54 @@
 {
-    "ami_version": "0.1",
-    "meta": {
-        "generated_at": "TIMESTAME_ISO_8601",
-        "generator": "ami_installer_v0.1"
+  "ami_version": "0.1",
+  "meta": {
+    "generated_at": "TIMESTAME_ISO_8601",
+    "generator": "ami_installer_v0.1"
+  },
+  "identity": {
+    "glyphsig": "\u27e1\u27e6AMI\u27e7\u00b7\u27e1\u27e6ORIGIN\u27e7\u00b7\u27e1\u27e6IDENTITY\u27e7",
+    "handle": "active-mirror",
+    "private_anchor_hash": "SHA256_OF_AMI_NAME"
+  },
+  "scd_state": {
+    "version": "3.1",
+    "checksum": null,
+    "last_turn": 2,
+    "history_chain": [
+      {
+        "turn": 1,
+        "source": "SCD_State\u2014This_Chat.md",
+        "timestamp": "2025-12-10T23:59:00",
+        "type": "observation"
+      },
+      {
+        "turn": 2,
+        "source": "Reflection_Economy_Model_v1.md",
+        "timestamp": "2025-12-10T23:59:00",
+        "type": "observation"
+      }
+    ]
+  },
+  "modules": {
+    "scd": {
+      "enabled": true,
+      "mode": "strict"
     },
-    "identity": {
-        "glyphsig": "⟡⟦AMI⟧·⟡⟦ORIGIN⟧·⟡⟦IDENTITY⟧",
-        "handle": "active-mirror",
-        "private_anchor_hash": "SHA256_OF_AMI_NAME"
+    "glyph_layer": {
+      "enabled": true,
+      "set": "v0.1"
     },
-    "scd_state": {
-        "version": "3.1",
-        "checksum": null,
-        "last_turn": 0,
-        "history_chain": []
+    "lingos": {
+      "enabled": true,
+      "runtime": "standard"
     },
-    "modules": {
-        "scd": {
-            "enabled": true,
-            "mode": "strict"
-        },
-        "glyph_layer": {
-            "enabled": true,
-            "set": "v0.1"
-        },
-        "lingos": {
-            "enabled": true,
-            "runtime": "standard"
-        },
-        "governance": {
-            "enabled": true,
-            "truth_gate": "fact_only"
-        }
-    },
-    "permissions": {
-        "can_auto_update": false,
-        "can_share_telemetry": false,
-        "sovereign_lock": true
+    "governance": {
+      "enabled": true,
+      "truth_gate": "fact_only"
     }
+  },
+  "permissions": {
+    "can_auto_update": false,
+    "can_share_telemetry": false,
+    "sovereign_lock": true
+  }
 }
