@@ -1,0 +1,29 @@
+{
+    "manifest_version": 3,
+    "name": "Mirror Shield (AMI Guardian)",
+    "version": "0.1",
+    "description": "Active Defense for Sovereign Identity. Detects hostile AI environments.",
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://chatgpt.com/*",
+                "https://claude.ai/*",
+                "https://grok.x.ai/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon.png"
+    }
+}
