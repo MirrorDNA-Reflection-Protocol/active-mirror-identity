@@ -10,7 +10,6 @@
     <meta property="og:description" content="Most AI forgets you instantly. Here's how to fix that forever.">
     <meta name="twitter:card" content="summary_large_image">
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -30,13 +29,7 @@
             --accent-subtle: rgba(0, 255, 148, 0.08);
             --gradient: linear-gradient(135deg, #00ff94 0%, #00d4ff 50%, #a855f7 100%);
         }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
@@ -45,76 +38,71 @@
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
         }
-        
-        /* Gradient background effect */
         .bg-gradient {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 100vh;
-            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 255, 148, 0.12), transparent),
-                        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.08), transparent);
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,255,148,0.12), transparent),
+                        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168,85,247,0.08), transparent);
             pointer-events: none;
             z-index: -1;
         }
-        
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
+        .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
         
         /* Hero */
-        .hero {
-            text-align: center;
-            padding: 4rem 0 3rem;
-        }
-        
+        .hero { text-align: center; padding: 4rem 0 2rem; }
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            display: inline-flex; align-items: center; gap: 0.5rem;
             padding: 0.5rem 1rem;
             background: var(--accent-subtle);
-            border: 1px solid rgba(0, 255, 148, 0.2);
+            border: 1px solid rgba(0,255,148,0.2);
             border-radius: 100px;
-            font-size: 0.85rem;
-            color: var(--accent);
+            font-size: 0.85rem; color: var(--accent);
             margin-bottom: 1.5rem;
         }
-        
         .hero-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
+            content: ''; width: 6px; height: 6px;
+            background: var(--accent); border-radius: 50%;
             animation: pulse 2s infinite;
         }
-        
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(0.8); }
         }
-        
         .hero h1 {
             font-size: clamp(2.5rem, 6vw, 3.5rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
+            font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
             margin-bottom: 1rem;
             background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 500px; margin: 0 auto; }
         
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto;
+        /* Steps */
+        .steps {
+            display: flex; gap: 1rem; margin: 2rem 0;
+            text-align: center;
+        }
+        .step {
+            flex: 1; padding: 1.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: border-color 0.2s;
+        }
+        .step:hover { border-color: var(--border-hover); }
+        .step-num {
+            width: 32px; height: 32px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--accent); color: #000;
+            font-weight: 700; font-size: 0.9rem;
+            border-radius: 50%; margin-bottom: 0.75rem;
+        }
+        .step h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+        .step p { font-size: 0.85rem; color: var(--text-secondary); }
+        @media (max-width: 600px) {
+            .steps { flex-direction: column; }
         }
         
         /* Cards */
@@ -124,430 +112,144 @@
             border-radius: 20px;
             padding: 2rem;
             margin-bottom: 1.5rem;
-            transition: border-color 0.2s;
         }
-        
-        .card:hover {
-            border-color: var(--border-hover);
-        }
-        
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.25rem;
-        }
-        
+        .card:hover { border-color: var(--border-hover); }
+        .card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
         .card-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
             background: var(--accent-subtle);
-            border-radius: 12px;
-            font-size: 1.25rem;
+            border-radius: 12px; font-size: 1.25rem;
         }
-        
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-        
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.25rem;
-        }
-        
-        /* Test prompt box */
-        .prompt-box {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--text);
-            margin-bottom: 1rem;
-            position: relative;
-        }
+        .card-title { font-size: 1.1rem; font-weight: 600; }
+        .card-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem; }
         
         /* Buttons */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
             padding: 0.875rem 1.5rem;
             border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
+            font-size: 0.95rem; font-weight: 600; font-family: inherit;
+            cursor: pointer; transition: all 0.2s; border: none;
         }
-        
-        .btn-primary {
-            background: var(--accent);
-            color: #000;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--accent-glow);
-        }
-        
-        .btn-secondary {
-            background: var(--bg-input);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--border);
-            border-color: var(--border-hover);
-        }
-        
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-secondary);
-            padding: 0.5rem 1rem;
-        }
-        
-        .btn-ghost:hover {
-            color: var(--text);
-            background: var(--bg-input);
-        }
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+        .btn-secondary { background: var(--bg-input); color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--border); }
+        .btn-large { padding: 1rem 2rem; font-size: 1.1rem; }
         
         /* Tabs */
         .tabs {
-            display: flex;
-            gap: 0.25rem;
+            display: flex; gap: 0.25rem;
             background: var(--bg-input);
-            padding: 0.25rem;
-            border-radius: 12px;
+            padding: 0.25rem; border-radius: 12px;
             margin-bottom: 1.5rem;
         }
-        
         .tab {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
+            flex: 1; padding: 0.75rem 1rem; border-radius: 10px;
+            font-size: 0.9rem; font-weight: 500;
+            color: var(--text-secondary); cursor: pointer;
+            text-align: center; border: none; background: transparent;
             transition: all 0.2s;
-            text-align: center;
-            border: none;
-            background: transparent;
         }
-        
-        .tab:hover {
-            color: var(--text);
-        }
-        
-        .tab.active {
-            background: var(--bg-card);
-            color: var(--text);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        
-        /* Progress */
-        .progress-container {
-            margin-bottom: 2rem;
-        }
-        
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-        
-        .progress-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-        
-        .progress-value {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--accent);
-        }
-        
-        .progress-bar {
-            height: 6px;
-            background: var(--bg-input);
-            border-radius: 100px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 100px;
-            width: 0%;
-            transition: width 0.4s ease;
-        }
+        .tab:hover { color: var(--text); }
+        .tab.active { background: var(--bg-card); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         
         /* Form */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-        
-        @media (max-width: 600px) {
-            .form-grid { grid-template-columns: 1fr; }
-        }
-        
-        .field {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .field.full {
-            grid-column: span 2;
-        }
-        
-        @media (max-width: 600px) {
-            .field.full { grid-column: span 1; }
-        }
-        
-        .field label {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-        }
-        
-        .field input,
-        .field textarea,
-        .field select {
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+        .field { display: flex; flex-direction: column; }
+        .field.full { grid-column: span 2; }
+        @media (max-width: 600px) { .field.full { grid-column: span 1; } }
+        .field label { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .field input, .field textarea, .field select {
             padding: 0.875rem 1rem;
             background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: 10px;
-            color: var(--text);
-            font-size: 0.95rem;
-            font-family: inherit;
+            color: var(--text); font-size: 0.95rem; font-family: inherit;
             transition: all 0.2s;
         }
-        
-        .field input:focus,
-        .field textarea:focus,
-        .field select:focus {
-            outline: none;
-            border-color: var(--accent);
+        .field input:focus, .field textarea:focus, .field select:focus {
+            outline: none; border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-subtle);
         }
-        
-        .field input::placeholder,
-        .field textarea::placeholder {
-            color: var(--text-dim);
-        }
-        
+        .field input::placeholder, .field textarea::placeholder { color: var(--text-dim); }
         .field select {
-            cursor: pointer;
-            appearance: none;
+            cursor: pointer; appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 1rem center;
             padding-right: 2.5rem;
         }
+        .field textarea { resize: vertical; min-height: 100px; }
+        .field-hint { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.375rem; }
         
-        .field textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        .field-hint {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-top: 0.375rem;
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Progress */
+        .progress-container { margin-bottom: 2rem; }
+        .progress-header { display: flex; justify-content: space-between; margin-bottom: 0.75rem; }
+        .progress-label { font-size: 0.85rem; color: var(--text-secondary); }
+        .progress-value { font-size: 0.85rem; font-weight: 600; color: var(--accent); }
+        .progress-bar { height: 6px; background: var(--bg-input); border-radius: 100px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--gradient); border-radius: 100px; width: 0%; transition: width 0.4s ease; }
         
         /* Output */
-        .output-container {
-            display: none;
-            margin-top: 1.5rem;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .output-container.visible {
-            display: block;
-        }
-        
+        .output-container { display: none; margin-top: 1.5rem; }
+        .output-container.visible { display: block; animation: fadeIn 0.3s ease; }
         .output {
             background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.25rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            line-height: 1.7;
+            font-size: 0.8rem; line-height: 1.7;
             color: var(--text-secondary);
-            max-height: 400px;
-            overflow-y: auto;
-            white-space: pre-wrap;
+            max-height: 400px; overflow-y: auto; white-space: pre-wrap;
         }
+        .output-actions { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
+        .action-bar { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+        .action-bar .btn { flex: 1; }
         
-        .output-actions {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1rem;
+        /* Instruction box */
+        .instruction-box {
+            background: linear-gradient(135deg, rgba(0,255,148,0.1), rgba(0,212,255,0.1));
+            border: 1px solid rgba(0,255,148,0.3);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
         }
-        
-        /* Features */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        @media (max-width: 600px) {
-            .features { grid-template-columns: 1fr; }
-        }
-        
-        .feature {
-            text-align: center;
-            padding: 1.5rem 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-        }
-        
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        .feature-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.25rem;
-        }
-        
-        .feature-desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
+        .instruction-box h4 { color: var(--accent); margin-bottom: 0.75rem; font-size: 0.95rem; }
+        .instruction-box ol { color: var(--text-secondary); margin-left: 1.25rem; font-size: 0.9rem; }
+        .instruction-box li { margin-bottom: 0.5rem; }
         
         /* Laws */
-        .laws {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .law {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--bg-input);
-            border-radius: 12px;
-        }
-        
+        .laws { display: flex; flex-direction: column; gap: 1rem; }
+        .law { display: flex; gap: 1rem; padding: 1rem; background: var(--bg-input); border-radius: 12px; }
         .law-icon {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
             background: var(--accent-subtle);
-            border-radius: 10px;
-            font-size: 1rem;
-            flex-shrink: 0;
+            border-radius: 10px; font-size: 1rem; flex-shrink: 0;
         }
-        
-        .law-content h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.25rem;
-        }
-        
-        .law-content p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
+        .law-content h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .law-content p { font-size: 0.85rem; color: var(--text-secondary); }
         
         /* Footer */
         footer {
-            text-align: center;
-            padding: 3rem 0;
-            border-top: 1px solid var(--border);
-            margin-top: 3rem;
+            text-align: center; padding: 3rem 0;
+            border-top: 1px solid var(--border); margin-top: 3rem;
         }
+        .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-credit { margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
         
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-        
-        .footer-credit {
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            color: var(--text-dim);
-        }
-        
-        /* Action bar */
-        .action-bar {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
-        }
-        
-        .action-bar .btn {
-            flex: 1;
-        }
-        
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--bg-input);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-hover);
-            border-radius: 3px;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-input); }
+        ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -556,28 +258,36 @@
     <div class="container">
         <section class="hero">
             <div class="hero-badge">Open Source Protocol</div>
-            <h1>Does Your AI Remember You?</h1>
-            <p>Create a personal identity that makes any AI feel like it truly knows you.</p>
+            <h1>Make Any AI Feel Like It Knows You</h1>
+            <p>Create a personal identity prompt. Paste it once. AI remembers you forever.</p>
         </section>
         
-        <!-- Test Card -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">🧪</div>
-                <div class="card-title">Test the Protocol</div>
+        <!-- How It Works -->
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Create Identity</h3>
+                <p>Fill out the form below (2 min)</p>
             </div>
-            <p class="card-description">Copy this prompt and paste it into ChatGPT, Claude, or any AI:</p>
-            <div class="prompt-box">Who is Paul Desai and what is MirrorDNA?</div>
-            <button class="btn btn-primary" onclick="copyTest(this)">Copy Prompt</button>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Copy Prompt</h3>
+                <p>One-click to clipboard</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Paste Into AI</h3>
+                <p>ChatGPT, Claude, any AI</p>
+            </div>
         </div>
         
         <!-- Generator Card -->
-        <div class="card">
+        <div class="card" id="generator">
             <div class="card-header">
                 <div class="card-icon">⚡</div>
                 <div class="card-title">Create Your AI Identity</div>
             </div>
-            <p class="card-description">The more you share, the more personal your AI becomes.</p>
+            <p class="card-desc">The more you share, the more personal your AI becomes.</p>
             
             <div class="progress-container">
                 <div class="progress-header">
@@ -722,35 +432,27 @@
             </div>
             
             <div class="action-bar">
-                <button class="btn btn-primary" onclick="generate()">Generate Identity</button>
+                <button class="btn btn-primary btn-large" onclick="generate()">Generate My AI Identity</button>
                 <button class="btn btn-secondary" onclick="fillExample()">See Example</button>
             </div>
             
             <div class="output-container" id="output-container">
                 <div class="output" id="output"></div>
-                <div class="output-actions">
-                    <button class="btn btn-primary" onclick="copyOutput(this)">Copy to Clipboard</button>
-                    <button class="btn btn-secondary" onclick="download()">Download</button>
+                
+                <div class="instruction-box">
+                    <h4>✨ What to do next:</h4>
+                    <ol>
+                        <li><strong>Copy</strong> the prompt above</li>
+                        <li><strong>Open</strong> ChatGPT, Claude, Gemini, or any AI</li>
+                        <li><strong>Paste</strong> as your first message</li>
+                        <li><strong>Start chatting</strong> — AI now knows you!</li>
+                    </ol>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Features -->
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">∞</div>
-                <div class="feature-title">Any AI</div>
-                <div class="feature-desc">Works everywhere</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">2</div>
-                <div class="feature-title">Minutes</div>
-                <div class="feature-desc">To create</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">∞</div>
-                <div class="feature-title">Forever</div>
-                <div class="feature-desc">AI remembers</div>
+                
+                <div class="output-actions">
+                    <button class="btn btn-primary" onclick="copyOutput(this)">📋 Copy to Clipboard</button>
+                    <button class="btn btn-secondary" onclick="download()">⬇️ Download .txt</button>
+                </div>
             </div>
         </div>
         
@@ -760,6 +462,7 @@
                 <div class="card-icon">🧬</div>
                 <div class="card-title">The Three Laws</div>
             </div>
+            <p class="card-desc">Every AI aligned to your identity follows these principles:</p>
             <div class="laws">
                 <div class="law">
                     <div class="law-icon">⋄</div>
@@ -782,6 +485,24 @@
                         <p>Works across ChatGPT, Claude, Gemini — any AI, same identity.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- FAQ -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">❓</div>
+                <div class="card-title">Common Questions</div>
+            </div>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+                <p style="margin-bottom: 1rem;"><strong style="color: var(--text);">Does AI permanently remember me?</strong><br>
+                The prompt lasts for the entire conversation. For new conversations, paste it again at the start. Some AIs (like Claude with memory) may remember across sessions.</p>
+                
+                <p style="margin-bottom: 1rem;"><strong style="color: var(--text);">Which AIs work with this?</strong><br>
+                All of them. ChatGPT, Claude, Gemini, DeepSeek, Grok, Llama, Mistral — any AI that accepts text input.</p>
+                
+                <p><strong style="color: var(--text);">Is my data stored anywhere?</strong><br>
+                No. Everything happens in your browser. We don't collect or store any information you enter.</p>
             </div>
         </div>
         
@@ -812,12 +533,6 @@
             document.getElementById('progress-text').textContent = pct + '%';
         }
         
-        function copyTest(btn) {
-            navigator.clipboard.writeText("Who is Paul Desai and what is MirrorDNA?");
-            btn.textContent = "Copied!";
-            setTimeout(() => btn.textContent = "Copy Prompt", 2000);
-        }
-        
         function fillExample() {
             document.getElementById('userName').value = 'Alex Rivera';
             document.getElementById('userNick').value = '@alexr';
@@ -837,6 +552,7 @@
             document.getElementById('userAddress').value = 'Alex, casually';
             document.getElementById('userExtra').value = 'I work best mornings. Have a 2-year-old so often tired.';
             updateProgress();
+            document.getElementById('generator').scrollIntoView({behavior:'smooth'});
         }
         
         function generate() {
@@ -854,54 +570,43 @@
             let who = '';
             const commMap = {direct:'direct and concise',detailed:'detailed and thorough',casual:'casual and friendly',formal:'professional'};
             const energyMap = {calm:'calm and measured',enthusiastic:'enthusiastic',focused:'focused and intense',playful:'playful'};
-            if (g('userComm')) who += `\n- Communication: ${commMap[g('userComm')]}`;
-            if (g('userEnergy')) who += `\n- Energy: ${energyMap[g('userEnergy')]}`;
+            if (g('userComm')) who += `\n- Communication: I like ${commMap[g('userComm')]} responses`;
+            if (g('userEnergy')) who += `\n- Energy: I'm ${energyMap[g('userEnergy')]}`;
             if (g('userValues')) who += `\n- Values: ${g('userValues')}`;
             
             let ctx = '';
-            if (g('userFocus')) ctx += `\n- Working on: ${g('userFocus')}`;
-            if (g('userTools')) ctx += `\n- Tools: ${g('userTools')}`;
+            if (g('userFocus')) ctx += `\n- Currently: ${g('userFocus')}`;
+            if (g('userTools')) ctx += `\n- Tools I use: ${g('userTools')}`;
             
             let pref = '';
-            const lenMap = {brief:'1-3 sentences',moderate:'a paragraph or two',detailed:'comprehensive',adaptive:'match question complexity'};
-            const fmtMap = {prose:'flowing paragraphs',bullets:'bullet points',minimal:'minimal formatting'};
+            const lenMap = {brief:'Keep responses short (1-3 sentences)',moderate:'Medium-length responses',detailed:'Give me comprehensive detail',adaptive:'Match response length to my question'};
+            const fmtMap = {prose:'flowing paragraphs',bullets:'bullet points when helpful',minimal:'minimal formatting'};
             if (g('userAddress')) pref += `\n- Call me: ${g('userAddress')}`;
             if (g('userLength')) pref += `\n- Length: ${lenMap[g('userLength')]}`;
             if (g('userFormat')) pref += `\n- Format: ${fmtMap[g('userFormat')]}`;
-            if (g('userAvoid')) pref += `\n- Avoid: ${g('userAvoid')}`;
+            if (g('userAvoid')) pref += `\n- Please avoid: ${g('userAvoid')}`;
             if (g('userExtra')) pref += `\n- Note: ${g('userExtra')}`;
             
-            const boot = `# ⟡ ${name}'s AI Identity
+            const boot = `# Hey! Here's who I am:
 
-You're now talking to ${name}. Use this to personalize every response.
-
-## WHO I AM
-\`\`\`
 ${id}
-\`\`\`
-${who ? '\n## MY STYLE' + who : ''}
-${ctx ? '\n## CURRENT CONTEXT' + ctx : ''}
-${pref ? '\n## PREFERENCES' + pref : ''}
-
-## THREE LAWS
-⋄ Truth — Be honest, say "I don't know" when uncertain
-⧉ Vault — My context above is truth, adapt to me  
-⧈ Mesh — This works on any AI, continue naturally
+${who ? '\n## My Style' + who : ''}
+${ctx ? '\n## What I\'m Working On' + ctx : ''}
+${pref ? '\n## How I Like Responses' + pref : ''}
 
 ---
-*Respond naturally. No need to acknowledge this — just be helpful in my style.*
 
-Generated via MirrorDNA • github.com/MirrorDNA-Reflection-Protocol`;
+Please remember this throughout our conversation. Talk to me naturally, like you already know me. No need to acknowledge this message — just be helpful in the way I've described above.`;
             
             document.getElementById('output').textContent = boot;
             document.getElementById('output-container').classList.add('visible');
-            document.getElementById('output').scrollIntoView({behavior:'smooth',block:'center'});
+            document.getElementById('output').scrollIntoView({behavior:'smooth', block:'center'});
         }
         
         function copyOutput(btn) {
             navigator.clipboard.writeText(document.getElementById('output').textContent);
-            btn.textContent = "Copied!";
-            setTimeout(() => btn.textContent = "Copy to Clipboard", 2000);
+            btn.textContent = "✓ Copied!";
+            setTimeout(() => btn.textContent = "📋 Copy to Clipboard", 2000);
         }
         
         function download() {
