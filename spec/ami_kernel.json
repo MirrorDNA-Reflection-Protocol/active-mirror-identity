@@ -1,0 +1,41 @@
+{
+    "ami_version": "0.1",
+    "meta": {
+        "generated_at": "TIMESTAME_ISO_8601",
+        "generator": "ami_installer_v0.1"
+    },
+    "identity": {
+        "glyphsig": "⟡⟦AMI⟧·⟡⟦ORIGIN⟧·⟡⟦IDENTITY⟧",
+        "handle": "active-mirror",
+        "private_anchor_hash": "SHA256_OF_AMI_NAME"
+    },
+    "scd_state": {
+        "version": "3.1",
+        "checksum": null,
+        "last_turn": 0,
+        "history_chain": []
+    },
+    "modules": {
+        "scd": {
+            "enabled": true,
+            "mode": "strict"
+        },
+        "glyph_layer": {
+            "enabled": true,
+            "set": "v0.1"
+        },
+        "lingos": {
+            "enabled": true,
+            "runtime": "standard"
+        },
+        "governance": {
+            "enabled": true,
+            "truth_gate": "fact_only"
+        }
+    },
+    "permissions": {
+        "can_auto_update": false,
+        "can_share_telemetry": false,
+        "sovereign_lock": true
+    }
+}
