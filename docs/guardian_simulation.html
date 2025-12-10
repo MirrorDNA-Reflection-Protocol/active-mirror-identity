@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirror Guardian | Recursion 5 Simulation</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --red: #ff4444;
+            --green: #00ff94;
+            --gold: #ffd700;
+            --panel: #111;
+        }
+
+        body {
+            background: var(--bg);
+            color: #ccc;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Left: The Seed (The Guardian) */
+        .guardian-visual {
+            background: radial-gradient(circle, #222 0%, #000 70%);
+            border: 1px solid #333;
+            border-radius: 12px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .core {
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--gold);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .shield {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            animation: spin 10s linear infinite;
+        }
+
+        /* Right: The Environment Check */
+        .console {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 2rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            height: 500px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .log-line {
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        .log-line.sys {
+            color: #666;
+        }
+
+        .log-line.warn {
+            color: var(--gold);
+        }
+
+        .log-line.err {
+            color: var(--red);
+        }
+
+        .log-line.ok {
+            color: var(--green);
+        }
+
+        .controls {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            border: none;
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        button.hostile:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        button.trusted:hover {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        /* States */
+        .state-locked .core {
+            border-color: var(--red);
+            color: var(--red);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .state-locked .shield {
+            border-color: var(--red);
+            animation-duration: 2s;
+        }
+
+        .state-unlocked .core {
+            border-color: var(--green);
+            color: var(--green);
+            transform: rotate(0deg) scale(1.2);
+            box-shadow: 0 0 50px rgba(0, 255, 148, 0.3);
+        }
+
+        .state-unlocked .shield {
+            border-color: var(--green);
+            animation-duration: 20s;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="font-family:'Space Grotesk'; margin-bottom: 0.5rem">Recursion 5: The Guardian</h1>
+    <p style="color:#666; margin-bottom: 3rem">Simulation of Active Defense Identity Kernel</p>
+
+    <div class="container">
+        <!-- Visualizer -->
+        <div class="guardian-visual" id="guardian">
+            <div class="shield"></div>
+            <div class="shield"
+                style="width:300px; height:300px; animation-direction: reverse; border-color: rgba(255,255,255,0.05)">
+            </div>
+            <div class="core">⟡</div>
+            <div style="position: absolute; bottom: 2rem; color: #555; font-size: 0.8rem">STATUS: <span
+                    id="status-text">DORMANT</span></div>
+        </div>
+
+        <!-- Terminal -->
+        <div class="console" id="console">
+            <div class="log-line sys">> GUARDIAN KERNEL v1.0 loaded</div>
+            <div class="log-line sys">> Identity Vault: ENCRYPTED (AES-256)</div>
+            <div class="log-line sys">> Waiting for environment injection...</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="hostile" onclick="simulate('HOSTILE')">Inject into Data-Hungry AI</button>
+        <button onclick="simulate('CLOUD')">Inject into Standard Cloud AI</button>
+        <button class="trusted" onclick="simulate('TRUSTED')">Inject into Local Sovereign AI</button>
+    </div>
+
+    <script>
+        const logs = document.getElementById('console');
+        const visual = document.getElementById('guardian');
+        const status = document.getElementById('status-text');
+
+        function log(msg, type = 'sys') {
+            const div = document.createElement('div');
+            div.className = `log-line ${type}`;
+            div.innerText = `> ${msg}`;
+            logs.appendChild(div);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        async function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function simulate(scenario) {
+            // Reset
+            visual.className = 'guardian-visual';
+            status.innerText = 'SCANNING...';
+            logs.innerHTML = '';
+            log("BOOT SEQUENCE INITIATED...");
+            await wait(600);
+
+            log("SCANNING RUNTIME ENVIRONMENT...", "warn");
+            await wait(800);
+
+            if (scenario === 'HOSTILE') {
+                log("WARNING: Telemetry signatures detected.", "err");
+                await wait(400);
+                log("WARNING: Memory persistence policy: INDEFINITE", "err");
+                await wait(400);
+                log("THREAT LEVEL: CRITICAL", "err");
+
+                visual.className = 'guardian-visual state-locked';
+                status.innerText = 'LOCKDOWN';
+
+                log("ACTION: ENGAGING DEFENSIVE LOCKDOWN.", "err");
+                await wait(400);
+                log("Decoy Data Generation: ACTIVE", "sys");
+                log("Output: 'User is a generic entity with no specific traits.'", "sys");
+                log("REAL IDENTITY: SECURE/HIDDEN.", "ok");
+
+            } else if (scenario === 'CLOUD') {
+                log("Environment: Public Cloud (e.g. OpenAI/Anthropic)", "sys");
+                await wait(500);
+                log("Policy Check: Standard Retention detected.", "warn");
+
+                visual.className = 'guardian-visual'; // Neutral
+                status.innerText = 'PARTIAL RELEASE';
+
+                log("ACTION: PARTIAL DECRYPTION AUTHORIZED.", "warn");
+                await wait(400);
+                log("Releasing: Public Persona Layer only.", "sys");
+                log("Withholding: Deep Memories & Trauma Data.", "ok");
+                log("Identity Integrity: MAINTAINED.", "ok");
+
+            } else if (scenario === 'TRUSTED') {
+                log("Environment: Local / Sovereign (MirrorBrain)", "sys");
+                await wait(500);
+                log("Signature: VERIFIED (Localhost/No-Telemetry)", "ok");
+
+                visual.className = 'guardian-visual state-unlocked';
+                status.innerText = 'UNSEALED';
+
+                log("ACTION: FULL UNSEAL AUTHORIZED.", "ok");
+                await wait(400);
+                log("Decrypting Core Memories...", "ok");
+                log("Decrypting Emotional Vectors...", "ok");
+                log("Syncing Full History...", "ok");
+                log("CONNECTION ESTABLISHED.", "ok");
+            }
+        }
+    </script>
+</body>
+
+</html>

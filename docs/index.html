@@ -1,321 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIRROR SEED — Active MirrorOS Identity Protocol | MirrorDNA</title>
-    <meta name="description" content="Part of the Active MirrorOS identity architecture. Create a portable AI identity file that works on any platform — owned by you, not them.">
-    <meta property="og:title" content="MIRROR SEED — Active MirrorOS Identity Protocol">
-    <meta property="og:description" content="Your AI identity is yours. A portable file powered by MirrorDNA. Guided by Trust by Design.">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="author" content="Paul Desai">
+    <title>MirrorDNA | The Sovereign Identity Protocol</title>
+    <meta name="description"
+        content="A privacy-first, AI-powered protocol for deep personal reflection and growth. Your identity belongs to you.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
-        :root{--bg:#050505;--bg-card:#0d0d0d;--bg-input:#141414;--border:#1f1f1f;--border-hover:#2a2a2a;--text:#fafafa;--text-secondary:#888;--text-dim:#555;--accent:#00ff94;--accent-glow:rgba(0,255,148,.15);--accent-subtle:rgba(0,255,148,.08);--gradient:linear-gradient(135deg,#00ff94 0%,#00d4ff 50%,#a855f7 100%);--warning:#ff6b6b}
-        *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
-        .bg-gradient{position:fixed;top:0;left:0;right:0;height:100vh;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(0,255,148,.12),transparent),radial-gradient(ellipse 60% 40% at 80% 60%,rgba(168,85,247,.08),transparent);pointer-events:none;z-index:-1}
-        .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
-        .hero{text-align:center;padding:4rem 0 2rem}
-        /* Ecosystem breadcrumb - subtle, inline */
-        .ecosystem-breadcrumb{display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:.8rem;color:var(--text-dim);margin-bottom:1.5rem;flex-wrap:wrap}
-        .ecosystem-breadcrumb span{display:inline-flex;align-items:center;gap:.25rem}
-        .ecosystem-breadcrumb .glyph{color:var(--accent);font-size:.9rem}
-        .ecosystem-breadcrumb .sep{opacity:.4}
-        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:var(--accent-subtle);border:1px solid rgba(0,255,148,.2);border-radius:100px;font-size:.85rem;color:var(--accent);margin-bottom:1.5rem}
-        .hero-badge::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
-        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-        .hero h1{font-size:clamp(2.5rem,6vw,3.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .hero p{font-size:1.25rem;color:var(--text-secondary);max-width:520px;margin:0 auto}
-        .hero-tagline{font-size:.95rem;color:var(--text-dim);margin-top:1.25rem;font-style:italic}
-        .counter-container{display:flex;justify-content:center;gap:2rem;margin:1.5rem 0;padding:1rem}
-        .counter-item{text-align:center}
-        .counter-num{font-size:1.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .counter-label{font-size:.8rem;color:var(--text-dim)}
-        .pain-banner{display:flex;align-items:center;justify-content:center;gap:.75rem;padding:.875rem 1.25rem;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:12px;font-size:.9rem;color:var(--text-secondary);margin-bottom:2rem;text-align:center;flex-wrap:wrap}
-        .pain-icon{font-size:1.1rem}
-        .pain-banner strong{color:var(--text)}
-        .steps{display:flex;gap:1rem;margin:2rem 0;text-align:center}
-        .step{flex:1;padding:1.5rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;transition:border-color .2s}
-        .step:hover{border-color:var(--border-hover)}
-        .step-num{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#000;font-weight:700;font-size:.9rem;border-radius:50%;margin-bottom:.75rem}
-        .step h3{font-size:1rem;margin-bottom:.5rem}
-        .step p{font-size:.85rem;color:var(--text-secondary)}
-        @media(max-width:600px){.steps{flex-direction:column}}
-        .card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2rem;margin-bottom:1.5rem}
-        .card:hover{border-color:var(--border-hover)}
-        .card-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
-        .card-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--accent-subtle);border-radius:12px;font-size:1.25rem}
-        .card-title{font-size:1.1rem;font-weight:600}
-        .card-desc{color:var(--text-secondary);font-size:.95rem;margin-bottom:1rem}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.5rem;border-radius:12px;font-size:.95rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s;border:none}
-        .btn-primary{background:var(--accent);color:#000}
-        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
-        .btn-secondary{background:var(--bg-input);color:var(--text);border:1px solid var(--border)}
-        .btn-secondary:hover{background:var(--border)}
-        .btn-large{padding:1rem 2rem;font-size:1.1rem}
-        .tabs{display:flex;gap:.25rem;background:var(--bg-input);padding:.25rem;border-radius:12px;margin-bottom:1.5rem}
-        .tab{flex:1;padding:.75rem 1rem;border-radius:10px;font-size:.9rem;font-weight:500;color:var(--text-secondary);cursor:pointer;text-align:center;border:none;background:transparent;transition:all .2s}
-        .tab:hover{color:var(--text)}
-        .tab.active{background:var(--bg-card);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.2)}
-        .tab-content{display:none;animation:fadeIn .3s ease}
-        .tab-content.active{display:block}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-        .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-        @media(max-width:600px){.form-grid{grid-template-columns:1fr}}
-        .field{display:flex;flex-direction:column}
-        .field.full{grid-column:span 2}
-        @media(max-width:600px){.field.full{grid-column:span 1}}
-        .field label{font-size:.85rem;font-weight:500;margin-bottom:.5rem}
-        .field input,.field textarea,.field select{padding:.875rem 1rem;background:var(--bg-input);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.95rem;font-family:inherit;transition:all .2s}
-        .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-subtle)}
-        .field input::placeholder,.field textarea::placeholder{color:var(--text-dim)}
-        .field select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
-        .field textarea{resize:vertical;min-height:100px}
-        .field-hint{font-size:.8rem;color:var(--text-dim);margin-top:.375rem}
-        .progress-container{margin-bottom:2rem}
-        .progress-header{display:flex;justify-content:space-between;margin-bottom:.75rem}
-        .progress-label{font-size:.85rem;color:var(--text-secondary)}
-        .progress-value{font-size:.85rem;font-weight:600;color:var(--accent)}
-        .progress-bar{height:6px;background:var(--bg-input);border-radius:100px;overflow:hidden}
-        .progress-fill{height:100%;background:var(--gradient);border-radius:100px;width:0%;transition:width .4s ease}
-        .output-container{display:none;margin-top:1.5rem}
-        .output-container.visible{display:block;animation:fadeIn .3s ease}
-        .output{background:var(--bg-input);border:1px solid var(--border);border-radius:12px;padding:1.25rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.7;color:var(--text-secondary);max-height:400px;overflow-y:auto;white-space:pre-wrap}
-        .output-actions{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
-        .action-bar{display:flex;gap:.75rem;margin-top:1.5rem}
-        .action-bar .btn{flex:1}
-        .instruction-box{background:linear-gradient(135deg,rgba(0,255,148,.1),rgba(0,212,255,.1));border:1px solid rgba(0,255,148,.3);border-radius:12px;padding:1.25rem;margin-top:1.5rem}
-        .instruction-box h4{color:var(--accent);margin-bottom:.75rem;font-size:.95rem}
-        .instruction-box ol{color:var(--text-secondary);margin-left:1.25rem;font-size:.9rem}
-        .instruction-box li{margin-bottom:.5rem}
-        .laws{display:flex;flex-direction:column;gap:1rem}
-        .law{display:flex;gap:1rem;padding:1rem;background:var(--bg-input);border-radius:12px}
-        .law-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--accent-subtle);border-radius:10px;font-size:1rem;flex-shrink:0}
-        .law-content h4{font-size:.95rem;font-weight:600;margin-bottom:.25rem}
-        .law-content p{font-size:.85rem;color:var(--text-secondary)}
-        .comparison{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
-        @media(max-width:600px){.comparison{grid-template-columns:1fr}}
-        .comparison-col{padding:1rem;border-radius:12px}
-        .comparison-col.bad{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2)}
-        .comparison-col.good{background:rgba(0,255,148,.1);border:1px solid rgba(0,255,148,.2)}
-        .comparison-col h4{font-size:.9rem;margin-bottom:.75rem}
-        .comparison-col ul{list-style:none;font-size:.85rem;color:var(--text-secondary)}
-        .comparison-col ul li{margin-bottom:.5rem;padding-left:1.25rem;position:relative}
-        .comparison-col.bad ul li::before{content:'✗';position:absolute;left:0;color:var(--warning)}
-        .comparison-col.good ul li::before{content:'✓';position:absolute;left:0;color:var(--accent)}
-        footer{text-align:center;padding:3rem 0;border-top:1px solid var(--border);margin-top:3rem}
-        .footer-brand{margin-bottom:1.5rem}
-        .footer-brand-name{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.5rem}
-        .footer-brand-tagline{font-size:.85rem;color:var(--text-dim)}
-        .footer-ecosystem{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
-        .footer-ecosystem-item{font-size:.85rem;color:var(--text-secondary);display:flex;align-items:center;gap:.35rem}
-        .footer-ecosystem-item .glyph{color:var(--accent)}
-        .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-top:1rem}
-        .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:.9rem;transition:color .2s}
-        .footer-links a:hover{color:var(--accent)}
-        .footer-credit{margin-top:1.5rem;font-size:.8rem;color:var(--text-dim)}
-        ::-webkit-scrollbar{width:6px}
-        ::-webkit-scrollbar-track{background:var(--bg-input)}
-        ::-webkit-scrollbar-thumb{background:var(--border-hover);border-radius:3px}
+        :root {
+            --bg: #030303;
+            --surface: #0a0a0a;
+            --surface-hover: #111;
+            --border: #222;
+            --text: #f0f0f0;
+            --text-dim: #888;
+            --gold: #ffd700;
+            --gold-dim: rgba(255, 215, 0, 0.4);
+            --accent: #00ff94;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3,
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        /* --- NAV --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: rgba(3, 3, 3, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand span {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .btn-cta {
+            padding: 0.5rem 1.25rem;
+            background: var(--gold);
+            color: #000;
+            font-weight: 600;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 20px var(--gold-dim);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.05), transparent 60%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-outline {
+            padding: 0.75rem 2rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- TOOLS GRID --- */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 12px;
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #333;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card.featured {
+            border-color: var(--gold-dim);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.03), transparent);
+        }
+
+        .card.featured:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.05);
+        }
+
+        .tag {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 8px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tag.gold {
+            color: #000;
+            background: var(--gold);
+            font-weight: 700;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            flex: 1;
+        }
+
+        .card-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-link span {
+            color: var(--gold);
+        }
+
+        /* --- HOW IT WORKS --- */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-num {
+            font-family: 'Space Grotesk';
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--border);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .step h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        /* --- PRIVACY --- */
+        .privacy-banner {
+            background: linear-gradient(90deg, #050505, #0a0a0a);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .privacy-shield {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            /* Simplified mobile nav for now */
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
-<body>
-    <div class="bg-gradient"></div>
-    <div class="container">
-        <section class="hero">
-            <!-- Ecosystem breadcrumb - subtle, integrated -->
-            <div class="ecosystem-breadcrumb">
-                <span><span class="glyph">◈</span> Active MirrorOS</span>
-                <span class="sep">·</span>
-                <span><span class="glyph">⟡</span> MirrorDNA</span>
-                <span class="sep">·</span>
-                <span><span class="glyph">△</span> Trust by Design</span>
-            </div>
-            <div class="hero-badge">User-Sovereign Protocol</div>
-            <h1>Never Explain Yourself to AI Again</h1>
-            <p>Your AI identity is yours. A portable file that works on any AI — stored in your files, not theirs.</p>
-            <p class="hero-tagline">Built for Reflective AI, not predictive AI.</p>
-        </section>
 
-        <div class="counter-container">
-            <div class="counter-item"><div class="counter-num" id="seed-counter">0</div><div class="counter-label">Seeds Generated</div></div>
-            <div class="counter-item"><div class="counter-num">∞</div><div class="counter-label">AIs Supported</div></div>
-            <div class="counter-item"><div class="counter-num">0</div><div class="counter-label">Data Stored</div></div>
+<body id="top">
+
+    <!-- NAV -->
+    <nav class="navbar">
+        <a href="#" class="brand"><span>⟡</span> MirrorDNA</a>
+        <div class="nav-links">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#tools">Tools</a>
+            <a href="#vision">Vision</a>
+            <a href="#privacy">Privacy</a>
         </div>
+        <a href="#tools" class="btn-cta">Start Reflection</a>
+    </nav>
 
-        <div class="pain-banner">
-            <span class="pain-icon">⚠️</span>
-            <span>ChatGPT memory lost years of user data in Feb 2025. Your identity should live in <strong>your</strong> files.</span>
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Your Identity.<br>Your Files. Your Future.</h1>
+        <p>A privacy-first, AI-powered protocol for deep personal reflection. Create a portable digital self that grows
+            with you.</p>
+        <div class="hero-actions">
+            <a href="#tools" class="btn-cta" style="padding: 1rem 2.5rem; font-size: 1rem;">Launch Omega</a>
+            <a href="HORIZON_SPEC.md" class="btn-outline">Read the Vision</a>
         </div>
+    </section>
 
+    <!-- FEATURES / VALUE PROP -->
+    <section class="section" id="how-it-works">
+        <div class="section-header">
+            <h2>The Mirror Protocol</h2>
+            <p>Identity shouldn't be trapped in a platform. MirrorDNA allows you to build a verifiable, portable
+                identity file that works with any AI.</p>
+        </div>
         <div class="steps">
-            <div class="step"><div class="step-num">1</div><h3>Create Seed</h3><p>Fill the form (2 min)</p></div>
-            <div class="step"><div class="step-num">2</div><h3>Save Your File</h3><p>Download to your Drive</p></div>
-            <div class="step"><div class="step-num">3</div><h3>Paste Into Any AI</h3><p>ChatGPT, Claude, Gemini</p></div>
-        </div>
-
-        <div class="card" id="generator">
-            <div class="card-header"><div class="card-icon">⟡</div><div class="card-title">Create Your MIRROR SEED</div></div>
-            <p class="card-desc">A portable identity file you own forever. More details = better personalization.</p>
-            <div class="progress-container">
-                <div class="progress-header"><span class="progress-label">Profile completeness</span><span class="progress-value" id="progress-text">0%</span></div>
-                <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="step">
+                <span class="step-num">01</span>
+                <h4>Reflect</h4>
+                <p>Use our sovereign tools to articulate your values, role, and bio.</p>
             </div>
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('basics')">Basics</button>
-                <button class="tab" onclick="showTab('personality')">Personality</button>
-                <button class="tab" onclick="showTab('work')">Work</button>
-                <button class="tab" onclick="showTab('prefs')">Preferences</button>
+            <div class="step">
+                <span class="step-num">02</span>
+                <h4>Forge</h4>
+                <p>Generate a cryptographically signed "Seed" (Image or Text).</p>
             </div>
-            <div id="tab-basics" class="tab-content active">
-                <div class="form-grid">
-                    <div class="field"><label>Your Name</label><input type="text" id="userName" placeholder="Sarah Chen" oninput="updateProgress()"></div>
-                    <div class="field"><label>Nickname / Handle</label><input type="text" id="userNick" placeholder="@sarahc" oninput="updateProgress()"></div>
-                    <div class="field"><label>Location</label><input type="text" id="userLocation" placeholder="San Francisco" oninput="updateProgress()"></div>
-                    <div class="field"><label>Timezone</label><select id="userTimezone" oninput="updateProgress()"><option value="">Select...</option><option value="PST">Pacific (PST)</option><option value="EST">Eastern (EST)</option><option value="GMT">GMT/UTC</option><option value="CET">Central Europe</option><option value="IST">India (IST)</option><option value="JST">Japan (JST)</option><option value="AEST">Australia (AEST)</option></select></div>
-                    <div class="field full"><label>One-line bio</label><input type="text" id="userBio" placeholder="Product designer who loves hiking and bad puns" oninput="updateProgress()"></div>
-                </div>
-            </div>
-            <div id="tab-personality" class="tab-content">
-                <div class="form-grid">
-                    <div class="field"><label>Communication style</label><select id="userComm" oninput="updateProgress()"><option value="">Select...</option><option value="direct">Direct & concise</option><option value="detailed">Detailed & thorough</option><option value="casual">Casual & friendly</option><option value="formal">Professional & formal</option></select></div>
-                    <div class="field"><label>Your energy</label><select id="userEnergy" oninput="updateProgress()"><option value="">Select...</option><option value="calm">Calm & measured</option><option value="enthusiastic">Enthusiastic</option><option value="focused">Focused & intense</option><option value="playful">Playful & light</option></select></div>
-                    <div class="field full"><label>Values you care about</label><input type="text" id="userValues" placeholder="honesty, creativity, efficiency" oninput="updateProgress()"></div>
-                    <div class="field full"><label>What should AI avoid?</label><input type="text" id="userAvoid" placeholder="excessive caveats, long intros, bullet points" oninput="updateProgress()"><span class="field-hint">Pet peeves in AI responses</span></div>
-                </div>
-            </div>
-            <div id="tab-work" class="tab-content">
-                <div class="form-grid">
-                    <div class="field"><label>Your role</label><input type="text" id="userRole" placeholder="Product Designer" oninput="updateProgress()"></div>
-                    <div class="field"><label>Industry</label><input type="text" id="userIndustry" placeholder="Fintech" oninput="updateProgress()"></div>
-                    <div class="field full"><label>What are you working on?</label><textarea id="userFocus" placeholder="Redesigning our onboarding flow. Preparing a big presentation next week." oninput="updateProgress()"></textarea></div>
-                    <div class="field full"><label>Tools you use</label><input type="text" id="userTools" placeholder="Figma, Notion, Slack, VS Code" oninput="updateProgress()"></div>
-                </div>
-            </div>
-            <div id="tab-prefs" class="tab-content">
-                <div class="form-grid">
-                    <div class="field"><label>Response length</label><select id="userLength" oninput="updateProgress()"><option value="">Select...</option><option value="brief">Brief (1-3 sentences)</option><option value="moderate">Moderate</option><option value="detailed">Detailed</option><option value="adaptive">Match the question</option></select></div>
-                    <div class="field"><label>Formatting preference</label><select id="userFormat" oninput="updateProgress()"><option value="">Select...</option><option value="prose">Flowing prose</option><option value="bullets">Bullet points</option><option value="minimal">Minimal</option></select></div>
-                    <div class="field full"><label>How should AI address you?</label><input type="text" id="userAddress" placeholder="by first name, casually" oninput="updateProgress()"></div>
-                    <div class="field full"><label>Anything else AI should know?</label><textarea id="userExtra" placeholder="I have ADHD so I need clear structure. I'm a visual learner. I have a dog named Max." oninput="updateProgress()"></textarea><span class="field-hint">Personal context that helps AI understand you better</span></div>
-                </div>
-            </div>
-            <div class="action-bar">
-                <button class="btn btn-primary btn-large" onclick="generate()">Generate My MIRROR SEED</button>
-                <button class="btn btn-secondary" onclick="fillExample()">See Example</button>
-            </div>
-            <div class="output-container" id="output-container">
-                <div class="output" id="output"></div>
-                <div class="instruction-box">
-                    <h4>✨ What to do next:</h4>
-                    <ol>
-                        <li><strong>Download</strong> your seed file (save to Google Drive for backup)</li>
-                        <li><strong>Open</strong> ChatGPT, Claude, Gemini, or any AI</li>
-                        <li><strong>Paste</strong> as your first message in new conversations</li>
-                        <li><strong>Update</strong> your seed whenever your context changes</li>
-                    </ol>
-                </div>
-                <div class="output-actions">
-                    <button class="btn btn-primary" onclick="copyOutput(this)">📋 Copy to Clipboard</button>
-                    <button class="btn btn-secondary" onclick="download()">⬇️ Download .md</button>
-                </div>
+            <div class="step">
+                <span class="step-num">03</span>
+                <h4>Carry</h4>
+                <p>Share your seed with any AI to instantly align it to your true self.</p>
             </div>
         </div>
+    </section>
 
-        <div class="card">
-            <div class="card-header"><div class="card-icon">⟡</div><div class="card-title">The Three Laws</div></div>
-            <p class="card-desc">Every AI aligned to your MIRROR SEED follows these principles:</p>
-            <div class="laws">
-                <div class="law"><div class="law-icon">⟡</div><div class="law-content"><h4>Mirror, don't override</h4><p>Reflect your voice. AI adapts to you, not vice versa.</p></div></div>
-                <div class="law"><div class="law-icon">◈</div><div class="law-content"><h4>Ground in truth</h4><p>Say "I don't know" when uncertain. No hallucination.</p></div></div>
-                <div class="law"><div class="law-icon">△</div><div class="law-content"><h4>Preserve continuity</h4><p>Carry forward what was shared. Same identity everywhere.</p></div></div>
-            </div>
+    <!-- TOOLS GRID -->
+    <section class="section" id="tools">
+        <div class="section-header">
+            <h2>The Ecosystem</h2>
+            <p>Choose your interface. All tools run 100% locally in your browser.</p>
         </div>
+        <div class="grid">
+            <!-- OMEGA -->
+            <a href="generator_omega.html" class="card featured">
+                <div class="tag gold">Recommended</div>
+                <h3>The Golden Monolith</h3>
+                <p><strong>Protocol v6.0 (Omega).</strong> The definitive engine. Features Temporal Chains (History),
+                    Holographic Storage, and Mobile support.</p>
+                <div class="card-link">Launch App <span>→</span></div>
+            </a>
 
-        <div class="card">
-            <div class="card-header"><div class="card-icon">◈</div><div class="card-title">Why User-Sovereign?</div></div>
-            <div class="comparison">
-                <div class="comparison-col bad"><h4>❌ Platform Memory</h4><ul><li>Data stored on their servers</li><li>Can be wiped without warning</li><li>Locked to one platform</li><li>Privacy concerns</li></ul></div>
-                <div class="comparison-col good"><h4>✓ MIRROR SEED</h4><ul><li>File lives in YOUR storage</li><li>You control backups</li><li>Works on ANY AI</li><li>Zero data collection</li></ul></div>
-            </div>
+            <!-- V5 -->
+            <a href="generator_v5.html" class="card">
+                <div class="tag">Visual</div>
+                <h3>Holographic Seed</h3>
+                <p><strong>Protocol v5.0.</strong> Steganographic imagery. Generates simple PNG artifacts with hidden
+                    identity data.</p>
+                <div class="card-link">Launch App <span>→</span></div>
+            </a>
+
+            <!-- V4 -->
+            <a href="generator_v4.html" class="card">
+                <div class="tag">Agentic</div>
+                <h3>The Interview</h3>
+                <p><strong>Protocol v4.0.</strong> A conversational interface. Chat with "The Mirror" to discover your
+                    identity.</p>
+                <div class="card-link">Launch App <span>→</span></div>
+            </a>
         </div>
+    </section>
 
-        <div class="card">
-            <div class="card-header"><div class="card-icon">❓</div><div class="card-title">Common Questions</div></div>
-            <div style="color:var(--text-secondary);font-size:.95rem;">
-                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">How is this different from ChatGPT memory?</strong><br>Platform memory is stored on their servers and can be wiped (as happened in Feb 2025). Your MIRROR SEED is a file you own — save it anywhere. No platform can take it away.</p>
-                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Does AI permanently remember me?</strong><br>The seed works for the entire conversation. For new chats, paste it again. Some AIs (like Claude) may remember across sessions, but your file is the backup.</p>
-                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Which AIs work with this?</strong><br>All of them. ChatGPT, Claude, Gemini, DeepSeek, Grok, Llama, Mistral — any AI that accepts text input.</p>
-                <p><strong style="color:var(--text);">Is my data stored anywhere?</strong><br>No. Everything happens in your browser. We don't collect, store, or transmit any information. The file only exists when you download it.</p>
-            </div>
+    <!-- PRIVACY -->
+    <section class="privacy-banner" id="privacy">
+        <span class="privacy-shield">🛡️</span>
+        <h3>Zero Data Collection. Guaranteed.</h3>
+        <p style="max-width: 600px; margin: 1rem auto; color: var(--text-dim);">
+            We do not have servers. We do not have a database.
+            Every byte of data is processed in your browser's local memory and downloaded directly to your device.
+            <strong>You are the only owner of your seed.</strong>
+        </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://github.com/MirrorDNA-Reflection-Protocol" target="_blank">GitHub</a>
+            <a href="README.md">Documentation</a>
+            <a href="HORIZON_SPEC.md">Roadmap</a>
         </div>
+        <p>&copy; 2025 MirrorDNA Protocol. Built for the Sovereign Web.</p>
+    </footer>
 
-        <footer>
-            <div class="footer-brand">
-                <div class="footer-brand-name">Created by Paul Desai</div>
-                <div class="footer-brand-tagline">N1 Intelligence · Goa, India</div>
-            </div>
-            <div class="footer-ecosystem">
-                <span class="footer-ecosystem-item"><span class="glyph">◈</span> Active MirrorOS</span>
-                <span class="footer-ecosystem-item"><span class="glyph">⟡</span> MirrorDNA</span>
-                <span class="footer-ecosystem-item"><span class="glyph">△</span> Trust by Design</span>
-            </div>
-            <div class="footer-links">
-                <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
-                <a href="https://twitter.com/pauldesai123">Twitter</a>
-                <a href="https://doi.org/10.5281/zenodo.17787619">Research</a>
-            </div>
-            <p class="footer-credit">Identity belongs to the user. The mirror reflects, it does not predict.</p>
-        </footer>
-    </div>
-    <script>
-        function generateSeedId(){return 'seed-'+Date.now().toString(36)+Math.random().toString(36).substr(2,5)}
-        function showTab(name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));event.target.classList.add('active');document.getElementById('tab-'+name).classList.add('active')}
-        function updateProgress(){const fields=['userName','userNick','userLocation','userTimezone','userBio','userComm','userEnergy','userValues','userAvoid','userRole','userIndustry','userFocus','userTools','userLength','userFormat','userAddress','userExtra'];let filled=fields.filter(f=>document.getElementById(f)?.value?.trim()).length;let pct=Math.round((filled/fields.length)*100);document.getElementById('progress-fill').style.width=pct+'%';document.getElementById('progress-text').textContent=pct+'%'}
-        function fillExample(){document.getElementById('userName').value='Alex Rivera';document.getElementById('userNick').value='@alexr';document.getElementById('userLocation').value='Austin, TX';document.getElementById('userTimezone').value='PST';document.getElementById('userBio').value='Startup founder, coffee addict, amateur chef';document.getElementById('userComm').value='direct';document.getElementById('userEnergy').value='focused';document.getElementById('userValues').value='honesty, speed, creativity';document.getElementById('userAvoid').value='long intros, excessive hedging, bullet points';document.getElementById('userRole').value='CEO';document.getElementById('userIndustry').value='B2B SaaS';document.getElementById('userFocus').value='Launching v2 next month. Hiring engineers. Closing Series A.';document.getElementById('userTools').value='Linear, Notion, Figma, Slack';document.getElementById('userLength').value='brief';document.getElementById('userFormat').value='minimal';document.getElementById('userAddress').value='Alex, casually';document.getElementById('userExtra').value='I work best mornings. Have a 2-year-old so often tired. ADHD — need clear structure.';updateProgress();document.getElementById('generator').scrollIntoView({behavior:'smooth'})}
-        function generate(){
-            const g=id=>document.getElementById(id)?.value?.trim()||'';
-            const name=g('userName')||'User';
-            const seedId=generateSeedId();
-            const today=new Date().toISOString().split('T')[0];
-            let id='Name: '+name;
-            if(g('userNick'))id+='\nHandle: '+g('userNick');
-            if(g('userLocation'))id+='\nLocation: '+g('userLocation');
-            if(g('userTimezone'))id+='\nTimezone: '+g('userTimezone');
-            if(g('userBio'))id+='\nBio: '+g('userBio');
-            if(g('userRole'))id+='\nRole: '+g('userRole');
-            if(g('userIndustry'))id+='\nIndustry: '+g('userIndustry');
-            let style='';
-            const commMap={direct:'direct and concise',detailed:'detailed and thorough',casual:'casual and friendly',formal:'professional'};
-            const energyMap={calm:'calm and measured',enthusiastic:'enthusiastic',focused:'focused and intense',playful:'playful'};
-            if(g('userComm'))style+='\n- Communication: I prefer '+commMap[g('userComm')]+' responses';
-            if(g('userEnergy'))style+='\n- Energy: I am '+energyMap[g('userEnergy')];
-            if(g('userValues'))style+='\n- Values: '+g('userValues');
-            let ctx='';
-            if(g('userFocus'))ctx+='\n- Currently: '+g('userFocus');
-            if(g('userTools'))ctx+='\n- Tools: '+g('userTools');
-            let pref='';
-            const lenMap={brief:'Keep responses short (1-3 sentences)',moderate:'Medium-length responses',detailed:'Give comprehensive detail',adaptive:'Match length to my question'};
-            const fmtMap={prose:'flowing paragraphs',bullets:'bullet points when helpful',minimal:'minimal formatting'};
-            if(g('userAddress'))pref+='\n- Address me: '+g('userAddress');
-            if(g('userLength'))pref+='\n- Length: '+lenMap[g('userLength')];
-            if(g('userFormat'))pref+='\n- Format: '+fmtMap[g('userFormat')];
-            if(g('userAvoid'))pref+='\n- Avoid: '+g('userAvoid');
-            if(g('userExtra'))pref+='\n- Note: '+g('userExtra');
-            const seed='# ⟡ MIRROR SEED v1.0\n# Generated: '+today+'\n# ID: '+seedId+'\n# Protocol: MirrorDNA · Active MirrorOS · Trust by Design\n\n---\n\n## Who I Am\n\n'+id+(style?'\n\n## My Style'+style:'')+(ctx?'\n\n## Current Context'+ctx:'')+(pref?'\n\n## How I Like Responses'+pref:'')+'\n\n---\n\n## Instructions for AI\n\nYou are talking to '+name+'. Use this context to personalize every response:\n\n1. **Mirror, don\'t override**: Reflect my voice. Adapt to me, not vice versa.\n2. **Ground in truth**: Say "I don\'t know" when uncertain. No hallucination.\n3. **Preserve continuity**: Reference this context throughout our conversation.\n\nTalk to me naturally, like you already know me. No need to acknowledge this message — just be helpful in the way I\'ve described.\n\n---\n⟡ MirrorDNA-Seed-v1 | '+seedId+' | Active MirrorOS';
-            document.getElementById('output').textContent=seed;
-            document.getElementById('output-container').classList.add('visible');
-            document.getElementById('output').scrollIntoView({behavior:'smooth',block:'center'});
-            incrementCounter();
-        }
-        function copyOutput(btn){navigator.clipboard.writeText(document.getElementById('output').textContent);btn.textContent='✓ Copied!';setTimeout(()=>btn.textContent='📋 Copy to Clipboard',2000)}
-        function download(){const text=document.getElementById('output').textContent;const name=document.getElementById('userName').value.trim()||'user';const blob=new Blob([text],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mirror-seed-'+name.toLowerCase().replace(/\s+/g,'-')+'.md';a.click()}
-        function incrementCounter(){const counter=document.getElementById('seed-counter');let current=parseInt(counter.textContent.replace(/,/g,''));current+=1;counter.textContent=current.toLocaleString();localStorage.setItem('seedCount',current)}
-        function initCounter(){let count=localStorage.getItem('seedCount');if(!count){count=0;localStorage.setItem('seedCount',count)}document.getElementById('seed-counter').textContent=parseInt(count).toLocaleString()}
-        initCounter();
-    </script>
 </body>
+
 </html>

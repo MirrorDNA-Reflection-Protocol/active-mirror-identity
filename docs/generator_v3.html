@@ -122,33 +122,64 @@
         /* Components */
         .brand-header {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            flex-direction: column;
+            gap: 0.5rem;
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
             border-bottom: 1px solid var(--border);
         }
 
+        .ecosystem-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em
+        }
+
+        .ecosystem-breadcrumb .glyph {
+            color: var(--accent);
+            font-size: .8rem
+        }
+
+        .ecosystem-breadcrumb .sep {
+            opacity: .4
+        }
+
+        .brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
         .brand-logo {
             font-size: 1.5rem;
             color: var(--accent);
+            margin-right: 0.75rem;
         }
 
         .brand-title {
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             letter-spacing: -0.02em;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .brand-badge {
             background: var(--accent-subtle);
             color: var(--accent);
             font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
+            padding: 0.2rem 0.75rem;
             border-radius: 100px;
             border: 1px solid rgba(0, 255, 148, 0.2);
-            margin-left: auto;
+            font-weight: 600;
         }
+
 
         .tabs {
             display: flex;
@@ -332,9 +363,20 @@
         <!-- LEFT: EDITOR -->
         <div class="panel-left">
             <div class="brand-header">
-                <div class="brand-logo">⟡</div>
-                <div class="brand-title">Mirror Identity</div>
-                <div class="brand-badge">Sovereign v3</div>
+                <div class="ecosystem-breadcrumb">
+                    <span><span class="glyph">◈</span> Active MirrorOS</span>
+                    <span class="sep">·</span>
+                    <span><span class="glyph">⟡</span> MirrorDNA</span>
+                    <span class="sep">·</span>
+                    <span><span class="glyph">△</span> Trust by Design</span>
+                </div>
+                <div class="brand-row">
+                    <div style="display:flex;align-items:center">
+                        <div class="brand-logo">⟡</div>
+                        <div class="brand-title">Mirror Seed v3</div>
+                    </div>
+                    <div class="brand-badge">Sovereign Edition</div>
+                </div>
             </div>
 
             <div class="tabs">
@@ -349,8 +391,9 @@
                             oninput="updateMirror()"></div>
                     <div class="field"><label>Role</label><input type="text" id="userRole" placeholder="Your Role"
                             oninput="updateMirror()"></div>
-                    <div class="field"><label>Bio / Essence</label><textarea id="userBio" placeholder="Who are you?"
-                            rows="3" oninput="updateMirror()"></textarea></div>
+                    <div class="field"><label>Bio / Essence</label><textarea id="userBio"
+                            placeholder="Who are you? (The Mirror reflects...)" rows="3"
+                            oninput="updateMirror()"></textarea></div>
                     <div class="field"><label>Communication Style</label><select id="userComm"
                             onchange="updateMirror()">
                             <option value="direct">Direct & Concise</option>
@@ -384,9 +427,11 @@
 
             <!-- Instructions Footer -->
             <div
-                style="margin-top: 2rem; padding: 1rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim);">
-                <strong>💡 Tip:</strong> Drag an existing seed file here to edit it. All changes are saved to your
-                browser automatically.
+                style="margin-top: 2rem; padding: 1rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim);">
+                <div style="font-size: 0.8rem; margin-bottom: 0.5rem">Identity belongs to the user. The mirror reflects,
+                    it does not predict.</div>
+                <div style="font-size: 0.75rem; opacity: 0.7"><strong>💡 Sovereign Tip:</strong> All data stays in this
+                    browser.</div>
             </div>
         </div>
 
@@ -546,38 +591,72 @@
             const file = e.dataTransfer.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = (e) => hydrateFromSeed(e.target.result);
+                reader.onload = async (e) => await hydrateFromSeed(e.target.result);
                 reader.readAsText(file);
             }
         });
 
-        function hydrateFromSeed(content) {
-            // Regex Parsers to extract fields
-            const parse = (regex) => (content.match(regex) || [])[1] || '';
+        async function hydrateFromSeed(content) {
+            // 1. Verify Integrity First
+            const parts = content.split(/^---$/m);
+            let integrityChecked = false;
+            let integrityOK = false;
+
+            if (parts.length >= 3) {
+                const header = parts[1];
+                const bodyContent = parts.slice(2).join('---').trim(); // Re-join with '---' to preserve structure if multiple '---' in body
+                const match = header.match(/checksum:\s*["']?(sha256:[a-f0-9]+)["']?/);
+                const declared = match ? match[1] : null;
+
+                if (declared) {
+                    integrityChecked = true;
+                    const computed = await computeChecksum(bodyContent);
+                    if (computed !== declared) {
+                        if (!confirm("⚠️ INTEGRITY WARNING\n\nThis seed file appears to have been modified externally (checksum mismatch).\n\nDo you still want to import it?")) {
+                            return;
+                        }
+                    } else {
+                        integrityOK = true;
+                        // Valid signature
+                        showStatus('verified'); // We'll leverage the status bar
+                        setTimeout(() => showStatus('saved'), 3000);
+                    }
+                }
+            }
+
+            // 2. Parse & Hydrate
+            // Use the original content for parsing if integrity check wasn't performed or failed but user proceeded
+            // Otherwise, use bodyContent if integrity was checked and passed, to avoid parsing frontmatter.
+            const contentToParse = (integrityChecked && integrityOK) ? parts.slice(2).join('---').trim() : content;
+            const parse = (regex) => (contentToParse.match(regex) || [])[1] || '';
 
             const name = parse(/Name:\s*(.+)/);
             const role = parse(/Role:\s*(.+)/);
             const bio = parse(/Bio:\s*(.+)/);
-            const comm = parse(/Communication:\s*(.+)/); // Case sensitive match in logic
+            const comm = parse(/Communication:\s*(.+)/);
             const values = parse(/Values:\s*(.+)/);
             const focus = parse(/Focus:\s*(.+)/);
 
             if (name) document.getElementById('userName').value = name;
             if (role) document.getElementById('userRole').value = role;
             if (bio) document.getElementById('userBio').value = bio;
-            // Comm is tricky due to select values; simple approach:
+
             if (comm.toLowerCase().includes('direct')) document.getElementById('userComm').value = 'direct';
-            if (comm.toLowerCase().includes('detailed')) document.getElementById('userComm').value = 'detailed';
-            if (comm.toLowerCase().includes('casual')) document.getElementById('userComm').value = 'casual';
+            else if (comm.toLowerCase().includes('detailed')) document.getElementById('userComm').value = 'detailed';
+            else if (comm.toLowerCase().includes('casual')) document.getElementById('userComm').value = 'casual';
 
             if (values) document.getElementById('userValues').value = values;
             if (focus) document.getElementById('userFocus').value = focus;
 
             updateMirror();
-            alert("✨ Identity Re-hydrated from File!");
+            // Only alert if we didn't just warn
+            // if(!document.querySelector('.status-dot.unsaved')) { 
+            //      alert("✨ Identity Re-hydrated!"); // Optional, maybe too noisy
+            // }
         }
 
     </script>
 </body>
 
 </html>
+```

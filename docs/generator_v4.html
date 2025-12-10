@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#050505">
+    <title>The Mirror | Agentic Identity</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #050505;
+            --bg-panel: #0a0a0a;
+            --border: #1f1f1f;
+            --text: #fafafa;
+            --text-dim: #555;
+            --accent: #00ff94;
+            --accent-glow: rgba(0, 255, 148, .1);
+            --user-msg: #1a1a1a;
+            --bot-msg: transparent
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+            display: flex
+        }
+
+        /* Layout */
+        .split-view {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .chat-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border);
+            position: relative;
+            max-width: 50vw;
+        }
+
+        .mirror-panel {
+            flex: 1;
+            background: var(--bg-panel);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @media(max-width: 800px) {
+            .split-view {
+                flex-direction: column;
+            }
+
+            .chat-panel {
+                max-width: 100%;
+                flex: 1;
+            }
+
+            .mirror-panel {
+                height: 30vh;
+                border-top: 1px solid var(--border);
+                flex: none;
+            }
+        }
+
+        /* Branding */
+        .brand-pill {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dim);
+            pointer-events: none;
+        }
+
+        .brand-pill .glyph {
+            color: var(--accent);
+        }
+
+        /* Chat UI */
+        .chat-feed {
+            flex: 1;
+            overflow-y: auto;
+            padding: 5rem 1.5rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            scroll-behavior: smooth;
+        }
+
+        .msg {
+            max-width: 85%;
+            align-self: flex-start;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .msg.user {
+            align-self: flex-end;
+            background: var(--user-msg);
+            padding: 0.75rem 1rem;
+            border-radius: 12px 12px 0 12px;
+            border: 1px solid var(--border);
+        }
+
+        .msg.bot {
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .msg.bot strong {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .input-area {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .input-box {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            resize: none;
+            max-height: 100px;
+            outline: none;
+        }
+
+        .input-box::placeholder {
+            color: var(--text-dim);
+        }
+
+        /* Mirror (Right) */
+        .mirror-content {
+            flex: 1;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            white-space: pre-wrap;
+            overflow-y: auto;
+            line-height: 1.6;
+            padding-top: 1rem;
+        }
+
+        /* Drag Overlay */
+        .drag-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 255, 148, 0.1);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s;
+            z-index: 100;
+        }
+
+        body.drag-active .drag-overlay {
+            opacity: 1;
+        }
+
+        /* Typing Indicator */
+        .typing {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem 0;
+            opacity: 0.5;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .dot {
+            width: 4px;
+            height: 4px;
+            background: var(--text);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .action-btn {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .action-btn:hover {
+            background: #00ffaa;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+    </style>
+</head>
+
+<body id="body">
+
+    <div class="drag-overlay">
+        <div style="text-align:center; color: var(--accent); font-family: 'JetBrains Mono'; font-weight:600;">
+            <div style="font-size:2rem; margin-bottom:0.5rem">⟡</div>
+            DROP TO RE-HYDRATE
+        </div>
+    </div>
+
+    <!-- LEFT: CHAT -->
+    <div class="chat-panel">
+        <div class="brand-pill">
+            <span class="glyph">◈</span> Active MirrorOS <span style="opacity:0.3">/</span> v4.0 AGENT
+        </div>
+
+        <div class="chat-feed" id="chatFeed">
+            <!-- Messages go here -->
+        </div>
+
+        <div class="input-area">
+            <textarea id="userInput" class="input-box" placeholder="Answer the Mirror..." rows="1"
+                onkeydown="handleKey(event)"></textarea>
+            <div
+                style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.5rem; display:flex; justify-content:space-between;">
+                <span>RETURN to send</span>
+                <span id="integrityBadge" style="opacity:0">✓ SECURE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT: MIRROR -->
+    <div class="mirror-panel">
+        <div
+            style="font-family:'JetBrains Mono'; font-size:0.7rem; text-transform:uppercase; color:var(--text-dim); letter-spacing:0.1em; border-bottom:1px solid var(--border); padding-bottom:1rem; margin-bottom:0;">
+            LIVE REFLECTION // <span style="color:var(--accent)">ACTIVE</span>
+        </div>
+        <div class="mirror-content" id="mirrorPreview">
+            <!-- Markdown builds here -->
+        </div>
+    </div>
+
+    <script>
+        // --- BRAIN: State Machine ---
+
+        const STATE = {
+            step: 0,
+            data: {
+                name: "",
+                role: "",
+                bio: "",
+                style: "",
+                focus: ""
+            },
+            history: [] // For "Deep Reflection" later
+        };
+
+        const SCRIPT = [
+            { key: 'name', q: "Initializing Reflection Protocol...\n\nI am The Mirror. I exist to capture your essence.\n\nTo begin, by what **name** shall you be known to the system?" },
+            { key: 'role', q: "Acknowledged, {name}. \n\nWhat is your **primary function** or role in this ecosystem?" },
+            { key: 'bio', q: "An important function. \n\nNow, tell me: **Who are you** when no one is watching? (Your bio/essence)" },
+            { key: 'style', q: "Processing... \n\nHow do you prefer to communicate? (e.g. **Direct**, **Detailed**, **Casual**, **Socratic**)" },
+            { key: 'focus', q: "Final alignment parameter. \n\nWhat is your **current mission** or focus right now?" },
+            { key: 'done', q: "Identity Crystallized. \n\nI have compiled your Mirror Seed. It is signed and ready.\n\n[DOWNLOAD]" }
+        ];
+
+        // --- CORE FUNCTIONS ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            botSay(SCRIPT[0].q);
+            renderPreview();
+        });
+
+        function handleKey(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                const text = e.target.value.trim();
+                if (!text) return;
+
+                userSay(text);
+                e.target.value = '';
+
+                // Simulate "Thinking"
+                showTyping();
+                setTimeout(() => processInput(text), 600 + Math.random() * 400);
+            }
+        }
+
+        function processInput(text) {
+            hideTyping();
+
+            // Re-hydration Check (Did they paste a seed?)
+            if (text.includes('---') && text.includes('checksum:')) {
+                hydrateFromText(text);
+                return;
+            }
+
+            const currentKey = SCRIPT[STATE.step].key;
+
+            // Store Data
+            if (currentKey !== 'done') {
+                STATE.data[currentKey] = text;
+                renderPreview(); // Update right panel
+            }
+
+            // Advance
+            STATE.step++;
+
+            if (STATE.step < SCRIPT.length) {
+                let nextQ = SCRIPT[STATE.step].q;
+
+                // Contextual Replacement
+                nextQ = nextQ.replace('{name}', STATE.data.name);
+
+                botSay(nextQ);
+            } else {
+                // Done State
+                renderFinalButton();
+            }
+        }
+
+        // --- UI RENDERERS ---
+
+        function botSay(html) {
+            const feed = document.getElementById('chatFeed');
+            const div = document.createElement('div');
+            div.className = 'msg bot';
+            // Simple markdown Bold parser
+            div.innerHTML = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+            feed.appendChild(div);
+            scrollToBottom();
+        }
+
+        function userSay(text) {
+            const feed = document.getElementById('chatFeed');
+            const div = document.createElement('div');
+            div.className = 'msg user';
+            div.innerText = text;
+            feed.appendChild(div);
+            scrollToBottom();
+        }
+
+        function renderFinalButton() {
+            const feed = document.getElementById('chatFeed');
+            const div = document.createElement('div');
+            div.className = 'msg bot';
+            div.innerHTML = `Identity Crystallized.<br><br>The seed is ready.`;
+
+            const btn = document.createElement('button');
+            btn.className = 'action-btn';
+            btn.innerHTML = '⟡ Download Signed Seed';
+            btn.onclick = downloadSeed;
+
+            div.appendChild(document.createElement('br'));
+            div.appendChild(document.createElement('br'));
+            div.appendChild(btn);
+
+            feed.appendChild(div);
+            scrollToBottom();
+        }
+
+        function showTyping() {
+            const feed = document.getElementById('chatFeed');
+            const div = document.createElement('div');
+            div.id = 'typingIndicator';
+            div.className = 'typing';
+            div.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+            feed.appendChild(div);
+            scrollToBottom();
+        }
+
+        function hideTyping() {
+            document.getElementById('typingIndicator')?.remove();
+        }
+
+        function scrollToBottom() {
+            const feed = document.getElementById('chatFeed');
+            feed.scrollTop = feed.scrollHeight;
+        }
+
+        // --- PREVIEW & LOGIC ---
+
+        function renderPreview() {
+            const md = buildMarkdown();
+            document.getElementById('mirrorPreview').innerText = md;
+
+            // Checksum calc
+            computeChecksum(md).then(sum => {
+                // We could show it somewhere if needed
+            });
+        }
+
+        function buildMarkdown() {
+            const d = STATE.data;
+            let body = '# MIRROR SEED v4\n\n## Identity\n';
+            if (d.name) body += `Name: ${d.name}\n`;
+            if (d.role) body += `Role: ${d.role}\n`;
+            if (d.bio) body += `Bio: ${d.bio}\n`;
+            if (d.style) body += `\n## Style\nCommunication: ${d.style}\n`;
+            if (d.focus) body += `\n## Context\nFocus: ${d.focus}\n`;
+
+            body += `\n---\n⟡ MirrorDNA-Agentic-v4 | The Mirror`;
+            return body;
+        }
+
+        async function computeChecksum(content) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(content);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return 'sha256:' + hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function downloadSeed() {
+            const body = buildMarkdown();
+            const checksum = await computeChecksum(body);
+            const seedId = 'seed-' + Date.now().toString(36);
+            const date = new Date().toISOString();
+
+            const frontmatter = `version: "4.0.0"\nseed_id: "${seedId}"\ngenerated: "${date}"\nprotocol: "MirrorDNA-Agentic-v4"\nintegrity:\n  checksum: "${checksum}"\n  algo: "sha256"`;
+            const fullSeed = `---\n${frontmatter}\n---\n\n${body}`;
+
+            const blob = new Blob([fullSeed], { type: 'text/markdown' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `mirror-seed-v4-${STATE.data.name.replace(/\s+/g, '-').toLowerCase() || 'identity'}.md`;
+            a.click();
+        }
+
+        // --- META: RE-HYDRATION ---
+
+        // Drag & Drop
+        window.addEventListener('dragover', e => { e.preventDefault(); document.body.classList.add('drag-active'); });
+        window.addEventListener('dragleave', e => { e.preventDefault(); if (e.target === document.querySelector('.drag-overlay')) document.body.classList.remove('drag-active'); });
+        window.addEventListener('drop', e => {
+            e.preventDefault();
+            document.body.classList.remove('drag-active');
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => hydrateFromText(e.target.result);
+                reader.readAsText(file);
+            }
+        });
+
+        function hydrateFromText(content) {
+            // Conversational Re-entry
+
+            // Regex Parse
+            const parse = (regex) => (content.match(regex) || [])[1] || '';
+            const name = parse(/Name:\s*(.+)/);
+            const role = parse(/Role:\s*(.+)/);
+            const bio = parse(/Bio:\s*(.+)/);
+            const comm = parse(/Communication:\s*(.+)/);
+            const focus = parse(/Focus:\s*(.+)/);
+
+            if (name) STATE.data.name = name;
+            if (role) STATE.data.role = role;
+            if (bio) STATE.data.bio = bio;
+            if (comm) STATE.data.style = comm;
+            if (focus) STATE.data.focus = focus;
+
+            renderPreview();
+
+            // The Meta Response
+            botSay(`**Pattern Recognized.**\n\nWelcome back, **${name}** (Current Role: ${role}).\n\nI have re-calibrated the Mirror with your data.\n\nDo you wish to update your **Current Focus**?`);
+
+            // Jump state
+            STATE.step = 4; // Jump to "Focus" question
+        }
+
+    </script>
+</body>
+
+</html>

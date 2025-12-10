@@ -31,10 +31,10 @@ MIRROR SEED is a **portable identity file format** for AI interactions. Create o
 
 ## Quick Start
 
-1. **[Generate your seed](https://mirrordna-reflection-protocol.github.io/active-mirror-identity/)** (2 minutes)
-2. **Download** the .md file to your Google Drive
-3. **Paste** into any AI conversation
-4. **Done** — AI now knows you
+1. **[Launch the Portal (`docs/index.html`)](docs/index.html)**
+2.  Select **"The Golden Monolith"** (Omega) or **"The Interview"** (Agentic).
+3.  **Forge your Artifact**.
+4.  **Drag & Drop** the artifact into the tool anytime to re-hydrate/update your identity.
 
 ## Why?
 
@@ -51,10 +51,29 @@ MIRROR SEED inverts the model: **your identity is a file you control**.
 
 ---
 
+## ⟡ The Omega Standard (v6)
+
+**Mirror Seed Omega** is the definitive evolution of the protocol. It transforms Identity from a text file into a **Holographic Artifact** with a verified history.
+
+### What it actually does:
+
+1.  **Holographic Storage (Steganography)**:
+    *   It takes your identity (Markdown) and **crypto-shreds it into pixels**.
+    *   The result is a standard `.png` image that functions as a valid ID card.
+    *   **Drag & Drop**: Drop the image back into the generator to "unlock" the text.
+
+2.  **Temporal Chains (The "Blockchain of Self")**:
+    *   It tracks your **growth**.
+    *   When you update your seed, it cryptographically links to your *previous* seed (`parent_hash`).
+    *   This creates an unbreakable chain of history. Proof that you are the same person who made those choices 5 years ago.
+
+3.  **Quantum Readiness**:
+    *   The file structure is reserved for Post-Quantum Cryptography (Kyber-1024), ensuring your identity survives the quantum decryption era (Q-Day).
+
+---
+
 ## ⟡ The Three Laws
-
 Every AI aligned to your MIRROR SEED follows these principles:
-
 1. **⟡ Mirror, don't override** — Reflect the user's voice, never impose. AI adapts to you, not vice versa.
 2. **◈ Ground in truth** — Say "I don't know" when uncertain. No hallucination. Ever.
 3. **△ Preserve continuity** — Carry forward what was shared. Works across all platforms — same identity everywhere.
