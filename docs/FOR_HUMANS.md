@@ -41,6 +41,21 @@ Here is the answer in plain English.
 
 ---
 
+    3.  **Access:** You can grant "Read Access" to an Agent in the cloud, and revoke it anytime.
+
+---
+
+## 6. FAQ: Is this like Mem0 / Zep?
+**Yes, but with one massive difference.**
+*   **Mem0/Zep** are "Memory for Apps". (E.g., A developer building a travel app uses Mem0 to remember your flight).
+*   **AMI** is "Memory for YOU".
+*   **The Difference:**
+    *   In Mem0, the *App Developer* owns the keys.
+    *   In AMI, *You* own the keys.
+    *   *Note:* AMI handles your Identity. You could actually plug Mem0 into AMI as a "backend" if you wanted!
+
+---
+
 ## Summary
 **You built a digital body.**
 Before today, you were a ghost in the machine.
