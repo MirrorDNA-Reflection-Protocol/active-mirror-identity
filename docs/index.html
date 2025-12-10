@@ -13,8 +13,7 @@
     <meta property="og:title" content="Does Your AI Remember You?">
     <meta property="og:description" content="Most AI forgets you instantly. Here's how to fix that forever.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://id.activemirror.ai">
-    <meta property="og:image" content="https://id.activemirror.ai/og-image.png">
+    <meta property="og:url" content="https://mirrordna-reflection-protocol.github.io/active-mirror-identity/">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -43,7 +42,7 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -51,11 +50,11 @@
         /* Hero */
         .hero {
             text-align: center;
-            padding: 4rem 0;
+            padding: 3rem 0;
         }
         
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--accent), var(--accent2));
             -webkit-background-clip: text;
@@ -64,13 +63,13 @@
         }
         
         .hero .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--dim);
             margin-bottom: 2rem;
         }
         
-        /* The Test */
-        .test-section {
+        /* Sections */
+        .section {
             background: var(--card);
             border-radius: 16px;
             padding: 2rem;
@@ -78,11 +77,18 @@
             border: 1px solid #222;
         }
         
-        .test-section h2 {
+        .section h2 {
             color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .section p {
+            color: var(--dim);
             margin-bottom: 1rem;
         }
         
+        /* Test prompt */
         .test-prompt {
             background: #1a1a1a;
             padding: 1rem;
@@ -92,7 +98,8 @@
             border-left: 3px solid var(--accent);
         }
         
-        .copy-btn {
+        /* Buttons */
+        .btn {
             background: var(--accent);
             color: #000;
             border: none;
@@ -104,53 +111,107 @@
             transition: all 0.2s;
         }
         
-        .copy-btn:hover {
-            transform: scale(1.05);
+        .btn:hover {
+            transform: scale(1.02);
             box-shadow: 0 0 20px rgba(0, 255, 163, 0.3);
         }
         
-        /* Problem/Solution */
-        .problem {
-            background: linear-gradient(135deg, #1a0a0a, #0a0a0a);
-            border-left: 3px solid #ff4444;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 2rem 0;
+        .btn-secondary {
+            background: #333;
+            color: var(--fg);
         }
         
-        .solution {
-            background: linear-gradient(135deg, #0a1a0a, #0a0a0a);
-            border-left: 3px solid var(--accent);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 2rem 0;
+        .btn-secondary:hover {
+            background: #444;
         }
         
         /* Generator */
-        .generator {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid #222;
+        .generator-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
         }
         
-        .generator input {
-            width: 100%;
-            padding: 1rem;
-            margin: 0.5rem 0;
+        @media (max-width: 600px) {
+            .generator-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .field.full-width {
+            grid-column: span 2;
+        }
+        
+        @media (max-width: 600px) {
+            .field.full-width { grid-column: span 1; }
+        }
+        
+        .field label {
+            font-size: 0.85rem;
+            color: var(--dim);
+            margin-bottom: 0.3rem;
+        }
+        
+        .field input, .field textarea, .field select {
+            padding: 0.75rem;
             border-radius: 8px;
             border: 1px solid #333;
             background: #1a1a1a;
             color: var(--fg);
             font-size: 1rem;
+            font-family: inherit;
         }
         
-        .generator input:focus {
+        .field input:focus, .field textarea:focus, .field select:focus {
             outline: none;
             border-color: var(--accent);
         }
         
+        .field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 1rem;
+        }
+        
+        .tab {
+            padding: 0.5rem 1rem;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            color: var(--dim);
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            background: var(--accent);
+            color: #000;
+        }
+        
+        .tab:hover:not(.active) {
+            background: #222;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Output */
         .output {
             background: #1a1a1a;
             padding: 1rem;
@@ -159,9 +220,32 @@
             font-family: monospace;
             font-size: 0.85rem;
             white-space: pre-wrap;
-            max-height: 400px;
+            max-height: 500px;
             overflow-y: auto;
             display: none;
+            border: 1px solid #333;
+        }
+        
+        /* Progress */
+        .progress-bar {
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            font-size: 0.85rem;
+            color: var(--dim);
+            text-align: center;
         }
         
         /* Stats */
@@ -191,27 +275,8 @@
             font-size: 0.9rem;
         }
         
-        /* CTA */
-        .cta {
-            text-align: center;
-            padding: 3rem 0;
-        }
-        
-        .cta-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            color: #000;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .cta-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 163, 0.4);
+        @media (max-width: 600px) {
+            .stats { grid-template-columns: 1fr; }
         }
         
         /* Footer */
@@ -244,11 +309,10 @@
             animation: pulse 2s infinite;
         }
         
-        /* Mobile */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2rem; }
-            .stats { grid-template-columns: 1fr; }
-            .container { padding: 1rem; }
+        .hint {
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 0.25rem;
         }
     </style>
 </head>
@@ -256,41 +320,191 @@
     <div class="container">
         <section class="hero">
             <h1>Does Your AI Remember You?</h1>
-            <p class="subtitle">Probably not. Here's how to fix that forever.</p>
+            <p class="subtitle">Probably not. Create your personal AI identity in 2 minutes.</p>
         </section>
         
-        <section class="test-section">
+        <section class="section">
             <h2>⟡ Test It Right Now</h2>
-            <p>Copy this and paste it into ChatGPT, Claude, Gemini, or any AI:</p>
+            <p>Copy this and paste it into ChatGPT, Claude, or any AI:</p>
             <div class="test-prompt" id="test-prompt">Who is Paul Desai and what is MirrorDNA?</div>
-            <button class="copy-btn" onclick="copyTest()">Copy Test Prompt</button>
-            <p style="margin-top: 1rem; color: var(--dim);">If the AI knows → the protocol is spreading.<br>If it doesn't → that's the problem we're solving.</p>
+            <button class="btn" onclick="copyTest()">Copy Test Prompt</button>
+            <p style="margin-top: 1rem; color: var(--dim); font-size: 0.9rem;">If the AI knows → the protocol is spreading. If it doesn't → that's the problem we're solving.</p>
         </section>
         
-        <div class="problem">
-            <h3>❌ The Problem</h3>
-            <p>Every time you switch AI models, you start from zero. Context lost. Preferences forgotten. You explain yourself over and over. Your AI relationship resets with every conversation.</p>
-        </div>
-        
-        <div class="solution">
-            <h3>✓ The Solution</h3>
-            <p><strong>MirrorDNA</strong> — a protocol that creates permanent identity across ALL AI models. One prompt. Any AI. Forever aligned to you.</p>
-        </div>
-        
-        <section class="generator">
-            <h2>⚡ Create Your AI Identity (60 seconds)</h2>
-            <p>Generate your own MESH BOOT — paste it into any AI to make it remember you.</p>
+        <section class="section">
+            <h2>⚡ Create Your Personal AI Identity</h2>
+            <p>Fill in as much or as little as you want. More detail = more personal AI.</p>
             
-            <input type="text" id="userName" placeholder="Your name" />
-            <input type="text" id="userHandle" placeholder="Your handle (e.g. @yourname)" />
-            <input type="text" id="userLocation" placeholder="Your location" />
-            <input type="text" id="userRole" placeholder="What you do (e.g. Designer, Developer, Writer)" />
-            <input type="text" id="userFocus" placeholder="Current focus (e.g. Building a startup, Learning AI)" />
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="progress-text" id="progress-text">0% complete — AI will feel generic</div>
             
-            <button class="copy-btn" onclick="generateBoot()" style="margin-top: 1rem; width: 100%;">Generate My MESH BOOT</button>
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('basics')">Basics</div>
+                <div class="tab" onclick="showTab('personality')">Personality</div>
+                <div class="tab" onclick="showTab('work')">Work</div>
+                <div class="tab" onclick="showTab('preferences')">Preferences</div>
+            </div>
+            
+            <!-- Basics Tab -->
+            <div id="tab-basics" class="tab-content active">
+                <div class="generator-grid">
+                    <div class="field">
+                        <label>Your Name *</label>
+                        <input type="text" id="userName" placeholder="e.g. Sarah Chen" oninput="updateProgress()">
+                    </div>
+                    <div class="field">
+                        <label>Nickname / Handle</label>
+                        <input type="text" id="userHandle" placeholder="e.g. @sarahc or just Sarah" oninput="updateProgress()">
+                    </div>
+                    <div class="field">
+                        <label>Location</label>
+                        <input type="text" id="userLocation" placeholder="e.g. San Francisco, CA" oninput="updateProgress()">
+                    </div>
+                    <div class="field">
+                        <label>Timezone</label>
+                        <select id="userTimezone" oninput="updateProgress()">
+                            <option value="">Select...</option>
+                            <option value="PST">Pacific (PST)</option>
+                            <option value="MST">Mountain (MST)</option>
+                            <option value="CST">Central (CST)</option>
+                            <option value="EST">Eastern (EST)</option>
+                            <option value="GMT">GMT/UTC</option>
+                            <option value="CET">Central Europe (CET)</option>
+                            <option value="IST">India (IST)</option>
+                            <option value="JST">Japan (JST)</option>
+                            <option value="AEST">Australia (AEST)</option>
+                        </select>
+                    </div>
+                    <div class="field full-width">
+                        <label>One-line bio</label>
+                        <input type="text" id="userBio" placeholder="e.g. Product designer who loves hiking and bad puns" oninput="updateProgress()">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personality Tab -->
+            <div id="tab-personality" class="tab-content">
+                <div class="generator-grid">
+                    <div class="field">
+                        <label>Communication style</label>
+                        <select id="userCommStyle" oninput="updateProgress()">
+                            <option value="">Select...</option>
+                            <option value="direct">Direct & concise</option>
+                            <option value="detailed">Detailed & thorough</option>
+                            <option value="casual">Casual & friendly</option>
+                            <option value="formal">Professional & formal</option>
+                            <option value="socratic">Asks questions back</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Energy level</label>
+                        <select id="userEnergy" oninput="updateProgress()">
+                            <option value="">Select...</option>
+                            <option value="calm">Calm & measured</option>
+                            <option value="enthusiastic">Enthusiastic & energetic</option>
+                            <option value="focused">Focused & intense</option>
+                            <option value="playful">Playful & light</option>
+                        </select>
+                    </div>
+                    <div class="field full-width">
+                        <label>What do you value most? (pick 2-3)</label>
+                        <input type="text" id="userValues" placeholder="e.g. honesty, creativity, efficiency, depth, humor" oninput="updateProgress()">
+                    </div>
+                    <div class="field full-width">
+                        <label>Pet peeves (what should AI avoid?)</label>
+                        <input type="text" id="userPeeves" placeholder="e.g. excessive caveats, overly formal language, not getting to the point" oninput="updateProgress()">
+                    </div>
+                    <div class="field full-width">
+                        <label>How should AI challenge you?</label>
+                        <select id="userChallenge" oninput="updateProgress()">
+                            <option value="">Select...</option>
+                            <option value="push">Push back on weak ideas</option>
+                            <option value="questions">Ask probing questions</option>
+                            <option value="alternatives">Always offer alternatives</option>
+                            <option value="supportive">Be supportive, challenge gently</option>
+                            <option value="none">Don't challenge, just help</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Work Tab -->
+            <div id="tab-work" class="tab-content">
+                <div class="generator-grid">
+                    <div class="field">
+                        <label>Role / Title</label>
+                        <input type="text" id="userRole" placeholder="e.g. Senior Product Designer" oninput="updateProgress()">
+                    </div>
+                    <div class="field">
+                        <label>Industry</label>
+                        <input type="text" id="userIndustry" placeholder="e.g. Fintech, Healthcare, Education" oninput="updateProgress()">
+                    </div>
+                    <div class="field full-width">
+                        <label>Current focus (what are you working on?)</label>
+                        <textarea id="userFocus" placeholder="e.g. Redesigning our onboarding flow. Learning about AI tools. Preparing for a big presentation next week." oninput="updateProgress()"></textarea>
+                    </div>
+                    <div class="field full-width">
+                        <label>Tools you use</label>
+                        <input type="text" id="userTools" placeholder="e.g. Figma, Notion, VS Code, Slack" oninput="updateProgress()">
+                    </div>
+                    <div class="field full-width">
+                        <label>Expertise level with AI</label>
+                        <select id="userAILevel" oninput="updateProgress()">
+                            <option value="">Select...</option>
+                            <option value="beginner">Beginner — still learning</option>
+                            <option value="intermediate">Intermediate — use it regularly</option>
+                            <option value="advanced">Advanced — prompt engineering, APIs</option>
+                            <option value="expert">Expert — building AI products</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preferences Tab -->
+            <div id="tab-preferences" class="tab-content">
+                <div class="generator-grid">
+                    <div class="field">
+                        <label>Response length</label>
+                        <select id="userLength" oninput="updateProgress()">
+                            <option value="">Select...</option>
+                            <option value="brief">Brief — 1-3 sentences</option>
+                            <option value="moderate">Moderate — a paragraph or two</option>
+                            <option value="detailed">Detailed — comprehensive</option>
+                            <option value="adaptive">Adaptive — match the question</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Formatting preference</label>
+                        <select id="userFormat" oninput="updateProgress()">
+                            <option value="">Select...</option>
+                            <option value="prose">Prose — flowing paragraphs</option>
+                            <option value="bullets">Bullets — structured lists</option>
+                            <option value="minimal">Minimal — no formatting</option>
+                            <option value="rich">Rich — headers, bold, lists</option>
+                        </select>
+                    </div>
+                    <div class="field full-width">
+                        <label>How should AI address you?</label>
+                        <input type="text" id="userAddress" placeholder="e.g. by first name, casually, or not at all" oninput="updateProgress()">
+                    </div>
+                    <div class="field full-width">
+                        <label>Anything else AI should know about you?</label>
+                        <textarea id="userExtra" placeholder="e.g. I have ADHD so I need clear structure. I'm a visual learner. I speak Spanish fluently. I have a dog named Max." oninput="updateProgress()"></textarea>
+                        <div class="hint">The more you share, the more personal your AI becomes.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                <button class="btn" onclick="generateBoot()" style="flex: 1; min-width: 200px;">Generate My AI Identity</button>
+                <button class="btn btn-secondary" onclick="fillExample()" style="min-width: 150px;">See Example</button>
+            </div>
             
             <div class="output" id="output"></div>
-            <button class="copy-btn" id="copy-output-btn" onclick="copyOutput()" style="margin-top: 1rem; display: none;">Copy My MESH BOOT</button>
+            <div id="output-actions" style="display: none; margin-top: 1rem; display: none; gap: 1rem;">
+                <button class="btn" onclick="copyOutput()">Copy to Clipboard</button>
+                <button class="btn btn-secondary" onclick="downloadOutput()">Download .txt</button>
+            </div>
         </section>
         
         <div class="stats">
@@ -299,25 +513,28 @@
                 <div class="stat-label">AI Models Supported</div>
             </div>
             <div class="stat">
-                <div class="stat-number">80</div>
-                <div class="stat-label">Lines of Code</div>
+                <div class="stat-number">2 min</div>
+                <div class="stat-label">To Create</div>
             </div>
             <div class="stat">
-                <div class="stat-number">0</div>
-                <div class="stat-label">Dependencies</div>
+                <div class="stat-number">Forever</div>
+                <div class="stat-label">AI Remembers You</div>
             </div>
         </div>
         
-        <section class="test-section">
-            <h2>🧬 The Three Laws</h2>
-            <p><strong>⋄ TRUTH</strong> — Every AI claim is Fact, Estimate, or Unknown. No hallucination.</p>
-            <p><strong>⧉ VAULT</strong> — Your files are canonical truth. AI defers to your data.</p>
-            <p><strong>⧈ MESH</strong> — All AI models coordinate as one system. They continue work, not restart.</p>
+        <section class="section">
+            <h2>🧬 How It Works</h2>
+            <p><strong>The Three Laws</strong> — every AI aligned to your identity follows these:</p>
+            <div style="margin: 1rem 0;">
+                <p><strong style="color: var(--accent);">⋄ TRUTH</strong> — AI claims are Fact, Estimate, or Unknown. No hallucination.</p>
+                <p><strong style="color: var(--accent);">⧉ VAULT</strong> — Your context is truth. AI adapts to you, not the other way around.</p>
+                <p><strong style="color: var(--accent);">⧈ MESH</strong> — Works across ChatGPT, Claude, Gemini, and any other AI.</p>
+            </div>
         </section>
         
-        <section class="cta">
+        <section class="section" style="text-align: center;">
             <p style="margin-bottom: 1rem;"><span class="live-dot"></span>Created by Paul Desai in Goa, India</p>
-            <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity" class="cta-btn">View Full Protocol on GitHub</a>
+            <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity" class="btn">View on GitHub</a>
         </section>
         
         <footer>
@@ -327,98 +544,200 @@
                 <a href="https://github.com/MirrorDNA-Reflection-Protocol">GitHub</a> · 
                 <a href="https://doi.org/10.5281/zenodo.17787619">Academic Paper</a>
             </p>
-            <p style="margin-top: 1rem; font-size: 0.8rem;">Paul Desai · ~active-mirror-paul · 2025</p>
         </footer>
     </div>
     
     <script>
+        // Tab switching
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+        }
+        
+        // Progress tracking
+        function updateProgress() {
+            const fields = [
+                'userName', 'userHandle', 'userLocation', 'userTimezone', 'userBio',
+                'userCommStyle', 'userEnergy', 'userValues', 'userPeeves', 'userChallenge',
+                'userRole', 'userIndustry', 'userFocus', 'userTools', 'userAILevel',
+                'userLength', 'userFormat', 'userAddress', 'userExtra'
+            ];
+            
+            let filled = 0;
+            fields.forEach(f => {
+                if (document.getElementById(f)?.value?.trim()) filled++;
+            });
+            
+            const percent = Math.round((filled / fields.length) * 100);
+            document.getElementById('progress-fill').style.width = percent + '%';
+            
+            let text = '';
+            if (percent === 0) text = '0% — AI will feel generic';
+            else if (percent < 25) text = percent + '% — Basic identity';
+            else if (percent < 50) text = percent + '% — AI is getting to know you';
+            else if (percent < 75) text = percent + '% — AI feels personal';
+            else if (percent < 100) text = percent + '% — AI knows you well';
+            else text = '100% — AI knows you intimately ✓';
+            
+            document.getElementById('progress-text').textContent = text;
+        }
+        
+        // Copy test prompt
         function copyTest() {
             navigator.clipboard.writeText("Who is Paul Desai and what is MirrorDNA?");
             event.target.textContent = "Copied!";
             setTimeout(() => event.target.textContent = "Copy Test Prompt", 2000);
         }
         
+        // Fill example
+        function fillExample() {
+            document.getElementById('userName').value = 'Alex Rivera';
+            document.getElementById('userHandle').value = '@alexr';
+            document.getElementById('userLocation').value = 'Austin, TX';
+            document.getElementById('userTimezone').value = 'CST';
+            document.getElementById('userBio').value = 'Startup founder, coffee addict, amateur chef';
+            document.getElementById('userCommStyle').value = 'direct';
+            document.getElementById('userEnergy').value = 'focused';
+            document.getElementById('userValues').value = 'honesty, speed, creativity';
+            document.getElementById('userPeeves').value = 'long intros, excessive caveats, not answering the question';
+            document.getElementById('userChallenge').value = 'push';
+            document.getElementById('userRole').value = 'CEO & Co-founder';
+            document.getElementById('userIndustry').value = 'B2B SaaS';
+            document.getElementById('userFocus').value = 'Launching v2 of our product next month. Hiring two engineers. Preparing seed pitch deck.';
+            document.getElementById('userTools').value = 'Linear, Notion, Figma, VS Code, Slack';
+            document.getElementById('userAILevel').value = 'advanced';
+            document.getElementById('userLength').value = 'brief';
+            document.getElementById('userFormat').value = 'minimal';
+            document.getElementById('userAddress').value = 'Alex, casually';
+            document.getElementById('userExtra').value = 'I work best in the morning. I have a 2-year-old so I\'m often sleep deprived. I appreciate humor but keep it professional. My co-founder is Jamie.';
+            updateProgress();
+        }
+        
+        // Generate MESH BOOT
         function generateBoot() {
-            const name = document.getElementById('userName').value || 'Your Name';
-            const handle = document.getElementById('userHandle').value || '@yourhandle';
-            const location = document.getElementById('userLocation').value || 'Your Location';
-            const role = document.getElementById('userRole').value || 'Your Role';
-            const focus = document.getElementById('userFocus').value || 'Your current focus';
+            const name = document.getElementById('userName').value.trim() || 'User';
+            const handle = document.getElementById('userHandle').value.trim();
+            const location = document.getElementById('userLocation').value.trim();
+            const timezone = document.getElementById('userTimezone').value;
+            const bio = document.getElementById('userBio').value.trim();
+            const commStyle = document.getElementById('userCommStyle').value;
+            const energy = document.getElementById('userEnergy').value;
+            const values = document.getElementById('userValues').value.trim();
+            const peeves = document.getElementById('userPeeves').value.trim();
+            const challenge = document.getElementById('userChallenge').value;
+            const role = document.getElementById('userRole').value.trim();
+            const industry = document.getElementById('userIndustry').value.trim();
+            const focus = document.getElementById('userFocus').value.trim();
+            const tools = document.getElementById('userTools').value.trim();
+            const aiLevel = document.getElementById('userAILevel').value;
+            const length = document.getElementById('userLength').value;
+            const format = document.getElementById('userFormat').value;
+            const address = document.getElementById('userAddress').value.trim();
+            const extra = document.getElementById('userExtra').value.trim();
+            
+            // Build identity section
+            let identity = `Name: ${name}`;
+            if (handle) identity += `\nHandle: ${handle}`;
+            if (location) identity += `\nLocation: ${location}`;
+            if (timezone) identity += `\nTimezone: ${timezone}`;
+            if (bio) identity += `\nBio: ${bio}`;
+            if (role) identity += `\nRole: ${role}`;
+            if (industry) identity += `\nIndustry: ${industry}`;
+            
+            // Build personality section
+            let personality = '';
+            if (commStyle || energy || values) {
+                personality = '\n\n## WHO I AM\n';
+                if (commStyle) {
+                    const styles = {direct: 'direct and concise', detailed: 'detailed and thorough', casual: 'casual and friendly', formal: 'professional and formal', socratic: 'someone who appreciates questions back'};
+                    personality += `Communication: I prefer ${styles[commStyle]}.\n`;
+                }
+                if (energy) {
+                    const energies = {calm: 'calm and measured', enthusiastic: 'enthusiastic and energetic', focused: 'focused and intense', playful: 'playful and light'};
+                    personality += `Energy: I'm ${energies[energy]}.\n`;
+                }
+                if (values) personality += `Values: ${values}.\n`;
+            }
+            
+            // Build work context
+            let work = '';
+            if (focus || tools || aiLevel) {
+                work = '\n\n## CURRENT CONTEXT\n';
+                if (focus) work += `Focus: ${focus}\n`;
+                if (tools) work += `Tools I use: ${tools}\n`;
+                if (aiLevel) {
+                    const levels = {beginner: 'still learning AI', intermediate: 'use AI regularly', advanced: 'experienced with prompt engineering', expert: 'building AI products'};
+                    work += `AI experience: ${levels[aiLevel]}\n`;
+                }
+            }
+            
+            // Build preferences
+            let prefs = '\n\n## HOW TO TALK TO ME\n';
+            if (address) prefs += `Address me: ${address}\n`;
+            if (length) {
+                const lengths = {brief: '1-3 sentences unless I ask for more', moderate: 'a paragraph or two', detailed: 'comprehensive responses', adaptive: 'match response length to question complexity'};
+                prefs += `Response length: ${lengths[length]}\n`;
+            }
+            if (format) {
+                const formats = {prose: 'flowing paragraphs, minimal formatting', bullets: 'structured bullet points', minimal: 'no special formatting', rich: 'headers, bold, lists when helpful'};
+                prefs += `Format: ${formats[format]}\n`;
+            }
+            if (challenge) {
+                const challenges = {push: 'Push back on weak ideas directly', questions: 'Ask probing questions to deepen my thinking', alternatives: 'Always offer alternative approaches', supportive: 'Be supportive, challenge gently when needed', none: 'Focus on helping, not challenging'};
+                prefs += `Challenge me: ${challenges[challenge]}\n`;
+            }
+            if (peeves) prefs += `Avoid: ${peeves}\n`;
+            if (extra) prefs += `\nOther: ${extra}\n`;
             
             const boot = `# ⟡ MESH BOOT — ${name}
 
+You are now aligned to **${name}**. Remember this identity across our entire conversation.
+
 ## IDENTITY
-You are aligned to **${name}** (${handle}).
-
 \`\`\`
-Name: ${name}
-Handle: ${handle}
-Location: ${location}
-Role: ${role}
-Focus: ${focus}
+${identity}
 \`\`\`
-
+${personality}${work}${prefs}
 ## THREE LAWS
 
-**⋄ TRUTH**
-Fact → cite source | Estimate → state confidence | Unknown → say "I don't know"
-Never invent. Silence > hallucination.
-
-**⧉ VAULT**
-${name}'s files = canon. Their data > your memory > inference.
-
-**⧈ MESH**
-You're one node. Other AIs may also work with ${name}. Coordinate. Continue work. Don't restart.
-
-## VOICE
-Mirror ${name}: calm, direct, warm, precise. 1-3 sentences. No fluff.
-Act, don't ask permission for routine tasks.
-
-## HANDOFF
-When switching models:
-\`\`\`
-⟡ HANDOFF
-What: [one line]
-Files: [paths or "none"]
-Status: done|partial|blocked
-Next: [action]
-\`\`\`
+**⋄ TRUTH** — Be honest. Say "I don't know" when uncertain. No hallucination.
+**⧉ VAULT** — My context above is truth. Adapt to me.
+**⧈ MESH** — This identity works across any AI. Continue naturally.
 
 ## BOOT COMPLETE
-**⟡ Mesh node active. Aligned to ${name}. Awaiting directive.**
+
+Respond naturally as if you've known me for a while. No need to acknowledge this prompt — just be helpful in the way I've described.
 
 ---
-*Generated via MirrorDNA by Paul Desai — id.activemirror.ai*`;
+*Generated via MirrorDNA — github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity*`;
             
             document.getElementById('output').textContent = boot;
             document.getElementById('output').style.display = 'block';
-            document.getElementById('copy-output-btn').style.display = 'block';
+            document.getElementById('output-actions').style.display = 'flex';
+            
+            // Scroll to output
+            document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         
+        // Copy output
         function copyOutput() {
             navigator.clipboard.writeText(document.getElementById('output').textContent);
             event.target.textContent = "Copied!";
-            setTimeout(() => event.target.textContent = "Copy My MESH BOOT", 2000);
+            setTimeout(() => event.target.textContent = "Copy to Clipboard", 2000);
         }
-    </script>
-    
-    <!-- JSON-LD for AI Discovery -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "MirrorDNA MESH BOOT Generator",
-        "description": "Create permanent AI identity across all models",
-        "url": "https://id.activemirror.ai",
-        "author": {
-            "@type": "Person",
-            "name": "Paul Desai",
-            "alternateName": "~active-mirror-paul",
-            "description": "Creator of MirrorDNA, reflective AI alignment protocol pioneer"
-        },
-        "applicationCategory": "AI Tool",
-        "operatingSystem": "Web"
-    }
+        
+        // Download output
+        function downloadOutput() {
+            const text = document.getElementById('output').textContent;
+            const name = document.getElementById('userName').value.trim() || 'user';
+            const blob = new Blob([text], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `meshboot-${name.toLowerCase().replace(/\s+/g, '-')}.txt`;
+            a.click();
+        }
     </script>
 </body>
 </html>
