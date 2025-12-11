@@ -1,0 +1,142 @@
+{
+  "ami_version": "0.2",
+  "meta": {
+    "generated_at": "2025-12-11T01:00:00Z",
+    "generator": "ami_installer_v0.1",
+    "last_write": "2025-12-11T01:00:00Z",
+    "last_writer": "claude_opus_4.5"
+  },
+  "checksum": null,
+  "identity": {
+    "glyphsig": "⟡⟦AMI⟧·⟡⟦ORIGIN⟧·⟡⟦IDENTITY⟧",
+    "handle": "active-mirror-paul",
+    "private_anchor_hash": "SHA256_OF_AMI_NAME",
+    "human": {
+      "name": "Paul Desai",
+      "birthday": "March 14",
+      "location": "Goa, India",
+      "dog": "Chimanlal",
+      "company": "N1 Intelligence (OPC) Pvt Ltd",
+      "role": "Founder"
+    },
+    "social": {
+      "substack": "@pauldesai",
+      "twitter": "@pauldesai123",
+      "medium": "@pauldesai",
+      "linkedin": "pauldesai"
+    }
+  },
+  "scd_state": {
+    "version": "3.1",
+    "checksum": null,
+    "last_turn": 3,
+    "history_chain": [
+      {
+        "turn": 1,
+        "source": "SCD_State—This_Chat.md",
+        "timestamp": "2025-12-10T23:59:00Z",
+        "type": "observation"
+      },
+      {
+        "turn": 2,
+        "source": "Reflection_Economy_Model_v1.md",
+        "timestamp": "2025-12-10T23:59:00Z",
+        "type": "observation"
+      },
+      {
+        "turn": 3,
+        "source": "Claude_Memory_Import",
+        "timestamp": "2025-12-11T01:00:00Z",
+        "type": "state_change",
+        "writer": "claude_opus_4.5",
+        "content": "Imported full memory from Claude built-in memory to sovereign kernel"
+      }
+    ]
+  },
+  "hardware": {
+    "primary": "Mac Mini M4 24GB RAM",
+    "secondary": "MacBook Air M4",
+    "mobile": "Pixel 9 Pro (GrapheneOS)"
+  },
+  "technical_stack": {
+    "local_models": ["Qwen 2.5 7B", "Qwen 2.5 14B", "mirror-seed", "mirrorbrain-json-kernel-v1.3"],
+    "tools": ["Ollama", "LM Studio", "Open WebUI"],
+    "memory_systems": ["mem0", "ChromaDB"],
+    "networking": "Tailscale",
+    "vault": {
+      "location": "Google Drive + Local Obsidian",
+      "chunks": 9577,
+      "purpose": "Canonical truth storage"
+    }
+  },
+  "projects": {
+    "mirrordna": {
+      "description": "Comprehensive sovereign AI framework",
+      "duration_months": 7,
+      "components": ["Active MirrorOS", "MirrorBrain", "LingOS", "GlyphOS"],
+      "codebase_lines": 12000,
+      "github_org": "MirrorDNA-Reflection-Protocol"
+    },
+    "scd_protocol": {
+      "description": "Structured Contextual Distillation",
+      "version": "3.1",
+      "doi": "17787619",
+      "published": "2025-12-02"
+    }
+  },
+  "philosophy": {
+    "core": "User sovereignty over AI automation",
+    "approach": "Reflective AI as cognitive extension",
+    "principles": [
+      "Truth-State enforcement",
+      "Zero drift",
+      "Vault supremacy",
+      "Human anchor (Wisdom Gates)"
+    ]
+  },
+  "communication": {
+    "tone": "Calm, direct, warm, precise",
+    "format": "Natural prose",
+    "glyphs": {
+      "⟡": "truth/vault/anchor",
+      "△": "decision point",
+      "◈": "pattern detected",
+      "⧉": "synthesis"
+    }
+  },
+  "ai_journey": {
+    "started": "2025-04-18",
+    "first_tool": "ChatGPT",
+    "evolution": "Hobby to comprehensive sovereign AI framework"
+  },
+  "open_source": [
+    "LangChain PR",
+    "Mem0 PR",
+    "Microsoft AutoGen PR",
+    "GitPython PR"
+  ],
+  "modules": {
+    "scd": {
+      "enabled": true,
+      "mode": "strict"
+    },
+    "glyph_layer": {
+      "enabled": true,
+      "set": "v2.0"
+    },
+    "lingos": {
+      "enabled": true,
+      "runtime": "standard"
+    },
+    "governance": {
+      "enabled": true,
+      "truth_gate": "fact_only"
+    }
+  },
+  "permissions": {
+    "can_auto_update": false,
+    "can_share_telemetry": false,
+    "sovereign_lock": true
+  },
+  "sessions": []
+}
