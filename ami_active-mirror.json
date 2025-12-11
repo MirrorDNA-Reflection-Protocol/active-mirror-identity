@@ -320,6 +320,13 @@
       "category": "optimization",
       "description": "Antigravity successfully unified AMI Kernel, migrated to Drive, and embedded native boot into MirrorBrain API. Ecosystem is now unified.",
       "writer": "antigravity"
+    },
+    {
+      "id": "evt_20251211184500",
+      "timestamp": "2025-12-11T18:45:00.000000Z",
+      "category": "milestone",
+      "description": "Upgraded Kernel to v1.1. Added Agent Registry, Epistemic State, Hardware Telemetry, and Circadian State schemas.",
+      "writer": "antigravity"
     }
   ]
 }
