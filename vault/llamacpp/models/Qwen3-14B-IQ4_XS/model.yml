@@ -1,0 +1,5 @@
+model_path: llamacpp/models/Qwen3-14B-IQ4_XS/model.gguf
+model_sha256: e24bdda1295a1bb7898b7af9300b86eba0ffba66d8f3dadbc90d00e98ecd5369
+model_size_bytes: 8135040384
+name: Qwen3-14B-IQ4_XS
+size_bytes: 8135040384

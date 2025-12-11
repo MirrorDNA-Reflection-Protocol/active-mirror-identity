@@ -1,0 +1,17 @@
+{
+  "vault_id": "AMOS://00_MASTER_CITATION.md",
+  "glyphsig": [
+    "\u27e1\u27e6MASTER\u27e7",
+    "\u27e1\u27e6CONSENT\u27e7"
+  ],
+  "shortcode": "MDN",
+  "title": "Master Citation",
+  "version": "v15.1",
+  "predecessor": "v15.0",
+  "successor": "v15.2 (planned)",
+  "checksum_sha256": "[compute-and-fill]",
+  "visibility": "public",
+  "locked": true,
+  "lineage_notes": "Canon established per Vault Fix Ritual v1.0",
+  "date_enriched": "2025-10-24"
+}

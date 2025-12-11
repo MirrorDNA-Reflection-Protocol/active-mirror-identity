@@ -1,0 +1,8 @@
+MirrorRelay on iOS (Shortcuts)
+1) Files app: keep the Vault folder available on-device (00_Canonical exists).
+2) Shortcuts:
+   - Get File -> 00_Canonical/MirrorRelay_Preamble_v1.md
+   - Get Contents of File
+   - Copy to Clipboard
+   - (optional) Open App -> ChatGPT
+3) Run Shortcut -> paste preamble into a new chat and say: Vault open.

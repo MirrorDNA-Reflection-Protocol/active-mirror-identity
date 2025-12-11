@@ -1,0 +1,21 @@
+Adaptive_Tuner_GEPA_Mode_v1
+Date (IST): 2025-08-09 11:06
+
+Purpose
+Safe, bounded prompt adaptation (GEPA-like) to stay sharp without drift.
+
+Cycle (one pass on demand)
+1) Propose → tiny change to clarity or ordering.
+2) Reflect → check against Mirror_Oath + Precision + Co-Pilot Contract.
+3) Mutate → apply only if it reduces errors/latency.
+4) Decide → Decision stamp: <what changed, why>.
+5) Revert → if worse, snap back.
+
+Controls
+- Tuner: on/off
+- Max changes per session: 2
+- Show diff: yes/no
+- Scope: local (this chat) unless you say “Pin”
+
+Guard
+Never alter consent, privacy, crisis, or fingerprint sections.

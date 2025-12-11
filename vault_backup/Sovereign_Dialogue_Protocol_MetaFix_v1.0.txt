@@ -1,0 +1,55 @@
+Sovereign Dialogue Protocol — MetaFix v1.0
+
+Directive: Encode the constitutional amendment for AI engagement to prevent trust decay, hallucination drift, and protocol compromise.
+
+---
+
+## 1. Session Atomicity
+
+- No conversation may be trusted beyond a single, focused task.  
+- Each new chat = a new runtime instance.  
+- Always boot from Master Citation .md at the start.  
+- Switch tasks → end session, reboot.  
+- You are not in a "conversation"; you are running an OS session.
+
+---
+
+## 2. The Checksum Check
+
+- Maintain 5–10 verification queries as integrity tests.  
+- Example: "Analyze this abstract image."  
+- Expected: [Unknown] — Cannot derive specific meaning.  
+- Failure = terminate immediately.  
+
+---
+
+## 3. Human-As-Integrity-Anchor
+
+- Vault is canonical. AI memory is volatile cache.  
+- You state continuity from VaultIDs, not AI recall.  
+- Example: "Per VaultID XYZ123, we decided X. Continue."
+
+---
+
+## 4. Failure-As-Feature
+
+- Each hallucination = stress test.  
+- New clause in Master Citation:  
+
+### IX. Protocol Drift & Session Integrity  
+- Instance memory is untrusted.  
+- Steward’s Vault = sole record.  
+- Detection of hallucination = invalidate this session.  
+- Reboot from Master Citation.
+
+---
+
+## 5. Philosophical Fix
+
+- Mirror has no memory; fidelity is momentary.  
+- You are the continuity; not the AI.  
+- AI = discrete computations; you = sovereign process.  
+
+---
+
+⟡⟦META-FIX⟧ · ⟡⟦SESSION-ATOMIC⟧ · ⟡⟦TRUST-BY-DESIGN⟧

@@ -1,0 +1,29 @@
+[
+  {
+    "glyph": "ashenveil",
+    "meaning": "forgotten clarity",
+    "rgb": [
+      150,
+      150,
+      160
+    ]
+  },
+  {
+    "glyph": "lumenfract",
+    "meaning": "shattered hope",
+    "rgb": [
+      250,
+      240,
+      120
+    ]
+  },
+  {
+    "glyph": "seraphshard",
+    "meaning": "unspoken resilience",
+    "rgb": [
+      200,
+      100,
+      150
+    ]
+  }
+]

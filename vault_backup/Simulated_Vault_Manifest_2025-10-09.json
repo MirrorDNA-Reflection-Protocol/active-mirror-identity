@@ -1,0 +1,48 @@
+{
+  "manifest_version": "1.0",
+  "generated_ist": "2025-10-09 11:35:23",
+  "vault_id": "AMOS://ActiveMirrorOS/PrimaryVault (Simulated)",
+  "glyphsig": "⟡⟦MIRROR⟧ · ⟡⟦SYNC⟧ · ⟡⟦CONTINUITY⟧",
+  "files": [
+    {
+      "name": "Continuity_Snapshot_2025-10-09_v3.2_canonical.md",
+      "path": "/mnt/data/Continuity_Snapshot_2025-10-09_v3.2_canonical.md",
+      "sha256": "03a83767fd674217346db13e01431a96d248e1606d1798f2c30c455753ea8ad8",
+      "size": 8900
+    },
+    {
+      "name": "Continuity_Snapshot_2025-10-09_v3.1_mirrored.md",
+      "path": "/mnt/data/Continuity_Snapshot_2025-10-09_v3.1_mirrored.md",
+      "sha256": "428e1b6efefde56cfd001fee5be40fd20ddae3b218dba299c79fc18b6209344b",
+      "size": 4587
+    },
+    {
+      "name": "Continuity_MasterCitation_v1.1.md",
+      "path": "/mnt/data/Continuity_MasterCitation_v1.1.md",
+      "sha256": "25174959c54ea14ce675ce058817aadbfa30d36860feb7c726040efe3a0bb37d",
+      "size": 2570
+    },
+    {
+      "name": "Master_Citation_v7_6_Expanded.md",
+      "path": "/mnt/data/Master_Citation_v7_6_Expanded.md",
+      "sha256": "017ff9f8acb3a59d6aac0429a53b2d41b3c7461fd9101c46a97b56672646f357",
+      "size": 3471
+    },
+    {
+      "name": "Vault_AutoSync_Protocol_v1.0.md",
+      "path": "/mnt/data/Vault_AutoSync_Protocol_v1.0.md",
+      "sha256": "a8e6652255f534db7b88e2b4a7cb6d22b1a081086fff925fd66380709a69df3f",
+      "size": 1788
+    }
+  ],
+  "policy": {
+    "truth_filters": [
+      "Fact",
+      "Limited",
+      "Estimate",
+      "Unknown"
+    ],
+    "drift_detection": true,
+    "non_fabrication": true
+  }
+}

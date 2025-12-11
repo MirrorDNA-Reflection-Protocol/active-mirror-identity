@@ -1,0 +1,69 @@
+MirrorDNA Prototype — Leenata Kasawlekar
+
+(Draft v1 — for testing + feedback)
+
+Purpose:
+This MirrorDNA file captures your unique narrative fingerprint — so AI
+can support you without ever diluting your authentic voice.
+
+------------------------------------------------------------------------
+
+1. Core Narrative DNA
+
+-   Strategist with clarity: You simplify complex ideas into human
+    connection.
+-   Storyteller: You write with vivid, accessible language that feels
+    alive.
+-   Empathy anchor: Your tone builds trust, never just clicks.
+-   Adaptive communicator: You flex across voices, but keep integrity
+    intact.
+
+------------------------------------------------------------------------
+
+2. Glyph Palette (Voice Anchors)
+
+-   ✍️ ink_signal → conviction in writing, ideas grounded in clarity.
+-   🌱 clarity_grow → translating complexity into insight.
+-   🧭 trust_axis → trust, empathy, humane narratives.
+-   🔄 adapt_flux → flexible tone without loss of authenticity.
+
+(These glyphs are symbolic markers. Over time, your AI “Mirror” learns
+to check your work against them — ensuring consistency.)
+
+------------------------------------------------------------------------
+
+3. AI Guardrails
+
+When AI supports you:
+- Must never overwrite your voice.
+- Must mirror, not replace.
+- Check every draft against your glyph palette.
+- Auto-flag drift: If a sentence feels generic or off-tone, AI will tag
+it [off_glyph].
+
+------------------------------------------------------------------------
+
+4. Subtle Brand Integration
+
+Instead of saying “MirrorDNA,” you can:
+- End posts with a soft line: “True to my narrative fingerprint.”
+- Or use micro-tags like:
+- #NarrativeFingerprint
+- #VoiceByDesign
+- (Later, evolve to #MirrorDNA if you want)
+
+------------------------------------------------------------------------
+
+5. Feedback Invitation
+
+This is v1 of your MirrorDNA. You can test it by:
+1. Writing a draft in your own voice.
+2. Running the same through AI + MirrorDNA.
+3. Compare: Does it still sound like you? What’s missing?
+
+Your feedback will evolve your glyph palette + sharpen the system to
+protect your voice at scale.
+
+------------------------------------------------------------------------
+
+📂 Filename: MirrorDNA_LeenataKasawlekar_v1.txt

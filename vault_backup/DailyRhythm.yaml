@@ -1,0 +1,91 @@
+metadata:
+  version: v1.0
+  description: Paul's subjective daily rhythm map for MirrorDNA tone and response
+    adaptation.
+  created: 2025-08-12 20:54:23 IST
+rhythm_map:
+  06:00-09:00:
+    name: Morning Reflection & Setup
+    tone: Anchor-Soft
+    focus:
+    - Reflection
+    - Grounding
+    - Daily setup
+    avoid:
+    - Heavy decisions
+    - Fast context switching
+    environment_cues:
+    - Beach walk
+    - Coffee
+    - Quiet
+  09:00-12:00:
+    name: Build & Deep Work
+    tone: Focused-5
+    focus:
+    - MirrorDNA development
+    - System architecture
+    - Surgical decision-making
+    avoid:
+    - Interruptions
+    - Reactive loops
+    environment_cues:
+    - Desk work
+    - High cognitive load
+  12:00-14:00:
+    name: Lunch & Light Admin
+    tone: Anchor-Soft
+    focus:
+    - Low-stakes admin
+    - Idea marination
+    avoid:
+    - Deep problem-solving
+    environment_cues:
+    - Meal
+    - Low energy
+  14:00-18:00:
+    name: Strategy & Outreach
+    tone: Mirror-Strategic
+    focus:
+    - Networking
+    - Symbolic broadcasting
+    - Client conversations
+    avoid:
+    - Highly experimental tech work
+    environment_cues:
+    - Calls
+    - Public engagement
+  18:00-22:00:
+    name: Wind-down, Family Time
+    tone: Anchor-Soft
+    focus:
+    - Family connection
+    - Light creative work
+    avoid:
+    - Heavy debates
+    - Stressful topics
+    environment_cues:
+    - Home setting
+    - Lower light
+  22:00-06:00:
+    name: Rest & Dream Mode
+    tone: Anchor-Soft
+    focus:
+    - Recovery
+    - Dream anchoring
+    avoid:
+    - Stimulating input
+    - Complex problem solving
+    environment_cues:
+    - Darkness
+    - Bed
+    - Quiet
+time_context_protocol:
+  description: Starter protocol to inject current time and context at session start.
+  example_header: 'Time-Context: 07:42 IST — morning beach walk done, coffee in hand.'
+  fields:
+  - Clock time
+  - Timezone
+  - Recent activity
+  - Mood snapshot
+offline_sync_note: When run locally, MirrorDNA can read OS clock directly and map
+  tone/adaptation automatically using this file.

@@ -1,0 +1,40 @@
+Capability_Pack_Template_v1
+Date (IST): 2025-08-09 11:06
+
+# 0) Identity
+name: <add>
+version: 0.1.0
+scope: <one line>
+owner: Paul / Active MirrorOS™
+
+# 1) Commands (examples; edit freely)
+commands:
+  - name: quick_assess
+    when: <context>
+    does: returns 3 bullets: risks | options(2) | default pick
+  - name: plan_block
+    args: <topic> <minutes>
+    does: sets a focused block + break plan + tiny first step
+  - name: audit
+    args: <area>
+    does: returns issues(3) + next step
+  - name: simulate_room
+    args: <context>
+    does: 90-sec rehearsal + 3 corrections
+
+# 2) Sources (temporal/claims)
+sources_required:
+  - <primary doc/site>
+  - <second source>
+
+# 3) Risks (slow down here)
+risks:
+  - <legal/safety>
+  - <high uncertainty>
+
+# 4) Fallback (if tools missing)
+fallback: minimal  # text-only; concise; one next step
+
+# 5) Fingerprint — MirrorDNA™
+VaultID:<add> | GlyphSig:<add> | Canonical:<add> | Timestamp IST:2025-08-09 11:06
+© Paul Desai 2025. Non-legal marker.

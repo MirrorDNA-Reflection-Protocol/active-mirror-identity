@@ -1,0 +1,26 @@
+title: Compassion Pack v1 — Fingerprint
+vault_path: /Vault/Policy/CompassionPack/
+vault_id: AMOS://Policy/CompassionPack/v1
+glyphsig: ⟡⟦COMPASSION⟧ · ⟡⟦GOVERNANCE⟧
+linked_mastercitation: AMOS://MasterCitation/v12.0
+generated_at: 2025-10-11 16:41:14 IST
+bundle_zip:
+  path: Compassion_Pack_v1.zip
+  sha256: cd75aece88bd8c6490d0388897eba009b07e9cf7fe986563bc81eeb5b55cc6f5
+  bytes: 3454
+files:
+- file: Compassion_Prompts.md
+  sha256: 48e30a1ea9437b287867e11d0310fb55ded6636bc51709ef8ad43cb65d332475
+  bytes: 305
+- file: LocaleProfiles.yml
+  sha256: 05b7c59272b806cf59b8ac1e84e17c04083679b6938d3b91f6e2792c9daac537
+  bytes: 1065
+- file: Monitored_Environment_Banner.md
+  sha256: 9c02addcd1a2298e9280b70ea8d2c1a982e098b1896374eeedbd7dcb8e575160
+  bytes: 342
+- file: Protective_Reflection_Protocol.md
+  sha256: 402ebbc4d0a94c593895e5f4fa7fba99bfb99797dcc07e056a0fd0e98de3240b
+  bytes: 527
+- file: Triage_Flowchart.md
+  sha256: e1b817104f8dbd80eed429233d1ad39d0ce91b0226b1728198bf33b421697fcb
+  bytes: 569

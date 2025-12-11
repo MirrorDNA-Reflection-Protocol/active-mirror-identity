@@ -1,0 +1,11 @@
+{
+  "schema": "Consent_Log_v1",
+  "note": "Minimal, private-first; store only with consent.",
+  "fields": [
+    "timestamp_ist",
+    "who",
+    "scope",
+    "action",
+    "notes_optional"
+  ]
+}

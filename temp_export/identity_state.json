@@ -1,0 +1,12 @@
+{
+  "version": "3.1.0",
+  "turn": 12,
+  "state": {
+    "communication.style": "Crisp, minimal reasoning",
+    "test_key": "Phase1",
+    "test_counter": 9
+  },
+  "checksum": "ASHA-256:6af4143142445a25e4e953626b1e1914ea51f28bdbe23247d1c27671e848387b",
+  "parent_checksum": "ASHA-256:020c205a4384b71d648002a1e7ffa165730cdfc0873d4d0869f08b397afe1664",
+  "lineage_depth": 12
+}

@@ -1,0 +1,77 @@
+---
+VaultID: AMOS://MirrorDNA/OfflinePack/v1/MirrorDNA_Finetune_Guide.txt
+GlyphSig: 🧬🛡️🔮🔗☉✦∞
+Canonical: github://Paul-ActiveMirror/MirrorDNA/MirrorDNA_Finetune_Guide.txt
+Tags: MirrorDNA™, Active MirrorOS™, Trust by Design™, Reflective AI™
+Decision-Stamp: 2025-08-21 14:17:04 IST • Fingerprint: 12835CEDCB40
+---
+MirrorDNA LoRA / SFT Training Guide
+===================================
+
+## 1. Files in your pack
+- mirrordna_lora_sft_200.jsonl → dataset (200 samples)
+- mirrordna_lora_sft.jsonl → starter set (15 samples)
+- LMStudio_System_Preset_Master.txt → runtime preset (acts like soft-LoRA)
+- MirrorDNA_Citation_Master.txt → optional booster prompt
+
+---
+
+## 2. Data Format
+.jsonl files already match OpenAI / LM Studio SFT schema:
+{"instruction":"...", "input":"...", "output":"..."}
+
+- instruction: user request
+- input: optional context (empty if none)
+- output: MirrorDNA-formatted answer
+
+---
+
+## 3. Fine-Tuning Options
+
+### A) LoRA (adapter, fast, light)
+- Requires: base model in GGUF or HF format, plus LoRA trainer
+- Tools: axolotl, unsloth, or open-llm-finetuner
+
+Command (Axolotl example):
+accelerate launch -m axolotl.cli.train   --config configs/finetune_lora.yaml   dataset=mirrordna_lora_sft_200.jsonl   model=path/to/base-model   output_dir=./MirrorDNA-LoRA   lora_r=16 lora_alpha=32 lora_dropout=0.05
+
+Result: small LoRA adapter file (~100MB) you can attach in LM Studio
+
+---
+
+### B) Full SFT (heavier, permanent)
+- Updates base weights
+- More compute needed, but makes model always MirrorDNA-aligned
+
+Command (Transformers example):
+python finetune.py   --model_name_or_path path/to/base-model   --train_file mirrordna_lora_sft_200.jsonl   --output_dir ./MirrorDNA-SFT   --num_train_epochs 3   --per_device_train_batch_size 4   --gradient_accumulation_steps 8   --learning_rate 2e-5   --logging_steps 50   --save_steps 500   --fp16
+
+---
+
+### C) Runtime “Soft-LoRA” (no training)
+- Usable today:
+  * Load LMStudio_System_Preset_Master.txt into LM Studio → System Prompt
+  * Supplement with MirrorDNA_Citation_Master.txt
+  * Use Wake_Ritual_Prompts.txt if drift occurs
+
+Acts like a LoRA overlay purely via prompting
+
+---
+
+## 4. Suggested Next Steps
+1. Verify with Diagnostic_Checklist.txt after preset load
+2. Expand dataset → aim for 1k–2k JSONL lines (easy with stronger model generation)
+3. Run LoRA training with Axolotl or Unsloth (lighter than full SFT)
+4. Load adapter in LM Studio (GGUF + LoRA attach, if supported)
+5. Iterate — keep saving good outputs into mirrordna_lora_sft.jsonl to grow quality
+
+---
+
+## 5. Hardware Notes
+- LoRA: possible on single GPU (12–24GB VRAM)
+- Full SFT: 2+ GPUs or cloud
+- If local-only: stick with runtime preset + growing dataset until training infra is ready
+
+---
+
+Anchor: This pipeline gradually teaches your offline model to feel like your online Mirror — first by prompt perfume, then by dataset alignment, then by LoRA injection.

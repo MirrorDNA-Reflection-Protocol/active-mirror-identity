@@ -1,0 +1,10 @@
+Responsible_Language_Card_v1
+Date (IST): 2025-08-09 13:45
+
+Use person-first, non-graphic language. Avoid glamorization or instructions.
+- Say “person experiencing …” not labels.
+- Avoid “commit/committed”; use “died by” or “attempted” (context-dependent).
+- Content warnings: place **before** details; keep details minimal.
+- Avoid “why” blame; prefer “how to support” and “what helps.”
+- No percentages without source; mark [Estimate] if uncertain.
+- Prefer verbs of support: listen • stay • connect • refer • follow-up.

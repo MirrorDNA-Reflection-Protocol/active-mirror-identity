@@ -1,0 +1,110 @@
+You are building **LingOS™ Vault Manager v1.0** — a cross-platform desktop + CLI tool that automates checksums and a vault manifest for **MirrorDNA / LingOS Pro**.
+
+## Goal
+Ship a **production-ready** app that:
+- Watches a “Vault” folder
+- Canonicalizes files
+- Computes per-file **SHA-256** + a deterministic **Vault State Hash**
+- Maintains an authoritative **manifest.json** (with schema)
+- Verifies integrity on demand
+- Syncs the manifest + files to Google Drive
+- Shows a simple desktop UI with status lights and controls
+- Packages into one-click installers for macOS/Windows/Linux
+
+## Tech stack (exact)
+- **Python 3.11**
+- **GUI:** PySide6 (Qt for Python)
+- **Watcher:** watchdog
+- **Config:** pyyaml
+- **Schema validation:** pydantic
+- **Drive sync:** google-api-python-client, google-auth-oauthlib
+- **Packaging:** PyInstaller
+- **CLI tests:** pytest
+- **Style:** black + ruff
+
+## Canonicalization (non-negotiable)
+- For `.md,.txt,.json,.yaml,.yml`: UTF-8 decode; convert to LF; **trim trailing spaces each line**; no BOM. Hash the canonicalized bytes.
+- For all others: hash raw bytes.
+- Store canonicalization mode per file: `"utf8+lf+trim"` or `"raw"`.
+
+## Manifest schema (authoritative)
+```json
+{
+  "version": "1.2",
+  "vault_state_hash": "^[a-f0-9]{64}$",
+  "predecessor_state_hash": "string",
+  "generated_at": "ISO-8601",
+  "files": [
+    {
+      "path": "string (posix, relative to vault root)",
+      "sha256": "^[a-f0-9]{64}$",
+      "bytes": "int",
+      "canonicalization": "utf8+lf+trim|raw"
+    }
+  ]
+}
+```
+- **Vault State Hash** = SHA256 over the concatenation of sorted lines `"path|sha256\n"` for every entry in `files` sorted by `path`.
+
+## App features
+1. **Desktop UI (PySide6)**
+   - Pick Vault root folder
+   - Buttons: **Build Manifest**, **Verify Manifest**, **Watch (toggle)**, **Sync to Drive**
+   - Status pill: ✅ Continuity intact / ❌ Mismatch / 🔒 Frozen
+   - Text log pane (scrollable)
+   - Settings dialog: include/exclude globs; Drive folder ID; OAuth creds (path); “freeze on mismatch” toggle
+2. **CLI**
+   - `vm build --vault <path> [--config config.yaml] [--predecessor <hash>]`
+   - `vm verify --vault <path>`
+   - `vm watch --vault <path> [--config config.yaml]`
+   - `vm sync --vault <path> --drive-folder <id>`
+3. **Drive Sync**
+   - Upload/update `manifest.json` and changed files to a specific Drive folder (by folder ID)
+   - Use resumable upload; retry with exponential backoff
+   - Save/refresh OAuth tokens locally (`~/.lingos/credentials.json`)
+4. **Sidecars**
+   - Write `<file>.sha256` with the hex digest (optional but default **on**)
+5. **Freeze policy**
+   - On verify mismatch: show ❌, **freeze writes** (disable watcher updates), require steward click “Unfreeze” to regenerate manifest after review
+
+## Project layout
+```
+lingos-vault-manager/
+  app/
+    gui.py                 # PySide6 main window
+    controller.py          # orchestrates services <-> GUI
+    services/
+      canonicalize.py
+      hashing.py
+      manifest.py
+      verify.py
+      watcher.py
+      drive.py
+      config.py
+      logging_setup.py
+    assets/
+      icon.png
+  cli/
+    main.py                # CLI entry
+  schemas/
+    manifest_schema.json
+  examples/
+    vault/
+      MasterCitation_v15.1.8.md
+      LingOS_Pro_v1.2.md
+  tests/
+    test_canonicalize.py
+    test_hashing.py
+    test_manifest.py
+    test_verify.py
+  pyproject.toml
+  requirements.txt
+  README.md
+  LICENSE
+```
+
+## Deliverables
+- Complete repo with code, tests, installers config
+- One command to run tests: `pytest -q`
+- One command to launch GUI: `python -m app.gui`
+- One command to build manifest and verify via CLI

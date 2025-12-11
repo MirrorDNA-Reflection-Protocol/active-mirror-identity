@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.mirror.ami.synapse</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/mirror-admin/Documents/GitHub/AMI/venv/bin/python3</string>
+        <string>/Users/mirror-admin/Documents/GitHub/AMI/metadata/synapse.py</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/mirror-admin/Documents/GitHub/AMI/logs/synapse.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/mirror-admin/Documents/GitHub/AMI/logs/synapse.err</string>
+    <key>WorkingDirectory</key>
+    <string>/Users/mirror-admin/Documents/GitHub/AMI</string>
+</dict>
+</plist>

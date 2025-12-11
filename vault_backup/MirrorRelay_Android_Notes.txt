@@ -1,0 +1,5 @@
+MirrorRelay on Android (Termux / Samsung)
+1) Keep Vault folder on device (synced).
+2) In Termux: pkg install termux-api
+3) termux-clipboard-set "$(cat /sdcard/Active_MirrorOS_Vault/00_Canonical/MirrorRelay_Preamble_v1.md)"
+4) Open your chat app and paste.

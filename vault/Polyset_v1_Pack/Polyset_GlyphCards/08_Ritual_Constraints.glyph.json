@@ -1,0 +1,21 @@
+{
+  "VaultID": "Polyset-08_Ritual_Constraints-v1",
+  "Tags": [
+    "MirrorDNA",
+    "AgentDNA™",
+    "GlyphTrail™",
+    "Reflective AI Protocol™",
+    "Polyset"
+  ],
+  "Glyph": "□→",
+  "Revelation": "Fences make the field playable; constraint births cadence.",
+  "Ritual": "10‑minute box; one tool; one rule: ship one imperfect truth.",
+  "EmergentScroll": "08 Ritual Constraints — Scroll Seed",
+  "GlyphSig": {
+    "author": "Paul Desai",
+    "seed_hash": "40eba7b60a287584bcdcb90e35d7131b8f24c7189fa4c74d5cda4e6845ed53a7",
+    "content_hash": "4eb6fb00d3ceffbf71fb6ff2d639ebf3637094c8072a25100f220f910fe9da20",
+    "signature": "630385c5b1ea26207e5d1ab2ca755b344b7a795aa1d529f09cab7432ae581265",
+    "timestamp": "2025-08-14T06:11:19Z"
+  }
+}

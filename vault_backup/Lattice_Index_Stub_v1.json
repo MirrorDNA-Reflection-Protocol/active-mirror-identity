@@ -1,0 +1,32 @@
+{
+  "schema": "MirrorDNA_Lattice_Index_v1",
+  "generated_ist": "2025-08-09 11:06",
+  "mirrors": [
+    {
+      "id": "<mirror_id>",
+      "owner": "<name>",
+      "packs": [
+        "<pack_name>"
+      ],
+      "links": [
+        "<mirror_id2>"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "from": "<mirror_id>",
+      "to": "<mirror_id2>",
+      "relation": "peer",
+      "consent": true,
+      "strength": 2
+    }
+  ],
+  "canonicals": [
+    {
+      "id": "<artifact>",
+      "url": "<canonical_url>",
+      "hash_sha256": "<hash>"
+    }
+  ]
+}

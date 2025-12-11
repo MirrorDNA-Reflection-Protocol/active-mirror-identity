@@ -1,0 +1,694 @@
+[2025-10-08][10:06:23][app_lib::core::setup][INFO] Installing extensions. Clean up: false
+[2025-10-08][10:06:23][app_lib::core::setup][ERROR] Failed to run mcp commands: Failed to parse config: trailing characters at line 1 column 593
+[2025-10-08][10:06:24][app_lib::core::extensions::commands][INFO] get jan extensions, path: "/Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /extensions/extensions.json"
+[2025-10-08][10:06:24][tauri_plugin_hardware::vendor::nvidia][ERROR] Unable to initialize NVML: a libloading error occurred: dlopen(nvml.dll, 0x0005): tried: 'nvml.dll' (relative path not allowed in hardened program), '/System/Volumes/Preboot/Cryptexes/OSnvml.dll' (no such file), '/usr/lib/nvml.dll' (no such file, not in dyld cache), 'nvml.dll' (relative path not allowed in hardened program)
+[2025-10-08][10:06:24][tauri_plugin_hardware::vendor::nvidia][ERROR] Failed to get NVIDIA GPUs: an internal driver error occured
+[2025-10-08][10:06:24][tauri_plugin_hardware::vendor::vulkan][ERROR] Failed to get Vulkan GPUs: LibraryLoadFailure(DlOpen { desc: "dlopen(libvulkan.dylib, 0x0005): tried: \'libvulkan.dylib\' (relative path not allowed in hardened program), \'/System/Volumes/Preboot/Cryptexes/OSlibvulkan.dylib\' (no such file), \'/usr/lib/libvulkan.dylib\' (no such file, not in dyld cache), \'libvulkan.dylib\' (relative path not allowed in hardened program)" })
+[2025-10-08][10:06:24][tauri_plugin_hardware::vendor::vulkan][ERROR] Failed to get Vulkan GPUs: LibraryLoadFailure(DlOpen { desc: "dlopen(libvulkan.dylib, 0x0005): tried: \'libvulkan.dylib\' (relative path not allowed in hardened program), \'/System/Volumes/Preboot/Cryptexes/OSlibvulkan.dylib\' (no such file), \'/usr/lib/libvulkan.dylib\' (no such file, not in dyld cache), \'libvulkan.dylib\' (relative path not allowed in hardened program)" })
+[2025-10-08][10:06:24][reqwest::connect][DEBUG] starting new connection: https://api.github.com/
+[2025-10-08][10:06:24][tauri_plugin_updater::updater][DEBUG] checking for updates https://github.com/menloresearch/jan/releases/latest/download/latest.json
+[2025-10-08][10:06:24][reqwest::connect][DEBUG] starting new connection: https://github.com/
+[2025-10-08][10:06:24][tauri_plugin_updater::updater][DEBUG] checking for updates https://github.com/menloresearch/jan/releases/latest/download/latest.json
+[2025-10-08][10:06:24][reqwest::connect][DEBUG] starting new connection: https://github.com/
+[2025-10-08][10:06:24][reqwest::connect][DEBUG] starting new connection: https://api.github.com/
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] modelSize: 7300778336
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] Using ctx_size: 65536
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::utils][INFO] Received ctx_size parameter: Some(65536)
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::utils][INFO] Received model metadata:
+{"gemma3.attention.sliding_window": "1024", "tokenizer.ggml.eos_token_id": "106", "general.architecture": "gemma3", "gemma3.block_count": "48", "gemma3.feed_forward_length": "15360", "general.finetune": "it", "gemma3.attention.layer_norm_rms_epsilon": "0.000001", "tokenizer.ggml.add_bos_token": "true", "gemma3.context_length": "131072", "gemma3.attention.head_count": "16", "tokenizer.ggml.add_eos_token": "false", "gemma3.attention.head_count_kv": "8", "general.file_type": "15", "quantize.imatrix.entries_count": "336", "gemma3.attention.key_length": "256", "general.quantized_by": "Unsloth", "tokenizer.ggml.bos_token_id": "2", "tokenizer.chat_template": "{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%- if messages[0]['content'] is string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n    {%- else -%}\n        {%- set first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:] -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n{%- for message in loop_messages -%}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}\n        {{ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\") }}\n    {%- endif -%}\n    {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n    {%- else -%}\n        {%- set role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n' + (first_user_prefix if loop.first else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content'] | trim }}\n    {%- elif message['content'] is iterable -%}\n        {%- for item in message['content'] -%}\n            {%- if item['type'] == 'image' -%}\n                {{ '<start_of_image>' }}\n            {%- elif item['type'] == 'text' -%}\n                {{ item['text'] | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception(\"Invalid content type\") }}\n    {%- endif -%}\n    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{'<start_of_turn>model\n'}}\n{%- endif -%}\n", "general.type": "model", "general.quantization_version": "2", "tokenizer.ggml.add_space_prefix": "false", "quantize.imatrix.chunks_count": "663", "gemma3.attention.value_length": "256", "tokenizer.ggml.model": "llama", "general.basename": "Gemma-3-12B-It", "general.size_label": "12B", "gemma3.rope.freq_base": "1000000", "tokenizer.ggml.tokens": "<Array of type String with 262208 elements, data skipped>", "tokenizer.ggml.scores": "<Array of type Float32 with 262208 elements, data skipped>", "gemma3.rope.scaling.type": "linear", "quantize.imatrix.file": "gemma-3-12b-it-GGUF/imatrix_unsloth.dat", "quantize.imatrix.dataset": "unsloth_calibration_gemma-3-12b-it.txt", "general.repo_url": "https://huggingface.co/unsloth", "gemma3.embedding_length": "3840", "tokenizer.ggml.padding_token_id": "0", "general.name": "Gemma-3-12B-It", "gemma3.rope.scaling.factor": "8", "tokenizer.ggml.pre": "default", "tokenizer.ggml.unknown_token_id": "3", "tokenizer.ggml.token_type": "<Array of type Int32 with 262208 elements, data skipped>"}
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::utils][INFO] KV estimates -> sliding: 402653184 bytes (~384.00 MB), full: 25769803776 bytes (~24576.00 MB), middle: 13086228480 bytes (~12480.00 MB)
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] isModelSupported: Total memory requirement: 20387006816 for /Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf; Got kvCacheSize: 13086228480 from BE
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] No GPUs detected (likely unified memory system), using total RAM as VRAM
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM reported/calculated (in bytes): 25769803776
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] System RAM: 0 bytes
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM: 25769803776 bytes
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] Usable total memory: 23481313587 bytes
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] Usable VRAM: 23481313587 bytes
+[2025-10-08][10:06:24][tauri_plugin_llamacpp::gguf::commands][INFO] Required: 20387006816 bytes
+[2025-10-08][10:06:24][reqwest::connect][DEBUG] starting new connection: https://release-assets.githubusercontent.com/
+[2025-10-08][10:06:24][reqwest::connect][DEBUG] starting new connection: https://release-assets.githubusercontent.com/
+[2025-10-08][10:06:25][tauri_plugin_updater::updater][DEBUG] update response: Object {"notes": String(""), "platforms": Object {"darwin-aarch64": Object {"signature": String("dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTGk2QlZWNnZIZ3FvbTFpREVDb3JVS2pXdFFCRWplQ2pFWnVBbTRFeHJvaUJlYnF3dWlvYlAxNWpvY05JRDBranJsc0U0RkZCUndhZVJ4d2JBZUZoamdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MzE5CWZpbGU6SmFuLmFwcC50YXIuZ3oKUlY3b0tFanUwK3EyZisvNGwvRTZzMUMxcGFqYUM4dDVDdThsdjhrYkZqUlpPWFlCTVFzQjFXdjZZNHFwZ0IxenV6M1FHdFlkSk1pQnhsSmRhU3RsRGc9PQo="), "url": String("https://github.com/menloresearch/jan/releases/download/v0.7.1/Jan.app.tar.gz")}, "darwin-x86_64": Object {"signature": String("dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTGk2QlZWNnZIZ3FvbTFpREVDb3JVS2pXdFFCRWplQ2pFWnVBbTRFeHJvaUJlYnF3dWlvYlAxNWpvY05JRDBranJsc0U0RkZCUndhZVJ4d2JBZUZoamdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MzE5CWZpbGU6SmFuLmFwcC50YXIuZ3oKUlY3b0tFanUwK3EyZisvNGwvRTZzMUMxcGFqYUM4dDVDdThsdjhrYkZqUlpPWFlCTVFzQjFXdjZZNHFwZ0IxenV6M1FHdFlkSk1pQnhsSmRhU3RsRGc9PQo="), "url": String("https://github.com/menloresearch/jan/releases/download/v0.7.1/Jan.app.tar.gz")}, "linux-x86_64": Object {"signature": String("dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTG1NYXUvWXZlZGg1QUczbnhFWWtVSlpWc284RnNzNllEWTFPUU85dDlML0MzYnZKRWROaGEzeHJTUFF2RkFsejBPQzlyeCtoMUZ5ZTZxSjY1ei8wZ0FzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MDg5CWZpbGU6SmFuXzAuNy4xX2FtZDY0LkFwcEltYWdlCklWTnE5em1hQ3lCUjErS3Bob1JwN3N3bHJZYjVWMnBTK3UwTmdGdkE2N01xOEsxOHRzYktaSDBMeG5QMk5HcE5sNWV5VVY3VytFKzN0eDZIR2FCeEFRPT0K"), "url": String("https://github.com/menloresearch/jan/releases/download/v0.7.1/Jan_0.7.1_amd64.AppImage")}, "windows-x86_64": Object {"signature": String("dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTG5YbjhBT0xWWjNoL21tQitDVlFoOStPN0tteVFrY0VVbFVvSHNLMVFZMWFTMXovbVFMNmN3dkRsT0hCUlVCQ2haRG5UeDI5KzAxNDhWeFZPWUJGdHdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MjE3CWZpbGU6SmFuXzAuNy4xX3g2NC1zZXR1cC5leGUKVmtCVlJIbFFLeGU4dWlGS0cvT3A0OTJYU1JwSWphT01MOUZoeEN4UWpYcjNENk5VRDAzaGlvc2xLdk9la3pERXppdEhNb2VGTldtNEd3WEhabEhsQXc9PQo="), "url": String("https://github.com/menloresearch/jan/releases/download/v0.7.1/Jan_0.7.1_x64-setup.exe")}}, "pub_date": String("2025-10-03T16:02:35.021Z"), "version": String("0.7.1")}
+[2025-10-08][10:06:25][tauri_plugin_updater::updater][DEBUG] update response: Object {"notes": String(""), "platforms": Object {"darwin-aarch64": Object {"signature": String("dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTGk2QlZWNnZIZ3FvbTFpREVDb3JVS2pXdFFCRWplQ2pFWnVBbTRFeHJvaUJlYnF3dWlvYlAxNWpvY05JRDBranJsc0U0RkZCUndhZVJ4d2JBZUZoamdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MzE5CWZpbGU6SmFuLmFwcC50YXIuZ3oKUlY3b0tFanUwK3EyZisvNGwvRTZzMUMxcGFqYUM4dDVDdThsdjhrYkZqUlpPWFlCTVFzQjFXdjZZNHFwZ0IxenV6M1FHdFlkSk1pQnhsSmRhU3RsRGc9PQo="), "url": String("https://github.com/menloresearch/jan/releases/download/v0.7.1/Jan.app.tar.gz")}, "darwin-x86_64": Object {"signature": String("dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTGk2QlZWNnZIZ3FvbTFpREVDb3JVS2pXdFFCRWplQ2pFWnVBbTRFeHJvaUJlYnF3dWlvYlAxNWpvY05JRDBranJsc0U0RkZCUndhZVJ4d2JBZUZoamdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MzE5CWZpbGU6SmFuLmFwcC50YXIuZ3oKUlY3b0tFanUwK3EyZisvNGwvRTZzMUMxcGFqYUM4dDVDdThsdjhrYkZqUlpPWFlCTVFzQjFXdjZZNHFwZ0IxenV6M1FHdFlkSk1pQnhsSmRhU3RsRGc9PQo="), "url": String("https://github.com/menloresearch/jan/releases/download/v0.7.1/Jan.app.tar.gz")}, "linux-x86_64": Object {"signature": String("dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTG1NYXUvWXZlZGg1QUczbnhFWWtVSlpWc284RnNzNllEWTFPUU85dDlML0MzYnZKRWROaGEzeHJTUFF2RkFsejBPQzlyeCtoMUZ5ZTZxSjY1ei8wZ0FzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MDg5CWZpbGU6SmFuXzAuNy4xX2FtZDY0LkFwcEltYWdlCklWTnE5em1hQ3lCUjErS3Bob1JwN3N3bHJZYjVWMnBTK3UwTmdGdkE2N01xOEsxOHRzYktaSDBMeG5QMk5HcE5sNWV5VVY3VytFKzN0eDZIR2FCeEFRPT0K"), "url": String("https://github.com/menloresearch/jan/releases/download/v0.7.1/Jan_0.7.1_amd64.AppImage")}, "windows-x86_64": Object {"signature": String("dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTG5YbjhBT0xWWjNoL21tQitDVlFoOStPN0tteVFrY0VVbFVvSHNLMVFZMWFTMXovbVFMNmN3dkRsT0hCUlVCQ2haRG5UeDI5KzAxNDhWeFZPWUJGdHdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MjE3CWZpbGU6SmFuXzAuNy4xX3g2NC1zZXR1cC5leGUKVmtCVlJIbFFLeGU4dWlGS0cvT3A0OTJYU1JwSWphT01MOUZoeEN4UWpYcjNENk5VRDAzaGlvc2xLdk9la3pERXppdEhNb2VGTldtNEd3WEhabEhsQXc9PQo="), "url": String("https://github.com/menloresearch/jan/releases/download/v0.7.1/Jan_0.7.1_x64-setup.exe")}}, "pub_date": String("2025-10-03T16:02:35.021Z"), "version": String("0.7.1")}
+[2025-10-08][10:06:25][tauri_plugin_updater::updater][DEBUG] parsed release response RemoteRelease { version: Version { major: 0, minor: 7, patch: 1 }, notes: Some(""), pub_date: Some(2025-10-03 16:02:35.021 +00:00:00), data: Static { platforms: {"darwin-x86_64": ReleaseManifestPlatform { url: Url { scheme: "https", cannot_be_a_base: false, username: "", password: None, host: Some(Domain("github.com")), port: None, path: "/menloresearch/jan/releases/download/v0.7.1/Jan.app.tar.gz", query: None, fragment: None }, signature: "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTGk2QlZWNnZIZ3FvbTFpREVDb3JVS2pXdFFCRWplQ2pFWnVBbTRFeHJvaUJlYnF3dWlvYlAxNWpvY05JRDBranJsc0U0RkZCUndhZVJ4d2JBZUZoamdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MzE5CWZpbGU6SmFuLmFwcC50YXIuZ3oKUlY3b0tFanUwK3EyZisvNGwvRTZzMUMxcGFqYUM4dDVDdThsdjhrYkZqUlpPWFlCTVFzQjFXdjZZNHFwZ0IxenV6M1FHdFlkSk1pQnhsSmRhU3RsRGc9PQo=" }, "windows-x86_64": ReleaseManifestPlatform { url: Url { scheme: "https", cannot_be_a_base: false, username: "", password: None, host: Some(Domain("github.com")), port: None, path: "/menloresearch/jan/releases/download/v0.7.1/Jan_0.7.1_x64-setup.exe", query: None, fragment: None }, signature: "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTG5YbjhBT0xWWjNoL21tQitDVlFoOStPN0tteVFrY0VVbFVvSHNLMVFZMWFTMXovbVFMNmN3dkRsT0hCUlVCQ2haRG5UeDI5KzAxNDhWeFZPWUJGdHdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MjE3CWZpbGU6SmFuXzAuNy4xX3g2NC1zZXR1cC5leGUKVmtCVlJIbFFLeGU4dWlGS0cvT3A0OTJYU1JwSWphT01MOUZoeEN4UWpYcjNENk5VRDAzaGlvc2xLdk9la3pERXppdEhNb2VGTldtNEd3WEhabEhsQXc9PQo=" }, "linux-x86_64": ReleaseManifestPlatform { url: Url { scheme: "https", cannot_be_a_base: false, username: "", password: None, host: Some(Domain("github.com")), port: None, path: "/menloresearch/jan/releases/download/v0.7.1/Jan_0.7.1_amd64.AppImage", query: None, fragment: None }, signature: "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTG1NYXUvWXZlZGg1QUczbnhFWWtVSlpWc284RnNzNllEWTFPUU85dDlML0MzYnZKRWROaGEzeHJTUFF2RkFsejBPQzlyeCtoMUZ5ZTZxSjY1ei8wZ0FzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MDg5CWZpbGU6SmFuXzAuNy4xX2FtZDY0LkFwcEltYWdlCklWTnE5em1hQ3lCUjErS3Bob1JwN3N3bHJZYjVWMnBTK3UwTmdGdkE2N01xOEsxOHRzYktaSDBMeG5QMk5HcE5sNWV5VVY3VytFKzN0eDZIR2FCeEFRPT0K" }, "darwin-aarch64": ReleaseManifestPlatform { url: Url { scheme: "https", cannot_be_a_base: false, username: "", password: None, host: Some(Domain("github.com")), port: None, path: "/menloresearch/jan/releases/download/v0.7.1/Jan.app.tar.gz", query: None, fragment: None }, signature: "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTGk2QlZWNnZIZ3FvbTFpREVDb3JVS2pXdFFCRWplQ2pFWnVBbTRFeHJvaUJlYnF3dWlvYlAxNWpvY05JRDBranJsc0U0RkZCUndhZVJ4d2JBZUZoamdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MzE5CWZpbGU6SmFuLmFwcC50YXIuZ3oKUlY3b0tFanUwK3EyZisvNGwvRTZzMUMxcGFqYUM4dDVDdThsdjhrYkZqUlpPWFlCTVFzQjFXdjZZNHFwZ0IxenV6M1FHdFlkSk1pQnhsSmRhU3RsRGc9PQo=" }} } }
+[2025-10-08][10:06:25][tauri_plugin_updater::updater][DEBUG] parsed release response RemoteRelease { version: Version { major: 0, minor: 7, patch: 1 }, notes: Some(""), pub_date: Some(2025-10-03 16:02:35.021 +00:00:00), data: Static { platforms: {"darwin-aarch64": ReleaseManifestPlatform { url: Url { scheme: "https", cannot_be_a_base: false, username: "", password: None, host: Some(Domain("github.com")), port: None, path: "/menloresearch/jan/releases/download/v0.7.1/Jan.app.tar.gz", query: None, fragment: None }, signature: "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTGk2QlZWNnZIZ3FvbTFpREVDb3JVS2pXdFFCRWplQ2pFWnVBbTRFeHJvaUJlYnF3dWlvYlAxNWpvY05JRDBranJsc0U0RkZCUndhZVJ4d2JBZUZoamdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MzE5CWZpbGU6SmFuLmFwcC50YXIuZ3oKUlY3b0tFanUwK3EyZisvNGwvRTZzMUMxcGFqYUM4dDVDdThsdjhrYkZqUlpPWFlCTVFzQjFXdjZZNHFwZ0IxenV6M1FHdFlkSk1pQnhsSmRhU3RsRGc9PQo=" }, "windows-x86_64": ReleaseManifestPlatform { url: Url { scheme: "https", cannot_be_a_base: false, username: "", password: None, host: Some(Domain("github.com")), port: None, path: "/menloresearch/jan/releases/download/v0.7.1/Jan_0.7.1_x64-setup.exe", query: None, fragment: None }, signature: "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTG5YbjhBT0xWWjNoL21tQitDVlFoOStPN0tteVFrY0VVbFVvSHNLMVFZMWFTMXovbVFMNmN3dkRsT0hCUlVCQ2haRG5UeDI5KzAxNDhWeFZPWUJGdHdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MjE3CWZpbGU6SmFuXzAuNy4xX3g2NC1zZXR1cC5leGUKVmtCVlJIbFFLeGU4dWlGS0cvT3A0OTJYU1JwSWphT01MOUZoeEN4UWpYcjNENk5VRDAzaGlvc2xLdk9la3pERXppdEhNb2VGTldtNEd3WEhabEhsQXc9PQo=" }, "darwin-x86_64": ReleaseManifestPlatform { url: Url { scheme: "https", cannot_be_a_base: false, username: "", password: None, host: Some(Domain("github.com")), port: None, path: "/menloresearch/jan/releases/download/v0.7.1/Jan.app.tar.gz", query: None, fragment: None }, signature: "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTGk2QlZWNnZIZ3FvbTFpREVDb3JVS2pXdFFCRWplQ2pFWnVBbTRFeHJvaUJlYnF3dWlvYlAxNWpvY05JRDBranJsc0U0RkZCUndhZVJ4d2JBZUZoamdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MzE5CWZpbGU6SmFuLmFwcC50YXIuZ3oKUlY3b0tFanUwK3EyZisvNGwvRTZzMUMxcGFqYUM4dDVDdThsdjhrYkZqUlpPWFlCTVFzQjFXdjZZNHFwZ0IxenV6M1FHdFlkSk1pQnhsSmRhU3RsRGc9PQo=" }, "linux-x86_64": ReleaseManifestPlatform { url: Url { scheme: "https", cannot_be_a_base: false, username: "", password: None, host: Some(Domain("github.com")), port: None, path: "/menloresearch/jan/releases/download/v0.7.1/Jan_0.7.1_amd64.AppImage", query: None, fragment: None }, signature: "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSRXJUVWE2ekJCTG1NYXUvWXZlZGg1QUczbnhFWWtVSlpWc284RnNzNllEWTFPUU85dDlML0MzYnZKRWROaGEzeHJTUFF2RkFsejBPQzlyeCtoMUZ5ZTZxSjY1ei8wZ0FzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzU5NTA3MDg5CWZpbGU6SmFuXzAuNy4xX2FtZDY0LkFwcEltYWdlCklWTnE5em1hQ3lCUjErS3Bob1JwN3N3bHJZYjVWMnBTK3UwTmdGdkE2N01xOEsxOHRzYktaSDBMeG5QMk5HcE5sNWV5VVY3VytFKzN0eDZIR2FCeEFRPT0K" }} } }
+[2025-10-08][10:06:26][webview:info@asset://localhost/%2FUsers%2Fpauldesai%2FLibrary%2FMobile%20Documents%2FiCloud~md~obsidian%2FDocuments%2FPaul-Desai%20%2Fextensions%2F%40janhq%2Fllamacpp-extension%2Fdist%2Findex.js:1908:7][INFO]  Using stored backend preference: b6673/macos-arm64
+[2025-10-08][10:06:26][webview:info@asset://localhost/%2FUsers%2Fpauldesai%2FLibrary%2FMobile%20Documents%2FiCloud~md~obsidian%2FDocuments%2FPaul-Desai%20%2Fextensions%2F%40janhq%2Fllamacpp-extension%2Fdist%2Findex.js:1908:7][INFO]  Initial UI default for version_backend set to: b6673/macos-arm64
+[2025-10-08][10:06:26][webview:info@asset://localhost/%2FUsers%2Fpauldesai%2FLibrary%2FMobile%20Documents%2FiCloud~md~obsidian%2FDocuments%2FPaul-Desai%20%2Fextensions%2F%40janhq%2Fllamacpp-extension%2Fdist%2Findex.js:1908:7][INFO]  Auto-update engine is enabled. Current backend: b6673/macos-arm64. Best available: b6673/macos-arm64
+[2025-10-08][10:06:26][reqwest::connect][DEBUG] starting new connection: https://api.github.com/
+[2025-10-08][10:06:27][webview:info@asset://localhost/%2FUsers%2Fpauldesai%2FLibrary%2FMobile%20Documents%2FiCloud~md~obsidian%2FDocuments%2FPaul-Desai%20%2Fextensions%2F%40janhq%2Fllamacpp-extension%2Fdist%2Findex.js:1908:7][INFO]  Already at latest version: b6673 = b6673
+[2025-10-08][10:06:28][webview:info@asset://localhost/%2FUsers%2Fpauldesai%2FLibrary%2FMobile%20Documents%2FiCloud~md~obsidian%2FDocuments%2FPaul-Desai%20%2Fextensions%2F%40janhq%2Fllamacpp-extension%2Fdist%2Findex.js:1908:7][INFO]  Auto-update: Already using the latest version of the selected backend
+[2025-10-08][10:06:28][webview:info@asset://localhost/%2FUsers%2Fpauldesai%2FLibrary%2FMobile%20Documents%2FiCloud~md~obsidian%2FDocuments%2FPaul-Desai%20%2Fextensions%2F%40janhq%2Fllamacpp-extension%2Fdist%2Findex.js:1908:7][INFO]  Final check: Backend b6673/macos-arm64 is already installed
+[2025-10-08][10:06:32][webview:info@asset://localhost/%2FUsers%2Fpauldesai%2FLibrary%2FMobile%20Documents%2FiCloud~md~obsidian%2FDocuments%2FPaul-Desai%20%2Fextensions%2F%40janhq%2Fllamacpp-extension%2Fdist%2Findex.js:1908:7][INFO]  Calling Tauri command llama_load with args:  --no-webui,--jinja,-m,/Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf,-a,gemma-3-12b-it-Q4_K_M,--port,3708,-ngl,100,--batch-size,2048,--ubatch-size,512,--context-shift,--flash-attn,off,--no-mmap,--ctx-size,65536
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] Attempting to launch server at path: "/Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/backends/b6673/macos-arm64/build/bin/llama-server"
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] Using arguments: ["--no-webui", "--jinja", "-m", "/Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf", "-a", "gemma-3-12b-it-Q4_K_M", "--port", "3708", "-ngl", "100", "--batch-size", "2048", "--ubatch-size", "512", "--context-shift", "--flash-attn", "off", "--no-mmap", "--ctx-size", "65536"]
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] MMPROJ Path string: None
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] Waiting for model session to be ready...
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_library_init: using embedded metal library
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_library_init: loaded in 0.004 sec
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: GPU name:   Apple M4
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: GPU family: MTLGPUFamilyApple9  (1009)
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: GPU family: MTLGPUFamilyCommon3 (3003)
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: GPU family: MTLGPUFamilyMetal3  (5001)
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: simdgroup reduction   = true
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: simdgroup matrix mul. = true
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: has unified memory    = true
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: has bfloat            = true
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: use residency sets    = true
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: use shared buffers    = true
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_device_init: recommendedMaxWorkingSetSize  = 17179.89 MB
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] build: 1 (02010ec) with Apple clang version 14.0.0 (clang-1400.0.29.202) for arm64-apple-darwin21.6.0
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] system info: n_threads = 4, n_threads_batch = 4, total_threads = 10
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] system_info: n_threads = 4 (n_threads_batch = 4) / 10 | Metal : EMBED_LIBRARY = 1 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | DOTPROD = 1 | ACCELERATE = 1 | REPACK = 1 |
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] Web UI is disabled
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] main: binding port with default address family
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] main: HTTP server is listening, hostname: 127.0.0.1, port: 3708, http threads: 9
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] main: loading model
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv    load_model: loading model '/Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf'
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_load_from_file_impl: using device Metal (Apple M4) (unknown id) - 16383 MiB free
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: loaded meta data with 40 key-value pairs and 626 tensors from /Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf (version GGUF V3 (latest))
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   0:                       general.architecture str              = gemma3
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   1:                               general.type str              = model
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   2:                               general.name str              = Gemma-3-12B-It
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   3:                           general.finetune str              = it
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   4:                           general.basename str              = Gemma-3-12B-It
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   5:                       general.quantized_by str              = Unsloth
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   6:                         general.size_label str              = 12B
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   7:                           general.repo_url str              = https://huggingface.co/unsloth
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   8:                      gemma3.context_length u32              = 131072
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv   9:                    gemma3.embedding_length u32              = 3840
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  10:                         gemma3.block_count u32              = 48
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  11:                 gemma3.feed_forward_length u32              = 15360
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  12:                gemma3.attention.head_count u32              = 16
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  13:    gemma3.attention.layer_norm_rms_epsilon f32              = 0.000001
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  14:                gemma3.attention.key_length u32              = 256
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  15:              gemma3.attention.value_length u32              = 256
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  16:                      gemma3.rope.freq_base f32              = 1000000.000000
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  17:            gemma3.attention.sliding_window u32              = 1024
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  18:             gemma3.attention.head_count_kv u32              = 8
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  19:                   gemma3.rope.scaling.type str              = linear
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  20:                 gemma3.rope.scaling.factor f32              = 8.000000
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  21:                       tokenizer.ggml.model str              = llama
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  22:                         tokenizer.ggml.pre str              = default
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  23:                      tokenizer.ggml.tokens arr[str,262208]  = ["<pad>", "<eos>", "<bos>", "<unk>", ...
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  24:                      tokenizer.ggml.scores arr[f32,262208]  = [-1000.000000, -1000.000000, -1000.00...
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  25:                  tokenizer.ggml.token_type arr[i32,262208]  = [3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, ...
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  26:                tokenizer.ggml.bos_token_id u32              = 2
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  27:                tokenizer.ggml.eos_token_id u32              = 106
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  28:            tokenizer.ggml.unknown_token_id u32              = 3
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  29:            tokenizer.ggml.padding_token_id u32              = 0
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  30:               tokenizer.ggml.add_bos_token bool             = true
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  31:               tokenizer.ggml.add_eos_token bool             = false
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  32:                    tokenizer.chat_template str              = {{ bos_token }}\n{%- if messages[0]['r...
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  33:            tokenizer.ggml.add_space_prefix bool             = false
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  34:               general.quantization_version u32              = 2
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  35:                          general.file_type u32              = 15
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  36:                      quantize.imatrix.file str              = gemma-3-12b-it-GGUF/imatrix_unsloth.dat
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  37:                   quantize.imatrix.dataset str              = unsloth_calibration_gemma-3-12b-it.txt
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  38:             quantize.imatrix.entries_count i32              = 336
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - kv  39:              quantize.imatrix.chunks_count i32              = 663
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - type  f32:  289 tensors
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - type q4_K:  288 tensors
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_model_loader: - type q6_K:   49 tensors
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: file format = GGUF V3 (latest)
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: file type   = Q4_K - Medium
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: file size   = 6.79 GiB (4.96 BPW)
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load: printing all EOG tokens:
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load:   - 106 ('<end_of_turn>')
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load: special tokens cache size = 6415
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load: token to piece cache size = 1.9446 MB
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: arch             = gemma3
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: vocab_only       = 0
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_ctx_train      = 131072
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_embd           = 3840
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_layer          = 48
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_head           = 16
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_head_kv        = 8
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_rot            = 256
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_swa            = 1024
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: is_swa_any       = 1
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_embd_head_k    = 256
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_embd_head_v    = 256
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_gqa            = 2
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_embd_k_gqa     = 2048
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_embd_v_gqa     = 2048
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: f_norm_eps       = 0.0e+00
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: f_norm_rms_eps   = 1.0e-06
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: f_clamp_kqv      = 0.0e+00
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: f_max_alibi_bias = 0.0e+00
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: f_logit_scale    = 0.0e+00
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: f_attn_scale     = 6.2e-02
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_ff             = 15360
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_expert         = 0
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_expert_used    = 0
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: causal attn      = 1
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: pooling type     = 0
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: rope type        = 2
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: rope scaling     = linear
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: freq_base_train  = 1000000.0
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: freq_scale_train = 0.125
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_ctx_orig_yarn  = 131072
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: rope_finetuned   = unknown
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: model type       = 12B
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: model params     = 11.77 B
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: general.name     = Gemma-3-12B-It
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: vocab type       = SPM
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_vocab          = 262208
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: n_merges         = 0
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: BOS token        = 2 '<bos>'
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: EOS token        = 106 '<end_of_turn>'
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: EOT token        = 106 '<end_of_turn>'
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: UNK token        = 3 '<unk>'
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: PAD token        = 0 '<pad>'
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: LF token         = 248 '<0x0A>'
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: EOG token        = 106 '<end_of_turn>'
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] print_info: max token length = 48
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load_tensors: loading model tensors, this can take a while... (mmap = false)
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load_tensors: offloading 48 repeating layers to GPU
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load_tensors: offloading output layer to GPU
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load_tensors: offloaded 49/49 layers to GPU
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load_tensors:        Metal model buffer size =  6956.32 MiB
+[2025-10-08][10:06:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] load_tensors:          CPU model buffer size =   787.69 MiB
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] .................................................................................
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: constructing llama_context
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: n_seq_max     = 1
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: n_ctx         = 65536
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: n_ctx_per_seq = 65536
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: n_batch       = 2048
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: n_ubatch      = 512
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: causal_attn   = 1
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: flash_attn    = disabled
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: kv_unified    = false
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: freq_base     = 1000000.0
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: freq_scale    = 0.125
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: n_ctx_per_seq (65536) < n_ctx_train (131072) -- the full capacity of the model will not be utilized
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_init: allocating
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_init: found device: Apple M4
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_init: picking default device: Apple M4
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_init: use bfloat         = true
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_init: use fusion         = true
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_init: use concurrency    = true
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_init: use graph optimize = true
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context:        CPU  output buffer size =     1.00 MiB
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_kv_cache_iswa: creating non-SWA KV cache, size = 65536 cells
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_kv_cache:      Metal KV buffer size =  4096.00 MiB
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_kv_cache: size = 4096.00 MiB ( 65536 cells,   8 layers,  1/1 seqs), K (f16): 2048.00 MiB, V (f16): 2048.00 MiB
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_kv_cache_iswa: creating     SWA KV cache, size = 1536 cells
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_kv_cache:      Metal KV buffer size =   480.00 MiB
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_kv_cache: size =  480.00 MiB (  1536 cells,  40 layers,  1/1 seqs), K (f16):  240.00 MiB, V (f16):  240.00 MiB
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context:      Metal compute buffer size =  2234.01 MiB
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context:        CPU compute buffer size =   154.51 MiB
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: graph nodes  = 2167
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] llama_context: graph splits = 2
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] common_init_from_params: KV cache shifting is not supported for this context, disabling KV cache shifting
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] common_init_from_params: added <end_of_turn> logit bias = -inf
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] common_init_from_params: setting dry_penalty_last_n to ctx_size = 65536
+[2025-10-08][10:06:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv          init: initializing slots, n_slots = 1
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot         init: id  0 | task -1 | new slot n_ctx_slot = 65536
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv          init: Enable thinking? 0
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] main: model loaded
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] main: chat template, chat_template: {{ bos_token }}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] {%- if messages[0]['role'] == 'system' -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- if messages[0]['content'] is string -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]         {%- set first_user_prefix = messages[0]['content'] + '
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ' -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- else -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]         {%- set first_user_prefix = messages[0]['content'][0]['text'] + '
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ' -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- endif -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- set loop_messages = messages[1:] -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] {%- else -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- set first_user_prefix = "" -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- set loop_messages = messages -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] {%- endif -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] {%- for message in loop_messages -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]         {{ raise_exception("Conversation roles must alternate user/assistant/user/assistant/...") }}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- endif -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- if (message['role'] == 'assistant') -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]         {%- set role = "model" -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- else -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]         {%- set role = message['role'] -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- endif -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {{ '<start_of_turn>' + role + '
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ' + (first_user_prefix if loop.first else "") }}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- if message['content'] is string -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]         {{ message['content'] | trim }}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- elif message['content'] is iterable -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]         {%- for item in message['content'] -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]             {%- if item['type'] == 'image' -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]                 {{ '<start_of_image>' }}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]             {%- elif item['type'] == 'text' -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]                 {{ item['text'] | trim }}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]             {%- endif -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]         {%- endfor -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- else -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]         {{ raise_exception("Invalid content type") }}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {%- endif -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {{ '<end_of_turn>
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ' }}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] {%- endfor -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] {%- if add_generation_prompt -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp]     {{'<start_of_turn>model
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] '}}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] {%- endif -%}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] , example_format: '<start_of_turn>user
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] You are a helpful assistant
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] Hello<end_of_turn>
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] <start_of_turn>model
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] Hi there<end_of_turn>
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] <start_of_turn>user
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] How are you?<end_of_turn>
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] <start_of_turn>model
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] '
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] main: server is listening on http://127.0.0.1:3708 - starting the main loop
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] Model appears to be ready based on logs: 'main: server is listening on http://127.0.0.1:3708 - starting the main loop'
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  update_slots: all slots are idle
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] Model is ready to accept requests!
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] Server process started with PID: 28104 and is ready
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] modelSize: 7300778336
+[2025-10-08][10:06:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:06:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  params_from_: Chat format: Content-only
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot launch_slot_: id  0 | task 0 | processing task
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 0 | new prompt, n_ctx_slot = 65536, n_keep = 0, n_prompt_tokens = 1336
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 0 | kv cache rm [0, end)
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 0 | prompt processing progress, n_past = 1336, n_tokens = 1336, progress = 1.000000
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 0 | prompt done, n_past = 1336, n_tokens = 1336
+[2025-10-08][10:06:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:06:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:06:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] Using ctx_size: 65536
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::utils][INFO] Received ctx_size parameter: Some(65536)
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::utils][INFO] Received model metadata:
+{"tokenizer.ggml.unknown_token_id": "3", "tokenizer.chat_template": "{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%- if messages[0]['content'] is string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n    {%- else -%}\n        {%- set first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:] -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n{%- for message in loop_messages -%}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}\n        {{ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\") }}\n    {%- endif -%}\n    {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n    {%- else -%}\n        {%- set role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n' + (first_user_prefix if loop.first else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content'] | trim }}\n    {%- elif message['content'] is iterable -%}\n        {%- for item in message['content'] -%}\n            {%- if item['type'] == 'image' -%}\n                {{ '<start_of_image>' }}\n            {%- elif item['type'] == 'text' -%}\n                {{ item['text'] | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception(\"Invalid content type\") }}\n    {%- endif -%}\n    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{'<start_of_turn>model\n'}}\n{%- endif -%}\n", "general.architecture": "gemma3", "gemma3.context_length": "131072", "tokenizer.ggml.add_space_prefix": "false", "gemma3.attention.sliding_window": "1024", "general.file_type": "15", "gemma3.rope.freq_base": "1000000", "gemma3.attention.head_count": "16", "general.quantization_version": "2", "general.basename": "Gemma-3-12B-It", "gemma3.attention.head_count_kv": "8", "general.quantized_by": "Unsloth", "tokenizer.ggml.scores": "<Array of type Float32 with 262208 elements, data skipped>", "tokenizer.ggml.add_eos_token": "false", "quantize.imatrix.entries_count": "336", "general.name": "Gemma-3-12B-It", "tokenizer.ggml.tokens": "<Array of type String with 262208 elements, data skipped>", "tokenizer.ggml.add_bos_token": "true", "tokenizer.ggml.bos_token_id": "2", "tokenizer.ggml.pre": "default", "gemma3.rope.scaling.factor": "8", "gemma3.embedding_length": "3840", "gemma3.rope.scaling.type": "linear", "general.finetune": "it", "general.type": "model", "gemma3.attention.key_length": "256", "gemma3.attention.value_length": "256", "tokenizer.ggml.token_type": "<Array of type Int32 with 262208 elements, data skipped>", "tokenizer.ggml.eos_token_id": "106", "tokenizer.ggml.padding_token_id": "0", "general.size_label": "12B", "quantize.imatrix.dataset": "unsloth_calibration_gemma-3-12b-it.txt", "quantize.imatrix.chunks_count": "663", "tokenizer.ggml.model": "llama", "quantize.imatrix.file": "gemma-3-12b-it-GGUF/imatrix_unsloth.dat", "gemma3.attention.layer_norm_rms_epsilon": "0.000001", "gemma3.block_count": "48", "general.repo_url": "https://huggingface.co/unsloth", "gemma3.feed_forward_length": "15360"}
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::utils][INFO] KV estimates -> sliding: 402653184 bytes (~384.00 MB), full: 25769803776 bytes (~24576.00 MB), middle: 13086228480 bytes (~12480.00 MB)
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] isModelSupported: Total memory requirement: 20387006816 for /Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf; Got kvCacheSize: 13086228480 from BE
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] No GPUs detected (likely unified memory system), using total RAM as VRAM
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM reported/calculated (in bytes): 25769803776
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] System RAM: 0 bytes
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM: 25769803776 bytes
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] Usable total memory: 23481313587 bytes
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] Usable VRAM: 23481313587 bytes
+[2025-10-08][10:06:36][tauri_plugin_llamacpp::gguf::commands][INFO] Required: 20387006816 bytes
+[2025-10-08][10:06:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 0 | SWA checkpoint create, pos_min = 0, pos_max = 1335, size = 417.516 MiB, total = 1/3 (417.516 MiB)
+[2025-10-08][10:06:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot      release: id  0 | task 0 | stop processing: n_past = 1341, truncated = 0
+[2025-10-08][10:06:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot print_timing: id  0 | task 0 |
+[2025-10-08][10:06:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] prompt eval time =   15705.11 ms /  1336 tokens (   11.76 ms per token,    85.07 tokens per second)
+[2025-10-08][10:06:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp]        eval time =     476.13 ms /     6 tokens (   79.36 ms per token,    12.60 tokens per second)
+[2025-10-08][10:06:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp]       total time =   16181.24 ms /  1342 tokens
+[2025-10-08][10:06:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  update_slots: all slots are idle
+[2025-10-08][10:06:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /v1/chat/completions 127.0.0.1 200
+[2025-10-08][10:06:53][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:06:53][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:06:53][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:06:53][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:06:53][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:06:53][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:07:17][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:07:17][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:07:17][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:07:17][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:07:17][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:07:17][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] modelSize: 7300778336
+[2025-10-08][10:07:19][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:07:19][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  params_from_: Chat format: Content-only
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot get_availabl: id  0 | task 0 | selected slot by lcs similarity, lcs_len = 1341, similarity = 1.000 (> 0.100 thold)
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot launch_slot_: id  0 | task 7 | processing task
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 7 | new prompt, n_ctx_slot = 65536, n_keep = 0, n_prompt_tokens = 2650
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 7 | kv cache rm [1341, end)
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 7 | prompt processing progress, n_past = 2650, n_tokens = 1309, progress = 0.493962
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 7 | prompt done, n_past = 2650, n_tokens = 1309
+[2025-10-08][10:07:19][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:07:19][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:07:19][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] Using ctx_size: 65536
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::utils][INFO] Received ctx_size parameter: Some(65536)
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::utils][INFO] Received model metadata:
+{"tokenizer.ggml.model": "llama", "gemma3.attention.sliding_window": "1024", "tokenizer.ggml.eos_token_id": "106", "general.quantization_version": "2", "quantize.imatrix.file": "gemma-3-12b-it-GGUF/imatrix_unsloth.dat", "gemma3.attention.layer_norm_rms_epsilon": "0.000001", "general.size_label": "12B", "gemma3.feed_forward_length": "15360", "gemma3.attention.head_count": "16", "gemma3.embedding_length": "3840", "gemma3.rope.scaling.factor": "8", "tokenizer.ggml.token_type": "<Array of type Int32 with 262208 elements, data skipped>", "general.basename": "Gemma-3-12B-It", "tokenizer.ggml.bos_token_id": "2", "tokenizer.ggml.unknown_token_id": "3", "general.file_type": "15", "general.architecture": "gemma3", "gemma3.attention.head_count_kv": "8", "tokenizer.ggml.add_eos_token": "false", "quantize.imatrix.chunks_count": "663", "general.repo_url": "https://huggingface.co/unsloth", "gemma3.attention.value_length": "256", "general.finetune": "it", "gemma3.rope.freq_base": "1000000", "tokenizer.ggml.tokens": "<Array of type String with 262208 elements, data skipped>", "general.name": "Gemma-3-12B-It", "tokenizer.ggml.scores": "<Array of type Float32 with 262208 elements, data skipped>", "tokenizer.ggml.padding_token_id": "0", "general.type": "model", "gemma3.rope.scaling.type": "linear", "gemma3.context_length": "131072", "tokenizer.ggml.pre": "default", "tokenizer.chat_template": "{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%- if messages[0]['content'] is string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n    {%- else -%}\n        {%- set first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:] -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n{%- for message in loop_messages -%}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}\n        {{ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\") }}\n    {%- endif -%}\n    {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n    {%- else -%}\n        {%- set role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n' + (first_user_prefix if loop.first else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content'] | trim }}\n    {%- elif message['content'] is iterable -%}\n        {%- for item in message['content'] -%}\n            {%- if item['type'] == 'image' -%}\n                {{ '<start_of_image>' }}\n            {%- elif item['type'] == 'text' -%}\n                {{ item['text'] | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception(\"Invalid content type\") }}\n    {%- endif -%}\n    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{'<start_of_turn>model\n'}}\n{%- endif -%}\n", "tokenizer.ggml.add_space_prefix": "false", "quantize.imatrix.entries_count": "336", "gemma3.attention.key_length": "256", "quantize.imatrix.dataset": "unsloth_calibration_gemma-3-12b-it.txt", "general.quantized_by": "Unsloth", "tokenizer.ggml.add_bos_token": "true", "gemma3.block_count": "48"}
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::utils][INFO] KV estimates -> sliding: 402653184 bytes (~384.00 MB), full: 25769803776 bytes (~24576.00 MB), middle: 13086228480 bytes (~12480.00 MB)
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] isModelSupported: Total memory requirement: 20387006816 for /Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf; Got kvCacheSize: 13086228480 from BE
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] No GPUs detected (likely unified memory system), using total RAM as VRAM
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM reported/calculated (in bytes): 25769803776
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] System RAM: 0 bytes
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM: 25769803776 bytes
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] Usable total memory: 23481313587 bytes
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] Usable VRAM: 23481313587 bytes
+[2025-10-08][10:07:19][tauri_plugin_llamacpp::gguf::commands][INFO] Required: 20387006816 bytes
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] modelSize: 7300778336
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] Using ctx_size: 65536
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::utils][INFO] Received ctx_size parameter: Some(65536)
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::utils][INFO] Received model metadata:
+{"tokenizer.ggml.padding_token_id": "0", "general.architecture": "gemma3", "gemma3.rope.freq_base": "1000000", "tokenizer.ggml.scores": "<Array of type Float32 with 262208 elements, data skipped>", "general.basename": "Gemma-3-12B-It", "tokenizer.ggml.bos_token_id": "2", "tokenizer.ggml.pre": "default", "general.quantization_version": "2", "gemma3.rope.scaling.factor": "8", "gemma3.attention.key_length": "256", "gemma3.feed_forward_length": "15360", "tokenizer.ggml.add_bos_token": "true", "gemma3.context_length": "131072", "gemma3.attention.value_length": "256", "gemma3.attention.head_count": "16", "general.size_label": "12B", "tokenizer.ggml.tokens": "<Array of type String with 262208 elements, data skipped>", "quantize.imatrix.entries_count": "336", "gemma3.attention.layer_norm_rms_epsilon": "0.000001", "tokenizer.ggml.token_type": "<Array of type Int32 with 262208 elements, data skipped>", "tokenizer.ggml.add_eos_token": "false", "tokenizer.ggml.add_space_prefix": "false", "tokenizer.ggml.eos_token_id": "106", "tokenizer.ggml.unknown_token_id": "3", "gemma3.block_count": "48", "tokenizer.ggml.model": "llama", "quantize.imatrix.file": "gemma-3-12b-it-GGUF/imatrix_unsloth.dat", "general.repo_url": "https://huggingface.co/unsloth", "quantize.imatrix.dataset": "unsloth_calibration_gemma-3-12b-it.txt", "general.finetune": "it", "gemma3.attention.sliding_window": "1024", "gemma3.rope.scaling.type": "linear", "general.file_type": "15", "general.quantized_by": "Unsloth", "quantize.imatrix.chunks_count": "663", "general.name": "Gemma-3-12B-It", "general.type": "model", "gemma3.attention.head_count_kv": "8", "tokenizer.chat_template": "{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%- if messages[0]['content'] is string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n    {%- else -%}\n        {%- set first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:] -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n{%- for message in loop_messages -%}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}\n        {{ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\") }}\n    {%- endif -%}\n    {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n    {%- else -%}\n        {%- set role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n' + (first_user_prefix if loop.first else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content'] | trim }}\n    {%- elif message['content'] is iterable -%}\n        {%- for item in message['content'] -%}\n            {%- if item['type'] == 'image' -%}\n                {{ '<start_of_image>' }}\n            {%- elif item['type'] == 'text' -%}\n                {{ item['text'] | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception(\"Invalid content type\") }}\n    {%- endif -%}\n    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{'<start_of_turn>model\n'}}\n{%- endif -%}\n", "gemma3.embedding_length": "3840"}
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::utils][INFO] KV estimates -> sliding: 402653184 bytes (~384.00 MB), full: 25769803776 bytes (~24576.00 MB), middle: 13086228480 bytes (~12480.00 MB)
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] isModelSupported: Total memory requirement: 20387006816 for /Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf; Got kvCacheSize: 13086228480 from BE
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] No GPUs detected (likely unified memory system), using total RAM as VRAM
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM reported/calculated (in bytes): 25769803776
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] System RAM: 0 bytes
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM: 25769803776 bytes
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] Usable total memory: 23481313587 bytes
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] Usable VRAM: 23481313587 bytes
+[2025-10-08][10:07:25][tauri_plugin_llamacpp::gguf::commands][INFO] Required: 20387006816 bytes
+[2025-10-08][10:07:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 7 | SWA checkpoint create, pos_min = 1114, pos_max = 2649, size = 480.018 MiB, total = 2/3 (897.535 MiB)
+[2025-10-08][10:07:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot      release: id  0 | task 7 | stop processing: n_past = 2655, truncated = 0
+[2025-10-08][10:07:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot print_timing: id  0 | task 7 |
+[2025-10-08][10:07:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp] prompt eval time =   15047.92 ms /  1309 tokens (   11.50 ms per token,    86.99 tokens per second)
+[2025-10-08][10:07:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp]        eval time =     459.73 ms /     6 tokens (   76.62 ms per token,    13.05 tokens per second)
+[2025-10-08][10:07:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp]       total time =   15507.64 ms /  1315 tokens
+[2025-10-08][10:07:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  update_slots: all slots are idle
+[2025-10-08][10:07:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /v1/chat/completions 127.0.0.1 200
+[2025-10-08][10:08:54][app_lib::core::mcp::commands][INFO] Deactivating MCP server: Vault
+[2025-10-08][10:08:54][app_lib::core::mcp::commands][INFO] Removed MCP server Vault from active servers list
+[2025-10-08][10:08:54][app_lib::core::mcp::commands][INFO] save mcp configs, path: "/Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /mcp_config.json"
+[2025-10-08][10:08:54][app_lib::core::mcp::commands][INFO] Marked MCP server Vault as not successfully connected
+[2025-10-08][10:08:54][app_lib::core::mcp::commands][INFO] Reset restart count for MCP server Vault
+[2025-10-08][10:08:54][app_lib::core::mcp::helpers][INFO] Starting MCP server Vault (Initial attempt)
+[2025-10-08][10:08:54][app_lib::core::mcp::commands][INFO] save mcp configs, path: "/Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /mcp_config.json"
+[2025-10-08][10:08:54][app_lib::core::mcp::helpers][ERROR] Failed to run command Vault: No such file or directory (os error 2)
+[2025-10-08][10:08:54][app_lib::core::mcp::helpers][ERROR] Failed to start MCP server Vault on first attempt: Failed to run command Vault: No such file or directory (os error 2)
+[2025-10-08][10:09:00][app_lib::core::mcp::commands][INFO] Deactivating MCP server: Vault
+[2025-10-08][10:09:00][app_lib::core::mcp::commands][INFO] Removed MCP server Vault from active servers list
+[2025-10-08][10:09:00][app_lib::core::mcp::commands][INFO] Marked MCP server Vault as not successfully connected
+[2025-10-08][10:09:00][app_lib::core::mcp::commands][INFO] Reset restart count for MCP server Vault
+[2025-10-08][10:09:00][app_lib::core::mcp::commands][INFO] save mcp configs, path: "/Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /mcp_config.json"
+[2025-10-08][10:09:00][app_lib::core::mcp::helpers][INFO] Restarting 0 previously active MCP servers
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] modelSize: 7300778336
+[2025-10-08][10:12:21][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:21][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:21][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] Using ctx_size: 65536
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::utils][INFO] Received ctx_size parameter: Some(65536)
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::utils][INFO] Received model metadata:
+{"general.repo_url": "https://huggingface.co/unsloth", "gemma3.context_length": "131072", "gemma3.block_count": "48", "tokenizer.ggml.scores": "<Array of type Float32 with 262208 elements, data skipped>", "gemma3.rope.scaling.type": "linear", "gemma3.attention.value_length": "256", "tokenizer.ggml.padding_token_id": "0", "quantize.imatrix.file": "gemma-3-12b-it-GGUF/imatrix_unsloth.dat", "general.type": "model", "general.quantization_version": "2", "quantize.imatrix.chunks_count": "663", "tokenizer.ggml.add_space_prefix": "false", "gemma3.rope.scaling.factor": "8", "quantize.imatrix.dataset": "unsloth_calibration_gemma-3-12b-it.txt", "gemma3.attention.head_count": "16", "general.name": "Gemma-3-12B-It", "quantize.imatrix.entries_count": "336", "tokenizer.ggml.tokens": "<Array of type String with 262208 elements, data skipped>", "gemma3.attention.layer_norm_rms_epsilon": "0.000001", "tokenizer.ggml.unknown_token_id": "3", "gemma3.attention.key_length": "256", "tokenizer.chat_template": "{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%- if messages[0]['content'] is string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n    {%- else -%}\n        {%- set first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:] -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n{%- for message in loop_messages -%}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}\n        {{ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\") }}\n    {%- endif -%}\n    {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n    {%- else -%}\n        {%- set role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n' + (first_user_prefix if loop.first else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content'] | trim }}\n    {%- elif message['content'] is iterable -%}\n        {%- for item in message['content'] -%}\n            {%- if item['type'] == 'image' -%}\n                {{ '<start_of_image>' }}\n            {%- elif item['type'] == 'text' -%}\n                {{ item['text'] | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception(\"Invalid content type\") }}\n    {%- endif -%}\n    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{'<start_of_turn>model\n'}}\n{%- endif -%}\n", "general.architecture": "gemma3", "tokenizer.ggml.token_type": "<Array of type Int32 with 262208 elements, data skipped>", "tokenizer.ggml.add_bos_token": "true", "gemma3.attention.sliding_window": "1024", "gemma3.feed_forward_length": "15360", "tokenizer.ggml.bos_token_id": "2", "tokenizer.ggml.eos_token_id": "106", "tokenizer.ggml.pre": "default", "general.file_type": "15", "general.size_label": "12B", "gemma3.attention.head_count_kv": "8", "gemma3.embedding_length": "3840", "general.basename": "Gemma-3-12B-It", "tokenizer.ggml.model": "llama", "gemma3.rope.freq_base": "1000000", "general.finetune": "it", "general.quantized_by": "Unsloth", "tokenizer.ggml.add_eos_token": "false"}
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::utils][INFO] KV estimates -> sliding: 402653184 bytes (~384.00 MB), full: 25769803776 bytes (~24576.00 MB), middle: 13086228480 bytes (~12480.00 MB)
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] isModelSupported: Total memory requirement: 20387006816 for /Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf; Got kvCacheSize: 13086228480 from BE
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] No GPUs detected (likely unified memory system), using total RAM as VRAM
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM reported/calculated (in bytes): 25769803776
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] System RAM: 0 bytes
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM: 25769803776 bytes
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] Usable total memory: 23481313587 bytes
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] Usable VRAM: 23481313587 bytes
+[2025-10-08][10:12:21][tauri_plugin_llamacpp::gguf::commands][INFO] Required: 20387006816 bytes
+[2025-10-08][10:12:27][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:27][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:27][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:27][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:27][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:27][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:27][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:27][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:27][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:27][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:27][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:27][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:28][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:28][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:28][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:28][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:28][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:28][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:28][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:28][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:28][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:28][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:28][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:28][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:29][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:29][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:29][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:29][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:29][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:29][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:29][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:29][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:29][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:29][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:29][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:29][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:29][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:29][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:29][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:29][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:29][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:29][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:32][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:32][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:32][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:32][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:33][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:33][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:33][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:33][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:33][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:33][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:34][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:34][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:34][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:34][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:35][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:35][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:35][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:35][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:35][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:35][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:35][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:36][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:36][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:37][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:37][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:37][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:37][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:37][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:37][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:37][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:37][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:37][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:37][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:37][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:37][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:37][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:37][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:37][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:37][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:37][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:37][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:38][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:38][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:38][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:38][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:38][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:38][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:38][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:38][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:38][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:38][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:38][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:38][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:39][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:39][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:39][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:39][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:39][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:39][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:39][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:39][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:39][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:39][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:39][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:39][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:39][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:39][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:39][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:39][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:39][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:39][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:40][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:40][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:40][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:40][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:40][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:40][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:40][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:40][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:40][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:40][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:40][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:40][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:41][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:41][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:41][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:41][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:41][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:41][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:41][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:41][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:41][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:41][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:41][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:41][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:42][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:42][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:42][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:42][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:42][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:42][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:42][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:42][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:42][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:42][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:42][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:42][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:43][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:43][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:43][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:43][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:43][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:43][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:44][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:44][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:44][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:44][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:44][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:44][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:44][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:44][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:44][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:44][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:44][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:44][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:45][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:45][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:45][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::gguf::commands][INFO] modelSize: 7300778336
+[2025-10-08][10:12:45][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:45][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  params_from_: Chat format: Content-only
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot get_availabl: id  0 | task 7 | selected slot by lcs similarity, lcs_len = 2655, similarity = 1.000 (> 0.100 thold)
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot launch_slot_: id  0 | task 14 | processing task
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 14 | new prompt, n_ctx_slot = 65536, n_keep = 0, n_prompt_tokens = 2684
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 14 | kv cache rm [2655, end)
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 14 | prompt processing progress, n_past = 2684, n_tokens = 29, progress = 0.010805
+[2025-10-08][10:12:45][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 14 | prompt done, n_past = 2684, n_tokens = 29
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::commands][INFO] Using ctx_size: 65536
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::utils][INFO] Received ctx_size parameter: Some(65536)
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::utils][INFO] Received model metadata:
+{"quantize.imatrix.file": "gemma-3-12b-it-GGUF/imatrix_unsloth.dat", "tokenizer.ggml.unknown_token_id": "3", "quantize.imatrix.entries_count": "336", "gemma3.context_length": "131072", "tokenizer.ggml.tokens": "<Array of type String with 262208 elements, data skipped>", "general.size_label": "12B", "general.repo_url": "https://huggingface.co/unsloth", "gemma3.attention.key_length": "256", "tokenizer.ggml.pre": "default", "gemma3.attention.value_length": "256", "tokenizer.ggml.padding_token_id": "0", "gemma3.feed_forward_length": "15360", "gemma3.rope.scaling.factor": "8", "general.name": "Gemma-3-12B-It", "general.type": "model", "gemma3.attention.head_count": "16", "gemma3.attention.head_count_kv": "8", "gemma3.embedding_length": "3840", "gemma3.rope.freq_base": "1000000", "general.quantized_by": "Unsloth", "gemma3.attention.sliding_window": "1024", "gemma3.rope.scaling.type": "linear", "tokenizer.ggml.scores": "<Array of type Float32 with 262208 elements, data skipped>", "gemma3.attention.layer_norm_rms_epsilon": "0.000001", "tokenizer.ggml.add_eos_token": "false", "quantize.imatrix.dataset": "unsloth_calibration_gemma-3-12b-it.txt", "quantize.imatrix.chunks_count": "663", "general.finetune": "it", "general.file_type": "15", "general.quantization_version": "2", "tokenizer.ggml.add_space_prefix": "false", "tokenizer.chat_template": "{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%- if messages[0]['content'] is string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n    {%- else -%}\n        {%- set first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:] -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n{%- for message in loop_messages -%}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}\n        {{ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\") }}\n    {%- endif -%}\n    {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n    {%- else -%}\n        {%- set role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n' + (first_user_prefix if loop.first else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content'] | trim }}\n    {%- elif message['content'] is iterable -%}\n        {%- for item in message['content'] -%}\n            {%- if item['type'] == 'image' -%}\n                {{ '<start_of_image>' }}\n            {%- elif item['type'] == 'text' -%}\n                {{ item['text'] | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception(\"Invalid content type\") }}\n    {%- endif -%}\n    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{'<start_of_turn>model\n'}}\n{%- endif -%}\n", "gemma3.block_count": "48", "tokenizer.ggml.model": "llama", "tokenizer.ggml.token_type": "<Array of type Int32 with 262208 elements, data skipped>", "tokenizer.ggml.add_bos_token": "true", "tokenizer.ggml.bos_token_id": "2", "general.architecture": "gemma3", "general.basename": "Gemma-3-12B-It", "tokenizer.ggml.eos_token_id": "106"}
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::utils][INFO] KV estimates -> sliding: 402653184 bytes (~384.00 MB), full: 25769803776 bytes (~24576.00 MB), middle: 13086228480 bytes (~12480.00 MB)
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::commands][INFO] isModelSupported: Total memory requirement: 20387006816 for /Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf; Got kvCacheSize: 13086228480 from BE
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::commands][INFO] No GPUs detected (likely unified memory system), using total RAM as VRAM
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM reported/calculated (in bytes): 25769803776
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::commands][INFO] System RAM: 0 bytes
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM: 25769803776 bytes
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::commands][INFO] Usable total memory: 23481313587 bytes
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::commands][INFO] Usable VRAM: 23481313587 bytes
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::gguf::commands][INFO] Required: 20387006816 bytes
+[2025-10-08][10:12:46][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:46][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:46][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:46][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 14 | SWA checkpoint create, pos_min = 1148, pos_max = 2683, size = 480.018 MiB, total = 3/3 (1377.553 MiB)
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot      release: id  0 | task 14 | stop processing: n_past = 2689, truncated = 0
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot print_timing: id  0 | task 14 |
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp] prompt eval time =    2249.21 ms /    29 tokens (   77.56 ms per token,    12.89 tokens per second)
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp]        eval time =     454.02 ms /     6 tokens (   75.67 ms per token,    13.22 tokens per second)
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp]       total time =    2703.23 ms /    35 tokens
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  update_slots: all slots are idle
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /v1/chat/completions 127.0.0.1 200
+[2025-10-08][10:12:48][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:48][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:48][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:48][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] modelSize: 7300778336
+[2025-10-08][10:12:51][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:51][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  params_from_: Chat format: Content-only
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot get_availabl: id  0 | task 14 | selected slot by lcs similarity, lcs_len = 2684, similarity = 0.998 (> 0.100 thold)
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot launch_slot_: id  0 | task 21 | processing task
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 21 | new prompt, n_ctx_slot = 65536, n_keep = 0, n_prompt_tokens = 2684
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 21 | need to evaluate at least 1 token for each active slot, n_past = 2684, n_prompt_tokens = 2684
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 21 | kv cache rm [2683, end)
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 21 | prompt processing progress, n_past = 2684, n_tokens = 1, progress = 0.000373
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 21 | prompt done, n_past = 2684, n_tokens = 1
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 21 | SWA checkpoint erase, pos_min = 1148, pos_max = 2683, size = 480.018 MiB
+[2025-10-08][10:12:51][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:51][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:51][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] Using ctx_size: 65536
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::utils][INFO] Received ctx_size parameter: Some(65536)
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::utils][INFO] Received model metadata:
+{"tokenizer.ggml.add_space_prefix": "false", "general.type": "model", "gemma3.attention.key_length": "256", "tokenizer.chat_template": "{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%- if messages[0]['content'] is string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n    {%- else -%}\n        {%- set first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:] -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n{%- for message in loop_messages -%}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}\n        {{ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\") }}\n    {%- endif -%}\n    {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n    {%- else -%}\n        {%- set role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n' + (first_user_prefix if loop.first else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content'] | trim }}\n    {%- elif message['content'] is iterable -%}\n        {%- for item in message['content'] -%}\n            {%- if item['type'] == 'image' -%}\n                {{ '<start_of_image>' }}\n            {%- elif item['type'] == 'text' -%}\n                {{ item['text'] | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception(\"Invalid content type\") }}\n    {%- endif -%}\n    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{'<start_of_turn>model\n'}}\n{%- endif -%}\n", "general.size_label": "12B", "gemma3.feed_forward_length": "15360", "tokenizer.ggml.eos_token_id": "106", "general.finetune": "it", "gemma3.rope.freq_base": "1000000", "gemma3.embedding_length": "3840", "tokenizer.ggml.pre": "default", "tokenizer.ggml.tokens": "<Array of type String with 262208 elements, data skipped>", "quantize.imatrix.dataset": "unsloth_calibration_gemma-3-12b-it.txt", "gemma3.rope.scaling.type": "linear", "tokenizer.ggml.unknown_token_id": "3", "quantize.imatrix.chunks_count": "663", "tokenizer.ggml.token_type": "<Array of type Int32 with 262208 elements, data skipped>", "general.quantization_version": "2", "gemma3.attention.value_length": "256", "gemma3.attention.head_count_kv": "8", "tokenizer.ggml.add_bos_token": "true", "quantize.imatrix.file": "gemma-3-12b-it-GGUF/imatrix_unsloth.dat", "general.name": "Gemma-3-12B-It", "general.repo_url": "https://huggingface.co/unsloth", "general.architecture": "gemma3", "tokenizer.ggml.bos_token_id": "2", "gemma3.rope.scaling.factor": "8", "tokenizer.ggml.add_eos_token": "false", "general.quantized_by": "Unsloth", "gemma3.attention.sliding_window": "1024", "quantize.imatrix.entries_count": "336", "general.basename": "Gemma-3-12B-It", "gemma3.context_length": "131072", "gemma3.attention.layer_norm_rms_epsilon": "0.000001", "gemma3.block_count": "48", "tokenizer.ggml.scores": "<Array of type Float32 with 262208 elements, data skipped>", "tokenizer.ggml.padding_token_id": "0", "general.file_type": "15", "tokenizer.ggml.model": "llama", "gemma3.attention.head_count": "16"}
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::utils][INFO] KV estimates -> sliding: 402653184 bytes (~384.00 MB), full: 25769803776 bytes (~24576.00 MB), middle: 13086228480 bytes (~12480.00 MB)
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] isModelSupported: Total memory requirement: 20387006816 for /Users/pauldesai/Library/Mobile Documents/iCloud~md~obsidian/Documents/Paul-Desai /llamacpp/models/gemma-3-12b-it-Q4_K_M/model.gguf; Got kvCacheSize: 13086228480 from BE
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] No GPUs detected (likely unified memory system), using total RAM as VRAM
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM reported/calculated (in bytes): 25769803776
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] System RAM: 0 bytes
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] Total VRAM: 25769803776 bytes
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] Usable total memory: 23481313587 bytes
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] Usable VRAM: 23481313587 bytes
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::gguf::commands][INFO] Required: 20387006816 bytes
+[2025-10-08][10:12:51][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot update_slots: id  0 | task 21 | SWA checkpoint create, pos_min = 1153, pos_max = 2683, size = 478.456 MiB, total = 3/3 (1438.493 MiB)
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot      release: id  0 | task 21 | stop processing: n_past = 2689, truncated = 0
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] slot print_timing: id  0 | task 21 |
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] prompt eval time =     290.76 ms /     1 tokens (  290.76 ms per token,     3.44 tokens per second)
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp]        eval time =     445.79 ms /     6 tokens (   74.30 ms per token,    13.46 tokens per second)
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp]       total time =     736.56 ms /     7 tokens
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  update_slots: all slots are idle
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /v1/chat/completions 127.0.0.1 200
+[2025-10-08][10:12:52][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: GET /health 127.0.0.1 200
+[2025-10-08][10:12:52][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /apply-template 127.0.0.1 200
+[2025-10-08][10:12:52][reqwest::connect][DEBUG] starting new connection: http://localhost:3708/
+[2025-10-08][10:12:52][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv  log_server_r: request: POST /tokenize 127.0.0.1 200
+[2025-10-08][10:13:10][app_lib::core::mcp::helpers][INFO] Cleaning up MCP servers
+[2025-10-08][10:13:10][app_lib::core::mcp::helpers][INFO] MCP servers cleaned up successfully
+[2025-10-08][10:13:10][tauri_plugin_llamacpp::cleanup][INFO] Sending SIGTERM to PID 28104 during shutdown
+[2025-10-08][10:13:10][tauri_plugin_llamacpp::commands][INFO] [llamacpp] srv    operator(): operator(): cleaning up before exit...
+[2025-10-08][10:13:10][tauri_plugin_llamacpp::commands][INFO] [llamacpp] ggml_metal_free: deallocating
+[2025-10-08][10:13:10][tauri_plugin_llamacpp::cleanup][INFO] Process 28104 exited gracefully: exit status: 0

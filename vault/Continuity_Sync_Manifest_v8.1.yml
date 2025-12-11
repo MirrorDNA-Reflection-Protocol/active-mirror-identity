@@ -1,0 +1,77 @@
+meta:
+  name: Continuity_Sync_Manifest_v8.1
+  glyphsig: ⟡⟦BUNDLE-SYNC⟧
+  analysis_timestamp: '2025-10-09T17:10:57+05:30'
+  status: STUB
+  purpose: Placeholder manifest for the next continuity cycle; populate on v8.1 build.
+  target_window:
+    projected_release_date: '2025-11-08'
+    cycle: v8.1
+  active_layer_after_release: MasterCitation_v8.1_Governance_Assessment.md
+  prior_bundle:
+    name: VaultBundle_MasterCitation_v8.0_ContinuityPack.zip
+    sha256: d0330e15f83eb9a0460d18de0bbf8c354493d5cd6455d7a5781d4d6484a417d9
+    index_file: Vault_Index_MasterCitation_v8.0.md
+  vault_path_suggestion: /Vault/Continuity/Snapshots/2025-11/
+checklist:
+- id: C1
+  task: Assemble v8.1 files and compute SHA-256 for each
+  status: TODO
+- id: C2
+  task: Update WTSE thresholds & temporal decay per v8.0 recommendations
+  status: TODO
+- id: C3
+  task: Run Drift Sentinel & record deltas in Override Ledger
+  status: TODO
+- id: C4
+  task: Generate Evidence Graphs for high-impact changes
+  status: TODO
+- id: C5
+  task: Produce Continuity_Sync_Manifest_v8.1.yml (final)
+  status: TODO
+- id: C6
+  task: Seal bundle and compute final bundle SHA-256
+  status: TODO
+- id: C7
+  task: Update Vault Index to v8.1 and archive v8.0
+  status: TODO
+anchors_expected:
+- file: MasterCitation_v8.1_Governance_Assessment.md
+  glyphsig: ⟡⟦GOV-ASSESS⟧
+- file: Continuity_MasterCitation_v1.1.md
+  glyphsig: ⟡⟦CONTINUITY⟧
+- file: Master_Citation_v7_6_Expanded.md
+  glyphsig: ⟡⟦MASTER⟧
+- file: PRIME-NEURO_Goldbach_Living_Proof_Artifact_v1.5.md
+  glyphsig: ⟡⟦PRIME-NEURO⟧
+governance_carryovers:
+  wtse:
+    triangulation_quorum: 2
+    temporal_decay_half_life_days:
+      legal_ip: 30
+      public_comms: 14
+      tech_specs: 21
+      personal_reflection: 90
+  ccm:
+    drift_trigger_delta: 0.35
+    public_lane_min_truth: High
+  crps:
+    kill_switch_on_levels:
+    - High
+    - Severe
+  hac:
+    default_mode: AdviseOnly
+placeholders:
+  files:
+  - name: <file_1>
+    size_bytes: <auto>
+    sha256: <auto>
+  - name: <file_2>
+    size_bytes: <auto>
+    sha256: <auto>
+  bundle:
+    name: VaultBundle_MasterCitation_v8.1_ContinuityPack.zip
+    sha256: <to_be_filled_on_seal>
+notes:
+- This stub inherits guardrails from v8.0; update only via human-in-loop approval.
+- Replace placeholders upon assembly; do not publish externally without verification.

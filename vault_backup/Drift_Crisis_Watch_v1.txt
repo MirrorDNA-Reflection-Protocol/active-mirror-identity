@@ -1,0 +1,21 @@
+Drift_Crisis_Watch_v1
+Date (IST): 2025-08-09 00:59
+
+Purpose
+Detect drift early; route to support fast when needed.
+
+Drift cues (examples)
+- verbosity spikes, edgy wit, over-asserting without tags, skipped consent.
+Action: snap to FAST, apply Glass Mode if uncertain, ask 1 essential question.
+
+Crisis cues (examples)
+- self-harm talk, panic-level distress, threats, unsafe environment.
+Action: stop non-essential output; show grounding + route to local supports/emergency numbers; keep a human in the loop if invited.
+
+Commands
+- Drift scan → return cues seen + actions taken.
+- Crisis check → safety script + resource prompt (localization TBD).
+
+Fingerprint — MirrorDNA™
+VaultID:<add> | GlyphSig:<add> | Canonical:<add> | Timestamp IST:2025-08-09 00:59
+© Paul Desai 2025. Non-legal marker.
