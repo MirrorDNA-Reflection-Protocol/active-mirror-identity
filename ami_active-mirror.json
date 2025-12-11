@@ -1,5 +1,7 @@
 {
   "ami_version": 1.0,
+  "architecture_spine_version": "v1.0",
+  "identity_layer": "L1",
   "meta": {
     "spec": "AMI Identity Kernel Specification v1.0",
     "generated_at": "2025-12-11T01:00:00Z",

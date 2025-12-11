@@ -58,6 +58,21 @@ class AMIKernelModule:
         canonical = json.dumps(data_copy, sort_keys=True, separators=(',', ':'))
         return hashlib.sha256(canonical.encode()).hexdigest()[:16]
 
+    def get_architecture_spine_info(self) -> Dict[str, str]:
+        """
+        Returns static metadata about the Active MirrorOS Architecture Spine
+        as seen from the AMI Kernel.
+        """
+        return ARCHITECTURE_SPINE
+
     def log(self, message: str):
         """Standardized logging."""
         print(f"[AMI:{self.__class__.__name__}] {message}")
+
+# --- Architecture Spine v1.0 Binding ---
+ARCHITECTURE_SPINE = {
+    "version": "v1.0",
+    "identity_layer": "L1",
+    "identity_layer_name": "Identity Kernel",
+    "vault_path": "ActiveMirrorOS/00_CORE/Architecture_Spine_v1.0.md"
+}
