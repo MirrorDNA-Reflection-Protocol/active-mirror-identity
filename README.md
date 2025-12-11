@@ -8,6 +8,10 @@
 [![Protocol: MirrorDNA](https://img.shields.io/badge/Protocol-MirrorDNA--v1-blue)](https://doi.org/10.5281/zenodo.17787619)
 [![AMI Version](https://img.shields.io/badge/AMI-v1.0-green)](./docs/ARCHITECTURE.md)
 
+## Architecture
+AMI operates as **L1 Identity Kernel** within the Active MirrorOS Architecture Spine.
+See [Architecture Binding](docs/ARCHITECTURE_SPINE_BINDING.md).
+
 ---
 
 ## What Is This?
