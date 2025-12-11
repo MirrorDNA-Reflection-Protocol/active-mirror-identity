@@ -1,14 +1,20 @@
 {
-  "ami_version": 1.0,
+  "ami_version": 1.1,
   "architecture_spine_version": "v1.0",
   "identity_layer": "L1",
   "meta": {
-    "spec": "AMI Identity Kernel Specification v1.0",
+    "spec": "AMI Identity Kernel Specification v1.1",
     "generated_at": "2025-12-11T01:00:00Z",
     "generator": "ami_v1.0_cleanup",
-    "last_write": "2025-12-11T18:35:00.000000Z",
+    "last_write": "2025-12-11T18:40:00.000000Z",
     "last_writer": "antigravity",
-    "last_read": null
+    "last_read": null,
+    "epistemic_state": {
+      "confidence_score": 1.0,
+      "drift_level": 0.0,
+      "last_reality_check": "2025-12-11T18:35:00Z",
+      "status": "ANCHORED"
+    }
   },
   "checksum": "3c918c94844344da",
   "identity": {
@@ -63,7 +69,13 @@
   "hardware": {
     "primary": "Mac Mini M4 24GB RAM",
     "secondary": "MacBook Air M4",
-    "mobile": "Pixel 9 Pro (GrapheneOS)"
+    "mobile": "Pixel 9 Pro (GrapheneOS)",
+    "active_telemetry": {
+      "cpu_load_percent": null,
+      "cpu_temp_c": null,
+      "ram_usage_gb": null,
+      "last_heartbeat": null
+    }
   },
   "technical_stack": {
     "local_models": [
