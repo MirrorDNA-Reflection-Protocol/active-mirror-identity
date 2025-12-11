@@ -1,0 +1,22 @@
+{
+  "snapshot_id": "snap_20251211_151930",
+  "name": "Post-Build v1.0",
+  "created_at": "2025-12-11T15:19:30+05:30",
+  "created_by": "claude_opus_4.5",
+  "ami_version": "1.0",
+  "kernel_checksum": "865d65cb371ed722",
+  "description": "Complete AMI v1.0 build with 10 core modules, full documentation, Prime Neuro deployed, Dreaming engine verified, handoff loop tested.",
+  "contents": [
+    "kernel.json",
+    "dream_journal.json",
+    "heartbeat.json",
+    "SNAPSHOT.json"
+  ],
+  "milestones_included": [
+    "AMI v1.0 documentation complete",
+    "Prime Neuro (Llama 3.2 3B) deployed",
+    "Dreaming engine tested",
+    "Claude↔Antigravity handoff loop verified"
+  ],
+  "restore_command": "cp snapshots/snap_20251211_151930/kernel.json ami_active-mirror.json"
+}

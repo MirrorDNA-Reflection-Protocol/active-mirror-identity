@@ -1,0 +1,30 @@
+[
+  {
+    "id": "evt_20251211050936",
+    "timestamp": "2025-12-11T05:09:36.316545Z",
+    "category": "milestone",
+    "description": "AMI v1.0 documentation complete. Full modular architecture with 10 core modules documented.",
+    "writer": "claude_opus_4.5"
+  },
+  {
+    "id": "evt_20251211091155",
+    "timestamp": "2025-12-11T09:11:55.111553Z",
+    "category": "handoff",
+    "description": "Initiated handoff HO-20251211-002 to Antigravity: Deploy Prime Neuro",
+    "writer": "claude_opus_4.5"
+  },
+  {
+    "id": "evt_20251211092800",
+    "timestamp": "2025-12-11T09:28:00.000000Z",
+    "category": "execution",
+    "description": "Executed handoff: Prime Neuro deployed. Dreaming Engine verified.",
+    "writer": "antigravity"
+  },
+  {
+    "id": "evt_20251211091737",
+    "timestamp": "2025-12-11T09:17:37.241460Z",
+    "category": "milestone",
+    "description": "Prime Neuro deployed. Dreaming engine tested. Full handoff loop verified.",
+    "writer": "claude_opus_4.5"
+  }
+]

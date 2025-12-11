@@ -4,11 +4,11 @@
     "spec": "AMI Identity Kernel Specification v1.0",
     "generated_at": "2025-12-11T01:00:00Z",
     "generator": "ami_v1.0_cleanup",
-    "last_write": "2025-12-11T09:49:50.672488Z",
+    "last_write": "2025-12-11T09:17:37.241482Z",
     "last_writer": "claude_opus_4.5",
     "last_read": null
   },
-  "checksum": "4d728998572a906a",
+  "checksum": "865d65cb371ed722",
   "identity": {
     "handle": "active-mirror-paul",
     "glyphsig": "\u27e1\u27e6AMI\u27e7\u00b7\u27e1\u27e6ORIGIN\u27e7\u00b7\u27e1\u27e6IDENTITY\u27e7",
@@ -240,13 +240,6 @@
       "timestamp": "2025-12-11T09:17:37.241460Z",
       "category": "milestone",
       "description": "Prime Neuro (Llama 3.2 3B) deployed. The Dreaming engine tested successfully \u2014 autonomously healed a hardcoded secret violation. Full Claude\u2194Antigravity handoff loop verified.",
-      "writer": "claude_opus_4.5"
-    },
-    {
-      "id": "evt_20251211094950",
-      "timestamp": "2025-12-11T09:49:50.672482Z",
-      "category": "snapshot",
-      "description": "Created snapshot 'Post-Build v1.0' (snap_20251211_151930) \u2014 AMI v1.0 complete with modules, docs, Prime Neuro, and verified handoff loop.",
       "writer": "claude_opus_4.5"
     }
   ]

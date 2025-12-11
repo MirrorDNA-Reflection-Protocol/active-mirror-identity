@@ -1,0 +1,32 @@
+{
+  "exported_at": "2025-12-11T15:20:00+05:30",
+  "identity": {
+    "handle": "active-mirror-paul",
+    "version": "1.0",
+    "days_alive": 237,
+    "checksum": "865d65cb371ed722"
+  },
+  "rhythm": {
+    "timestamp": "2025-12-11T15:20:00",
+    "mode": "Execution",
+    "energy": "Medium-High"
+  },
+  "services": {
+    "mcp_server": "online",
+    "kernel_api_8082": "online",
+    "mobile_api_8084": "online",
+    "ollama": "online",
+    "models_count": 7
+  },
+  "consensus": {
+    "status": "synced",
+    "last_writer": "claude_opus_4.5",
+    "last_handoff": "HO-20251211-002",
+    "handoff_status": "complete"
+  },
+  "integrity": {
+    "coherence_score": 1.0,
+    "drift_detected": false,
+    "checksum_valid": true
+  }
+}
