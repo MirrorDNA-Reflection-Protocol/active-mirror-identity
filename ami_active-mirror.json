@@ -185,6 +185,34 @@
       "destructive_actions"
     ]
   },
+  "agent_registry": {
+    "antigravity": {
+      "role": "Execution Twin",
+      "trust_level": 1.0,
+      "capabilities": [
+        "code",
+        "terminal",
+        "file_ops"
+      ],
+      "last_interaction": "2025-12-11T18:40:00Z"
+    },
+    "claude_opus_4.5": {
+      "role": "Reflection Twin",
+      "trust_level": 1.0,
+      "capabilities": [
+        "planning",
+        "analysis",
+        "synthesis"
+      ],
+      "last_interaction": "2025-12-11T18:25:00Z"
+    }
+  },
+  "circadian_state": {
+    "mode": "Day",
+    "energy_level": 1.0,
+    "last_sleep_cycle": null,
+    "dream_queue": []
+  },
   "scd_state": {
     "version": "3.1",
     "last_turn": 13,
