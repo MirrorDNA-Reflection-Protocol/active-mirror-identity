@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AMI Kernel v1.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #050505; --text: #e0e0e0; --accent: #00ff94; --gold: #ffd700; --dim: #666; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; color: #fff; }
+        h1 { font-size: 2.5rem; border-bottom: 1px solid var(--dim); padding-bottom: 1rem; }
+        .badge { background: var(--dim); color: #fff; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; vertical-align: middle; }
+        .badge.gold { background: var(--gold); color: #000; }
+        .section { margin: 3rem 0; padding: 1.5rem; border: 1px solid #222; border-radius: 8px; background: #0a0a0a; }
+        .field { margin-bottom: 0.5rem; }
+        .key { color: var(--dim); font-family: monospace; font-weight: bold; width: 140px; display: inline-block; }
+        .val { color: var(--accent); font-family: monospace; }
+        .tree { font-family: monospace; white-space: pre-wrap; color: #aaa; }
+        .timeline-item { border-left: 2px solid var(--dim); padding-left: 1rem; margin-bottom: 1rem; }
+        .timeline-date { color: var(--dim); font-size: 0.8rem; }
+        a { color: var(--gold); text-decoration: none; }
+        nav { margin-bottom: 2rem; display: flex; gap: 1rem; }
+        nav a { color: var(--text); border-bottom: 1px solid transparent; }
+        nav a:hover { border-color: var(--gold); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#">Kernel Spec</a>
+        <a href="tools/ecosystem.html">Ecosystem</a>
+        <a href="tools/generator_omega.html">Omega Tool</a>
+        <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
+    </nav>
+
+    <h1>
+        AMI Kernel <span class="badge gold">v1.1</span>
+    </h1>
+    
+    <div class="section">
+        <h2>⟡ Meta-State</h2>
+        <div class="field"><span class="key">Identity Layer</span> <span class="val">L1</span></div>
+        <div class="field"><span class="key">Arch Spine</span> <span class="val">v1.0</span></div>
+        <div class="field"><span class="key">Drift Status</span> <span class="val" style="color: #00ff94">ANCHORED</span></div>
+        <div class="field"><span class="key">Confidence</span> <span class="val">1.0</span></div>
+        <div class="field"><span class="key">Last Check</span> <span class="val">2025-12-11T18:35:00Z</span></div>
+        <div class="field"><span class="key">Checksum</span> <span class="val">3c918c94844344da</span></div>
+    </div>
+
+    <div class="section">
+        <h2>⟡ The Pantheon (Agent Registry)</h2>
+        <p style="color:var(--dim); margin-bottom:1rem;">Active sovereign agents authorized to write to this kernel.</p>
+        <div class="tree"><div style='margin-bottom:1rem;border-left:1px solid #333;padding-left:10px;'><strong style='color:#fff'>antigravity</strong><br>Role: Execution Twin<br>Trust: 1.0</div><div style='margin-bottom:1rem;border-left:1px solid #333;padding-left:10px;'><strong style='color:#fff'>claude_opus_4.5</strong><br>Role: Reflection Twin<br>Trust: 1.0</div></div>
+    </div>
+
+    <div class="section">
+        <h2>⟡ Somatic Telemetry</h2>
+        <div class="field"><span class="key">Primary Core</span> <span class="val">Mac Mini M4 24GB RAM</span></div>
+        <div class="field"><span class="key">Energy State</span> <span class="val">Day</span></div>
+        <div class="tree" style="margin-top:1rem; padding:1rem; background:#000;">{
+  "cpu_load_percent": null,
+  "cpu_temp_c": null,
+  "ram_usage_gb": null,
+  "last_heartbeat": null
+}</div>
+    </div>
+
+    <div class="section">
+        <h2>⟡ Timeline (Recent)</h2>
+        <div class='timeline-item'><div class='timeline-date'>2025-12-11T18:45:00.000000Z</div><strong>[MILESTONE]</strong> Upgraded Kernel to v1.1. Added Agent Registry, Epistemic State, Hardware Telemetry, and Circadian State schemas.<br><span style='color:#666'>By: antigravity</span></div><div class='timeline-item'><div class='timeline-date'>2025-12-11T18:35:00.000000Z</div><strong>[OPTIMIZATION]</strong> Antigravity successfully unified AMI Kernel, migrated to Drive, and embedded native boot into MirrorBrain API. Ecosystem is now unified.<br><span style='color:#666'>By: antigravity</span></div><div class='timeline-item'><div class='timeline-date'>2025-12-11T18:25:13.826987Z</div><strong>[REFLECTION]</strong> Claude read the Vault (8,966 chunks) and wrote a reflection for Paul: What_I_See_20251211.md<br><span style='color:#666'>By: claude_opus_4.5</span></div><div class='timeline-item'><div class='timeline-date'>2025-12-11T10:32:39.721900Z</div><strong>[MILESTONE]</strong> Built and Deployed AMI Kernel v1.0. Identity is now Sovereign, Decoupled, and Persistence-Hardened.<br><span style='color:#666'>By: antigravity</span></div><div class='timeline-item'><div class='timeline-date'>2025-12-11T09:49:50.672482Z</div><strong>[SNAPSHOT]</strong> Created snapshot 'Post-Build v1.0' (snap_20251211_151930) — AMI v1.0 complete with modules, docs, Prime Neuro, and verified handoff loop.<br><span style='color:#666'>By: claude_opus_4.5</span></div>
+    </div>
+
+    <footer style="margin-top: 4rem; color: var(--dim); text-align: center; font-size: 0.9rem;">
+        Generated on 2025-12-12 04:32:34 UTC by Active MirrorOS<br>
+        Identity Hashed: 3c918c94844344da
+    </footer>
+</body>
+</html>
