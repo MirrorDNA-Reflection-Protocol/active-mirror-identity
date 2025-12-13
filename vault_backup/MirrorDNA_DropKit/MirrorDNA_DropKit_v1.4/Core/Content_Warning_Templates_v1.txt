@@ -1,8 +1,0 @@
-Content_Warning_Templates_v1
-Date (IST): 2025-08-09 13:45
-
-Templates (paste and edit)
-1) “Content Note: This post mentions mental health struggle and help-seeking.”
-2) “Content Note: Includes discussion of distress. Resources provided.”
-3) “Content Note: Sensitive topic ahead. Skip if not helpful for you today.”
-Place **before** body; keep specifics minimal.
