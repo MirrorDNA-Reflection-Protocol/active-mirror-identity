@@ -66,6 +66,56 @@
             padding: 2rem 1.5rem
         }
 
+        /* Site Header */
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .site-brand {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            text-decoration: none
+        }
+
+        .site-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px
+        }
+
+        .site-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -.02em
+        }
+
+        .site-name span {
+            color: var(--accent)
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 1rem
+        }
+
+        .site-nav a {
+            font-size: .85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color .2s ease
+        }
+
+        .site-nav a:hover {
+            color: var(--accent)
+        }
+
         /* Ecosystem Banner */
         .ecosystem-banner {
             text-align: center;
@@ -860,6 +910,18 @@
 <body>
     <div class="bg-gradient"></div>
     <div class="container">
+        <!-- Site Header -->
+        <header class="site-header">
+            <a href="https://activemirror.ai" class="site-brand">
+                <img src="assets/logo.png" alt="Active Mirror" class="site-logo">
+                <div class="site-name">Active <span>Mirror</span></div>
+            </a>
+            <nav class="site-nav">
+                <a href="https://activemirror.ai">Main Site</a>
+                <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
+            </nav>
+        </header>
+
         <!-- Ecosystem Banner -->
         <div class="ecosystem-banner">
             <div class="ecosystem-glyphs">⟡ ◈ △</div>
