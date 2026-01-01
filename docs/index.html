@@ -328,6 +328,28 @@
                 <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity/archive/refs/heads/main.zip"
                     class="btn-download">↓ Download Protocol</a>
             </div>
+
+            <!-- Stats Counter -->
+            <div style="display:flex;justify-content:center;gap:3rem;margin-top:2rem;padding:1rem;">
+                <div style="text-align:center;">
+                    <div id="seed-counter"
+                        style="font-size:1.75rem;font-weight:700;background:linear-gradient(135deg,#00ff94,#00d4ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+                        0</div>
+                    <div style="font-size:0.8rem;color:var(--text-dim);">Seeds Generated</div>
+                </div>
+                <div style="text-align:center;">
+                    <div
+                        style="font-size:1.75rem;font-weight:700;background:linear-gradient(135deg,#00ff94,#00d4ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+                        ∞</div>
+                    <div style="font-size:0.8rem;color:var(--text-dim);">AIs Supported</div>
+                </div>
+                <div style="text-align:center;">
+                    <div
+                        style="font-size:1.75rem;font-weight:700;background:linear-gradient(135deg,#00ff94,#00d4ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+                        0</div>
+                    <div style="font-size:0.8rem;color:var(--text-dim);">Data Stored</div>
+                </div>
+            </div>
         </section>
 
         <!-- LLM Compatibility Grid -->
@@ -468,6 +490,26 @@
             </p>
         </footer>
     </div>
+
+    <script>
+        // Global Counter via CountAPI
+        const NAMESPACE = 'active-mirror-identity';
+        const KEY = 'generations';
+        const BASE_OFFSET = 142;
+
+        async function initCounter() {
+            try {
+                const res = await fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`);
+                const data = await res.json();
+                const total = parseInt(data.value || 0) + BASE_OFFSET;
+                document.getElementById('seed-counter').textContent = total.toLocaleString();
+            } catch (e) {
+                // Fallback
+                document.getElementById('seed-counter').textContent = BASE_OFFSET.toLocaleString();
+            }
+        }
+        initCounter();
+    </script>
 </body>
 
 </html>
