@@ -1198,9 +1198,8 @@
 
         async function initCounter() {
             try {
-                // Use same 'up' endpoint but just to get current value (will increment by 1)
-                // For pure get without increment, we'd need auth, so we accept +1 on load
-                const res = await fetch('https://api.counterapi.dev/v1/activemirror/seeds/up');
+                // Read-only endpoint (with trailing slash) - does NOT increment
+                const res = await fetch('https://api.counterapi.dev/v1/activemirror/seeds/');
                 const data = await res.json();
                 updateDisplay(data.count);
             } catch (e) {
