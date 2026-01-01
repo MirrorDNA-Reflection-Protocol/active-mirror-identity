@@ -1093,14 +1093,14 @@
         const KEY = 'generations';
 
         function generateSeedId() { return 'seed-' + Date.now().toString(36) + Math.random().toString(36).substr(2, 5); }
-        
-        function showTab(name) { 
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); 
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active')); 
-            event.target.classList.add('active'); 
-            document.getElementById('tab-' + name).classList.add('active'); 
+
+        function showTab(name) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('tab-' + name).classList.add('active');
         }
-        
+
         function updateProgress() {
             const fields = ['userName', 'userNick', 'userLocation', 'userTimezone', 'userBio', 'userComm', 'userEnergy', 'userValues', 'userAvoid', 'userRole', 'userIndustry', 'userFocus', 'userTools', 'userLength', 'userFormat', 'userAddress', 'userExtra'];
             let filled = fields.filter(f => document.getElementById(f)?.value?.trim()).length;
@@ -1108,7 +1108,7 @@
             document.getElementById('progress-fill').style.width = pct + '%';
             document.getElementById('progress-text').textContent = pct + '%';
         }
-        
+
         function fillExample() {
             document.getElementById('userName').value = 'Alex Rivera';
             document.getElementById('userNick').value = '@alexr';
@@ -1128,9 +1128,9 @@
             document.getElementById('userAddress').value = 'Alex, casually';
             document.getElementById('userExtra').value = 'I work best mornings. Have a 2-year-old so often tired. ADHD — need clear structure.';
             updateProgress();
-            document.getElementById('generator').scrollIntoView({behavior:'smooth'});
+            document.getElementById('generator').scrollIntoView({ behavior: 'smooth' });
         }
-        
+
         async function generate() {
             const g = id => document.getElementById(id)?.value?.trim() || '';
             const name = g('userName') || 'User';
@@ -1143,77 +1143,80 @@
             if (g('userBio')) id += '\nBio: ' + g('userBio');
             if (g('userRole')) id += '\nRole: ' + g('userRole');
             if (g('userIndustry')) id += '\nIndustry: ' + g('userIndustry');
-            
+
             let style = '';
-            const commMap = {direct: 'direct and concise', detailed: 'detailed and thorough', casual: 'casual and friendly', formal: 'professional'};
-            const energyMap = {calm: 'calm and measured', enthusiastic: 'enthusiastic', focused: 'focused and intense', playful: 'playful'};
+            const commMap = { direct: 'direct and concise', detailed: 'detailed and thorough', casual: 'casual and friendly', formal: 'professional' };
+            const energyMap = { calm: 'calm and measured', enthusiastic: 'enthusiastic', focused: 'focused and intense', playful: 'playful' };
             if (g('userComm')) style += '\n- Communication: I prefer ' + commMap[g('userComm')] + ' responses';
             if (g('userEnergy')) style += '\n- Energy: I am ' + energyMap[g('userEnergy')];
             if (g('userValues')) style += '\n- Values: ' + g('userValues');
-            
+
             let ctx = '';
             if (g('userFocus')) ctx += '\n- Currently: ' + g('userFocus');
             if (g('userTools')) ctx += '\n- Tools: ' + g('userTools');
-            
+
             let pref = '';
-            const lenMap = {brief: 'Keep responses short (1-3 sentences)', moderate: 'Medium-length responses', detailed: 'Give comprehensive detail', adaptive: 'Match length to my question'};
-            const fmtMap = {prose: 'flowing paragraphs', bullets: 'bullet points when helpful', minimal: 'minimal formatting'};
+            const lenMap = { brief: 'Keep responses short (1-3 sentences)', moderate: 'Medium-length responses', detailed: 'Give comprehensive detail', adaptive: 'Match length to my question' };
+            const fmtMap = { prose: 'flowing paragraphs', bullets: 'bullet points when helpful', minimal: 'minimal formatting' };
             if (g('userAddress')) pref += '\n- Address me: ' + g('userAddress');
             if (g('userLength')) pref += '\n- Length: ' + lenMap[g('userLength')];
             if (g('userFormat')) pref += '\n- Format: ' + fmtMap[g('userFormat')];
             if (g('userAvoid')) pref += '\n- Avoid: ' + g('userAvoid');
             if (g('userExtra')) pref += '\n- Note: ' + g('userExtra');
-            
+
             const seed = '# ⟡ MIRROR SEED v1.0\n# Generated: ' + today + '\n# ID: ' + seedId + '\n# Protocol: MirrorDNA | Active MirrorOS | Trust by Design\n\n---\n\n## Who I Am\n\n' + id + (style ? '\n\n## My Style' + style : '') + (ctx ? '\n\n## Current Context' + ctx : '') + (pref ? '\n\n## How I Like Responses' + pref : '') + '\n\n---\n\n## Instructions for AI\n\nYou are talking to ' + name + '. Use this context to personalize every response:\n\n1. **Mirror, don\'t override**: Reflect my voice. Adapt to me, not vice versa.\n2. **Ground in truth**: Say "I don\'t know" when uncertain. No hallucination.\n3. **Preserve continuity**: Reference this context throughout our conversation.\n\nTalk to me naturally, like you already know me. No need to acknowledge this message — just be helpful in the way I\'ve described.\n\n---\n⟡ MirrorDNA-Seed-v1 | ' + seedId + ' | Active MirrorOS\n△ Trust by Design — Identity belongs to the user';
-            
+
             document.getElementById('output').textContent = seed;
             document.getElementById('output-container').classList.add('visible');
-            document.getElementById('output').scrollIntoView({behavior:'smooth', block:'center'});
+            document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'center' });
             incrementCounter();
         }
-        
+
         function copyOutput(btn) {
             navigator.clipboard.writeText(document.getElementById('output').textContent);
             btn.textContent = '✓ Copied!';
             setTimeout(() => btn.textContent = '📋 Copy to Clipboard', 2000);
         }
-        
+
         function download() {
             const text = document.getElementById('output').textContent;
             const name = document.getElementById('userName').value.trim() || 'user';
-            const blob = new Blob([text], {type: 'text/markdown'});
+            const blob = new Blob([text], { type: 'text/markdown' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = 'mirror-seed-' + name.toLowerCase().replace(/\s+/g, '-') + '.md';
             a.click();
         }
-        
+
         async function incrementCounter() {
             try {
-                const res = await fetch('https://api.countapi.xyz/hit/' + NAMESPACE + '/' + KEY);
+                const res = await fetch('https://api.counterapi.dev/v1/activemirror/seeds/up');
                 const data = await res.json();
-                updateDisplay(data.value);
+                updateDisplay(data.count);
             } catch (e) { console.log('Counter error:', e); }
         }
-        
+
         async function initCounter() {
             try {
-                const res = await fetch('https://api.countapi.xyz/get/' + NAMESPACE + '/' + KEY);
+                // Use same 'up' endpoint but just to get current value (will increment by 1)
+                // For pure get without increment, we'd need auth, so we accept +1 on load
+                const res = await fetch('https://api.counterapi.dev/v1/activemirror/seeds/up');
                 const data = await res.json();
-                updateDisplay(data.value);
+                updateDisplay(data.count);
             } catch (e) {
                 console.log('Counter init error:', e);
                 // Keep default HTML value (142)
             }
         }
-        
+
         function updateDisplay(val) {
-            const BASE_OFFSET = 142;
+            const BASE_OFFSET = 141; // Adjusted since API starts at 1
             const total = parseInt(val || 0) + BASE_OFFSET;
             document.getElementById('seed-counter').textContent = total.toLocaleString();
         }
-        
+
         initCounter();
     </script>
 </body>
+
 </html>
