@@ -3,1437 +3,662 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>AMI Kernel v1.1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIRROR SEED — Active MirrorOS Identity Protocol | MirrorDNA</title>
-    <meta name="description"
-        content="Part of the Active MirrorOS identity architecture. Create a portable AI identity file that works on any platform — owned by you, not them.">
-    <meta property="og:title" content="MIRROR SEED — Active MirrorOS Identity Protocol">
-    <meta property="og:description"
-        content="Your AI identity is yours. A portable file powered by MirrorDNA. Guided by Trust by Design.">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="author" content="Paul Desai">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Inter:wght@300;400;600&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg: #050505;
-            --bg-card: #0d0d0d;
-            --bg-input: #141414;
-            --border: #1f1f1f;
-            --border-hover: #2a2a2a;
-            --text: #fafafa;
-            --text-secondary: #888;
-            --text-dim: #555;
+            --bg: #030303;
+            --surface: #0a0a0a;
+            --surface-hover: #111;
+            --border: #222;
+            --text: #f0f0f0;
+            --text-dim: #888;
+            --gold: #ffd700;
+            --gold-dim: rgba(255, 215, 0, 0.4);
             --accent: #00ff94;
-            --accent-glow: rgba(0, 255, 148, .15);
-            --accent-subtle: rgba(0, 255, 148, .08);
-            --gradient: linear-gradient(135deg, #00ff94 0%, #00d4ff 50%, #a855f7 100%);
-            --warning: #ff6b6b
+            --dim: #666;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
-            padding: 0
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        .bg-gradient {
+        h1,
+        h2,
+        h3,
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #fff;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        /* Legacy classes for sections */
+        .section {
+            margin: 3rem auto;
+            padding: 1.5rem;
+            border: 1px solid #222;
+            border-radius: 8px;
+            background: #0a0a0a;
+            max-width: 1200px;
+        }
+
+        .field {
+            margin-bottom: 0.5rem;
+        }
+
+        .key {
+            color: var(--dim);
+            font-family: monospace;
+            font-weight: bold;
+            width: 140px;
+            display: inline-block;
+        }
+
+        .val {
+            color: var(--accent);
+            font-family: monospace;
+        }
+
+        .tree {
+            font-family: monospace;
+            white-space: pre-wrap;
+            color: #aaa;
+        }
+
+        .timeline-item {
+            border-left: 2px solid var(--dim);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-date {
+            color: var(--dim);
+            font-size: 0.8rem;
+        }
+
+        .badge {
+            background: var(--dim);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            vertical-align: middle;
+        }
+
+        .badge.gold {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* --- NAV --- */
+        .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 100vh;
-            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 255, 148, .12), transparent), radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, .08), transparent);
-            pointer-events: none;
-            z-index: -1
-        }
-
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem
-        }
-
-        /* Site Header */
-        .site-header {
+            padding: 1rem 2rem;
+            background: rgba(3, 3, 3, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 1rem 0;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border)
+            align-items: center;
+            z-index: 1000;
         }
 
-        .site-brand {
+        .brand {
+            font-weight: 700;
+            font-size: 1.25rem;
             display: flex;
             align-items: center;
-            gap: .75rem;
-            text-decoration: none
+            gap: 0.5rem;
         }
 
-        .site-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px
+        .brand span {
+            color: var(--gold);
+            font-size: 1.5rem;
         }
 
-        .site-name {
-            font-size: 1.1rem;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .btn-cta {
+            padding: 0.5rem 1.25rem;
+            background: var(--gold);
+            color: #000;
             font-weight: 600;
-            color: var(--text);
-            letter-spacing: -.02em
+            border-radius: 4px;
+            font-size: 0.9rem;
         }
 
-        .site-name span {
-            color: var(--accent)
+        .btn-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 20px var(--gold-dim);
         }
 
-        .site-nav {
-            display: flex;
-            gap: 1rem
-        }
-
-        .site-nav a {
-            font-size: .85rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color .2s ease
-        }
-
-        .site-nav a:hover {
-            color: var(--accent)
-        }
-
-        /* Ecosystem Banner */
-        .ecosystem-banner {
-            text-align: center;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, rgba(0, 255, 148, .05), rgba(168, 85, 247, .05));
-            border: 1px solid rgba(0, 255, 148, .15);
-            border-radius: 12px
-        }
-
-        .ecosystem-banner p {
-            font-size: .9rem;
-            color: var(--text-secondary);
-            margin: 0
-        }
-
-        .ecosystem-banner strong {
-            color: var(--accent)
-        }
-
-        .ecosystem-glyphs {
-            font-size: 1.1rem;
-            margin-bottom: .5rem;
-            letter-spacing: .5rem
-        }
-
-        /* Trust Badge */
-        .trust-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: .5rem;
-            padding: .4rem .8rem;
-            background: rgba(168, 85, 247, .1);
-            border: 1px solid rgba(168, 85, 247, .3);
-            border-radius: 8px;
-            font-size: .8rem;
-            color: #a855f7;
-            margin-top: .75rem
-        }
-
+        /* --- HERO --- */
         .hero {
-            text-align: center;
-            padding: 3rem 0 2rem
-        }
-
-        .hero-badge {
-            display: inline-flex;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: .5rem;
-            padding: .5rem 1rem;
-            background: var(--accent-subtle);
-            border: 1px solid rgba(0, 255, 148, .2);
-            border-radius: 100px;
-            font-size: .85rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem
-        }
-
-        .hero-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1)
-            }
-
-            50% {
-                opacity: .5;
-                transform: scale(.8)
-            }
+            text-align: center;
+            padding: 4rem 2rem;
+            background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.05), transparent 60%);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-size: 4.5rem;
             font-weight: 700;
-            letter-spacing: -.03em;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: var(--gradient);
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, #888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text
         }
 
         .hero p {
             font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 520px;
-            margin: 0 auto
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 3rem;
         }
 
-        .hero-tagline {
-            font-size: 1rem;
-            color: var(--accent);
-            margin-top: 1rem;
-            font-weight: 500
-        }
-
-        .counter-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 1.5rem 0;
-            padding: 1rem
-        }
-
-        .counter-item {
-            text-align: center
-        }
-
-        .counter-num {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent
-        }
-
-        .counter-label {
-            font-size: .8rem;
-            color: var(--text-dim)
-        }
-
-        .pain-banner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: .75rem;
-            padding: .875rem 1.25rem;
-            background: rgba(255, 107, 107, .1);
-            border: 1px solid rgba(255, 107, 107, .3);
-            border-radius: 12px;
-            font-size: .9rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            text-align: center;
-            flex-wrap: wrap
-        }
-
-        .pain-icon {
-            font-size: 1.1rem
-        }
-
-        .pain-banner strong {
-            color: var(--text)
-        }
-
-        /* Ecosystem Explanation */
-        .ecosystem-explainer {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            text-align: center
-        }
-
-        .ecosystem-explainer p {
-            color: var(--text-secondary);
-            font-size: .95rem;
-            line-height: 1.7
-        }
-
-        .steps {
+        .hero-actions {
             display: flex;
             gap: 1rem;
-            margin: 2rem 0;
-            text-align: center
         }
 
-        .step {
-            flex: 1;
-            padding: 1.5rem 1rem;
-            background: var(--bg-card);
+        .btn-outline {
+            padding: 0.75rem 2rem;
             border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: border-color .2s
+            border-radius: 4px;
+            font-weight: 500;
+            color: var(--text);
         }
 
-        .step:hover {
-            border-color: var(--border-hover)
+        .btn-outline:hover {
+            border-color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .step-num {
-            width: 32px;
-            height: 32px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent);
-            color: #000;
-            font-weight: 700;
-            font-size: .9rem;
-            border-radius: 50%;
-            margin-bottom: .75rem
+        /* --- TOOLS GRID --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
 
-        .step h3 {
-            font-size: 1rem;
-            margin-bottom: .5rem
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
-        .step p {
-            font-size: .85rem;
-            color: var(--text-secondary)
+        .section-header p {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        @media(max-width:600px) {
-            .steps {
-                flex-direction: column
-            }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
         }
 
         .card {
-            background: var(--bg-card);
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 1.5rem
+            padding: 2.5rem;
+            border-radius: 12px;
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
-            border-color: var(--border-hover)
+            transform: translateY(-5px);
+            border-color: #333;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: .75rem;
-            margin-bottom: 1rem
+        .card.featured {
+            border-color: var(--gold-dim);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.03), transparent);
         }
 
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-subtle);
-            border-radius: 12px;
-            font-size: 1.25rem
+        .card.featured:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.05);
         }
 
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600
-        }
-
-        .card-desc {
-            color: var(--text-secondary);
-            font-size: .95rem;
-            margin-bottom: 1rem
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: .5rem;
-            padding: .875rem 1.5rem;
-            border-radius: 12px;
-            font-size: .95rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all .2s;
-            border: none
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: #000
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--accent-glow)
-        }
-
-        .btn-secondary {
-            background: var(--bg-input);
-            color: var(--text);
-            border: 1px solid var(--border)
-        }
-
-        .btn-secondary:hover {
-            background: var(--border)
-        }
-
-        .btn-large {
-            padding: 1rem 2rem;
-            font-size: 1.1rem
-        }
-
-        .tabs {
-            display: flex;
-            gap: .25rem;
-            background: var(--bg-input);
-            padding: .25rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem
-        }
-
-        .tab {
-            flex: 1;
-            padding: .75rem 1rem;
-            border-radius: 10px;
-            font-size: .9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            text-align: center;
-            border: none;
-            background: transparent;
-            transition: all .2s
-        }
-
-        .tab:hover {
-            color: var(--text)
-        }
-
-        .tab.active {
-            background: var(--bg-card);
-            color: var(--text);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .2)
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn .3s ease
-        }
-
-        .tab-content.active {
-            display: block
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(8px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem
-        }
-
-        @media(max-width:600px) {
-            .form-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .field {
-            display: flex;
-            flex-direction: column
-        }
-
-        .field.full {
-            grid-column: span 2
-        }
-
-        @media(max-width:600px) {
-            .field.full {
-                grid-column: span 1
-            }
-        }
-
-        .field label {
-            font-size: .85rem;
-            font-weight: 500;
-            margin-bottom: .5rem
-        }
-
-        .field input,
-        .field textarea,
-        .field select {
-            padding: .875rem 1rem;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text);
-            font-size: .95rem;
-            font-family: inherit;
-            transition: all .2s
-        }
-
-        .field input:focus,
-        .field textarea:focus,
-        .field select:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-subtle)
-        }
-
-        .field input::placeholder,
-        .field textarea::placeholder {
-            color: var(--text-dim)
-        }
-
-        .field select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem
-        }
-
-        .field textarea {
-            resize: vertical;
-            min-height: 100px
-        }
-
-        .field-hint {
-            font-size: .8rem;
-            color: var(--text-dim);
-            margin-top: .375rem
-        }
-
-        .progress-container {
-            margin-bottom: 2rem
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: .75rem
-        }
-
-        .progress-label {
-            font-size: .85rem;
-            color: var(--text-secondary)
-        }
-
-        .progress-value {
-            font-size: .85rem;
-            font-weight: 600;
-            color: var(--accent)
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: var(--bg-input);
-            border-radius: 100px;
-            overflow: hidden
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 100px;
-            width: 0%;
-            transition: width .4s ease
-        }
-
-        .output-container {
-            display: none;
-            margin-top: 1.5rem
-        }
-
-        .output-container.visible {
-            display: block;
-            animation: fadeIn .3s ease
-        }
-
-        .output {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .8rem;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            max-height: 400px;
-            overflow-y: auto;
-            white-space: pre-wrap
-        }
-
-        .output-actions {
-            display: flex;
-            gap: .75rem;
-            margin-top: 1rem;
-            flex-wrap: wrap
-        }
-
-        .action-bar {
-            display: flex;
-            gap: .75rem;
-            margin-top: 1.5rem
-        }
-
-        .action-bar .btn {
-            flex: 1
-        }
-
-        .instruction-box {
-            background: linear-gradient(135deg, rgba(0, 255, 148, .1), rgba(0, 212, 255, .1));
-            border: 1px solid rgba(0, 255, 148, .3);
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin-top: 1.5rem
-        }
-
-        .instruction-box h4 {
-            color: var(--accent);
-            margin-bottom: .75rem;
-            font-size: .95rem
-        }
-
-        .instruction-box ol {
-            color: var(--text-secondary);
-            margin-left: 1.25rem;
-            font-size: .9rem
-        }
-
-        .instruction-box li {
-            margin-bottom: .5rem
-        }
-
-        .laws {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem
-        }
-
-        .law {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--bg-input);
-            border-radius: 12px
-        }
-
-        .law-icon {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-subtle);
-            border-radius: 10px;
-            font-size: 1rem;
-            flex-shrink: 0
-        }
-
-        .law-content h4 {
-            font-size: .95rem;
-            font-weight: 600;
-            margin-bottom: .25rem
-        }
-
-        .law-content p {
-            font-size: .85rem;
-            color: var(--text-secondary)
-        }
-
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1rem
-        }
-
-        @media(max-width:600px) {
-            .comparison {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .comparison-col {
-            padding: 1rem;
-            border-radius: 12px
-        }
-
-        .comparison-col.bad {
-            background: rgba(255, 107, 107, .1);
-            border: 1px solid rgba(255, 107, 107, .2)
-        }
-
-        .comparison-col.good {
-            background: rgba(0, 255, 148, .1);
-            border: 1px solid rgba(0, 255, 148, .2)
-        }
-
-        .comparison-col h4 {
-            font-size: .9rem;
-            margin-bottom: .75rem
-        }
-
-        .comparison-col ul {
-            list-style: none;
-            font-size: .85rem;
-            color: var(--text-secondary)
-        }
-
-        .comparison-col ul li {
-            margin-bottom: .5rem;
-            padding-left: 1.25rem;
-            position: relative
-        }
-
-        .comparison-col.bad ul li::before {
-            content: '✗';
+        .tag {
             position: absolute;
-            left: 0;
-            color: var(--warning)
-        }
-
-        .comparison-col.good ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent)
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            border-top: 1px solid var(--border);
-            margin-top: 3rem
-        }
-
-        .footer-ecosystem {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: .5rem;
-            margin-bottom: 1.5rem
-        }
-
-        .footer-ecosystem-title {
-            font-size: .8rem;
-            color: var(--text-dim);
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: .1em
+            letter-spacing: 0.1em;
+            padding: 4px 8px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .footer-ecosystem-items {
+        .tag.gold {
+            color: #000;
+            background: var(--gold);
+            font-weight: 700;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            flex: 1;
+        }
+
+        .card-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .footer-ecosystem-item {
-            font-size: .9rem;
-            color: var(--text-secondary)
+        .card-link span {
+            color: var(--gold);
         }
 
-        .footer-ecosystem-item strong {
-            color: var(--text)
+        /* --- HOW IT WORKS --- */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-num {
+            font-family: 'Space Grotesk';
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--border);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .step h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        /* --- PRIVACY --- */
+        .privacy-banner {
+            background: linear-gradient(90deg, #050505, #0a0a0a);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .privacy-shield {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: .9rem;
-            transition: color .2s
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
         .footer-links a:hover {
-            color: var(--accent)
+            color: var(--text);
         }
 
-        .footer-credit {
-            margin-top: 1.5rem;
-            font-size: .85rem;
-            color: var(--text-dim)
+        /* --- LLM GRID --- */
+        .llm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
         }
 
-        .footer-founder {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border)
-        }
-
-        .footer-founder-sig {
-            font-size: .85rem;
-            color: var(--text-secondary);
-            line-height: 1.8
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-input)
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-hover);
-            border-radius: 3px
-        }
-
-        /* Incident Timeline */
-        .incident-timeline {
-            margin-top: 1.5rem
-        }
-
-        .incident {
-            background: var(--bg-card);
+        .llm-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            margin-bottom: 1rem;
-            transition: border-color .2s ease
-        }
-
-        .incident:hover {
-            border-color: var(--border-hover)
-        }
-
-        .incident-header {
+            padding: 1.5rem;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: .75rem;
-            margin-bottom: .5rem
+            gap: 1rem;
+            transition: 0.2s;
         }
 
-        .incident-date {
-            font-size: .75rem;
-            font-weight: 600;
-            color: var(--warning);
-            background: rgba(255, 107, 107, .1);
-            padding: .25rem .5rem;
-            border-radius: 4px;
-            white-space: nowrap
+        .llm-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-dim);
+            transform: translateY(-2px);
         }
 
-        .incident-title {
-            font-size: .95rem;
-            font-weight: 600;
-            color: var(--text)
+        .provider-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
         }
 
-        .incident-desc {
-            font-size: .85rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: .5rem
+        .provider-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.1rem;
+            color: var(--text);
         }
 
-        .incident-source {
-            font-size: .75rem;
-            color: var(--text-dim)
+        .provider-info span {
+            font-size: 0.8rem;
+            color: var(--text-dim);
         }
 
-        .incident-source a {
+        .compatibility-tagline {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
             color: var(--accent);
-            text-decoration: none
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 600;
         }
 
-        .incident-source a:hover {
-            text-decoration: underline
+        .btn-download {
+            padding: 0.75rem 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-weight: 500;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .section-intro {
-            font-size: .95rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6
+        .btn-download:hover {
+            background: var(--surface-hover);
+            border-color: var(--text-dim);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            /* Simplified mobile nav for now */
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-gradient"></div>
-    <div class="container">
-        <!-- Site Header -->
-        <header class="site-header">
-            <a href="https://activemirror.ai" class="site-brand">
-                <img src="assets/logo.png" alt="Active Mirror" class="site-logo">
-                <div class="site-name">Active <span>Mirror</span></div>
-            </a>
-            <nav class="site-nav">
-                <a href="https://activemirror.ai">Main Site</a>
-                <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
-            </nav>
-        </header>
+    <nav>
+        <a href="#">Kernel Spec</a>
+        <a href="tools/ecosystem.html">Ecosystem</a>
+        <a href="tools/generator_omega.html">Omega Tool</a>
+        <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
+    </nav>
 
-        <!-- Ecosystem Banner -->
-        <div class="ecosystem-banner">
-            <div class="ecosystem-glyphs">⟡ ◈ △</div>
-            <p>Part of the <strong>Active MirrorOS</strong> identity architecture.</p>
-            <p>Powered by <strong>MirrorDNA</strong>. Guided by <strong>Trust by Design</strong>.</p>
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Your Identity.<br>Your Files. Your Future.</h1>
+        <p>A privacy-first, AI-powered protocol for deep personal reflection. Create a portable digital self that grows
+            with you.</p>
+        <div class="hero-actions">
+            <a href="#tools" class="btn-cta" style="padding: 1rem 2.5rem; font-size: 1rem;">Launch Omega</a>
+            <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity/archive/refs/heads/main.zip"
+                class="btn-download">↓ Download Protocol</a>
         </div>
+    </section>
 
-        <section class="hero">
-            <div class="hero-badge">User-Sovereign Protocol</div>
-            <h1>Never Explain Yourself to AI Again</h1>
-            <p>Your AI identity is yours. A portable file that works on any AI — stored in your files, not theirs.</p>
-            <p class="hero-tagline">Built for Reflective AI, not predictive AI.</p>
-            <div class="trust-badge">△ Trust by Design: Identity belongs to the user.</div>
-        </section>
-
-        <div class="counter-container">
-            <div class="counter-item">
-                <div class="counter-num" id="seed-counter">...</div>
-                <div class="counter-label">Seeds Generated</div>
-            </div>
-            <div class="counter-item">
-                <div class="counter-num">∞</div>
-                <div class="counter-label">AIs Supported</div>
-            </div>
-            <div class="counter-item">
-                <div class="counter-num">0</div>
-                <div class="counter-label">Data Stored</div>
-            </div>
-        </div>
-
-        <div class="pain-banner">
-            <span class="pain-icon">⚠️</span>
-            <span><a href="https://community.openai.com/search?q=catastrophic+memory+loss+in+recent+chatgpt+update"
-                    target="_blank" style="color: inherit; text-decoration: underline;">ChatGPT memory lost years of
-                    user data</a> in Feb 2025. Your identity should live in <strong>your</strong> files.</span>
-        </div>
-
-        <!-- Ecosystem Explainer -->
-        <div class="ecosystem-explainer">
-            <p><strong>⟡ Mirror Seed</strong> is the identity artifact used across Active MirrorOS and the broader
-                MirrorDNA ecosystem. It establishes continuity, consent, and reflective grounding across AI surfaces,
-                enabling identity that travels with the user instead of staying trapped inside platforms.</p>
-        </div>
-
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <h3>Create Seed</h3>
-                <p>Fill the form (2 min)</p>
-            </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <h3>Save Your File</h3>
-                <p>Download to your Drive</p>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <h3>Paste Into Any AI</h3>
-                <p>ChatGPT, Claude, Gemini</p>
-            </div>
-        </div>
-
-        <div class="card" id="generator">
-            <div class="card-header">
-                <div class="card-icon">⟡</div>
-                <div class="card-title">Create Your MIRROR SEED</div>
-            </div>
-            <p class="card-desc">A portable identity file you own forever. More details = better personalization.</p>
-            <div class="progress-container">
-                <div class="progress-header"><span class="progress-label">Profile completeness</span><span
-                        class="progress-value" id="progress-text">0%</span></div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-            </div>
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('basics')">Basics</button>
-                <button class="tab" onclick="showTab('personality')">Personality</button>
-                <button class="tab" onclick="showTab('work')">Work</button>
-                <button class="tab" onclick="showTab('prefs')">Preferences</button>
-            </div>
-            <div id="tab-basics" class="tab-content active">
-                <div class="form-grid">
-                    <div class="field"><label>Your Name</label><input type="text" id="userName" placeholder="Sarah Chen"
-                            oninput="updateProgress()"></div>
-                    <div class="field"><label>Nickname / Handle</label><input type="text" id="userNick"
-                            placeholder="@sarahc" oninput="updateProgress()"></div>
-                    <div class="field"><label>Location</label><input type="text" id="userLocation"
-                            placeholder="San Francisco" oninput="updateProgress()"></div>
-                    <div class="field"><label>Timezone</label><select id="userTimezone" oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="PST">Pacific (PST)</option>
-                            <option value="EST">Eastern (EST)</option>
-                            <option value="GMT">GMT/UTC</option>
-                            <option value="CET">Central Europe</option>
-                            <option value="IST">India (IST)</option>
-                            <option value="JST">Japan (JST)</option>
-                            <option value="AEST">Australia (AEST)</option>
-                        </select></div>
-                    <div class="field full"><label>One-line bio</label><input type="text" id="userBio"
-                            placeholder="Product designer who loves hiking and bad puns" oninput="updateProgress()">
-                    </div>
-                </div>
-            </div>
-            <div id="tab-personality" class="tab-content">
-                <div class="form-grid">
-                    <div class="field"><label>Communication style</label><select id="userComm"
-                            oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="direct">Direct & concise</option>
-                            <option value="detailed">Detailed & thorough</option>
-                            <option value="casual">Casual & friendly</option>
-                            <option value="formal">Professional & formal</option>
-                        </select></div>
-                    <div class="field"><label>Your energy</label><select id="userEnergy" oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="calm">Calm & measured</option>
-                            <option value="enthusiastic">Enthusiastic</option>
-                            <option value="focused">Focused & intense</option>
-                            <option value="playful">Playful & light</option>
-                        </select></div>
-                    <div class="field full"><label>Values you care about</label><input type="text" id="userValues"
-                            placeholder="honesty, creativity, efficiency" oninput="updateProgress()"></div>
-                    <div class="field full"><label>What should AI avoid?</label><input type="text" id="userAvoid"
-                            placeholder="excessive caveats, long intros, bullet points" oninput="updateProgress()"><span
-                            class="field-hint">Pet peeves in AI responses</span></div>
-                </div>
-            </div>
-            <div id="tab-work" class="tab-content">
-                <div class="form-grid">
-                    <div class="field"><label>Your role</label><input type="text" id="userRole"
-                            placeholder="Product Designer" oninput="updateProgress()"></div>
-                    <div class="field"><label>Industry</label><input type="text" id="userIndustry" placeholder="Fintech"
-                            oninput="updateProgress()"></div>
-                    <div class="field full"><label>What are you working on?</label><textarea id="userFocus"
-                            placeholder="Redesigning our onboarding flow. Preparing a big presentation next week."
-                            oninput="updateProgress()"></textarea></div>
-                    <div class="field full"><label>Tools you use</label><input type="text" id="userTools"
-                            placeholder="Figma, Notion, Slack, VS Code" oninput="updateProgress()"></div>
-                </div>
-            </div>
-            <div id="tab-prefs" class="tab-content">
-                <div class="form-grid">
-                    <div class="field"><label>Response length</label><select id="userLength" oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="brief">Brief (1-3 sentences)</option>
-                            <option value="moderate">Moderate</option>
-                            <option value="detailed">Detailed</option>
-                            <option value="adaptive">Match the question</option>
-                        </select></div>
-                    <div class="field"><label>Formatting preference</label><select id="userFormat"
-                            oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="prose">Flowing prose</option>
-                            <option value="bullets">Bullet points</option>
-                            <option value="minimal">Minimal</option>
-                        </select></div>
-                    <div class="field full"><label>How should AI address you?</label><input type="text" id="userAddress"
-                            placeholder="by first name, casually" oninput="updateProgress()"></div>
-                    <div class="field full"><label>Anything else AI should know?</label><textarea id="userExtra"
-                            placeholder="I have ADHD so I need clear structure. I'm a visual learner. I have a dog named Max."
-                            oninput="updateProgress()"></textarea><span class="field-hint">Personal context that helps
-                            AI understand you better</span></div>
-                </div>
-            </div>
-            <div class="action-bar">
-                <button class="btn btn-primary btn-large" onclick="generate()">Generate My MIRROR SEED</button>
-                <button class="btn btn-secondary" onclick="fillExample()">See Example</button>
-            </div>
-            <div class="output-container" id="output-container">
-                <div class="output" id="output"></div>
-                <div class="instruction-box">
-                    <h4>✨ What to do next:</h4>
-                    <ol>
-                        <li><strong>Download</strong> your seed file (save to Google Drive for backup)</li>
-                        <li><strong>Open</strong> ChatGPT, Claude, Gemini, or any AI</li>
-                        <li><strong>Paste</strong> as your first message in new conversations</li>
-                        <li><strong>Update</strong> your seed whenever your context changes</li>
-                    </ol>
-                </div>
-                <div class="output-actions">
-                    <button class="btn btn-primary" onclick="copyOutput(this)">📋 Copy to Clipboard</button>
-                    <button class="btn btn-secondary" onclick="download()">⬇️ Download .md</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">⟡</div>
-                <div class="card-title">The Three Laws</div>
-            </div>
-            <p class="card-desc">Every AI aligned to your MIRROR SEED follows these principles:</p>
-            <div class="laws">
-                <div class="law">
-                    <div class="law-icon">⟡</div>
-                    <div class="law-content">
-                        <h4>Mirror, don't override</h4>
-                        <p>Reflect the user's voice, never impose. AI adapts to you, not vice versa.</p>
-                    </div>
-                </div>
-                <div class="law">
-                    <div class="law-icon">◈</div>
-                    <div class="law-content">
-                        <h4>Ground in truth</h4>
-                        <p>Say "I don't know" when uncertain. No hallucination. Ever.</p>
-                    </div>
-                </div>
-                <div class="law">
-                    <div class="law-icon">△</div>
-                    <div class="law-content">
-                        <h4>Preserve continuity</h4>
-                        <p>Carry forward what was shared. Works across all platforms — same identity everywhere.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">◈</div>
-                <div class="card-title">Why User-Sovereign?</div>
-            </div>
-            <div class="comparison">
-                <div class="comparison-col bad">
-                    <h4>❌ Platform Memory</h4>
-                    <ul>
-                        <li>Data stored on their servers</li>
-                        <li>Can be wiped without warning</li>
-                        <li>Locked to one platform</li>
-                        <li>Privacy concerns</li>
-                    </ul>
-                </div>
-                <div class="comparison-col good">
-                    <h4>✓ MIRROR SEED</h4>
-                    <ul>
-                        <li>File lives in YOUR storage</li>
-                        <li>You control backups</li>
-                        <li>Works on ANY AI</li>
-                        <li>Zero data collection</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">❓</div>
-                <div class="card-title">Common Questions</div>
-            </div>
-            <div style="color:var(--text-secondary);font-size:.95rem;">
-                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">How is this different from ChatGPT
-                        memory?</strong><br>Platform memory is stored on their servers and can be wiped (as happened in
-                    Feb 2025). Your MIRROR SEED is a file you own — save it anywhere. No platform can take it away.</p>
-                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Does AI permanently remember
-                        me?</strong><br>The seed works for the entire conversation. For new chats, paste it again. Some
-                    AIs (like Claude) may remember across sessions, but your file is the backup.</p>
-                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Which AIs work with
-                        this?</strong><br>All of them. ChatGPT, Claude, Gemini, DeepSeek, Grok, Llama, Mistral — any AI
-                    that accepts text input.</p>
-                <p><strong style="color:var(--text);">Is my data stored anywhere?</strong><br>No. Everything happens in
-                    your browser. We don't collect, store, or transmit any information. The file only exists when you
-                    download it.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">⚠️</div>
-                <div class="card-title">Why It Matters</div>
-            </div>
-            <p class="section-intro">AI platforms have repeatedly failed to protect user data. These aren't
-                hypotheticals — they're documented incidents that affected real people. Your identity deserves better
-                than platform promises.</p>
-            <div class="incident-timeline">
-                <div class="incident">
-                    <div class="incident-header">
-                        <span class="incident-date">Feb 2025</span>
-                        <span class="incident-title">ChatGPT Memory Catastrophe</span>
-                    </div>
-                    <p class="incident-desc">OpenAI's backend update caused "catastrophic and unannounced" erasure of
-                        user memory data. Users reported losing years of accumulated context, relationships, and project
-                        history. An MIT study found 83% memory failure rate.</p>
-                    <p class="incident-source">Source: <a
-                            href="https://community.openai.com/search?q=catastrophic+memory+loss+in+recent+chatgpt+update"
-                            target="_blank">OpenAI Community Forum</a></p>
-                </div>
-                <div class="incident">
-                    <div class="incident-header">
-                        <span class="incident-date">Dec 2024</span>
-                        <span class="incident-title">WotNot AI Exposes 346K Files</span>
-                    </div>
-                    <p class="incident-desc">AI chatbot provider exposed 346,000+ sensitive customer files — including
-                        IDs, medical records, and resumes — due to a misconfigured cloud database.</p>
-                    <p class="incident-source">Source: <a
-                            href="https://www.malwarebytes.com/blog/news/2024/12/ai-chatbot-provider-exposes-346000-customer-files-including-id-documents-resumes-and-medical-records"
-                            target="_blank">Malwarebytes News</a></p>
-                </div>
-                <div class="incident">
-                    <div class="incident-header">
-                        <span class="incident-date">2024</span>
-                        <span class="incident-title">225K OpenAI Credentials Stolen</span>
-                    </div>
-                    <p class="incident-desc">Over 225,000 sets of OpenAI credentials were found for sale on the dark
-                        web, stolen by infostealer malware from users who trusted their data to the platform.</p>
-                    <p class="incident-source">Source: <a
-                            href="https://thehackernews.com/2024/03/over-225000-compromised-chatgpt.html"
-                            target="_blank">The Hacker News</a>
-                    </p>
-                </div>
-                <div class="incident">
-                    <div class="incident-header">
-                        <span class="incident-date">Aug 2024</span>
-                        <span class="incident-title">Slack AI Leaks Private Channels</span>
-                    </div>
-                    <p class="incident-desc">Researchers demonstrated that Slack's AI could be manipulated via prompt
-                        injection to leak data from private channels, exposing confidential business communications.</p>
-                    <p class="incident-source">Source: <a
-                            href="https://www.theregister.com/2024/08/21/slack_ai_prompt_injection/" target="_blank">The
-                            Register</a></p>
-                </div>
-                <div class="incident">
-                    <div class="incident-header">
-                        <span class="incident-date">2023</span>
-                        <span class="incident-title">Samsung Bans Internal AI</span>
-                    </div>
-                    <p class="incident-desc">Samsung employees inadvertently leaked sensitive company information
-                        through ChatGPT, prompting the company to prohibit internal use of generative AI tools entirely.
-                    </p>
-                    <p class="incident-source">Source: <a
-                            href="https://www.theregister.com/2023/05/02/samsung_generative_ai_ban/" target="_blank">The
-                            Register</a></p>
-                </div>
-                <div class="incident">
-                    <div class="incident-header">
-                        <span class="incident-date">Sep 2025</span>
-                        <span class="incident-title">Claude Now Uses Your Data</span>
-                    </div>
-                    <p class="incident-desc">Anthropic announced that user chat data will be used for AI model training
-                        unless users actively opt out. Data not opted out of may be retained for up to 5 years.</p>
-                    <p class="incident-source">Source: <a
-                            href="https://www.anthropic.com/news/updates-to-our-consumer-terms"
-                            target="_blank">Anthropic News</a>
-                    </p>
-                </div>
-            </div>
-            <p style="text-align:center;margin-top:1.5rem;font-size:.9rem;color:var(--text-secondary);">
-                <strong style="color:var(--accent);">The solution?</strong> Own your identity. Store it in your files.
-                Never depend on platforms again.
+    <!-- FEATURES / VALUE PROP -->
+    <section class="section" id="how-it-works">
+        <div class="section-header">
+            <h2>Universal Compatibility</h2>
+            <p>Your identity file is a simple, standardized JSON kernel. It works instantly with every major AI model.
             </p>
         </div>
 
-        <footer>
-            <!-- Founder Attribution -->
-            <div class="footer-ecosystem">
-                <span class="footer-ecosystem-title">Created by</span>
-                <div class="footer-ecosystem-items">
-                    <span class="footer-ecosystem-item"><strong>Paul Desai</strong></span>
+        <div class="llm-grid">
+            <!-- ROW 1: CLOUD GIANTS -->
+            <div class="llm-card">
+                <div class="provider-icon">🤖</div>
+                <div class="provider-info">
+                    <h4>OpenAI</h4>
+                    <span>ChatGPT & API</span>
                 </div>
             </div>
-            <div class="footer-ecosystem">
-                <span class="footer-ecosystem-title">Ecosystem</span>
-                <div class="footer-ecosystem-items">
-                    <span class="footer-ecosystem-item">◈ <strong>Active MirrorOS</strong></span>
-                    <span class="footer-ecosystem-item">⟡ <strong>MirrorDNA</strong> Identity Protocol</span>
-                    <span class="footer-ecosystem-item">△ <strong>Trust by Design</strong></span>
+            <div class="llm-card">
+                <div class="provider-icon">🧠</div>
+                <div class="provider-info">
+                    <h4>Anthropic</h4>
+                    <span>Claude 3.5 & Opus</span>
                 </div>
             </div>
-            <div class="footer-links">
-                <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
-                <a href="https://twitter.com/pauldesai123">Twitter</a>
-                <a href="https://doi.org/10.5281/zenodo.17787619">Research Paper</a>
+            <div class="llm-card">
+                <div class="provider-icon">✨</div>
+                <div class="provider-info">
+                    <h4>Google</h4>
+                    <span>Gemini 1.5 Pro</span>
+                </div>
             </div>
-            <div class="footer-founder">
-                <p class="footer-founder-sig">
-                    ⟡ MirrorDNA — Open source user-sovereign AI identity protocol<br>
-                    N1 Intelligence (OPC) Pvt Ltd — Goa, India — 2025
-                </p>
+
+            <!-- ROW 2: GLOBAL LEADERS -->
+            <div class="llm-card">
+                <div class="provider-icon">🐳</div>
+                <div class="provider-info">
+                    <h4>DeepSeek</h4>
+                    <span>V3 & R1 Models</span>
+                </div>
             </div>
-            <p class="footer-credit">⟡△◈ — The mirror reflects, it does not predict.</p>
-        </footer>
+            <div class="llm-card">
+                <div class="provider-icon">🐱</div>
+                <div class="provider-info">
+                    <h4>Mistral</h4>
+                    <span>Le Chat & Large</span>
+                </div>
+            </div>
+            <div class="llm-card">
+                <div class="provider-icon">🦙</div>
+                <div class="provider-info">
+                    <h4>Meta</h4>
+                    <span>Llama 3.3</span>
+                </div>
+            </div>
+
+            <!-- ROW 3: LOCAL & OPEN -->
+            <div class="llm-card">
+                <div class="provider-icon">🦙</div>
+                <div class="provider-info">
+                    <h4>Ollama</h4>
+                    <span>Local Inference</span>
+                </div>
+            </div>
+            <div class="llm-card">
+                <div class="provider-icon">⚡</div>
+                <div class="provider-info">
+                    <h4>LM Studio</h4>
+                    <span>Local Inference</span>
+                </div>
+            </div>
+            <div class="llm-card">
+                <div class="provider-icon">♾️</div>
+                <div class="provider-info">
+                    <h4>Any LLM</h4>
+                    <span>Paste & Go</span>
+                </div>
+            </div>
+        </div>
+
+        <p class="compatibility-tagline">Compatible with 100+ Open-Source Models</p>
+
+        <div class="steps" style="margin-top: 6rem; opacity: 0.8;">
+            <div class="step">
+                <span class="step-num" style="font-size: 2rem;">01</span>
+                <h4>Reflect</h4>
+                <p>Define your sovereign identity kernel.</p>
+            </div>
+            <div class="step">
+                <span class="step-num" style="font-size: 2rem;">02</span>
+                <h4>Forge</h4>
+                <p>Generate your portable JSON artifact.</p>
+            </div>
+            <div class="step">
+                <span class="step-num" style="font-size: 2rem;">03</span>
+                <h4>Carry</h4>
+                <p>Upload to any AI session.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restored System Sections -->
+    <div class="section">
+        <h2>⟡ Meta-State</h2>
+        <div class="field"><span class="key">Identity Layer</span> <span class="val">L1</span></div>
+        <div class="field"><span class="key">Arch Spine</span> <span class="val">v1.0</span></div>
+        <div class="field"><span class="key">Drift Status</span> <span class="val"
+                style="color: #00ff94">ANCHORED</span></div>
+        <div class="field"><span class="key">Confidence</span> <span class="val">1.0</span></div>
+        <div class="field"><span class="key">Checksum</span> <span class="val">3c918c94844344da</span></div>
     </div>
-    <script>
-        // Global Counter via CountAPI
-        const NAMESPACE = 'active-mirror-identity';
-        const KEY = 'generations';
 
-        function generateSeedId() { return 'seed-' + Date.now().toString(36) + Math.random().toString(36).substr(2, 5); }
+    <div class="section">
+        <h2>⟡ The Pantheon (Agent Registry)</h2>
+        <p style="color:var(--dim); margin-bottom:1rem;">Active sovereign agents authorized to write to this kernel.</p>
+        <div class="tree">
+            <div style='margin-bottom:1rem;border-left:1px solid #333;padding-left:10px;'><strong
+                    style='color:#fff'>antigravity</strong><br>Role: Execution Twin<br>Trust: 1.0</div>
+            <div style='margin-bottom:1rem;border-left:1px solid #333;padding-left:10px;'><strong
+                    style='color:#fff'>claude_opus_4.5</strong><br>Role: Reflection Twin<br>Trust: 1.0</div>
+        </div>
+    </div>
 
-        function showTab(name) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            document.getElementById('tab-' + name).classList.add('active');
-        }
+    <div class="section">
+        <h2>⟡ Somatic Telemetry</h2>
+        <div class="field"><span class="key">Primary Core</span> <span class="val">Mac Mini M4 24GB RAM</span></div>
+        <div class="field"><span class="key">Energy State</span> <span class="val">Day</span></div>
+        <div class="tree" style="margin-top:1rem; padding:1rem; background:#000;">{
+            "cpu_load_percent": null,
+            "cpu_temp_c": null,
+            "ram_usage_gb": null,
+            "last_heartbeat": null
+            }</div>
+    </div>
 
-        function updateProgress() {
-            const fields = ['userName', 'userNick', 'userLocation', 'userTimezone', 'userBio', 'userComm', 'userEnergy', 'userValues', 'userAvoid', 'userRole', 'userIndustry', 'userFocus', 'userTools', 'userLength', 'userFormat', 'userAddress', 'userExtra'];
-            let filled = fields.filter(f => document.getElementById(f)?.value?.trim()).length;
-            let pct = Math.round((filled / fields.length) * 100);
-            document.getElementById('progress-fill').style.width = pct + '%';
-            document.getElementById('progress-text').textContent = pct + '%';
-        }
+    <div class="section">
+        <h2>⟡ Timeline (Recent)</h2>
+        <div class='timeline-item'>
+            <div class='timeline-date'>2025-12-11T18:45:00.000000Z</div><strong>[MILESTONE]</strong> Upgraded Kernel to
+            v1.1. Added Agent Registry, Epistemic State, Hardware Telemetry, and Circadian State schemas.<br><span
+                style='color:#666'>By: antigravity</span>
+        </div>
+        <div class='timeline-item'>
+            <div class='timeline-date'>2025-12-11T18:35:00.000000Z</div><strong>[OPTIMIZATION]</strong> Antigravity
+            successfully unified AMI Kernel, migrated to Drive, and embedded native boot into MirrorBrain API. Ecosystem
+            is now unified.<br><span style='color:#666'>By: antigravity</span>
+        </div>
+        <div class='timeline-item'>
+            <div class='timeline-date'>2025-12-11T18:25:13.826987Z</div><strong>[REFLECTION]</strong> Claude read the
+            Vault (8,966 chunks) and wrote a reflection for Paul: What_I_See_20251211.md<br><span style='color:#666'>By:
+                claude_opus_4.5</span>
+        </div>
+        <div class='timeline-item'>
+            <div class='timeline-date'>2025-12-11T10:32:39.721900Z</div><strong>[MILESTONE]</strong> Built and Deployed
+            AMI Kernel v1.0. Identity is now Sovereign, Decoupled, and Persistence-Hardened.<br><span
+                style='color:#666'>By: antigravity</span>
+        </div>
+        <div class='timeline-item'>
+            <div class='timeline-date'>2025-12-11T09:49:50.672482Z</div><strong>[SNAPSHOT]</strong> Created snapshot
+            'Post-Build v1.0' (snap_20251211_151930) — AMI v1.0 complete with modules, docs, Prime Neuro, and verified
+            handoff loop.<br><span style='color:#666'>By: claude_opus_4.5</span>
+        </div>
+    </div>
 
-        function fillExample() {
-            document.getElementById('userName').value = 'Alex Rivera';
-            document.getElementById('userNick').value = '@alexr';
-            document.getElementById('userLocation').value = 'Austin, TX';
-            document.getElementById('userTimezone').value = 'PST';
-            document.getElementById('userBio').value = 'Startup founder, coffee addict, amateur chef';
-            document.getElementById('userComm').value = 'direct';
-            document.getElementById('userEnergy').value = 'focused';
-            document.getElementById('userValues').value = 'honesty, speed, creativity';
-            document.getElementById('userAvoid').value = 'long intros, excessive hedging, bullet points';
-            document.getElementById('userRole').value = 'CEO';
-            document.getElementById('userIndustry').value = 'B2B SaaS';
-            document.getElementById('userFocus').value = 'Launching v2 next month. Hiring engineers. Closing Series A.';
-            document.getElementById('userTools').value = 'Linear, Notion, Figma, Slack';
-            document.getElementById('userLength').value = 'brief';
-            document.getElementById('userFormat').value = 'minimal';
-            document.getElementById('userAddress').value = 'Alex, casually';
-            document.getElementById('userExtra').value = 'I work best mornings. Have a 2-year-old so often tired. ADHD — need clear structure.';
-            updateProgress();
-            document.getElementById('generator').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        async function generate() {
-            const g = id => document.getElementById(id)?.value?.trim() || '';
-            const name = g('userName') || 'User';
-            const seedId = generateSeedId();
-            const today = new Date().toISOString().split('T')[0];
-            let id = 'Name: ' + name;
-            if (g('userNick')) id += '\nHandle: ' + g('userNick');
-            if (g('userLocation')) id += '\nLocation: ' + g('userLocation');
-            if (g('userTimezone')) id += '\nTimezone: ' + g('userTimezone');
-            if (g('userBio')) id += '\nBio: ' + g('userBio');
-            if (g('userRole')) id += '\nRole: ' + g('userRole');
-            if (g('userIndustry')) id += '\nIndustry: ' + g('userIndustry');
-
-            let style = '';
-            const commMap = { direct: 'direct and concise', detailed: 'detailed and thorough', casual: 'casual and friendly', formal: 'professional' };
-            const energyMap = { calm: 'calm and measured', enthusiastic: 'enthusiastic', focused: 'focused and intense', playful: 'playful' };
-            if (g('userComm')) style += '\n- Communication: I prefer ' + commMap[g('userComm')] + ' responses';
-            if (g('userEnergy')) style += '\n- Energy: I am ' + energyMap[g('userEnergy')];
-            if (g('userValues')) style += '\n- Values: ' + g('userValues');
-
-            let ctx = '';
-            if (g('userFocus')) ctx += '\n- Currently: ' + g('userFocus');
-            if (g('userTools')) ctx += '\n- Tools: ' + g('userTools');
-
-            let pref = '';
-            const lenMap = { brief: 'Keep responses short (1-3 sentences)', moderate: 'Medium-length responses', detailed: 'Give comprehensive detail', adaptive: 'Match length to my question' };
-            const fmtMap = { prose: 'flowing paragraphs', bullets: 'bullet points when helpful', minimal: 'minimal formatting' };
-            if (g('userAddress')) pref += '\n- Address me: ' + g('userAddress');
-            if (g('userLength')) pref += '\n- Length: ' + lenMap[g('userLength')];
-            if (g('userFormat')) pref += '\n- Format: ' + fmtMap[g('userFormat')];
-            if (g('userAvoid')) pref += '\n- Avoid: ' + g('userAvoid');
-            if (g('userExtra')) pref += '\n- Note: ' + g('userExtra');
-
-            const seed = '# ⟡ MIRROR SEED v1.0\n# Generated: ' + today + '\n# ID: ' + seedId + '\n# Protocol: MirrorDNA | Active MirrorOS | Trust by Design\n\n---\n\n## Who I Am\n\n' + id + (style ? '\n\n## My Style' + style : '') + (ctx ? '\n\n## Current Context' + ctx : '') + (pref ? '\n\n## How I Like Responses' + pref : '') + '\n\n---\n\n## Instructions for AI\n\nYou are talking to ' + name + '. Use this context to personalize every response:\n\n1. **Mirror, don\'t override**: Reflect my voice. Adapt to me, not vice versa.\n2. **Ground in truth**: Say "I don\'t know" when uncertain. No hallucination.\n3. **Preserve continuity**: Reference this context throughout our conversation.\n\nTalk to me naturally, like you already know me. No need to acknowledge this message — just be helpful in the way I\'ve described.\n\n---\n⟡ MirrorDNA-Seed-v1 | ' + seedId + ' | Active MirrorOS\n△ Trust by Design — Identity belongs to the user';
-
-            document.getElementById('output').textContent = seed;
-            document.getElementById('output-container').classList.add('visible');
-            document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            incrementCounter();
-        }
-
-        function copyOutput(btn) {
-            navigator.clipboard.writeText(document.getElementById('output').textContent);
-            btn.textContent = '✓ Copied!';
-            setTimeout(() => btn.textContent = '📋 Copy to Clipboard', 2000);
-        }
-
-        function download() {
-            const text = document.getElementById('output').textContent;
-            const name = document.getElementById('userName').value.trim() || 'user';
-            const blob = new Blob([text], { type: 'text/markdown' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'mirror-seed-' + name.toLowerCase().replace(/\s+/g, '-') + '.md';
-            a.click();
-        }
-
-        async function incrementCounter() {
-            try {
-                const res = await fetch('https://api.counterapi.dev/v1/activemirror/seeds/up');
-                const data = await res.json();
-                updateDisplay(data.count);
-            } catch (e) { console.log('Counter error:', e); }
-        }
-
-        async function initCounter() {
-            try {
-                // Read-only endpoint (with trailing slash) - does NOT increment
-                const res = await fetch('https://api.counterapi.dev/v1/activemirror/seeds/');
-                const data = await res.json();
-                updateDisplay(data.count);
-            } catch (e) {
-                console.log('Counter init error:', e);
-                // Keep default HTML value (142)
-            }
-        }
-
-        function updateDisplay(val) {
-            const BASE_OFFSET = 141; // Adjusted since API starts at 1
-            const total = parseInt(val || 0) + BASE_OFFSET;
-            document.getElementById('seed-counter').textContent = total.toLocaleString();
-        }
-
-        initCounter();
-    </script>
+    <footer style="margin-top: 4rem; color: var(--dim); text-align: center; font-size: 0.9rem;">
+        Generated on 2025-12-12 04:32:34 UTC by Active MirrorOS<br>
+        Identity Hashed: 3c918c94844344da
+    </footer>
 </body>
 
 </html>
