@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainScan — Brain Visualization</title>
+    <meta name="description" content="Interactive brain visualization. Explore a living knowledge graph.">
+    <link rel="icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030303;
+            --bg-panel: #0a0a0a;
+            --bg-elevated: #111;
+            --bg-input: #141414;
+            --border: #1a1a1a;
+            --border-hover: #2a2a2a;
+            --text: #fafafa;
+            --text-secondary: #999;
+            --text-dim: #555;
+            --accent: #00ff94;
+            --accent-glow: rgba(0,255,148,.15);
+            --accent-subtle: rgba(0,255,148,.06);
+            --c-core: #00ff94;
+            --c-trait: #a855f7;
+            --c-skill: #00d4ff;
+            --c-domain: #ffd700;
+            --c-memory: #ec4899;
+            --c-project: #f97316;
+            --c-value: #3b82f6;
+            --c-person: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ═══ LAYOUT ═══ */
+        .app {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            grid-template-rows: 52px 1fr;
+            height: 100vh;
+        }
+
+        /* ═══ TOPBAR ═══ */
+        .topbar {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo .g { color: var(--accent); font-size: 1.1rem; }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 240px;
+            padding: .5rem .75rem .5rem 2rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: .85rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color .2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent);
+        }
+
+        .search-box input::placeholder { color: var(--text-dim); }
+
+        .search-box::before {
+            content: '\u2315';
+            position: absolute;
+            left: .6rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            font-size: .9rem;
+        }
+
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 4px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            max-height: 240px;
+            overflow-y: auto;
+            z-index: 200;
+        }
+
+        .search-results.open { display: block; }
+
+        .search-result-item {
+            padding: .6rem .75rem;
+            font-size: .85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            transition: background .15s;
+        }
+
+        .search-result-item:hover { background: var(--bg-elevated); }
+
+        .search-result-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2px;
+        }
+
+        .zoom-btn {
+            width: 30px; height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all .15s;
+        }
+
+        .zoom-btn:hover { background: var(--border); color: var(--text); }
+
+        .zoom-level {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem;
+            color: var(--text-dim);
+            width: 36px;
+            text-align: center;
+        }
+
+        .tb-btn {
+            padding: .4rem .75rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: .8rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .tb-btn:hover { background: var(--border); color: var(--text); }
+        .tb-btn.active { border-color: var(--accent); color: var(--accent); }
+
+        /* ═══ SIDEBAR ═══ */
+        .sidebar {
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        .brain-identity {
+            text-align: center;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brain-archetype-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: .5rem;
+        }
+
+        .brain-user {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: .15rem;
+        }
+
+        .brain-type {
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .75rem;
+        }
+
+        .stat-box {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: .75rem;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: .7rem;
+            color: var(--text-dim);
+            margin-top: .15rem;
+        }
+
+        .sidebar-section h3 {
+            font-size: .75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--text-dim);
+            margin-bottom: .75rem;
+        }
+
+        /* ═══ CLUSTER LIST ═══ */
+        .cluster-list {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+
+        .cluster-item {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .5rem .6rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background .15s;
+            font-size: .85rem;
+        }
+
+        .cluster-item:hover { background: var(--bg-elevated); }
+        .cluster-item.dimmed { opacity: .35; }
+
+        .cluster-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .cluster-name { flex: 1; }
+
+        .cluster-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem;
+            color: var(--text-dim);
+        }
+
+        /* ═══ NODE DETAIL PANEL ═══ */
+        .node-detail {
+            display: none;
+            background: var(--bg-panel);
+            border-top: 1px solid var(--border);
+            padding: 1rem 1.25rem;
+        }
+
+        .node-detail.open { display: block; }
+
+        .node-detail-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: .75rem;
+        }
+
+        .node-detail-name {
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        .node-detail-close {
+            width: 24px; height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: .8rem;
+            transition: all .15s;
+        }
+
+        .node-detail-close:hover { color: var(--text); border-color: var(--border-hover); }
+
+        .node-detail-meta {
+            font-size: .8rem;
+            color: var(--text-dim);
+            margin-bottom: .75rem;
+        }
+
+        .node-connections-label {
+            font-size: .75rem;
+            color: var(--text-dim);
+            margin-bottom: .4rem;
+        }
+
+        .node-connections-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .3rem;
+        }
+
+        .conn-tag {
+            padding: .2rem .5rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: .75rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .conn-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ═══ CANVAS ═══ */
+        .graph-viewport {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        .graph-viewport canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ═══ TOOLTIP ═══ */
+        .tooltip {
+            display: none;
+            position: fixed;
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: .5rem .75rem;
+            font-size: .8rem;
+            pointer-events: none;
+            z-index: 100;
+            max-width: 220px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.5);
+        }
+
+        .tooltip.show { display: block; }
+
+        .tooltip-name {
+            font-weight: 600;
+            margin-bottom: .15rem;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+        }
+
+        .tooltip-meta {
+            font-size: .7rem;
+            color: var(--text-dim);
+        }
+
+        /* ═══ HELP HINT ═══ */
+        .help-hint {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: .75rem;
+            color: var(--text-dim);
+            background: rgba(3,3,3,.7);
+            padding: .4rem 1rem;
+            border-radius: 6px;
+            backdrop-filter: blur(8px);
+            pointer-events: none;
+            transition: opacity 1s;
+            z-index: 10;
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 768px) {
+            .app {
+                grid-template-columns: 1fr;
+                grid-template-rows: 52px 1fr;
+            }
+            .sidebar {
+                display: none;
+                position: fixed;
+                top: 52px; left: 0; bottom: 0;
+                width: 280px;
+                z-index: 60;
+            }
+            .sidebar.mobile-open { display: flex; }
+            .search-box input { width: 160px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <a href="/" class="logo"><span class="g">&#9671;</span> BrainScan</a>
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Search nodes..." autocomplete="off">
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </div>
+        <div class="topbar-right">
+            <div class="zoom-controls">
+                <button class="zoom-btn" id="zoom-out" title="Zoom out">&minus;</button>
+                <span class="zoom-level" id="zoom-level">100%</span>
+                <button class="zoom-btn" id="zoom-in" title="Zoom in">+</button>
+                <button class="zoom-btn" id="zoom-fit" title="Fit to view">&#8652;</button>
+            </div>
+            <button class="tb-btn" id="btn-physics">Physics: On</button>
+            <button class="tb-btn" id="btn-labels">Labels</button>
+            <button class="tb-btn" id="btn-sidebar-toggle" style="display:none;">&#9776;</button>
+        </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+        <div class="brain-identity">
+            <div class="brain-archetype-icon">&#9671;</div>
+            <div class="brain-user">@paul_desai</div>
+            <div class="brain-type">The Architect</div>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-box">
+                <div class="stat-num" id="stat-nodes">0</div>
+                <div class="stat-label">Nodes</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num" id="stat-edges">0</div>
+                <div class="stat-label">Edges</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num" id="stat-clusters">0</div>
+                <div class="stat-label">Clusters</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num" id="stat-density">0</div>
+                <div class="stat-label">Density</div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Clusters</h3>
+            <div class="cluster-list" id="cluster-list"></div>
+        </div>
+
+        <!-- Node detail slides in here -->
+        <div class="node-detail" id="node-detail">
+            <div class="node-detail-header">
+                <div class="node-detail-name" id="nd-name"></div>
+                <button class="node-detail-close" id="nd-close">&times;</button>
+            </div>
+            <div class="node-detail-meta" id="nd-meta"></div>
+            <div class="node-connections-label">Connected to:</div>
+            <div class="node-connections-list" id="nd-connections"></div>
+        </div>
+
+        <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border); text-align: center;">
+            <a href="/" style="font-size:.8rem; color:var(--text-dim); text-decoration:none;">&#8592; Back to BrainScan</a>
+        </div>
+    </div>
+
+    <!-- GRAPH -->
+    <div class="graph-viewport" id="viewport">
+        <canvas id="graph"></canvas>
+        <div class="help-hint" id="help-hint">Scroll to zoom &middot; Drag to pan &middot; Click node to inspect</div>
+    </div>
+
+</div>
+
+<!-- TOOLTIP -->
+<div class="tooltip" id="tooltip">
+    <div class="tooltip-name" id="tt-name"></div>
+    <div class="tooltip-meta" id="tt-meta"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// PAUL'S BRAIN DATA — Clustered Knowledge Graph
+// ═══════════════════════════════════════════════════════════
+const CLUSTERS = [
+    {
+        id: 'ai', name: 'AI & Systems', color: '#00ff94',
+        nodes: [
+            'MirrorDNA','Sovereign AI','Language Models','Agent Architecture','Tool Use',
+            'Multi-Agent Systems','Prompt Engineering','Model Evaluation','Fine-Tuning',
+            'Claude','GPT','Local LLMs','Ollama','GGUF','Quantization',
+            'RAG','Embeddings','Vector Search','Transformer Architecture',
+            'Attention Mechanism','Context Windows','Token Economics',
+            'Self-Evolving Systems','Dreaming Infrastructure','Curiosity Engine',
+            'Stream Monitoring','Percolation','Serendipity Engine','Obsession Tracking',
+            'AI Safety','Alignment','Red Teaming','Capability Leases',
+            'Cost Reduction 280x','Consumer Hardware AI','Edge Inference',
+            'MirrorBrain','Synapse Daemon','Neural Bridge','MCP Servers',
+            'Active Mirror Identity','Brain Visualization','BrainScan',
+            'MirrorAgent','Headless Browser','Automation','Phone Control',
+            'SC1v2 Architecture','Event Receiver','ntfy Queue','Command Pipeline'
+        ]
+    },
+    {
+        id: 'identity', name: 'Identity & Sovereignty', color: '#a855f7',
+        nodes: [
+            'Digital Sovereignty','Self-Ownership','Data Portability','Trust by Design',
+            'Identity Kernel','Mirror Seed Protocol','Fingerprint Module',
+            'Portable AI Identity','Cross-Platform Identity','Identity File',
+            'SCD Protocol','Sovereign Compute','Personal Cloud',
+            'EU AI Act 2026','Right to Sovereignty','Legal Framework',
+            'Privacy First','Zero Knowledge','Local Processing',
+            'Denied Actions Ledger','Safety Proof','Governance Layer',
+            'UNDENIABLE Thesis','Inevitable Sovereignty','Evidence Synthesis',
+            'Consumer vs Centralized','8x Compute by 2035','Decentralization',
+            'Agent Governance','Binding Constraints','Intent System','Invariants'
+        ]
+    },
+    {
+        id: 'protocol', name: 'Protocol Design', color: '#00d4ff',
+        nodes: [
+            'Memory Bus','Hash Chains','Attestation Bundles','Design Ledger',
+            'Constraint Registry','WorkOrder Contracts','Capability Leases',
+            'Bus Read/Write','Transaction Model','State Machine',
+            'Stream Architecture','16 Hash Chains','Replay System',
+            'Teams Stream','Roster Stream','Plans Stream','Votes Stream',
+            'Messages Stream','Leases Stream','Coordination Stream',
+            'Deadlock Detection','Cycle Detection','Stall Detection','Quorum Starvation',
+            'Chaos Testing','Simulation Mode','Fault Injection',
+            'Consensus Protocol','Byzantine Tolerance','Heartbeat Protocol',
+            'ntfy Relay','External Heartbeat','Status Server',
+            'Handoff Protocol','Session Management','Context Preservation'
+        ]
+    },
+    {
+        id: 'infra', name: 'Infrastructure', color: '#3b82f6',
+        nodes: [
+            'macOS Architecture','LaunchAgents','81 Daemons','System Services',
+            'Caffeinate Agent','Health Guardian','Crash Detection',
+            'Desktop Notifications','Status Dashboard','Port 8888',
+            'GitHub Actions','CI/CD Pipeline','Automated Testing',
+            'Playwright Tests','E2E Testing','Monitoring Suite',
+            'Python venv','Node.js','Shell Scripts','Bash Automation',
+            'Git Workflow','83 Repositories','SEO Overhaul',
+            'Cloudflare','DNS Management','SSL Certificates',
+            'Ed25519 Signing','Key Management','Credential Safety',
+            'Homebrew','Package Management','Dependency Graph',
+            'Log Management','Structured Logging','Error Tracking'
+        ]
+    },
+    {
+        id: 'knowledge', name: 'Knowledge Management', color: '#ffd700',
+        nodes: [
+            'Obsidian Vault','27676 Notes','Vault Structure','Vault Spec v2',
+            '00 Canonical','01 Active','02 Shipped','03 Parked',
+            '04 Reference','05 Archive','10 Compressions',
+            '11 Read Paths','12 Glossary','Frontmatter Standards',
+            'Wikilinks','Backlinks','Graph View','Tag Taxonomy',
+            'Compression Protocol','Lossy vs Lossless','Summary Generation',
+            'Read Path Generation','Navigation Aids','Entry Points',
+            'Knowledge Decay','Freshness Scoring','Relevance Ranking',
+            'Daily Notes','Capture Flow','Quick Add','Inbox Zero',
+            'Cross-Reference','Citation Network','Source Tracking'
+        ]
+    },
+    {
+        id: 'philosophy', name: 'Philosophy & Values', color: '#ec4899',
+        nodes: [
+            'First Principles','Stoicism','Marcus Aurelius','Meditations',
+            'Sovereignty as Right','Ownership Ethics','Digital Rights',
+            'Building in Public','Radical Transparency','Ship Fast',
+            'Proof of Work','Evidence-Based','Show Don\'t Tell',
+            'Long-Term Thinking','Compounding','Patient Capital',
+            'Anti-Fragility','Resilience','Graceful Degradation',
+            'Simplicity','Minimalism','Essential Complexity',
+            'Trust Architecture','Earned Trust','Verified Claims',
+            'Autonomy','Self-Reliance','Independence',
+            'Craftsmanship','Quality','Attention to Detail'
+        ]
+    },
+    {
+        id: 'strategy', name: 'Business & Strategy', color: '#f97316',
+        nodes: [
+            'Product-Market Fit','Viral Mechanics','Growth Loops',
+            'Discoverability','SEO Strategy','Social Proof',
+            'Network Effects','Platform Dynamics','Ecosystem Play',
+            'Comeback Strategy','Public Narrative','Credibility',
+            'Publishing Strategy','Thesis Distribution','Thought Leadership',
+            'Open Source Strategy','Community Building','Developer Relations',
+            'Revenue Models','Freemium','API Monetization',
+            'Competitive Moats','Technical Moats','Data Moats',
+            'Product Hunt Launch','Hacker News','Twitter Threads',
+            'User Acquisition','Retention','Activation Metrics'
+        ]
+    },
+    {
+        id: 'creative', name: 'Creative & Expression', color: '#10b981',
+        nodes: [
+            'Data Visualization','Graph Aesthetics','Cosmic Theme',
+            'Force-Directed Layouts','Canvas Rendering','WebGL',
+            'Color Theory','Gradient Design','Glow Effects',
+            'Typography','Inter Font','JetBrains Mono',
+            'Responsive Design','Mobile-First','Touch Interactions',
+            'Animation Design','Easing Functions','Physics Simulation',
+            'Writing Style','Terse Communication','Signal over Noise',
+            'Brand Identity','MirrorDNA Brand','Glyph System',
+            'User Experience','Flow States','Delight Details',
+            'Storytelling','Narrative Arc','Hook Writing'
+        ]
+    }
+];
+
+// ═══════════════════════════════════════════════════════════
+// GRAPH DATA GENERATION
+// ═══════════════════════════════════════════════════════════
+const allNodes = [];
+const allEdges = [];
+let idCounter = 0;
+
+// Core node
+allNodes.push({
+    id: idCounter++,
+    label: 'Paul Desai',
+    cluster: 'core',
+    color: '#fff',
+    level: 0,
+    x: 0, y: 0,
+    vx: 0, vy: 0,
+    r: 10,
+    connections: 0,
+    pinned: true
+});
+
+for (const cluster of CLUSTERS) {
+    const cx = 0;
+    const cy = 0;
+    for (let i = 0; i < cluster.nodes.length; i++) {
+        const level = i < 5 ? 1 : i < 15 ? 2 : i < 25 ? 3 : 4;
+        const r = level === 1 ? 6 : level === 2 ? 4.5 : level === 3 ? 3 : 2;
+        const angle = (Math.PI * 2 * i) / cluster.nodes.length + Math.random() * 0.3;
+        const dist = 100 + level * 80 + Math.random() * 60;
+
+        allNodes.push({
+            id: idCounter++,
+            label: cluster.nodes[i],
+            cluster: cluster.id,
+            color: cluster.color,
+            level,
+            x: Math.cos(angle) * dist + (Math.random() - 0.5) * 40,
+            y: Math.sin(angle) * dist + (Math.random() - 0.5) * 40,
+            vx: 0, vy: 0,
+            r,
+            connections: 0
+        });
+    }
+}
+
+// Generate edges
+function nodesByCluster(cid) {
+    return allNodes.filter(n => n.cluster === cid);
+}
+
+// Connect core to top nodes of each cluster
+for (const cluster of CLUSTERS) {
+    const cNodes = nodesByCluster(cluster.id);
+    for (let i = 0; i < Math.min(3, cNodes.length); i++) {
+        allEdges.push({ from: 0, to: cNodes[i].id, color: cluster.color, strength: 0.8 });
+        allNodes[0].connections++;
+        cNodes[i].connections++;
+    }
+}
+
+// Intra-cluster edges (chain + random)
+for (const cluster of CLUSTERS) {
+    const cNodes = nodesByCluster(cluster.id);
+    // Chain
+    for (let i = 0; i < cNodes.length - 1; i++) {
+        allEdges.push({ from: cNodes[i].id, to: cNodes[i+1].id, color: cluster.color, strength: 0.5 });
+        cNodes[i].connections++;
+        cNodes[i+1].connections++;
+    }
+    // Random intra-cluster
+    for (let i = 0; i < cNodes.length; i++) {
+        const count = Math.floor(Math.random() * 3) + 1;
+        for (let c = 0; c < count; c++) {
+            const j = Math.floor(Math.random() * cNodes.length);
+            if (i !== j) {
+                allEdges.push({ from: cNodes[i].id, to: cNodes[j].id, color: cluster.color, strength: 0.3 });
+                cNodes[i].connections++;
+                cNodes[j].connections++;
+            }
+        }
+    }
+}
+
+// Inter-cluster bridge edges (specific meaningful connections)
+const bridges = [
+    ['MirrorDNA', 'Identity Kernel'], ['Sovereign AI', 'Digital Sovereignty'],
+    ['Memory Bus', 'Obsidian Vault'], ['Agent Architecture', 'Agent Governance'],
+    ['Hash Chains', 'Ed25519 Signing'], ['Dreaming Infrastructure', 'Daily Notes'],
+    ['AI Safety', 'Denied Actions Ledger'], ['Cost Reduction 280x', 'Consumer vs Centralized'],
+    ['LaunchAgents', 'Synapse Daemon'], ['First Principles', 'Sovereign AI'],
+    ['Viral Mechanics', 'Data Visualization'], ['Building in Public', 'Twitter Threads'],
+    ['Obsidian Vault', 'Wikilinks'], ['Force-Directed Layouts', 'Brain Visualization'],
+    ['Trust by Design', 'Trust Architecture'], ['Local LLMs', 'Edge Inference'],
+    ['Product Hunt Launch', 'BrainScan'], ['Long-Term Thinking', 'Compounding'],
+    ['Open Source Strategy', '83 Repositories'], ['Brand Identity', 'MirrorDNA Brand'],
+    ['Capability Leases', 'WorkOrder Contracts'], ['Compression Protocol', 'Knowledge Decay'],
+    ['User Experience', 'Responsive Design'], ['Storytelling', 'Publishing Strategy'],
+    ['Git Workflow', 'CI/CD Pipeline'], ['Automation', 'Shell Scripts'],
+    ['UNDENIABLE Thesis', 'Evidence Synthesis'], ['Graph View', 'Graph Aesthetics'],
+    ['Prompt Engineering', 'Claude'], ['Network Effects', 'Platform Dynamics'],
+    ['Simplicity', 'Essential Complexity'], ['Craftsmanship', 'Attention to Detail'],
+    ['Mobile-First', 'Touch Interactions'], ['Revenue Models', 'API Monetization'],
+    ['Context Preservation', 'Session Management'], ['Vault Spec v2', '00 Canonical'],
+    ['SC1v2 Architecture', 'Event Receiver'], ['MirrorAgent', 'Phone Control'],
+    ['Status Server', 'Desktop Notifications'], ['Chaos Testing', 'Fault Injection'],
+    ['Comeback Strategy', 'Public Narrative'], ['Self-Evolving Systems', 'Anti-Fragility'],
+];
+
+const labelToId = {};
+allNodes.forEach(n => labelToId[n.label] = n.id);
+
+for (const [fromLabel, toLabel] of bridges) {
+    const fromId = labelToId[fromLabel];
+    const toId = labelToId[toLabel];
+    if (fromId !== undefined && toId !== undefined) {
+        allEdges.push({ from: fromId, to: toId, color: '#666', strength: 0.15 });
+        allNodes[fromId].connections++;
+        allNodes[toId].connections++;
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// GRAPH ENGINE
+// ═══════════════════════════════════════════════════════════
+const canvas = document.getElementById('graph');
+const ctx = canvas.getContext('2d');
+const dpr = window.devicePixelRatio || 1;
+const viewport = document.getElementById('viewport');
+
+let W, H;
+let camera = { x: 0, y: 0, zoom: 1 };
+let physicsEnabled = true;
+let showLabels = false;
+let hoveredNode = null;
+let selectedNode = null;
+let draggedNode = null;
+let isPanning = false;
+let panStart = { x: 0, y: 0 };
+let frame = 0;
+
+function resizeCanvas() {
+    const rect = viewport.getBoundingClientRect();
+    W = rect.width;
+    H = rect.height;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Position nodes in cluster layout
+function layoutInitial() {
+    const cCount = CLUSTERS.length;
+    const radius = 350;
+    CLUSTERS.forEach((cluster, ci) => {
+        const cAngle = (Math.PI * 2 * ci) / cCount - Math.PI / 2;
+        const cx = Math.cos(cAngle) * radius;
+        const cy = Math.sin(cAngle) * radius;
+
+        const cNodes = nodesByCluster(cluster.id);
+        cNodes.forEach((node, ni) => {
+            const nAngle = (Math.PI * 2 * ni) / cNodes.length;
+            const nDist = 30 + node.level * 25 + Math.random() * 20;
+            node.x = cx + Math.cos(nAngle) * nDist;
+            node.y = cy + Math.sin(nAngle) * nDist;
+            node._cx = cx;
+            node._cy = cy;
+        });
+    });
+}
+
+layoutInitial();
+
+// ── PHYSICS ──
+function simulate() {
+    if (!physicsEnabled) return;
+
+    const alpha = 0.3;
+    const repulsionStrength = 500;
+    const attractionStrength = 0.005;
+    const clusterPull = 0.008;
+    const damping = 0.85;
+
+    // Node-node repulsion (quadratic approximation - skip distant pairs)
+    for (let i = 0; i < allNodes.length; i++) {
+        const ni = allNodes[i];
+        if (ni.pinned || ni.id === 0) continue;
+        for (let j = i + 1; j < allNodes.length; j++) {
+            const nj = allNodes[j];
+            if (nj.pinned || nj.id === 0) continue;
+            const dx = ni.x - nj.x;
+            const dy = ni.y - nj.y;
+            const distSq = dx * dx + dy * dy;
+            if (distSq > 90000) continue; // Skip if far
+            const dist = Math.sqrt(distSq) || 1;
+            const force = repulsionStrength / distSq;
+            const fx = (dx / dist) * force;
+            const fy = (dy / dist) * force;
+            ni.vx += fx;
+            ni.vy += fy;
+            nj.vx -= fx;
+            nj.vy -= fy;
+        }
+    }
+
+    // Edge attraction
+    for (const edge of allEdges) {
+        const from = allNodes[edge.from];
+        const to = allNodes[edge.to];
+        if (!from || !to) continue;
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        const targetDist = 50 + (from.level + to.level) * 15;
+        const force = (dist - targetDist) * attractionStrength * (edge.strength || 0.3);
+        const fx = (dx / dist) * force;
+        const fy = (dy / dist) * force;
+        if (!from.pinned) { from.vx += fx; from.vy += fy; }
+        if (!to.pinned) { to.vx -= fx; to.vy -= fy; }
+    }
+
+    // Cluster center pull
+    for (const node of allNodes) {
+        if (node.pinned || node.id === 0 || !node._cx) continue;
+        const dx = node._cx - node.x;
+        const dy = node._cy - node.y;
+        node.vx += dx * clusterPull;
+        node.vy += dy * clusterPull;
+    }
+
+    // Apply velocity
+    for (const node of allNodes) {
+        if (node.pinned) continue;
+        if (draggedNode && node.id === draggedNode.id) continue;
+        node.vx *= damping;
+        node.vy *= damping;
+        node.x += node.vx * alpha;
+        node.y += node.vy * alpha;
+    }
+}
+
+// ── COORDINATE TRANSFORMS ──
+function worldToScreen(wx, wy) {
+    return {
+        x: (wx - camera.x) * camera.zoom + W / 2,
+        y: (wy - camera.y) * camera.zoom + H / 2
+    };
+}
+
+function screenToWorld(sx, sy) {
+    return {
+        x: (sx - W / 2) / camera.zoom + camera.x,
+        y: (sy - H / 2) / camera.zoom + camera.y
+    };
+}
+
+// ── FIND NODE AT POSITION ──
+function nodeAtScreen(sx, sy) {
+    const world = screenToWorld(sx, sy);
+    let closest = null;
+    let closestDist = Infinity;
+    for (const node of allNodes) {
+        const dx = node.x - world.x;
+        const dy = node.y - world.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const hitRadius = (node.r + 5) / camera.zoom;
+        if (dist < hitRadius && dist < closestDist) {
+            closest = node;
+            closestDist = dist;
+        }
+    }
+    return closest;
+}
+
+// ── CONNECTED NODES ──
+function getConnectedIds(nodeId) {
+    const ids = new Set();
+    for (const e of allEdges) {
+        if (e.from === nodeId) ids.add(e.to);
+        if (e.to === nodeId) ids.add(e.from);
+    }
+    return ids;
+}
+
+// ── RENDER ──
+function hexToRGBA(hex, a) {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return `rgba(${r},${g},${b},${a})`;
+}
+
+// Cluster visibility
+const clusterVisible = {};
+CLUSTERS.forEach(c => clusterVisible[c.id] = true);
+clusterVisible['core'] = true;
+
+function render() {
+    frame++;
+    simulate();
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+
+    // Background glow
+    const bgGrad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W * 0.6);
+    bgGrad.addColorStop(0, 'rgba(0,255,148,0.02)');
+    bgGrad.addColorStop(0.5, 'rgba(168,85,247,0.01)');
+    bgGrad.addColorStop(1, 'transparent');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    const hoveredIds = hoveredNode ? getConnectedIds(hoveredNode.id) : new Set();
+    const selectedIds = selectedNode ? getConnectedIds(selectedNode.id) : new Set();
+    const highlightIds = hoveredNode ? hoveredIds : selectedIds;
+    const highlightSource = hoveredNode || selectedNode;
+
+    // Edges
+    for (const edge of allEdges) {
+        const from = allNodes[edge.from];
+        const to = allNodes[edge.to];
+        if (!from || !to) continue;
+        if (!clusterVisible[from.cluster] || !clusterVisible[to.cluster]) continue;
+
+        const sp1 = worldToScreen(from.x, from.y);
+        const sp2 = worldToScreen(to.x, to.y);
+
+        // Frustum culling
+        if (sp1.x < -50 && sp2.x < -50) continue;
+        if (sp1.x > W + 50 && sp2.x > W + 50) continue;
+        if (sp1.y < -50 && sp2.y < -50) continue;
+        if (sp1.y > H + 50 && sp2.y > H + 50) continue;
+
+        let alpha = 0.08;
+        let width = 0.5;
+
+        if (highlightSource) {
+            const isConn = (edge.from === highlightSource.id || edge.to === highlightSource.id);
+            if (isConn) {
+                alpha = 0.5;
+                width = 1.5;
+            } else {
+                alpha = 0.02;
+            }
+        }
+
+        const pulse = 0.8 + 0.2 * Math.sin(frame * 0.008 + edge.from * 0.1);
+        ctx.beginPath();
+        ctx.moveTo(sp1.x, sp1.y);
+        ctx.lineTo(sp2.x, sp2.y);
+        ctx.strokeStyle = hexToRGBA(edge.color, alpha * pulse);
+        ctx.lineWidth = width * camera.zoom;
+        ctx.stroke();
+    }
+
+    // Nodes
+    for (const node of allNodes) {
+        if (!clusterVisible[node.cluster]) continue;
+
+        const sp = worldToScreen(node.x, node.y);
+
+        // Frustum culling
+        if (sp.x < -30 || sp.x > W + 30 || sp.y < -30 || sp.y > H + 30) continue;
+
+        const breathe = 1 + 0.06 * Math.sin(frame * 0.015 + node.id * 0.7);
+        const r = node.r * camera.zoom * breathe;
+
+        let nodeAlpha = node.level === 0 ? 1 : node.level === 1 ? 0.95 : node.level === 2 ? 0.8 : node.level === 3 ? 0.6 : 0.4;
+
+        if (highlightSource) {
+            if (node.id === highlightSource.id) {
+                nodeAlpha = 1;
+            } else if (highlightIds.has(node.id)) {
+                nodeAlpha = 0.9;
+            } else {
+                nodeAlpha = 0.1;
+            }
+        }
+
+        // Glow
+        if ((node.level <= 1 || node.id === (hoveredNode && hoveredNode.id) || node.id === (selectedNode && selectedNode.id)) && r > 2) {
+            const glow = ctx.createRadialGradient(sp.x, sp.y, 0, sp.x, sp.y, r * 4);
+            glow.addColorStop(0, hexToRGBA(node.color, 0.25 * nodeAlpha));
+            glow.addColorStop(1, hexToRGBA(node.color, 0));
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(sp.x, sp.y, r * 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Body
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, Math.max(r, 1), 0, Math.PI * 2);
+        ctx.fillStyle = hexToRGBA(node.color, nodeAlpha);
+        ctx.fill();
+
+        // Label
+        if (showLabels && r > 3 && camera.zoom > 0.6) {
+            ctx.fillStyle = hexToRGBA('#ffffff', nodeAlpha * 0.8);
+            ctx.font = `${Math.max(9, 11 * camera.zoom)}px Inter`;
+            ctx.textAlign = 'center';
+            ctx.fillText(node.label, sp.x, sp.y + r + 12 * camera.zoom);
+        }
+
+        // Always show label for hovered/selected
+        if ((node === hoveredNode || node === selectedNode) && r > 1) {
+            ctx.fillStyle = hexToRGBA('#ffffff', 0.95);
+            ctx.font = `600 ${Math.max(11, 13 * camera.zoom)}px Inter`;
+            ctx.textAlign = 'center';
+            ctx.fillText(node.label, sp.x, sp.y + r + 14 * camera.zoom);
+        }
+    }
+
+    requestAnimationFrame(render);
+}
+
+requestAnimationFrame(render);
+
+// ═══════════════════════════════════════════════════════════
+// INTERACTION
+// ═══════════════════════════════════════════════════════════
+const tooltipEl = document.getElementById('tooltip');
+const ttName = document.getElementById('tt-name');
+const ttMeta = document.getElementById('tt-meta');
+
+// ── Mouse move → hover ──
+canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+
+    if (isPanning) {
+        camera.x -= (e.clientX - panStart.x) / camera.zoom;
+        camera.y -= (e.clientY - panStart.y) / camera.zoom;
+        panStart.x = e.clientX;
+        panStart.y = e.clientY;
+        return;
+    }
+
+    if (draggedNode) {
+        const world = screenToWorld(mx, my);
+        draggedNode.x = world.x;
+        draggedNode.y = world.y;
+        draggedNode.vx = 0;
+        draggedNode.vy = 0;
+        return;
+    }
+
+    const node = nodeAtScreen(mx, my);
+    hoveredNode = node;
+    canvas.style.cursor = node ? 'pointer' : 'grab';
+
+    if (node) {
+        const clusterInfo = CLUSTERS.find(c => c.id === node.cluster);
+        const connCount = getConnectedIds(node.id).size;
+        const dot = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${node.color};"></span>`;
+        ttName.innerHTML = dot + ' ' + node.label;
+        ttMeta.textContent = `${clusterInfo ? clusterInfo.name : 'Core'} · ${connCount} connections · L${node.level}`;
+        tooltipEl.classList.add('show');
+        tooltipEl.style.left = (e.clientX + 14) + 'px';
+        tooltipEl.style.top = (e.clientY - 10) + 'px';
+    } else {
+        tooltipEl.classList.remove('show');
+    }
+});
+
+canvas.addEventListener('mouseleave', () => {
+    hoveredNode = null;
+    tooltipEl.classList.remove('show');
+});
+
+// ── Mouse down → drag node or pan ──
+canvas.addEventListener('mousedown', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const node = nodeAtScreen(mx, my);
+
+    if (node) {
+        draggedNode = node;
+        canvas.style.cursor = 'grabbing';
+    } else {
+        isPanning = true;
+        panStart.x = e.clientX;
+        panStart.y = e.clientY;
+        canvas.style.cursor = 'grabbing';
+    }
+});
+
+window.addEventListener('mouseup', () => {
+    if (draggedNode) {
+        draggedNode = null;
+        canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
+    }
+    if (isPanning) {
+        isPanning = false;
+        canvas.style.cursor = 'grab';
+    }
+});
+
+// ── Click → select node ──
+canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const node = nodeAtScreen(mx, my);
+
+    if (node) {
+        selectNode(node);
+    } else {
+        deselectNode();
+    }
+});
+
+// ── Double-click → zoom to node ──
+canvas.addEventListener('dblclick', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const node = nodeAtScreen(mx, my);
+    if (node) {
+        smoothZoomTo(node.x, node.y, 2.5);
+    }
+});
+
+function selectNode(node) {
+    selectedNode = node;
+    const panel = document.getElementById('node-detail');
+    const ndName = document.getElementById('nd-name');
+    const ndMeta = document.getElementById('nd-meta');
+    const ndConn = document.getElementById('nd-connections');
+
+    const cluster = CLUSTERS.find(c => c.id === node.cluster);
+    ndName.innerHTML = `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${node.color};"></span> ${node.label}`;
+    ndMeta.textContent = `${cluster ? cluster.name : 'Core'} · Level ${node.level} · ${node.connections} edges`;
+
+    const connIds = getConnectedIds(node.id);
+    const connNodes = allNodes.filter(n => connIds.has(n.id));
+    ndConn.innerHTML = connNodes.slice(0, 20).map(n =>
+        `<span class="conn-tag" data-id="${n.id}" style="border-color:${hexToRGBA(n.color, 0.3)}">${n.label}</span>`
+    ).join('');
+
+    // Click connected node tags
+    ndConn.querySelectorAll('.conn-tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+            const targetNode = allNodes[parseInt(tag.dataset.id)];
+            if (targetNode) {
+                selectNode(targetNode);
+                smoothZoomTo(targetNode.x, targetNode.y, camera.zoom);
+            }
+        });
+    });
+
+    panel.classList.add('open');
+}
+
+function deselectNode() {
+    selectedNode = null;
+    document.getElementById('node-detail').classList.remove('open');
+}
+
+document.getElementById('nd-close').addEventListener('click', deselectNode);
+
+// ── Zoom ──
+canvas.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+    const newZoom = Math.max(0.15, Math.min(6, camera.zoom * zoomFactor));
+
+    // Zoom toward mouse position
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const worldBefore = screenToWorld(mx, my);
+    camera.zoom = newZoom;
+    const worldAfter = screenToWorld(mx, my);
+    camera.x -= (worldAfter.x - worldBefore.x);
+    camera.y -= (worldAfter.y - worldBefore.y);
+
+    updateZoomDisplay();
+}, { passive: false });
+
+function updateZoomDisplay() {
+    document.getElementById('zoom-level').textContent = Math.round(camera.zoom * 100) + '%';
+}
+
+function smoothZoomTo(wx, wy, targetZoom) {
+    const steps = 30;
+    const startX = camera.x;
+    const startY = camera.y;
+    const startZoom = camera.zoom;
+    let step = 0;
+
+    function tick() {
+        step++;
+        const t = step / steps;
+        const ease = 1 - Math.pow(1 - t, 3);
+        camera.x = startX + (wx - startX) * ease;
+        camera.y = startY + (wy - startY) * ease;
+        camera.zoom = startZoom + (targetZoom - startZoom) * ease;
+        updateZoomDisplay();
+        if (step < steps) requestAnimationFrame(tick);
+    }
+    tick();
+}
+
+// Zoom buttons
+document.getElementById('zoom-in').addEventListener('click', () => {
+    camera.zoom = Math.min(6, camera.zoom * 1.3);
+    updateZoomDisplay();
+});
+document.getElementById('zoom-out').addEventListener('click', () => {
+    camera.zoom = Math.max(0.15, camera.zoom * 0.7);
+    updateZoomDisplay();
+});
+document.getElementById('zoom-fit').addEventListener('click', () => {
+    smoothZoomTo(0, 0, 0.7);
+});
+
+// ── Physics toggle ──
+const btnPhysics = document.getElementById('btn-physics');
+btnPhysics.addEventListener('click', () => {
+    physicsEnabled = !physicsEnabled;
+    btnPhysics.textContent = 'Physics: ' + (physicsEnabled ? 'On' : 'Off');
+    btnPhysics.classList.toggle('active', physicsEnabled);
+});
+
+// ── Labels toggle ──
+const btnLabels = document.getElementById('btn-labels');
+btnLabels.addEventListener('click', () => {
+    showLabels = !showLabels;
+    btnLabels.classList.toggle('active', showLabels);
+});
+
+// ── Mobile sidebar toggle ──
+const btnSidebarToggle = document.getElementById('btn-sidebar-toggle');
+btnSidebarToggle.addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('mobile-open');
+});
+
+if (window.innerWidth <= 768) {
+    btnSidebarToggle.style.display = 'inline-flex';
+}
+window.addEventListener('resize', () => {
+    btnSidebarToggle.style.display = window.innerWidth <= 768 ? 'inline-flex' : 'none';
+});
+
+// ═══════════════════════════════════════════════════════════
+// SIDEBAR POPULATION
+// ═══════════════════════════════════════════════════════════
+function populateSidebar() {
+    document.getElementById('stat-nodes').textContent = allNodes.length.toLocaleString();
+    document.getElementById('stat-edges').textContent = allEdges.length.toLocaleString();
+    document.getElementById('stat-clusters').textContent = CLUSTERS.length;
+    const density = (2 * allEdges.length / (allNodes.length * (allNodes.length - 1)) * 100).toFixed(1);
+    document.getElementById('stat-density').textContent = density + '%';
+
+    const clusterList = document.getElementById('cluster-list');
+    clusterList.innerHTML = '';
+    for (const cluster of CLUSTERS) {
+        const count = nodesByCluster(cluster.id).length;
+        const item = document.createElement('div');
+        item.className = 'cluster-item';
+        item.innerHTML = `
+            <span class="cluster-dot" style="background:${cluster.color}"></span>
+            <span class="cluster-name">${cluster.name}</span>
+            <span class="cluster-count">${count}</span>
+        `;
+        item.addEventListener('click', () => {
+            clusterVisible[cluster.id] = !clusterVisible[cluster.id];
+            item.classList.toggle('dimmed', !clusterVisible[cluster.id]);
+        });
+        clusterList.appendChild(item);
+    }
+}
+
+populateSidebar();
+
+// ═══════════════════════════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════════════════════════
+const searchInput = document.getElementById('search');
+const searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('input', () => {
+    const q = searchInput.value.toLowerCase().trim();
+    if (q.length < 2) {
+        searchResults.classList.remove('open');
+        return;
+    }
+
+    const matches = allNodes.filter(n => n.label.toLowerCase().includes(q)).slice(0, 10);
+    if (matches.length === 0) {
+        searchResults.classList.remove('open');
+        return;
+    }
+
+    searchResults.innerHTML = matches.map(n =>
+        `<div class="search-result-item" data-id="${n.id}">
+            <span class="search-result-dot" style="background:${n.color}"></span>
+            ${n.label}
+        </div>`
+    ).join('');
+
+    searchResults.querySelectorAll('.search-result-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const node = allNodes[parseInt(item.dataset.id)];
+            if (node) {
+                selectNode(node);
+                smoothZoomTo(node.x, node.y, 2);
+                searchResults.classList.remove('open');
+                searchInput.value = '';
+            }
+        });
+    });
+
+    searchResults.classList.add('open');
+});
+
+searchInput.addEventListener('blur', () => {
+    setTimeout(() => searchResults.classList.remove('open'), 200);
+});
+
+// ── Keyboard shortcut ──
+document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+    }
+    if (e.key === 'Escape') {
+        searchInput.blur();
+        searchResults.classList.remove('open');
+        deselectNode();
+    }
+    if (e.key === 'l' && document.activeElement !== searchInput) {
+        showLabels = !showLabels;
+        btnLabels.classList.toggle('active', showLabels);
+    }
+    if (e.key === 'p' && document.activeElement !== searchInput) {
+        physicsEnabled = !physicsEnabled;
+        btnPhysics.textContent = 'Physics: ' + (physicsEnabled ? 'On' : 'Off');
+        btnPhysics.classList.toggle('active', physicsEnabled);
+    }
+});
+
+// ── Hide help hint after 5s ──
+setTimeout(() => {
+    document.getElementById('help-hint').style.opacity = '0';
+}, 5000);
+
+// ── Touch support ──
+let touchStart = null;
+let touchDist = 0;
+
+canvas.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+        touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    } else if (e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        touchDist = Math.sqrt(dx * dx + dy * dy);
+    }
+}, { passive: true });
+
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (e.touches.length === 1 && touchStart) {
+        const dx = e.touches[0].clientX - touchStart.x;
+        const dy = e.touches[0].clientY - touchStart.y;
+        camera.x -= dx / camera.zoom;
+        camera.y -= dy / camera.zoom;
+        touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    } else if (e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const newDist = Math.sqrt(dx * dx + dy * dy);
+        const scale = newDist / touchDist;
+        camera.zoom = Math.max(0.15, Math.min(6, camera.zoom * scale));
+        touchDist = newDist;
+        updateZoomDisplay();
+    }
+}, { passive: false });
+
+canvas.addEventListener('touchend', () => { touchStart = null; });
+</script>
+
+</body>
+</html>
