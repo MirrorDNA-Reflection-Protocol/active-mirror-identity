@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainScan — Compare Minds</title>
+    <meta name="description" content="Compare two brains side by side. See shared concepts, unique strengths, and cognitive compatibility.">
+    <meta property="og:title" content="BrainScan — Compare Minds">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030303;
+            --bg-card: #0a0a0a;
+            --bg-elevated: #111;
+            --bg-input: #141414;
+            --border: #1a1a1a;
+            --border-hover: #2a2a2a;
+            --text: #fafafa;
+            --text-secondary: #999;
+            --text-dim: #555;
+            --accent: #00ff94;
+            --accent-glow: rgba(0,255,148,.15);
+            --accent-subtle: rgba(0,255,148,.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* ═══ NAV ═══ */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(3,3,3,.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.05rem; text-decoration: none; color: var(--text); }
+        .nav-logo .g { color: var(--accent); font-size: 1.2rem; }
+        .nav-links { display: flex; gap: 1rem; align-items: center; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: .85rem; font-weight: 500; transition: color .2s; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-cta { padding: .45rem 1rem; background: var(--accent); color: #000 !important; border-radius: 8px; font-weight: 600; }
+
+        /* ═══ MAIN ═══ */
+        .page { max-width: 1100px; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .page-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem; color: var(--accent);
+            text-transform: uppercase; letter-spacing: .15em;
+            margin-bottom: .5rem;
+        }
+        .page-title {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 800; letter-spacing: -.02em;
+            margin-bottom: .5rem;
+        }
+        .page-desc { color: var(--text-secondary); font-size: 1rem; }
+
+        /* ═══ SELECTOR ═══ */
+        .selector-bar {
+            display: flex; align-items: center; justify-content: center;
+            gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap;
+        }
+        .selector-brain {
+            display: flex; align-items: center; gap: .5rem;
+            padding: .6rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: .9rem; font-weight: 500;
+        }
+        .selector-brain .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .selector-vs {
+            font-weight: 800; font-size: 1.1rem;
+            color: var(--text-dim);
+        }
+        .selector-pick {
+            position: relative;
+        }
+        .selector-pick select {
+            appearance: none;
+            padding: .6rem 2.5rem .6rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: .9rem; font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: border-color .2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right .75rem center;
+        }
+        .selector-pick select:focus { outline: none; border-color: var(--accent); }
+
+        /* ═══ COMPARE LAYOUT ═══ */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 0;
+            margin-bottom: 2.5rem;
+        }
+
+        .brain-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .brain-panel-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: .75rem;
+        }
+        .brain-panel-icon {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            border: 2px solid var(--border);
+        }
+        .brain-panel-name { font-weight: 700; font-size: 1rem; }
+        .brain-panel-type {
+            font-size: .75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: .06em;
+        }
+        .brain-panel-graph {
+            height: 280px;
+            position: relative;
+        }
+        .brain-panel-graph canvas { width: 100%; height: 100%; display: block; }
+        .brain-panel-stats {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex; flex-direction: column; gap: .6rem;
+        }
+        .bp-stat-row {
+            display: flex; align-items: center; gap: .75rem;
+        }
+        .bp-stat-label {
+            font-size: .8rem; color: var(--text-secondary);
+            width: 80px; flex-shrink: 0; text-align: right;
+        }
+        .bp-stat-bar-bg {
+            flex: 1; height: 6px;
+            background: var(--border); border-radius: 3px; overflow: hidden;
+        }
+        .bp-stat-bar-fill {
+            height: 100%; border-radius: 3px;
+            transition: width .8s ease;
+        }
+        .bp-stat-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .75rem; color: var(--text-dim);
+            width: 32px;
+        }
+
+        /* ═══ CENTER DIVIDER ═══ */
+        .compare-center {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 0 1.5rem;
+            min-width: 180px;
+        }
+        .compat-ring {
+            width: 120px; height: 120px;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .compat-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .compat-ring-bg { fill: none; stroke: var(--border); stroke-width: 6; }
+        .compat-ring-fill {
+            fill: none; stroke: var(--accent); stroke-width: 6;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1.2s ease;
+        }
+        .compat-value {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem; font-weight: 800;
+            color: var(--accent);
+        }
+        .compat-label {
+            font-size: .75rem; color: var(--text-dim);
+            text-align: center; margin-bottom: 1.5rem;
+            text-transform: uppercase; letter-spacing: .1em;
+        }
+        .shared-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .85rem; color: var(--text-secondary);
+            text-align: center; margin-bottom: .25rem;
+        }
+        .shared-label {
+            font-size: .7rem; color: var(--text-dim);
+            text-align: center;
+        }
+
+        /* ═══ ANALYSIS SECTION ═══ */
+        .analysis {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .analysis-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+        .analysis-card h3 {
+            font-size: .85rem; font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex; align-items: center; gap: .4rem;
+        }
+        .analysis-card h3 .dot {
+            width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+        }
+        .concept-list {
+            display: flex; flex-direction: column; gap: .35rem;
+        }
+        .concept-tag {
+            display: inline-flex; align-items: center; gap: .35rem;
+            padding: .3rem .6rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: .8rem; color: var(--text-secondary);
+        }
+        .concept-tag .cdot {
+            width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+        }
+
+        /* ═══ ACTIONS ═══ */
+        .actions-bar {
+            display: flex; align-items: center; justify-content: center;
+            gap: 1rem; flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: .5rem; padding: .8rem 1.5rem;
+            border-radius: 10px; font-size: .9rem;
+            font-weight: 600; font-family: inherit;
+            cursor: pointer; transition: all .2s;
+            border: none; text-decoration: none;
+        }
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 30px var(--accent-glow); }
+        .btn-ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--border); }
+        .btn-ghost:hover { background: var(--bg-elevated); color: var(--text); }
+        .btn-twitter { background: #1DA1F2; color: #fff; }
+
+        .back-link {
+            display: block; text-align: center;
+            color: var(--text-dim); font-size: .85rem;
+            text-decoration: none; transition: color .2s;
+        }
+        .back-link:hover { color: var(--text-secondary); }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 900px) {
+            .compare-grid { grid-template-columns: 1fr; }
+            .compare-center {
+                flex-direction: row; gap: 1.5rem;
+                padding: 1.5rem 0; min-width: 0;
+            }
+            .analysis { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            nav { padding: .75rem 1rem; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .page { padding: 4.5rem 1rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="nav-logo"><span class="g">&#9671;</span> BrainScan</a>
+    <div class="nav-links">
+        <a href="brain.html">Explore</a>
+        <a href="scan.html" class="nav-cta">Scan My Brain</a>
+    </div>
+</nav>
+
+<div class="page">
+
+    <div class="page-header">
+        <div class="page-label">Brain Compare</div>
+        <h1 class="page-title">Two minds, side by side</h1>
+        <p class="page-desc">See what you share, what's unique, and how compatible your brains are.</p>
+    </div>
+
+    <!-- Selector -->
+    <div class="selector-bar">
+        <div class="selector-brain">
+            <span class="dot" style="background:#00ff94;"></span>
+            @paul_desai
+        </div>
+        <span class="selector-vs">VS</span>
+        <div class="selector-pick">
+            <select id="brain-select" onchange="loadComparison()">
+                <option value="einstein">Albert Einstein</option>
+                <option value="jobs">Steve Jobs</option>
+                <option value="aurelius">Marcus Aurelius</option>
+                <option value="davinci">Leonardo da Vinci</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Compare Grid -->
+    <div class="compare-grid">
+
+        <!-- Left: Paul -->
+        <div class="brain-panel" id="panel-left">
+            <div class="brain-panel-header">
+                <div class="brain-panel-icon" style="background:rgba(0,255,148,.1);border-color:#00ff94;">&#9671;</div>
+                <div>
+                    <div class="brain-panel-name">@paul_desai</div>
+                    <div class="brain-panel-type" style="color:#00ff94;">THE ARCHITECT</div>
+                </div>
+            </div>
+            <div class="brain-panel-graph"><canvas id="graph-left"></canvas></div>
+            <div class="brain-panel-stats" id="stats-left"></div>
+        </div>
+
+        <!-- Center: Compatibility -->
+        <div class="compare-center">
+            <div class="compat-ring">
+                <svg viewBox="0 0 120 120">
+                    <circle class="compat-ring-bg" cx="60" cy="60" r="52"/>
+                    <circle class="compat-ring-fill" id="compat-arc" cx="60" cy="60" r="52"
+                        stroke-dasharray="327" stroke-dashoffset="327"/>
+                </svg>
+                <div class="compat-value" id="compat-value">0%</div>
+            </div>
+            <div class="compat-label">Compatibility</div>
+            <div class="shared-count" id="shared-count">0 shared</div>
+            <div class="shared-label">concepts in common</div>
+        </div>
+
+        <!-- Right: Opponent -->
+        <div class="brain-panel" id="panel-right">
+            <div class="brain-panel-header" id="header-right">
+                <div class="brain-panel-icon" id="icon-right" style="background:rgba(168,85,247,.1);border-color:#a855f7;">E</div>
+                <div>
+                    <div class="brain-panel-name" id="name-right">Albert Einstein</div>
+                    <div class="brain-panel-type" id="type-right" style="color:#a855f7;">THE EXPLORER</div>
+                </div>
+            </div>
+            <div class="brain-panel-graph"><canvas id="graph-right"></canvas></div>
+            <div class="brain-panel-stats" id="stats-right"></div>
+        </div>
+
+    </div>
+
+    <!-- Analysis -->
+    <div class="analysis" id="analysis">
+        <div class="analysis-card" id="card-shared">
+            <h3><span class="dot" style="background:var(--accent);"></span> Shared Concepts</h3>
+            <div class="concept-list" id="list-shared"></div>
+        </div>
+        <div class="analysis-card" id="card-unique-left">
+            <h3><span class="dot" style="background:#00ff94;"></span> Unique to Paul</h3>
+            <div class="concept-list" id="list-unique-left"></div>
+        </div>
+        <div class="analysis-card" id="card-unique-right">
+            <h3><span class="dot" id="dot-unique-right" style="background:#a855f7;"></span> <span id="label-unique-right">Unique to Einstein</span></h3>
+            <div class="concept-list" id="list-unique-right"></div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions-bar">
+        <button class="btn btn-twitter" onclick="shareComparison()">Share on X</button>
+        <a href="scan.html" class="btn btn-primary">Scan My Brain</a>
+        <a href="brain.html" class="btn btn-ghost">Explore Full Graph</a>
+    </div>
+
+    <a href="/" class="back-link">&#8592; Back to BrainScan</a>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// BRAIN DATA
+// ═══════════════════════════════════════════════════════════
+
+const PAUL = {
+    id: 'paul',
+    name: '@paul_desai',
+    archetype: 'THE ARCHITECT',
+    color: '#00ff94',
+    initial: 'P',
+    nodeCount: 27676,
+    edgeCount: 142847,
+    stats: { Systems: 89, Depth: 72, Speed: 81, Creativity: 58, Connection: 64 },
+    concepts: [
+        'Sovereign AI','MirrorDNA','Agent Architecture','Memory Bus','Hash Chains',
+        'Digital Sovereignty','Identity Kernel','Protocol Design','Trust by Design',
+        'LaunchAgents','macOS Infrastructure','CI/CD','GitHub Actions',
+        'Obsidian Vault','Knowledge Graphs','Compression','Read Paths',
+        'First Principles','Stoicism','Anti-Fragility','Long-Term Thinking',
+        'Viral Mechanics','Product-Market Fit','Network Effects','SEO Strategy',
+        'Data Visualization','Force Layouts','Canvas Rendering','Responsive Design',
+        'Language Models','Prompt Engineering','Local LLMs','Edge Inference',
+        'Self-Evolving Systems','Curiosity Engine','Dreaming Infrastructure',
+        'AI Safety','Alignment','Capability Leases','Governance',
+        'Building in Public','Ship Fast','Craftsmanship','Proof of Work',
+        'Consumer Hardware','Cost Reduction','Decentralization',
+        'Open Source','Community Building','Developer Relations',
+        'Typography','Color Theory','UX Design','Animation',
+        'Systems Thinking','Complexity Theory','Emergence',
+        'Automation','Shell Scripting','Python','JavaScript',
+        'Privacy','Zero Knowledge','Encryption'
+    ],
+    clusters: [
+        { name: 'AI/Systems', color: '#00ff94', count: 44 },
+        { name: 'Identity', color: '#a855f7', count: 30 },
+        { name: 'Protocol', color: '#00d4ff', count: 34 },
+        { name: 'Infra', color: '#3b82f6', count: 33 },
+        { name: 'Knowledge', color: '#ffd700', count: 32 },
+        { name: 'Philosophy', color: '#ec4899', count: 30 },
+        { name: 'Strategy', color: '#f97316', count: 30 },
+        { name: 'Creative', color: '#10b981', count: 30 },
+    ]
+};
+
+const BRAINS = {
+    einstein: {
+        id: 'einstein',
+        name: 'Albert Einstein',
+        archetype: 'THE EXPLORER',
+        color: '#a855f7',
+        initial: 'E',
+        nodeCount: 3420,
+        edgeCount: 12847,
+        stats: { Systems: 71, Depth: 95, Speed: 48, Creativity: 88, Connection: 62 },
+        concepts: [
+            'Relativity','Spacetime','Quantum Mechanics','Photoelectric Effect',
+            'Thought Experiments','Imagination','Curiosity','Wonder',
+            'First Principles','Simplicity','Elegance','Beauty in Physics',
+            'Mathematics','Geometry','Tensor Calculus','Field Equations',
+            'Philosophy of Science','Epistemology','Determinism','Causality',
+            'Unified Field Theory','Grand Unification','Constants of Nature',
+            'Patent Office','Practical Applications','Swiss Education',
+            'Music','Violin','Mozart','Harmony',
+            'Pacifism','Nuclear Ethics','Responsibility','Conscience',
+            'Teaching','Communication','Analogy','Visualization',
+            'Persistence','Solitude','Deep Work','Contemplation',
+            'Light','Waves','Particles','Duality',
+            'Gravity','Curvature','Mass-Energy','E=mc2',
+            'Time','Simultaneity','Reference Frames','Observers',
+            'Statistical Mechanics','Brownian Motion','Thermodynamics',
+            'Cosmology','Expanding Universe','Dark Matter'
+        ],
+        clusters: [
+            { name: 'Physics', color: '#a855f7', count: 24 },
+            { name: 'Mathematics', color: '#00d4ff', count: 12 },
+            { name: 'Philosophy', color: '#ec4899', count: 14 },
+            { name: 'Creativity', color: '#f97316', count: 10 },
+        ]
+    },
+    jobs: {
+        id: 'jobs',
+        name: 'Steve Jobs',
+        archetype: 'THE ARCHITECT',
+        color: '#00d4ff',
+        initial: 'S',
+        nodeCount: 2891,
+        edgeCount: 9847,
+        stats: { Systems: 85, Depth: 62, Speed: 91, Creativity: 92, Connection: 78 },
+        concepts: [
+            'Product Design','User Experience','Simplicity','Minimalism',
+            'Typography','Calligraphy','Aesthetics','Beauty',
+            'Systems Thinking','Integration','Ecosystem','Platform',
+            'Marketing','Storytelling','Reality Distortion','Presentation',
+            'Innovation','Disruption','Category Creation','Market Timing',
+            'Hardware','Software','Services','Vertical Integration',
+            'Supply Chain','Manufacturing','Quality Control','Precision',
+            'Retail Experience','Apple Store','Customer Journey',
+            'Pixar','Animation','Digital Entertainment','Creative Teams',
+            'Zen Buddhism','Meditation','Focus','Intuition',
+            'First Principles','Taste','Curation','Editing',
+            'Building in Public','Ship Fast','Iteration','Perfection',
+            'Silicon Valley','Startup Culture','Entrepreneurship',
+            'Music Industry','iTunes','iPod','Digital Distribution',
+            'Mobile Computing','Touch Interface','Smartphone Revolution',
+            'Computing History','Xerox PARC','GUI','Mouse'
+        ],
+        clusters: [
+            { name: 'Product', color: '#00d4ff', count: 20 },
+            { name: 'Design', color: '#f97316', count: 16 },
+            { name: 'Business', color: '#ffd700', count: 14 },
+            { name: 'Technology', color: '#3b82f6', count: 12 },
+        ]
+    },
+    aurelius: {
+        id: 'aurelius',
+        name: 'Marcus Aurelius',
+        archetype: 'THE SCHOLAR',
+        color: '#10b981',
+        initial: 'M',
+        nodeCount: 847,
+        edgeCount: 2341,
+        stats: { Systems: 58, Depth: 92, Speed: 32, Creativity: 45, Connection: 71 },
+        concepts: [
+            'Stoicism','Virtue Ethics','Duty','Discipline',
+            'Self-Examination','Journaling','Reflection','Meditation',
+            'Impermanence','Mortality','Memento Mori','Time',
+            'Nature','Logos','Rational Universe','Order',
+            'Leadership','Governance','Responsibility','Service',
+            'Adversity','Resilience','Obstacle is the Way','Anti-Fragility',
+            'Community','Citizenship','Common Good','Justice',
+            'Emotion Control','Equanimity','Acceptance','Detachment',
+            'Philosophy','Epictetus','Seneca','Zeno',
+            'First Principles','Truth','Wisdom','Knowledge',
+            'Simplicity','Frugality','Humility','Modesty',
+            'Long-Term Thinking','Legacy','Posterity','Perspective',
+            'Practice','Habit','Repetition','Consistency'
+        ],
+        clusters: [
+            { name: 'Philosophy', color: '#10b981', count: 20 },
+            { name: 'Leadership', color: '#3b82f6', count: 12 },
+            { name: 'Ethics', color: '#ffd700', count: 14 },
+            { name: 'Practice', color: '#ec4899', count: 8 },
+        ]
+    },
+    davinci: {
+        id: 'davinci',
+        name: 'Leonardo da Vinci',
+        archetype: 'THE CREATIVE',
+        color: '#f97316',
+        initial: 'L',
+        nodeCount: 4102,
+        edgeCount: 18920,
+        stats: { Systems: 74, Depth: 83, Speed: 45, Creativity: 98, Connection: 89 },
+        concepts: [
+            'Anatomy','Human Body','Proportion','Vitruvian Man',
+            'Engineering','Machines','Flying Machine','War Machines',
+            'Painting','Mona Lisa','Last Supper','Sfumato',
+            'Sculpture','Architecture','Urban Planning','Bridges',
+            'Optics','Light','Shadow','Perspective',
+            'Water','Fluid Dynamics','Hydraulics','River Systems',
+            'Botany','Natural Observation','Scientific Method','Experimentation',
+            'Notebooks','Sketching','Mirror Writing','Documentation',
+            'Music','Performance','Lyre','Improvisation',
+            'Mathematics','Geometry','Golden Ratio','Symmetry',
+            'Curiosity','Polymathy','Cross-Domain','Synthesis',
+            'Visualization','Data Visualization','Diagrams','Technical Drawing',
+            'Innovation','Invention','Prototype','Iteration',
+            'Systems Thinking','Interconnection','Complexity','Emergence',
+            'Beauty','Aesthetics','Nature','Harmony',
+            'First Principles','Observation','Direct Experience'
+        ],
+        clusters: [
+            { name: 'Art', color: '#f97316', count: 16 },
+            { name: 'Science', color: '#00d4ff', count: 18 },
+            { name: 'Engineering', color: '#3b82f6', count: 14 },
+            { name: 'Creativity', color: '#ec4899', count: 16 },
+        ]
+    }
+};
+
+// ═══════════════════════════════════════════════════════════
+// COMPARISON ENGINE
+// ═══════════════════════════════════════════════════════════
+function normalize(s) {
+    return s.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+function computeComparison(brainA, brainB) {
+    const setA = new Set(brainA.concepts.map(normalize));
+    const setB = new Set(brainB.concepts.map(normalize));
+    const shared = [];
+    const uniqueA = [];
+    const uniqueB = [];
+
+    // Direct matches
+    for (const c of brainA.concepts) {
+        if (setB.has(normalize(c))) shared.push(c);
+        else uniqueA.push(c);
+    }
+    for (const c of brainB.concepts) {
+        if (!setA.has(normalize(c))) uniqueB.push(c);
+    }
+
+    // Fuzzy matches (substring containment)
+    const fuzzyShared = [];
+    for (const a of uniqueA.slice()) {
+        for (const b of uniqueB.slice()) {
+            const na = normalize(a);
+            const nb = normalize(b);
+            if (na.length > 4 && nb.length > 4 && (na.includes(nb) || nb.includes(na))) {
+                fuzzyShared.push(a);
+                break;
+            }
+        }
+    }
+
+    const totalShared = shared.length + fuzzyShared.length * 0.5;
+    const totalUnique = new Set([...brainA.concepts.map(normalize), ...brainB.concepts.map(normalize)]).size;
+
+    // Stat similarity
+    const statKeys = Object.keys(brainA.stats);
+    let statDiff = 0;
+    for (const k of statKeys) {
+        statDiff += Math.abs((brainA.stats[k] || 0) - (brainB.stats[k] || 0));
+    }
+    const statSimilarity = 1 - (statDiff / (statKeys.length * 100));
+
+    // Archetype match
+    const archetypeMatch = brainA.archetype === brainB.archetype ? 1 : 0.5;
+
+    const compatibility = Math.round(
+        (totalShared / totalUnique) * 40 +
+        statSimilarity * 40 +
+        archetypeMatch * 20
+    );
+
+    return {
+        compatibility: Math.min(99, Math.max(15, compatibility)),
+        shared: shared.slice(0, 12),
+        uniqueA: uniqueA.slice(0, 10),
+        uniqueB: uniqueB.slice(0, 10),
+        sharedCount: shared.length
+    };
+}
+
+// ═══════════════════════════════════════════════════════════
+// MINI GRAPH RENDERER
+// ═══════════════════════════════════════════════════════════
+const graphAnimations = {};
+
+function renderMiniGraph(canvasId, brain, side) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    const w = rect.width;
+    const h = rect.height;
+
+    // Cancel previous
+    if (graphAnimations[canvasId]) cancelAnimationFrame(graphAnimations[canvasId]);
+
+    // Generate nodes per cluster
+    const nodes = [];
+    const edges = [];
+    const clusterCount = brain.clusters.length;
+
+    // Core
+    nodes.push({ x: w/2, y: h/2, r: 6, color: brain.color, glow: true });
+
+    let idx = 1;
+    brain.clusters.forEach((cluster, ci) => {
+        const cAngle = (Math.PI * 2 * ci) / clusterCount - Math.PI / 2;
+        const cx = w/2 + Math.cos(cAngle) * w * 0.25;
+        const cy = h/2 + Math.sin(cAngle) * h * 0.25;
+        const count = Math.min(cluster.count, 20);
+
+        for (let i = 0; i < count; i++) {
+            const nAngle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
+            const dist = 15 + Math.random() * w * 0.12;
+            const level = i < 3 ? 1 : i < 8 ? 2 : 3;
+            const r = level === 1 ? 4 : level === 2 ? 2.5 : 1.5;
+            nodes.push({
+                x: cx + Math.cos(nAngle) * dist,
+                y: cy + Math.sin(nAngle) * dist,
+                r, color: cluster.color,
+                glow: level === 1
+            });
+
+            // Edge to core
+            if (i < 2) edges.push({ from: 0, to: idx, color: cluster.color, alpha: 0.2 });
+            // Intra-cluster
+            if (i > 0) edges.push({ from: idx - 1, to: idx, color: cluster.color, alpha: 0.1 });
+            if (Math.random() > 0.6 && idx > 2) {
+                edges.push({ from: idx, to: Math.floor(Math.random() * (idx - 1)) + 1, color: '#555', alpha: 0.06 });
+            }
+            idx++;
+        }
+    });
+
+    let frame = 0;
+    function draw() {
+        frame++;
+        ctx.clearRect(0, 0, w, h);
+
+        // Background
+        const bg = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w * 0.5);
+        bg.addColorStop(0, hexAlpha(brain.color, 0.03));
+        bg.addColorStop(1, 'transparent');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, w, h);
+
+        // Edges
+        for (const e of edges) {
+            const from = nodes[e.from]; const to = nodes[e.to];
+            if (!from || !to) continue;
+            const pulse = 0.7 + 0.3 * Math.sin(frame * 0.012 + e.from);
+            ctx.beginPath();
+            ctx.moveTo(from.x, from.y);
+            ctx.lineTo(to.x, to.y);
+            ctx.strokeStyle = hexAlpha(e.color, (e.alpha || 0.08) * pulse);
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+        }
+
+        // Nodes
+        for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+            const breathe = 1 + 0.06 * Math.sin(frame * 0.02 + i * 0.8);
+            if (n.glow) {
+                const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+                glow.addColorStop(0, hexAlpha(n.color, 0.2));
+                glow.addColorStop(1, hexAlpha(n.color, 0));
+                ctx.fillStyle = glow;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r * breathe, 0, Math.PI * 2);
+            ctx.fillStyle = n.color;
+            ctx.fill();
+
+            // Gentle drift
+            n.x += Math.sin(frame * 0.004 + i * 1.1) * 0.12;
+            n.y += Math.cos(frame * 0.003 + i * 1.3) * 0.08;
+        }
+
+        graphAnimations[canvasId] = requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+function hexAlpha(hex, a) {
+    if (!hex || hex[0] !== '#') return `rgba(100,100,100,${a})`;
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return `rgba(${r},${g},${b},${a})`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// RENDER STAT BARS
+// ═══════════════════════════════════════════════════════════
+function renderStatBars(containerId, stats, color) {
+    const el = document.getElementById(containerId);
+    el.innerHTML = '';
+    for (const [label, value] of Object.entries(stats)) {
+        const row = document.createElement('div');
+        row.className = 'bp-stat-row';
+        row.innerHTML = `
+            <div class="bp-stat-label">${label}</div>
+            <div class="bp-stat-bar-bg">
+                <div class="bp-stat-bar-fill" style="width:0%;background:${color};"></div>
+            </div>
+            <div class="bp-stat-val">${value}%</div>
+        `;
+        el.appendChild(row);
+    }
+    // Animate after paint
+    requestAnimationFrame(() => {
+        el.querySelectorAll('.bp-stat-bar-fill').forEach((bar, i) => {
+            bar.style.width = Object.values(stats)[i] + '%';
+        });
+    });
+}
+
+// ═══════════════════════════════════════════════════════════
+// RENDER CONCEPT LISTS
+// ═══════════════════════════════════════════════════════════
+function renderConcepts(containerId, concepts, color) {
+    const el = document.getElementById(containerId);
+    el.innerHTML = concepts.map(c =>
+        `<div class="concept-tag"><span class="cdot" style="background:${color}"></span>${c}</div>`
+    ).join('');
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANIMATE COMPATIBILITY RING
+// ═══════════════════════════════════════════════════════════
+function animateCompat(pct) {
+    const circumference = 327;
+    const offset = circumference - (circumference * pct / 100);
+    const arc = document.getElementById('compat-arc');
+    const valueEl = document.getElementById('compat-value');
+
+    arc.style.strokeDashoffset = circumference;
+    valueEl.textContent = '0%';
+
+    requestAnimationFrame(() => {
+        arc.style.transition = 'stroke-dashoffset 1.2s ease';
+        arc.style.strokeDashoffset = offset;
+    });
+
+    // Count up
+    let current = 0;
+    const duration = 1200;
+    const start = Date.now();
+    function tick() {
+        const elapsed = Date.now() - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        current = Math.round(pct * eased);
+        valueEl.textContent = current + '%';
+        if (progress < 1) requestAnimationFrame(tick);
+    }
+    tick();
+}
+
+// ═══════════════════════════════════════════════════════════
+// LOAD COMPARISON
+// ═══════════════════════════════════════════════════════════
+function loadComparison() {
+    const brainId = document.getElementById('brain-select').value;
+    const opponent = BRAINS[brainId];
+    if (!opponent) return;
+
+    // Update right panel header
+    document.getElementById('icon-right').textContent = opponent.initial;
+    document.getElementById('icon-right').style.background = hexAlpha(opponent.color, 0.1);
+    document.getElementById('icon-right').style.borderColor = opponent.color;
+    document.getElementById('name-right').textContent = opponent.name;
+    document.getElementById('type-right').textContent = opponent.archetype;
+    document.getElementById('type-right').style.color = opponent.color;
+
+    // Stat bars
+    renderStatBars('stats-left', PAUL.stats, PAUL.color);
+    renderStatBars('stats-right', opponent.stats, opponent.color);
+
+    // Mini graphs
+    renderMiniGraph('graph-left', PAUL, 'left');
+    renderMiniGraph('graph-right', opponent, 'right');
+
+    // Compute comparison
+    const result = computeComparison(PAUL, opponent);
+
+    // Compatibility
+    animateCompat(result.compatibility);
+    document.getElementById('shared-count').textContent = result.sharedCount + ' shared';
+
+    // Concept lists
+    renderConcepts('list-shared', result.shared, 'var(--accent)');
+    renderConcepts('list-unique-left', result.uniqueA, PAUL.color);
+    renderConcepts('list-unique-right', result.uniqueB, opponent.color);
+
+    // Update unique-right label
+    document.getElementById('label-unique-right').textContent = 'Unique to ' + opponent.name.split(' ').pop();
+    document.getElementById('dot-unique-right').style.background = opponent.color;
+
+    // Set compat ring color
+    document.getElementById('compat-arc').style.stroke = opponent.color;
+    document.getElementById('compat-value').style.color = opponent.color;
+}
+
+// Share
+function shareComparison() {
+    const brainId = document.getElementById('brain-select').value;
+    const opponent = BRAINS[brainId];
+    const result = computeComparison(PAUL, opponent);
+    const text = encodeURIComponent(
+        `Brain Compatibility: @paul_desai vs ${opponent.name}\n\n` +
+        `${result.compatibility}% match\n` +
+        `${result.sharedCount} shared concepts\n\n` +
+        `Compare your brain:\n` +
+        `\u2192 id.activemirror.ai/compare.html\n\n` +
+        `#BrainScan #MirrorDNA`
+    );
+    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+// Check URL params
+const params = new URLSearchParams(window.location.search);
+const brainParam = params.get('vs') || params.get('b');
+if (brainParam && BRAINS[brainParam]) {
+    document.getElementById('brain-select').value = brainParam;
+}
+
+// Load initial
+loadComparison();
+
+// Handle resize
+window.addEventListener('resize', () => {
+    const brainId = document.getElementById('brain-select').value;
+    renderMiniGraph('graph-left', PAUL, 'left');
+    renderMiniGraph('graph-right', BRAINS[brainId], 'right');
+});
+</script>
+
+</body>
+</html>
