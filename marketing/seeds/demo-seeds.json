@@ -1,0 +1,90 @@
+{
+  "generated": "2026-01-27T16:44:47.420Z",
+  "count": 9,
+  "seeds": [
+    {
+      "template": "Developer",
+      "name": "Alex Chen",
+      "role": "Senior Software Engineer",
+      "shortcode": "97879b",
+      "url": "https://id.activemirror.ai/?seed=97879b",
+      "contentLength": 1512,
+      "generatedAt": "2026-01-27T16:44:35.899Z"
+    },
+    {
+      "template": "Writer",
+      "name": "Maya Torres",
+      "role": "Author & Newsletter Writer",
+      "shortcode": "6569fe",
+      "url": "https://id.activemirror.ai/?seed=6569fe",
+      "contentLength": 1521,
+      "generatedAt": "2026-01-27T16:44:36.915Z"
+    },
+    {
+      "template": "Executive",
+      "name": "James Park",
+      "role": "VP Product",
+      "shortcode": "e5695f",
+      "url": "https://id.activemirror.ai/?seed=e5695f",
+      "contentLength": 1456,
+      "generatedAt": "2026-01-27T16:44:37.923Z"
+    },
+    {
+      "template": "Student",
+      "name": "Priya Sharma",
+      "role": "Computer Science Student",
+      "shortcode": "ad75a8",
+      "url": "https://id.activemirror.ai/?seed=ad75a8",
+      "contentLength": 1528,
+      "generatedAt": "2026-01-27T16:44:38.922Z"
+    },
+    {
+      "template": "Parent",
+      "name": "Sam Wilson",
+      "role": "Product Manager",
+      "shortcode": "2e77ab",
+      "url": "https://id.activemirror.ai/?seed=2e77ab",
+      "contentLength": 1523,
+      "generatedAt": "2026-01-27T16:44:39.922Z"
+    },
+    {
+      "template": "Founder",
+      "name": "Riya Patel",
+      "role": "Founder & CEO",
+      "shortcode": "2b6532",
+      "url": "https://id.activemirror.ai/?seed=2b6532",
+      "contentLength": 1535,
+      "generatedAt": "2026-01-27T16:44:40.924Z"
+    },
+    {
+      "template": "Founder (ChatGPT format)",
+      "name": "Riya Patel",
+      "role": "Founder & CEO",
+      "format": "chatgpt",
+      "shortcode": "6e6e15",
+      "url": "https://id.activemirror.ai/?seed=6e6e15",
+      "contentLength": 1663,
+      "generatedAt": "2026-01-27T16:44:43.071Z"
+    },
+    {
+      "template": "Founder (Claude format)",
+      "name": "Riya Patel",
+      "role": "Founder & CEO",
+      "format": "claude",
+      "shortcode": "3a4eda",
+      "url": "https://id.activemirror.ai/?seed=3a4eda",
+      "contentLength": 1708,
+      "generatedAt": "2026-01-27T16:44:45.255Z"
+    },
+    {
+      "template": "Founder (Gemini format)",
+      "name": "Riya Patel",
+      "role": "Founder & CEO",
+      "format": "gemini",
+      "shortcode": "fe634c",
+      "url": "https://id.activemirror.ai/?seed=fe634c",
+      "contentLength": 1614,
+      "generatedAt": "2026-01-27T16:44:47.401Z"
+    }
+  ]
+}
