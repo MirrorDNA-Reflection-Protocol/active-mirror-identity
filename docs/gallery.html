@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainScan — Explore Public Brains</title>
+    <title>MINDPRINT — Constellation</title>
     <meta name="description" content="Browse the gallery of public brain visualizations. Find minds like yours.">
-    <meta property="og:title" content="BrainScan — Brain Gallery">
-    <meta property="og:description" content="Explore public brain visualizations. The most connected minds, visualized.">
+    <meta property="og:title" content="MINDPRINT — Constellation">
+    <meta property="og:description" content="The constellation of minds. Explore public cognitive fingerprints and find resonant minds.">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,19 +115,19 @@
 <body>
 
 <nav>
-    <a href="/" class="nav-logo"><span class="g">&#9671;</span> BrainScan</a>
+    <a href="/" class="nav-logo"><span class="g">&#9671;</span> MINDPRINT</a>
     <div class="nav-links">
         <a href="brain.html">Explore</a>
         <a href="compare.html">Compare</a>
-        <a href="scan.html" class="nav-cta">Scan My Brain</a>
+        <a href="scan.html" class="nav-cta">Generate Yours</a>
     </div>
 </nav>
 
 <div class="page">
     <div class="page-header">
-        <div class="page-label">Brain Gallery</div>
-        <h1 class="page-title">Explore public brains</h1>
-        <p class="page-desc">The most connected minds, visualized. Find brains like yours.</p>
+        <div class="page-label">Constellation</div>
+        <h1 class="page-title">Explore the constellation</h1>
+        <p class="page-desc">The most connected minds, visualized. Find minds like yours.</p>
     </div>
 
     <!-- Featured -->
@@ -163,7 +163,7 @@
                 <option value="growing">Fastest Growing</option>
             </select>
             <div class="search-wrap">
-                <input type="text" class="search-input" id="search" placeholder="Search brains..." autocomplete="off">
+                <input type="text" class="search-input" id="search" placeholder="Search minds..." autocomplete="off">
             </div>
         </div>
     </div>
@@ -173,10 +173,10 @@
     <!-- Grid -->
     <div class="gallery-grid" id="gallery-grid"></div>
 
-    <button class="load-more" id="load-more" onclick="loadMore()">Load More Brains</button>
+    <button class="load-more" id="load-more" onclick="loadMore()">Load More Minds</button>
 
     <div class="page-footer">
-        <a href="/">&#8592; Back to BrainScan</a>
+        <a href="/">&#8592; Back to MINDPRINT</a>
     </div>
 </div>
 
@@ -370,10 +370,10 @@ function renderGallery() {
     const grid = document.getElementById('gallery-grid');
     grid.innerHTML = '';
 
-    document.getElementById('result-count').textContent = `${brains.length} brains found`;
+    document.getElementById('result-count').textContent = `${brains.length} minds found`;
 
     if (visible.length === 0) {
-        grid.innerHTML = '<div class="empty-state">No brains match your filters.</div>';
+        grid.innerHTML = '<div class="empty-state">No minds match your filters.</div>';
         document.getElementById('load-more').style.display = 'none';
         return;
     }

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainScan — Famous Brain</title>
+    <title>MINDPRINT — Mind Archaeology</title>
     <meta name="description" content="Explore a famous mind, visualized as a knowledge graph.">
-    <meta property="og:title" content="BrainScan — Famous Minds Visualized">
+    <meta property="og:title" content="MINDPRINT — Mind Archaeology">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -106,12 +106,12 @@
 <body>
 
 <nav>
-    <a href="/" class="nav-logo"><span class="g">&#9671;</span> BrainScan</a>
+    <a href="/" class="nav-logo"><span class="g">&#9671;</span> MINDPRINT</a>
     <div class="nav-links">
         <a href="brain.html">Explore</a>
         <a href="compare.html">Compare</a>
         <a href="gallery.html">Gallery</a>
-        <a href="scan.html" class="nav-cta">Scan My Brain</a>
+        <a href="scan.html" class="nav-cta">Generate Yours</a>
     </div>
 </nav>
 
@@ -128,7 +128,7 @@
     <div class="insights" id="insights"></div>
     <div class="actions" id="actions"></div>
     <div class="others" id="others"></div>
-    <a href="/" class="back-link">&#8592; Back to BrainScan</a>
+    <a href="/" class="back-link">&#8592; Back to MINDPRINT</a>
 </div>
 
 <script>
@@ -219,7 +219,7 @@ const params = new URLSearchParams(window.location.search);
 const brainId = params.get('brain') || params.get('b') || 'einstein';
 const brain = FAMOUS[brainId] || FAMOUS.einstein;
 
-document.title = `BrainScan \u2014 ${brain.name}`;
+document.title = `MINDPRINT \u2014 ${brain.name}`;
 
 // ═══ HEADER ═══
 document.getElementById('header').innerHTML = `
@@ -281,7 +281,7 @@ insightsEl.innerHTML = `
 // ═══ ACTIONS ═══
 document.getElementById('actions').innerHTML = `
     <a href="compare.html?vs=${brainId}" class="btn btn-primary">Compare With My Brain</a>
-    <a href="scan.html" class="btn btn-ghost">Scan My Brain</a>
+    <a href="scan.html" class="btn btn-ghost">Generate Your Mindprint</a>
     <a href="gallery.html" class="btn btn-ghost">Browse Gallery</a>
 `;
 

@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainScan — Scan Your Brain</title>
-    <meta name="description" content="Take the BrainScan quiz. 8 questions, 2 minutes, your brain type revealed.">
-    <meta property="og:title" content="BrainScan — What's Your Brain Type?">
-    <meta property="og:description" content="8 questions. 2 minutes. Discover your cognitive archetype.">
+    <title>Generate Your Mindprint</title>
+    <meta name="description" content="Eight questions. One cognitive fingerprint. Discover how your mind works across five dimensions.">
+    <meta property="og:title" content="MINDPRINT — Generate Your Cognitive Fingerprint">
+    <meta property="og:description" content="Not a personality quiz. A cognitive identity layer. How does your mind work?">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #030303;
-            --bg-card: #0a0a0a;
-            --bg-elevated: #111;
+            --surface: #0a0a0a;
+            --surface-2: #111;
             --border: #1a1a1a;
-            --border-hover: #2a2a2a;
             --text: #fafafa;
-            --text-secondary: #888;
-            --text-dim: #555;
-            --accent: #00ff94;
-            --accent-glow: rgba(0,255,148,.15);
-            --accent-subtle: rgba(0,255,148,.06);
+            --text-2: #999;
+            --text-3: #555;
+            --mint: #00ff94;
+            --mint-dim: rgba(0,255,148,.08);
+            --mint-glow: rgba(0,255,148,.15);
+            --violet: #a855f7;
+            --cyan: #00d4ff;
+            --blue: #3b82f6;
+            --gold: #ffd700;
+            --rose: #ec4899;
+            --orange: #f97316;
+            --emerald: #10b981;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
             display: flex;
@@ -52,22 +54,57 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(3,3,3,.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            background: rgba(3,3,3,.6);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255,255,255,.04);
         }
 
-        .nav-logo {
+        .nav-brand {
             display: flex;
             align-items: center;
-            gap: .5rem;
-            font-weight: 700;
-            font-size: 1.1rem;
+            gap: .6rem;
             text-decoration: none;
             color: var(--text);
         }
 
-        .nav-logo .glyph { color: var(--accent); font-size: 1.3rem; }
+        .nav-mark {
+            width: 24px; height: 24px;
+            border: 2px solid var(--mint);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-mark::after {
+            content: '';
+            width: 6px; height: 6px;
+            background: var(--mint);
+            border-radius: 50%;
+        }
+
+        .nav-wordmark {
+            font-weight: 800;
+            font-size: .9rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-3);
+            text-decoration: none;
+            font-size: .85rem;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
 
         /* ── QUIZ CONTAINER ── */
         .quiz-container {
@@ -77,29 +114,34 @@
         }
 
         /* ── PROGRESS ── */
+        .progress-wrap {
+            margin-bottom: 2rem;
+        }
+
         .progress-bar {
             width: 100%;
-            height: 4px;
+            height: 3px;
             background: var(--border);
             border-radius: 2px;
-            margin-bottom: 2rem;
             overflow: hidden;
+            margin-bottom: .75rem;
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--accent);
+            background: var(--mint);
             border-radius: 2px;
             transition: width .4s ease;
-            box-shadow: 0 0 10px var(--accent-glow);
+            box-shadow: 0 0 8px var(--mint-glow);
         }
 
         .progress-text {
             font-family: 'JetBrains Mono', monospace;
-            font-size: .75rem;
-            color: var(--text-dim);
-            margin-bottom: 1.5rem;
+            font-size: .65rem;
+            color: var(--text-3);
             text-align: right;
+            letter-spacing: .05em;
+            text-transform: uppercase;
         }
 
         /* ── QUESTION ── */
@@ -115,57 +157,66 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .question-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .65rem;
+            color: var(--mint);
+            letter-spacing: .1em;
+            margin-bottom: .75rem;
+        }
+
         .question h2 {
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: .4rem;
             line-height: 1.3;
+            letter-spacing: -.01em;
         }
 
-        .question-num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .8rem;
-            color: var(--accent);
-            margin-bottom: .5rem;
+        .question .q-layer {
+            font-size: .75rem;
+            color: var(--text-3);
+            margin-bottom: 1.5rem;
         }
 
         /* ── OPTIONS ── */
         .options {
             display: flex;
             flex-direction: column;
-            gap: .75rem;
+            gap: .6rem;
         }
 
         .option {
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1.25rem 1.5rem;
-            background: var(--bg-card);
+            padding: 1.1rem 1.4rem;
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 14px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all .2s;
-            font-size: 1rem;
-            color: var(--text);
-            text-align: left;
+            font-size: .95rem;
+            color: var(--text-2);
         }
 
         .option:hover {
-            border-color: var(--border-hover);
-            background: var(--bg-elevated);
+            border-color: rgba(255,255,255,.08);
+            background: var(--surface-2);
+            color: var(--text);
             transform: translateX(4px);
         }
 
         .option.selected {
-            border-color: var(--accent);
-            background: var(--accent-subtle);
+            border-color: var(--mint);
+            background: var(--mint-dim);
+            color: var(--text);
         }
 
         .option-marker {
-            width: 20px; height: 20px;
+            width: 18px; height: 18px;
             border: 2px solid var(--border);
-            border-radius: 6px;
+            border-radius: 50%;
             flex-shrink: 0;
             transition: all .2s;
             display: flex;
@@ -174,18 +225,18 @@
         }
 
         .option.selected .option-marker {
-            border-color: var(--accent);
-            background: var(--accent);
+            border-color: var(--mint);
+            background: var(--mint);
         }
 
         .option.selected .option-marker::after {
             content: '';
-            width: 8px; height: 8px;
+            width: 6px; height: 6px;
             background: #000;
-            border-radius: 2px;
+            border-radius: 50%;
         }
 
-        /* ── SCANNING SCREEN ── */
+        /* ── SCANNING ── */
         .scanning {
             display: none;
             text-align: center;
@@ -196,7 +247,7 @@
         .scanning.active { display: block; }
 
         .scan-ring {
-            width: 200px; height: 200px;
+            width: 180px; height: 180px;
             margin: 0 auto 2rem;
             position: relative;
         }
@@ -206,27 +257,37 @@
             animation: spin 3s linear infinite;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         .scan-ring .inner {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 2rem;
+        }
+
+        .scan-ring .inner-dot {
+            width: 12px; height: 12px;
+            background: var(--mint);
+            border-radius: 50%;
+            animation: core-pulse 2s infinite;
+        }
+
+        @keyframes core-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 20px var(--mint-glow); }
+            50% { opacity: .5; transform: scale(.6); box-shadow: 0 0 8px var(--mint-glow); }
         }
 
         .scan-status {
             font-family: 'JetBrains Mono', monospace;
-            font-size: .9rem;
-            color: var(--accent);
+            font-size: .8rem;
+            color: var(--mint);
             margin-bottom: .5rem;
+            letter-spacing: .03em;
         }
 
         .scan-detail {
-            font-size: .85rem;
-            color: var(--text-dim);
+            font-size: .8rem;
+            color: var(--text-3);
         }
 
         /* ── RESULTS ── */
@@ -237,112 +298,186 @@
 
         .results.active { display: block; }
 
-        .result-card {
-            background: var(--bg-card);
+        .result-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .result-fingerprint {
+            width: 100%;
+            aspect-ratio: 1;
+            max-width: 320px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .result-fingerprint canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .result-type {
+            font-size: .65rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: .5rem;
+        }
+
+        .result-name {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: -.02em;
+            margin-bottom: .75rem;
+        }
+
+        .result-desc {
+            color: var(--text-2);
+            font-size: .95rem;
+            max-width: 420px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ── LAYERS RESULT ── */
+        .result-layers {
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2.5rem;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-layers-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .65rem;
+            font-weight: 600;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--mint);
+            margin-bottom: 1.5rem;
+        }
+
+        .layer-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .layer-row:last-child { margin-bottom: 0; }
+
+        .layer-label {
+            font-size: .8rem;
+            font-weight: 600;
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        .layer-bar-bg {
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .layer-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1.2s cubic-bezier(.16,1,.3,1);
+            width: 0%;
+        }
+
+        .layer-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .75rem;
+            color: var(--text-3);
+            width: 36px;
+            text-align: right;
+        }
+
+        /* ── TWIN SPAWN ── */
+        .twin-spawn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
             text-align: center;
             margin-bottom: 2rem;
         }
 
-        .result-archetype-icon {
-            font-size: 3rem;
+        .twin-spawn-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .6rem;
             margin-bottom: 1rem;
         }
 
-        .result-archetype-name {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: .02em;
-            margin-bottom: .5rem;
+        .twin-spawn-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--mint);
+            animation: core-pulse 2s infinite;
         }
 
-        .result-archetype-desc {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            max-width: 400px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-
-        /* ── STAT BARS ── */
-        .stat-bars {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-
-        .stat-row {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .stat-label {
-            font-size: .85rem;
-            color: var(--text-secondary);
-            width: 100px;
-            flex-shrink: 0;
-            text-align: right;
-        }
-
-        .stat-bar-bg {
-            flex: 1;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .stat-bar-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 1s ease;
-        }
-
-        .stat-pct {
+        .twin-spawn-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: .8rem;
-            color: var(--text-dim);
-            width: 40px;
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--mint);
+        }
+
+        .twin-spawn p {
+            font-size: .85rem;
+            color: var(--text-3);
+            line-height: 1.6;
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        .twin-spawn p strong {
+            color: var(--text-2);
         }
 
         /* ── NODE COUNT ── */
-        .node-count {
+        .node-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .node-stat {
+            text-align: center;
+        }
+
+        .node-stat-num {
             font-family: 'JetBrains Mono', monospace;
-            font-size: .9rem;
-            color: var(--text-dim);
-            margin-bottom: 2rem;
-        }
-
-        .node-count .num {
-            color: var(--accent);
+            font-size: 1.2rem;
             font-weight: 700;
+            color: var(--mint);
         }
 
-        /* ── MINI GRAPH ── */
-        .result-graph {
-            width: 100%;
-            height: 250px;
-            margin-bottom: 2rem;
+        .node-stat-label {
+            font-size: .65rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: .05em;
         }
 
-        .result-graph canvas {
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-        }
-
-        /* ── SHARE BUTTONS ── */
+        /* ── SHARE ── */
         .share-actions {
             display: flex;
-            gap: 1rem;
+            gap: .75rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .btn {
@@ -350,9 +485,9 @@
             align-items: center;
             justify-content: center;
             gap: .5rem;
-            padding: .875rem 1.5rem;
-            border-radius: 12px;
-            font-size: .95rem;
+            padding: .8rem 1.5rem;
+            border-radius: 10px;
+            font-size: .85rem;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
@@ -362,86 +497,102 @@
         }
 
         .btn-primary {
-            background: var(--accent);
+            background: var(--mint);
             color: #000;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 40px var(--accent-glow);
+            box-shadow: 0 8px 30px var(--mint-glow);
         }
 
-        .btn-secondary {
-            background: var(--bg-elevated);
-            color: var(--text);
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-2);
             border: 1px solid var(--border);
         }
 
-        .btn-secondary:hover {
-            background: var(--border);
+        .btn-ghost:hover {
+            background: var(--surface);
+            color: var(--text);
         }
 
-        .btn-twitter { background: #1DA1F2; color: #fff; }
-        .btn-linkedin { background: #0077B5; color: #fff; }
+        .btn-x { background: #000; color: #fff; border: 1px solid var(--border); }
+        .btn-li { background: #0077B5; color: #fff; }
 
-        /* ── BACK LINK ── */
+        .result-actions {
+            display: flex;
+            gap: .75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .back-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
         .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: .5rem;
-            color: var(--text-dim);
+            color: var(--text-3);
             text-decoration: none;
-            font-size: .85rem;
-            margin-top: 2rem;
+            font-size: .8rem;
             transition: color .2s;
         }
 
-        .back-link:hover { color: var(--text-secondary); }
+        .back-link:hover { color: var(--text-2); }
 
         @media (max-width: 600px) {
+            nav { padding: .75rem 1rem; }
+            .nav-links a:not(:last-child) { display: none; }
             .quiz-container { padding: 5rem 1rem 2rem; }
             .question h2 { font-size: 1.25rem; }
-            .share-actions { flex-direction: column; }
+            .share-actions, .result-actions { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="/" class="nav-logo">
-        <span class="glyph">&#9671;</span> BrainScan
+    <a href="/" class="nav-brand">
+        <div class="nav-mark"></div>
+        <span class="nav-wordmark">Mindprint</span>
     </a>
-    <div style="display:flex;gap:1rem;align-items:center;">
-        <a href="brain.html" style="color:#999;text-decoration:none;font-size:.85rem;font-weight:500;">Explore</a>
-        <a href="compare.html" style="color:#999;text-decoration:none;font-size:.85rem;font-weight:500;">Compare</a>
-        <a href="gallery.html" style="color:#999;text-decoration:none;font-size:.85rem;font-weight:500;">Gallery</a>
+    <div class="nav-links">
+        <a href="brain.html">Explore</a>
+        <a href="compare.html">Sync</a>
+        <a href="gallery.html">Constellation</a>
     </div>
 </nav>
 
 <div class="quiz-container">
 
     <!-- Progress -->
-    <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div></div>
-    <div class="progress-text" id="progress-text">Question 1 of 8</div>
+    <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div></div>
+        <div class="progress-text" id="progress-text">Cognitive Profiling &mdash; 1 / 8</div>
+    </div>
 
     <!-- Questions -->
     <div class="question active" data-q="0">
-        <div class="question-num">01</div>
+        <div class="question-num">01 &mdash; TOPOLOGY</div>
         <h2>When you learn something new, you...</h2>
+        <div class="q-layer">Measures how you connect ideas</div>
         <div class="options">
-            <div class="option" data-scores='{"architect":3,"analyst":1}'>
+            <div class="option" data-scores='{"architect":3,"analyst":1}' data-layers='{"topology":90,"depth":70}'>
                 <div class="option-marker"></div>
                 <span>Dive deep into one thing</span>
             </div>
-            <div class="option" data-scores='{"explorer":3,"connector":1}'>
+            <div class="option" data-scores='{"explorer":3,"connector":1}' data-layers='{"topology":60,"entropy":80}'>
                 <div class="option-marker"></div>
                 <span>Connect it to everything else</span>
             </div>
-            <div class="option" data-scores='{"builder":3,"strategist":1}'>
+            <div class="option" data-scores='{"builder":3,"strategist":1}' data-layers='{"topology":50,"velocity":85}'>
                 <div class="option-marker"></div>
                 <span>Find the practical application</span>
             </div>
-            <div class="option" data-scores='{"analyst":3,"scholar":1}'>
+            <div class="option" data-scores='{"analyst":3,"scholar":1}' data-layers='{"topology":75,"depth":90}'>
                 <div class="option-marker"></div>
                 <span>Question the assumptions</span>
             </div>
@@ -449,22 +600,23 @@
     </div>
 
     <div class="question" data-q="1">
-        <div class="question-num">02</div>
+        <div class="question-num">02 &mdash; ENTROPY</div>
         <h2>Your browser tabs right now:</h2>
+        <div class="q-layer">Measures cognitive order vs chaos</div>
         <div class="options">
-            <div class="option" data-scores='{"builder":2,"strategist":2}'>
+            <div class="option" data-scores='{"builder":2,"strategist":2}' data-layers='{"entropy":20,"velocity":75}'>
                 <div class="option-marker"></div>
                 <span>5 or fewer (focused)</span>
             </div>
-            <div class="option" data-scores='{"scholar":2,"analyst":2}'>
+            <div class="option" data-scores='{"scholar":2,"analyst":2}' data-layers='{"entropy":40,"depth":65}'>
                 <div class="option-marker"></div>
                 <span>10-20 (curious)</span>
             </div>
-            <div class="option" data-scores='{"explorer":2,"connector":2}'>
+            <div class="option" data-scores='{"explorer":2,"connector":2}' data-layers='{"entropy":70,"topology":60}'>
                 <div class="option-marker"></div>
                 <span>20-50 (explorer)</span>
             </div>
-            <div class="option" data-scores='{"creative":2,"explorer":2}'>
+            <div class="option" data-scores='{"creative":2,"explorer":2}' data-layers='{"entropy":95,"topology":80}'>
                 <div class="option-marker"></div>
                 <span>50+ (chaos genius)</span>
             </div>
@@ -472,22 +624,23 @@
     </div>
 
     <div class="question" data-q="2">
-        <div class="question-num">03</div>
+        <div class="question-num">03 &mdash; TOPOLOGY</div>
         <h2>When explaining ideas, you prefer:</h2>
+        <div class="q-layer">Measures your graph structure</div>
         <div class="options">
-            <div class="option" data-scores='{"architect":2,"strategist":2}'>
+            <div class="option" data-scores='{"architect":2,"strategist":2}' data-layers='{"topology":85,"velocity":60}'>
                 <div class="option-marker"></div>
                 <span>Bullet points</span>
             </div>
-            <div class="option" data-scores='{"connector":2,"creative":2}'>
+            <div class="option" data-scores='{"connector":2,"creative":2}' data-layers='{"topology":55,"entropy":65}'>
                 <div class="option-marker"></div>
                 <span>Stories and analogies</span>
             </div>
-            <div class="option" data-scores='{"explorer":2,"analyst":2}'>
+            <div class="option" data-scores='{"explorer":2,"analyst":2}' data-layers='{"topology":70,"depth":60}'>
                 <div class="option-marker"></div>
                 <span>Diagrams and visuals</span>
             </div>
-            <div class="option" data-scores='{"builder":3,"architect":1}'>
+            <div class="option" data-scores='{"builder":3,"architect":1}' data-layers='{"topology":40,"velocity":90}'>
                 <div class="option-marker"></div>
                 <span>Just show me the code</span>
             </div>
@@ -495,22 +648,23 @@
     </div>
 
     <div class="question" data-q="3">
-        <div class="question-num">04</div>
+        <div class="question-num">04 &mdash; DEPTH</div>
         <h2>Your notes are:</h2>
+        <div class="q-layer">Measures breadth vs depth ratio</div>
         <div class="options">
-            <div class="option" data-scores='{"builder":3,"creative":1}'>
+            <div class="option" data-scores='{"builder":3,"creative":1}' data-layers='{"depth":20,"velocity":85}'>
                 <div class="option-marker"></div>
                 <span>Nonexistent</span>
             </div>
-            <div class="option" data-scores='{"scholar":2,"strategist":2}'>
+            <div class="option" data-scores='{"scholar":2,"strategist":2}' data-layers='{"depth":75,"entropy":25}'>
                 <div class="option-marker"></div>
                 <span>Linear documents</span>
             </div>
-            <div class="option" data-scores='{"architect":3,"explorer":1}'>
+            <div class="option" data-scores='{"architect":3,"explorer":1}' data-layers='{"depth":65,"topology":90}'>
                 <div class="option-marker"></div>
                 <span>Connected web</span>
             </div>
-            <div class="option" data-scores='{"creative":2,"explorer":2}'>
+            <div class="option" data-scores='{"creative":2,"explorer":2}' data-layers='{"depth":50,"entropy":80}'>
                 <div class="option-marker"></div>
                 <span>Organized chaos</span>
             </div>
@@ -518,22 +672,23 @@
     </div>
 
     <div class="question" data-q="4">
-        <div class="question-num">05</div>
+        <div class="question-num">05 &mdash; EVOLUTION</div>
         <h2>What drives you:</h2>
+        <div class="q-layer">Measures your growth trajectory</div>
         <div class="options">
-            <div class="option" data-scores='{"builder":3,"architect":1}'>
+            <div class="option" data-scores='{"builder":3,"architect":1}' data-layers='{"evolution":70,"velocity":80}'>
                 <div class="option-marker"></div>
                 <span>Building things</span>
             </div>
-            <div class="option" data-scores='{"scholar":2,"analyst":2}'>
+            <div class="option" data-scores='{"scholar":2,"analyst":2}' data-layers='{"evolution":60,"depth":85}'>
                 <div class="option-marker"></div>
                 <span>Understanding things</span>
             </div>
-            <div class="option" data-scores='{"connector":2,"explorer":2}'>
+            <div class="option" data-scores='{"connector":2,"explorer":2}' data-layers='{"evolution":80,"topology":70}'>
                 <div class="option-marker"></div>
                 <span>Connecting things</span>
             </div>
-            <div class="option" data-scores='{"strategist":2,"architect":2}'>
+            <div class="option" data-scores='{"strategist":2,"architect":2}' data-layers='{"evolution":90,"depth":60}'>
                 <div class="option-marker"></div>
                 <span>Improving things</span>
             </div>
@@ -541,22 +696,23 @@
     </div>
 
     <div class="question" data-q="5">
-        <div class="question-num">06</div>
+        <div class="question-num">06 &mdash; VELOCITY</div>
         <h2>Your thinking speed:</h2>
+        <div class="q-layer">Measures cognitive processing rate</div>
         <div class="options">
-            <div class="option" data-scores='{"scholar":3,"analyst":1}'>
+            <div class="option" data-scores='{"scholar":3,"analyst":1}' data-layers='{"velocity":30,"depth":95}'>
                 <div class="option-marker"></div>
                 <span>Slow and deep</span>
             </div>
-            <div class="option" data-scores='{"builder":2,"strategist":2}'>
+            <div class="option" data-scores='{"builder":2,"strategist":2}' data-layers='{"velocity":85,"evolution":70}'>
                 <div class="option-marker"></div>
                 <span>Fast and iterative</span>
             </div>
-            <div class="option" data-scores='{"creative":3,"explorer":1}'>
+            <div class="option" data-scores='{"creative":3,"explorer":1}' data-layers='{"velocity":65,"entropy":75}'>
                 <div class="option-marker"></div>
                 <span>Bursts of insight</span>
             </div>
-            <div class="option" data-scores='{"architect":2,"connector":2}'>
+            <div class="option" data-scores='{"architect":2,"connector":2}' data-layers='{"velocity":80,"topology":75}'>
                 <div class="option-marker"></div>
                 <span>Always running</span>
             </div>
@@ -564,22 +720,23 @@
     </div>
 
     <div class="question" data-q="6">
-        <div class="question-num">07</div>
+        <div class="question-num">07 &mdash; DEPTH</div>
         <h2>When stuck, you:</h2>
+        <div class="q-layer">Measures problem-solving depth</div>
         <div class="options">
-            <div class="option" data-scores='{"builder":3,"strategist":1}'>
+            <div class="option" data-scores='{"builder":3,"strategist":1}' data-layers='{"depth":40,"velocity":90}'>
                 <div class="option-marker"></div>
                 <span>Push through</span>
             </div>
-            <div class="option" data-scores='{"creative":2,"explorer":2}'>
+            <div class="option" data-scores='{"creative":2,"explorer":2}' data-layers='{"depth":60,"entropy":70}'>
                 <div class="option-marker"></div>
                 <span>Step away</span>
             </div>
-            <div class="option" data-scores='{"connector":3,"explorer":1}'>
+            <div class="option" data-scores='{"connector":3,"explorer":1}' data-layers='{"depth":50,"topology":80}'>
                 <div class="option-marker"></div>
                 <span>Talk it out</span>
             </div>
-            <div class="option" data-scores='{"scholar":2,"analyst":2}'>
+            <div class="option" data-scores='{"scholar":2,"analyst":2}' data-layers='{"depth":90,"velocity":30}'>
                 <div class="option-marker"></div>
                 <span>Research more</span>
             </div>
@@ -587,80 +744,129 @@
     </div>
 
     <div class="question" data-q="7">
-        <div class="question-num">08</div>
+        <div class="question-num">08 &mdash; EVOLUTION</div>
         <h2>Your ideal AI is:</h2>
+        <div class="q-layer">Measures growth orientation</div>
         <div class="options">
-            <div class="option" data-scores='{"builder":3,"architect":1}'>
+            <div class="option" data-scores='{"builder":3,"architect":1}' data-layers='{"evolution":60,"velocity":90}'>
                 <div class="option-marker"></div>
                 <span>A fast executor</span>
             </div>
-            <div class="option" data-scores='{"strategist":2,"analyst":2}'>
+            <div class="option" data-scores='{"strategist":2,"analyst":2}' data-layers='{"evolution":80,"depth":75}'>
                 <div class="option-marker"></div>
                 <span>A thinking partner</span>
             </div>
-            <div class="option" data-scores='{"scholar":3,"connector":1}'>
+            <div class="option" data-scores='{"scholar":3,"connector":1}' data-layers='{"evolution":50,"depth":85}'>
                 <div class="option-marker"></div>
                 <span>A knowledge base</span>
             </div>
-            <div class="option" data-scores='{"creative":2,"explorer":2}'>
+            <div class="option" data-scores='{"creative":2,"explorer":2}' data-layers='{"evolution":90,"entropy":70}'>
                 <div class="option-marker"></div>
                 <span>A creative spark</span>
             </div>
         </div>
     </div>
 
-    <!-- Scanning Animation -->
+    <!-- Scanning -->
     <div class="scanning" id="scanning">
         <div class="scan-ring">
             <svg viewBox="0 0 200 200">
-                <circle cx="100" cy="100" r="90" fill="none" stroke="#1a1a1a" stroke-width="2"/>
-                <circle cx="100" cy="100" r="90" fill="none" stroke="#00ff94" stroke-width="2"
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#00ff94" stroke-width="1.5"
                     stroke-dasharray="141 424" stroke-linecap="round"/>
-                <circle cx="100" cy="100" r="70" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
-                <circle cx="100" cy="100" r="70" fill="none" stroke="#a855f7" stroke-width="1.5"
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#a855f7" stroke-width="1"
                     stroke-dasharray="110 330" stroke-linecap="round"
                     style="animation: spin 2s linear infinite reverse"/>
+                <circle cx="100" cy="100" r="50" fill="none" stroke="#1a1a1a" stroke-width=".8"/>
+                <circle cx="100" cy="100" r="50" fill="none" stroke="#00d4ff" stroke-width=".8"
+                    stroke-dasharray="78 236" stroke-linecap="round"
+                    style="animation: spin 1.5s linear infinite"/>
             </svg>
-            <div class="inner">&#9671;</div>
+            <div class="inner"><div class="inner-dot"></div></div>
         </div>
-        <div class="scan-status" id="scan-status">Initializing scan...</div>
-        <div class="scan-detail" id="scan-detail">Mapping neural pathways</div>
+        <div class="scan-status" id="scan-status">Initializing cognitive profile...</div>
+        <div class="scan-detail" id="scan-detail">Mapping topology layer</div>
     </div>
 
     <!-- Results -->
     <div class="results" id="results">
-        <div class="result-card">
-            <div class="result-archetype-icon" id="result-icon"></div>
-            <div class="result-archetype-name" id="result-name"></div>
-            <div class="result-archetype-desc" id="result-desc"></div>
-
-            <div class="result-graph">
-                <canvas id="result-graph-canvas"></canvas>
+        <div class="result-header">
+            <div class="result-fingerprint">
+                <canvas id="fingerprint-canvas"></canvas>
             </div>
+            <div class="result-type">Your Cognitive Fingerprint</div>
+            <div class="result-name" id="result-name"></div>
+            <p class="result-desc" id="result-desc"></p>
+        </div>
 
-            <div class="stat-bars" id="stat-bars"></div>
-
-            <div class="node-count">
-                <span class="num" id="result-nodes">0</span> nodes &middot;
-                <span class="num" id="result-edges">0</span> connections
+        <div class="result-layers">
+            <div class="result-layers-title">5 Cognitive Layers</div>
+            <div class="layer-row">
+                <div class="layer-label" style="color:var(--mint)">Topology</div>
+                <div class="layer-bar-bg"><div class="layer-bar-fill" id="bar-topology" style="background:var(--mint)"></div></div>
+                <div class="layer-pct" id="pct-topology"></div>
             </div>
+            <div class="layer-row">
+                <div class="layer-label" style="color:var(--cyan)">Velocity</div>
+                <div class="layer-bar-bg"><div class="layer-bar-fill" id="bar-velocity" style="background:var(--cyan)"></div></div>
+                <div class="layer-pct" id="pct-velocity"></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-label" style="color:var(--violet)">Depth</div>
+                <div class="layer-bar-bg"><div class="layer-bar-fill" id="bar-depth" style="background:var(--violet)"></div></div>
+                <div class="layer-pct" id="pct-depth"></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-label" style="color:var(--gold)">Entropy</div>
+                <div class="layer-bar-bg"><div class="layer-bar-fill" id="bar-entropy" style="background:var(--gold)"></div></div>
+                <div class="layer-pct" id="pct-entropy"></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-label" style="color:var(--rose)">Evolution</div>
+                <div class="layer-bar-bg"><div class="layer-bar-fill" id="bar-evolution" style="background:var(--rose)"></div></div>
+                <div class="layer-pct" id="pct-evolution"></div>
+            </div>
+        </div>
+
+        <div class="node-stats">
+            <div class="node-stat">
+                <div class="node-stat-num" id="result-nodes">0</div>
+                <div class="node-stat-label">seed nodes</div>
+            </div>
+            <div class="node-stat">
+                <div class="node-stat-num" id="result-edges">0</div>
+                <div class="node-stat-label">connections</div>
+            </div>
+            <div class="node-stat">
+                <div class="node-stat-num" id="result-layers-count">5</div>
+                <div class="node-stat-label">layers</div>
+            </div>
+        </div>
+
+        <div class="twin-spawn" id="twin-spawn">
+            <div class="twin-spawn-header">
+                <div class="twin-spawn-dot"></div>
+                <div class="twin-spawn-label">AI Twin Initialized</div>
+            </div>
+            <p>Your cognitive profile has been loaded into a <strong>Claude-powered AI Twin</strong>. It thinks like you, finds compatible minds, and represents you in the network.</p>
         </div>
 
         <div class="share-actions">
-            <button class="btn btn-twitter" onclick="shareTwitter()">Share on X</button>
-            <button class="btn btn-linkedin" onclick="shareLinkedIn()">Share on LinkedIn</button>
-            <button class="btn btn-secondary" onclick="downloadCard()">Download Card</button>
+            <button class="btn btn-x" onclick="shareX()">Share on X</button>
+            <button class="btn btn-li" onclick="shareLinkedIn()">Share on LinkedIn</button>
+            <button class="btn btn-ghost" onclick="downloadCard()">Download Card</button>
         </div>
 
-        <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;">
-            <a href="brain.html" class="btn btn-primary">Explore Full Brain</a>
-            <a href="compare.html" class="btn btn-secondary">Compare With Famous Minds</a>
-            <button class="btn btn-secondary" onclick="location.reload()">Scan Again</button>
+        <div class="result-actions">
+            <a href="brain.html" class="btn btn-primary">Explore Your Mindprint</a>
+            <a href="compare.html" class="btn btn-ghost">Find Cognitive Resonance</a>
+            <button class="btn btn-ghost" onclick="location.reload()">Regenerate</button>
         </div>
 
-        <div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;">
-            <a href="gallery.html" class="back-link">Browse Gallery</a>
-            <a href="/" class="back-link">&larr; Back to BrainScan</a>
+        <div class="back-links">
+            <a href="gallery.html" class="back-link">Browse Constellation</a>
+            <a href="/" class="back-link">&larr; Back to MINDPRINT</a>
         </div>
     </div>
 
@@ -673,59 +879,43 @@
 const archetypes = {
     architect: {
         name: 'THE ARCHITECT',
-        icon: '&#9671;',
         color: '#00d4ff',
-        desc: 'You see systems where others see chaos. Your mind builds frameworks, connects structures, and designs from first principles. The world is your blueprint.',
-        stats: { Systems: 89, Depth: 72, Speed: 81, Creativity: 58, Connection: 64 }
+        desc: 'You see systems where others see chaos. Your mind builds frameworks, connects structures, and designs from first principles. High topology, structured entropy.',
     },
     explorer: {
         name: 'THE EXPLORER',
-        icon: '&#9671;',
         color: '#a855f7',
-        desc: 'Curiosity is your compass. You follow threads wherever they lead, making connections others miss. Your brain is a web of discovery.',
-        stats: { Systems: 52, Depth: 61, Speed: 74, Creativity: 83, Connection: 78 }
+        desc: 'Curiosity is your compass. You follow threads wherever they lead, making connections others miss. High entropy, wide topology.',
     },
     builder: {
         name: 'THE BUILDER',
-        icon: '&#9671;',
         color: '#00ff94',
-        desc: 'Ship it. You think with your hands. Ideas are only as good as their execution, and you execute relentlessly.',
-        stats: { Systems: 68, Depth: 45, Speed: 92, Creativity: 55, Connection: 48 }
+        desc: 'Ship it. You think with your hands. Ideas are only as good as their execution. High velocity, rapid evolution.',
     },
     analyst: {
         name: 'THE ANALYST',
-        icon: '&#9671;',
         color: '#ffd700',
-        desc: 'Precision is not optional. You dive deeper than anyone else, questioning assumptions until you find bedrock truth.',
-        stats: { Systems: 76, Depth: 94, Speed: 42, Creativity: 51, Connection: 53 }
+        desc: 'Precision is not optional. You dive deeper than anyone, questioning assumptions until you find bedrock. Maximum depth, low entropy.',
     },
     connector: {
         name: 'THE CONNECTOR',
-        icon: '&#9671;',
         color: '#3b82f6',
-        desc: 'You bridge worlds. Ideas, people, domains — you see the links between things that seem unrelated. Your superpower is synthesis.',
-        stats: { Systems: 58, Depth: 55, Speed: 67, Creativity: 72, Connection: 91 }
+        desc: 'You bridge worlds. Ideas, people, domains \u2014 you see the links between things that seem unrelated. Dense topology, high evolution.',
     },
     creative: {
         name: 'THE CREATIVE',
-        icon: '&#9671;',
         color: '#f97316',
-        desc: 'Your mind makes leaps others can\'t follow. Unexpected connections, lateral thinking, artistic vision — you see what doesn\'t exist yet.',
-        stats: { Systems: 44, Depth: 58, Speed: 71, Creativity: 95, Connection: 69 }
+        desc: 'Your mind makes leaps others can\'t follow. Unexpected connections, lateral thinking, artistic vision. High entropy, burst velocity.',
     },
     scholar: {
         name: 'THE SCHOLAR',
-        icon: '&#9671;',
         color: '#10b981',
-        desc: 'Knowledge is power, and you accumulate it methodically. Your brain is a library — organized, deep, and always growing.',
-        stats: { Systems: 65, Depth: 88, Speed: 38, Creativity: 47, Connection: 62 }
+        desc: 'Knowledge is power, and you accumulate it methodically. Your brain is a library \u2014 organized, deep, and always growing. Maximum depth, steady evolution.',
     },
     strategist: {
         name: 'THE STRATEGIST',
-        icon: '&#9671;',
         color: '#ec4899',
-        desc: 'You play the long game. While others focus on the move, you see the whole board. Big picture thinking with surgical precision.',
-        stats: { Systems: 82, Depth: 71, Speed: 56, Creativity: 63, Connection: 74 }
+        desc: 'You play the long game. While others focus on the move, you see the whole board. High topology, deliberate velocity.',
     }
 };
 
@@ -733,44 +923,37 @@ const archetypes = {
 // QUIZ ENGINE
 // ═══════════════════════════════════════════
 const scores = {};
+const layerScores = { topology: [], velocity: [], depth: [], entropy: [], evolution: [] };
 let currentQuestion = 0;
 const totalQuestions = 8;
 
-// Initialize scores
 Object.keys(archetypes).forEach(k => scores[k] = 0);
 
-// Option click handlers
 document.querySelectorAll('.option').forEach(opt => {
     opt.addEventListener('click', function() {
-        // Deselect siblings
         this.parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
         this.classList.add('selected');
 
-        // Add scores
         const optScores = JSON.parse(this.dataset.scores);
-        Object.entries(optScores).forEach(([k, v]) => {
-            scores[k] = (scores[k] || 0) + v;
+        Object.entries(optScores).forEach(([k, v]) => { scores[k] = (scores[k] || 0) + v; });
+
+        const optLayers = JSON.parse(this.dataset.layers || '{}');
+        Object.entries(optLayers).forEach(([k, v]) => {
+            if (layerScores[k]) layerScores[k].push(v);
         });
 
-        // Auto-advance after brief delay
         setTimeout(() => advanceQuestion(), 400);
     });
 });
 
 function advanceQuestion() {
     currentQuestion++;
+    if (currentQuestion >= totalQuestions) { showScanning(); return; }
 
-    if (currentQuestion >= totalQuestions) {
-        showScanning();
-        return;
-    }
-
-    // Update progress
     const pct = (currentQuestion / totalQuestions) * 100;
     document.getElementById('progress').style.width = pct + '%';
-    document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${totalQuestions}`;
+    document.getElementById('progress-text').textContent = `Cognitive Profiling \u2014 ${currentQuestion + 1} / ${totalQuestions}`;
 
-    // Show next question
     document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
     document.querySelector(`.question[data-q="${currentQuestion}"]`).classList.add('active');
 }
@@ -780,15 +963,18 @@ function advanceQuestion() {
 // ═══════════════════════════════════════════
 function showScanning() {
     document.getElementById('progress').style.width = '100%';
-    document.getElementById('progress-text').textContent = 'Scanning...';
+    document.getElementById('progress-text').textContent = 'Generating Mindprint...';
     document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
     document.getElementById('scanning').classList.add('active');
 
     const phases = [
-        ['Mapping neural pathways...', 'Analyzing cognitive patterns'],
-        ['Identifying knowledge clusters...', 'Detecting connection density'],
-        ['Classifying archetype...', 'Calculating brain topology'],
-        ['Rendering visualization...', 'Generating brain card'],
+        ['Analyzing topology layer...', 'Mapping idea connection patterns'],
+        ['Measuring velocity...', 'Calculating cognitive processing rate'],
+        ['Profiling depth...', 'Analyzing breadth vs depth ratio'],
+        ['Computing entropy...', 'Measuring order vs chaos signature'],
+        ['Tracking evolution...', 'Projecting growth trajectory'],
+        ['Generating fingerprint...', 'Rendering unique visual identity'],
+        ['Spawning AI Twin...', 'Loading personality matrix'],
     ];
 
     let phase = 0;
@@ -796,12 +982,12 @@ function showScanning() {
         phase++;
         if (phase >= phases.length) {
             clearInterval(interval);
-            setTimeout(showResults, 800);
+            setTimeout(showResults, 600);
             return;
         }
         document.getElementById('scan-status').textContent = phases[phase][0];
         document.getElementById('scan-detail').textContent = phases[phase][1];
-    }, 900);
+    }, 700);
 }
 
 // ═══════════════════════════════════════════
@@ -809,64 +995,51 @@ function showScanning() {
 // ═══════════════════════════════════════════
 function showResults() {
     document.getElementById('scanning').classList.remove('active');
-    document.querySelector('.progress-bar').style.display = 'none';
-    document.querySelector('.progress-text').style.display = 'none';
+    document.querySelector('.progress-wrap').style.display = 'none';
 
-    // Find winner
+    // Winner
     const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
     const winner = sorted[0][0];
     const arch = archetypes[winner];
 
-    // Populate result
-    document.getElementById('result-icon').innerHTML = arch.icon;
-    document.getElementById('result-icon').style.color = arch.color;
     document.getElementById('result-name').textContent = arch.name;
     document.getElementById('result-name').style.color = arch.color;
     document.getElementById('result-desc').textContent = arch.desc;
 
-    // Stat bars
-    const statsEl = document.getElementById('stat-bars');
-    statsEl.innerHTML = '';
-    Object.entries(arch.stats).forEach(([label, value]) => {
-        const row = document.createElement('div');
-        row.className = 'stat-row';
-        row.innerHTML = `
-            <div class="stat-label">${label}</div>
-            <div class="stat-bar-bg">
-                <div class="stat-bar-fill" style="width: 0%; background: ${arch.color};"></div>
-            </div>
-            <div class="stat-pct">${value}%</div>
-        `;
-        statsEl.appendChild(row);
-    });
+    // Compute layers
+    const layers = {};
+    for (const [k, vals] of Object.entries(layerScores)) {
+        layers[k] = vals.length > 0 ? Math.round(vals.reduce((a,b) => a+b, 0) / vals.length) : 50;
+    }
 
-    // Animate stat bars
+    // Fill layer bars
     setTimeout(() => {
-        document.querySelectorAll('.stat-bar-fill').forEach((bar, i) => {
-            const vals = Object.values(arch.stats);
-            bar.style.width = vals[i] + '%';
-        });
-    }, 100);
+        for (const [k, v] of Object.entries(layers)) {
+            const bar = document.getElementById('bar-' + k);
+            const pct = document.getElementById('pct-' + k);
+            if (bar) bar.style.width = v + '%';
+            if (pct) pct.textContent = v + '%';
+        }
+    }, 200);
 
-    // Node count (generated from score)
-    const nodeBase = sorted[0][1] * 150 + 800;
-    const edgeBase = Math.floor(nodeBase * 3.2);
+    // Node count
+    const nodeBase = sorted[0][1] * 12 + 50;
+    const edgeBase = Math.floor(nodeBase * 2.8);
     animateNumber('result-nodes', nodeBase);
     animateNumber('result-edges', edgeBase);
 
-    // Show results
+    // Show
     document.getElementById('results').classList.add('active');
 
-    // Render mini graph
-    renderResultGraph(winner, arch.color);
+    // Render fingerprint
+    renderFingerprint(arch.color, layers);
 
-    // Store for sharing
-    window._brainResult = { archetype: arch.name, color: arch.color, nodes: nodeBase, edges: edgeBase };
+    window._mindprintResult = { archetype: arch.name, color: arch.color, nodes: nodeBase, edges: edgeBase, layers };
 }
 
 function animateNumber(id, target) {
     const el = document.getElementById(id);
-    const duration = 1500;
+    const duration = 1200;
     const start = Date.now();
     const tick = () => {
         const elapsed = Date.now() - start;
@@ -879,90 +1052,120 @@ function animateNumber(id, target) {
 }
 
 // ═══════════════════════════════════════════
-// RESULT MINI GRAPH
+// FINGERPRINT VISUALIZATION
 // ═══════════════════════════════════════════
-function renderResultGraph(type, color) {
-    const canvas = document.getElementById('result-graph-canvas');
+function renderFingerprint(color, layers) {
+    const canvas = document.getElementById('fingerprint-canvas');
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.parentElement.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-    const w = rect.width;
-    const h = rect.height;
+    const size = rect.width;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // Generate nodes
+    const cx = size / 2, cy = size / 2;
+    const layerColors = { topology: '#00ff94', velocity: '#00d4ff', depth: '#a855f7', entropy: '#ffd700', evolution: '#ec4899' };
+    const layerKeys = Object.keys(layers);
+
+    // Generate nodes based on layer values
     const nodes = [];
     const edges = [];
-    const count = 80;
 
     // Core
-    nodes.push({ x: w/2, y: h/2, r: 6, color: color, glow: true, vx: 0, vy: 0 });
+    nodes.push({ x: cx, y: cy, r: 5, color: color, glow: true });
 
-    // Cluster nodes
-    for (let i = 1; i < count; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const dist = 30 + Math.random() * Math.min(w, h) * 0.35;
-        nodes.push({
-            x: w/2 + Math.cos(angle) * dist,
-            y: h/2 + Math.sin(angle) * dist,
-            r: 1 + Math.random() * 3,
-            color: i < 15 ? color : i < 35 ? shiftHue(color) : '#555',
-            glow: i < 8,
-            vx: 0, vy: 0
-        });
+    // Generate rings based on layers
+    for (let li = 0; li < layerKeys.length; li++) {
+        const key = layerKeys[li];
+        const val = layers[key] / 100;
+        const lColor = layerColors[key];
+        const ringR = 25 + li * 22;
+        const count = Math.floor(4 + val * 8);
 
-        // Edges
-        if (i < 8) {
-            edges.push({ from: 0, to: i, alpha: 0.2, color: color });
+        for (let i = 0; i < count; i++) {
+            const angle = (Math.PI * 2 * i) / count + (li * 0.3);
+            const jitter = (1 - val) * 12;
+            const r = ringR + (Math.random() - .5) * jitter;
+            const nodeR = 1.5 + val * 2;
+            nodes.push({
+                x: cx + Math.cos(angle) * r,
+                y: cy + Math.sin(angle) * r,
+                r: nodeR,
+                color: lColor,
+                glow: i < 2
+            });
+
+            const idx = nodes.length - 1;
+            // Connect to core
+            if (i === 0) edges.push({ from: 0, to: idx, alpha: .15, color: lColor });
+            // Connect within ring
+            if (i > 0) edges.push({ from: idx - 1, to: idx, alpha: .1, color: lColor });
+            // Close ring
+            if (i === count - 1) edges.push({ from: idx, to: idx - count + 1, alpha: .08, color: lColor });
         }
-        const connections = Math.floor(Math.random() * 2) + 1;
-        for (let c = 0; c < connections; c++) {
-            const target = Math.floor(Math.random() * i);
-            edges.push({ from: i, to: target, alpha: 0.08, color: '#888' });
-        }
+    }
+
+    // Cross-ring connections
+    for (let i = 0; i < 10; i++) {
+        const a = 1 + Math.floor(Math.random() * (nodes.length - 1));
+        const b = 1 + Math.floor(Math.random() * (nodes.length - 1));
+        if (a !== b) edges.push({ from: a, to: b, alpha: .04, color: '#555' });
     }
 
     let frame = 0;
     function draw() {
         frame++;
-        ctx.clearRect(0, 0, w, h);
+        ctx.clearRect(0, 0, size, size);
+
+        // Center glow
+        const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, size * .4);
+        bg.addColorStop(0, hexA(color, .04));
+        bg.addColorStop(1, 'transparent');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, size, size);
 
         // Edges
         for (const e of edges) {
-            const from = nodes[e.from];
-            const to = nodes[e.to];
+            const from = nodes[e.from], to = nodes[e.to];
             if (!from || !to) continue;
+            const p = .7 + .3 * Math.sin(frame * .012 + e.from);
             ctx.beginPath();
             ctx.moveTo(from.x, from.y);
             ctx.lineTo(to.x, to.y);
-            const pulse = 0.7 + 0.3 * Math.sin(frame * 0.015 + e.from);
-            ctx.strokeStyle = hexToRGBA(e.color, e.alpha * pulse);
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = hexA(e.color, e.alpha * p);
+            ctx.lineWidth = .4;
             ctx.stroke();
         }
 
         // Nodes
-        for (const n of nodes) {
-            const breathe = 1 + 0.08 * Math.sin(frame * 0.025 + nodes.indexOf(n));
+        for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+            const b = 1 + .08 * Math.sin(frame * .02 + i * .6);
+
             if (n.glow) {
-                const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
-                glow.addColorStop(0, hexToRGBA(n.color, 0.25));
-                glow.addColorStop(1, hexToRGBA(n.color, 0));
-                ctx.fillStyle = glow;
+                const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 3.5);
+                g.addColorStop(0, hexA(n.color, .25));
+                g.addColorStop(1, hexA(n.color, 0));
+                ctx.fillStyle = g;
                 ctx.beginPath();
-                ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+                ctx.arc(n.x, n.y, n.r * 3.5, 0, Math.PI * 2);
                 ctx.fill();
             }
+
             ctx.beginPath();
-            ctx.arc(n.x, n.y, n.r * breathe, 0, Math.PI * 2);
+            ctx.arc(n.x, n.y, n.r * b, 0, Math.PI * 2);
             ctx.fillStyle = n.color;
             ctx.fill();
 
-            // Gentle drift
-            n.x += Math.sin(frame * 0.005 + nodes.indexOf(n)) * 0.15;
-            n.y += Math.cos(frame * 0.004 + nodes.indexOf(n) * 1.3) * 0.1;
+            // Gentle orbit
+            if (i > 0) {
+                const angle = Math.atan2(n.y - cy, n.x - cx);
+                const dist = Math.sqrt((n.x-cx)**2 + (n.y-cy)**2);
+                const newAngle = angle + .001;
+                n.x = cx + Math.cos(newAngle) * dist + Math.sin(frame * .003 + i) * .05;
+                n.y = cy + Math.sin(newAngle) * dist + Math.cos(frame * .002 + i * 1.1) * .04;
+            }
         }
 
         requestAnimationFrame(draw);
@@ -970,35 +1173,24 @@ function renderResultGraph(type, color) {
     draw();
 }
 
-function shiftHue(hex) {
-    const r = parseInt(hex.slice(1,3), 16);
-    const g = parseInt(hex.slice(3,5), 16);
-    const b = parseInt(hex.slice(5,7), 16);
-    return `rgb(${Math.min(255, r + 40)}, ${Math.min(255, g + 20)}, ${Math.min(255, b + 60)})`;
-}
-
-function hexToRGBA(hex, alpha) {
-    if (hex.startsWith('rgb')) {
-        return hex.replace('rgb', 'rgba').replace(')', `,${alpha})`);
-    }
-    const r = parseInt(hex.slice(1,3), 16);
-    const g = parseInt(hex.slice(3,5), 16);
-    const b = parseInt(hex.slice(5,7), 16);
-    return `rgba(${r},${g},${b},${alpha})`;
+function hexA(hex, a) {
+    if (hex.startsWith('rgb')) return hex.replace('rgb', 'rgba').replace(')', `,${a})`);
+    return `rgba(${parseInt(hex.slice(1,3),16)},${parseInt(hex.slice(3,5),16)},${parseInt(hex.slice(5,7),16)},${a})`;
 }
 
 // ═══════════════════════════════════════════
 // SHARE FUNCTIONS
 // ═══════════════════════════════════════════
-function shareTwitter() {
-    const r = window._brainResult;
+function shareX() {
+    const r = window._mindprintResult;
     if (!r) return;
     const text = encodeURIComponent(
-        `I'm ${r.archetype}\n\n` +
-        `${r.nodes.toLocaleString()} nodes \u00b7 ${r.edges.toLocaleString()} connections\n\n` +
-        `What does YOUR brain look like?\n` +
+        `My cognitive fingerprint: ${r.archetype}\n\n` +
+        `Topology ${r.layers.topology}% \u00b7 Velocity ${r.layers.velocity}% \u00b7 Depth ${r.layers.depth}%\n` +
+        `Entropy ${r.layers.entropy}% \u00b7 Evolution ${r.layers.evolution}%\n\n` +
+        `How does YOUR mind work?\n` +
         `\u2192 id.activemirror.ai/scan.html\n\n` +
-        `#BrainScan #MirrorDNA`
+        `#MINDPRINT`
     );
     window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
 }
@@ -1009,45 +1201,47 @@ function shareLinkedIn() {
 }
 
 function downloadCard() {
-    // Generate a simple card on canvas
-    const r = window._brainResult;
+    const r = window._mindprintResult;
     if (!r) return;
     const c = document.createElement('canvas');
     c.width = 1200; c.height = 630;
     const x = c.getContext('2d');
 
-    // Background
     x.fillStyle = '#030303';
     x.fillRect(0, 0, 1200, 630);
 
-    // Border
     x.strokeStyle = '#1a1a1a';
     x.lineWidth = 2;
     x.strokeRect(20, 20, 1160, 590);
 
-    // Archetype
+    // Title
     x.fillStyle = r.color;
-    x.font = 'bold 64px Inter, sans-serif';
+    x.font = 'bold 56px Inter, sans-serif';
     x.textAlign = 'center';
-    x.fillText(r.archetype, 600, 250);
+    x.fillText(r.archetype, 600, 200);
 
-    // Glyph
-    x.font = '80px serif';
-    x.fillText('\u25C7', 600, 150);
+    // Layers
+    x.font = '24px JetBrains Mono, monospace';
+    x.fillStyle = '#999';
+    const layerText = `T:${r.layers.topology}  V:${r.layers.velocity}  D:${r.layers.depth}  E:${r.layers.entropy}  Ev:${r.layers.evolution}`;
+    x.fillText(layerText, 600, 280);
 
     // Stats
-    x.fillStyle = '#888';
-    x.font = '28px JetBrains Mono, monospace';
-    x.fillText(`${r.nodes.toLocaleString()} nodes \u00b7 ${r.edges.toLocaleString()} connections`, 600, 340);
+    x.fillStyle = '#555';
+    x.font = '20px JetBrains Mono, monospace';
+    x.fillText(`${r.nodes} seed nodes \u00b7 ${r.edges} connections`, 600, 340);
 
-    // Watermark
+    // Brand
     x.fillStyle = '#00ff94';
-    x.font = '22px JetBrains Mono, monospace';
-    x.fillText('brainscan \u25C7 id.activemirror.ai', 600, 560);
+    x.font = 'bold 20px JetBrains Mono, monospace';
+    x.fillText('MINDPRINT \u00b7 id.activemirror.ai', 600, 560);
 
-    // Download
+    x.fillStyle = '#555';
+    x.font = '14px Inter, sans-serif';
+    x.fillText('The identity layer for human cognition', 600, 590);
+
     const link = document.createElement('a');
-    link.download = 'my-brain-scan.png';
+    link.download = 'my-mindprint.png';
     link.href = c.toDataURL('image/png');
     link.click();
 }
