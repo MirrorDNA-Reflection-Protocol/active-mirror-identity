@@ -4,3 +4,7 @@ __pycache__/
 exports/*.zip
 
 ami_active-mirror.json
+node_modules/
+test-results/
+playwright-report/
+package-lock.json

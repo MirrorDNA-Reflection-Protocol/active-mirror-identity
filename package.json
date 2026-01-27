@@ -1,0 +1,33 @@
+{
+  "name": "active-mirror-identity",
+  "version": "1.0.0",
+  "description": "> Sovereign Identity Kernel for Cross-Platform AI",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npx playwright test",
+    "test:e2e": "npx playwright test tests/e2e/mirror-seed.spec.js",
+    "test:monitor": "npx playwright test tests/e2e/monitoring.spec.js",
+    "test:headed": "npx playwright test --headed",
+    "test:report": "npx playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity/issues"
+  },
+  "homepage": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.0"
+  }
+}
