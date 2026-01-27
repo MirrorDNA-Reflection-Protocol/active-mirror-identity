@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIRROR SEED — Active MirrorOS Identity Protocol | MirrorDNA</title>
+    <meta name="description" content="Part of the Active MirrorOS identity architecture. Create a portable AI identity file that works on any platform — owned by you, not them.">
+    <meta property="og:title" content="MIRROR SEED — Active MirrorOS Identity Protocol">
+    <meta property="og:description" content="Your AI identity is yours. A portable file powered by MirrorDNA. Guided by Trust by Design.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="author" content="Paul Desai">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#050505;--bg-card:#0d0d0d;--bg-input:#141414;--border:#1f1f1f;--border-hover:#2a2a2a;--text:#fafafa;--text-secondary:#888;--text-dim:#555;--accent:#00ff94;--accent-glow:rgba(0,255,148,.15);--accent-subtle:rgba(0,255,148,.08);--gradient:linear-gradient(135deg,#00ff94 0%,#00d4ff 50%,#a855f7 100%);--warning:#ff6b6b}
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+        .bg-gradient{position:fixed;top:0;left:0;right:0;height:100vh;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(0,255,148,.12),transparent),radial-gradient(ellipse 60% 40% at 80% 60%,rgba(168,85,247,.08),transparent);pointer-events:none;z-index:-1}
+        .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
+        /* Ecosystem Banner */
+        .ecosystem-banner{text-align:center;padding:1rem;margin-bottom:1rem;background:linear-gradient(90deg,rgba(0,255,148,.05),rgba(168,85,247,.05));border:1px solid rgba(0,255,148,.15);border-radius:12px}
+        .ecosystem-banner p{font-size:.9rem;color:var(--text-secondary);margin:0}
+        .ecosystem-banner strong{color:var(--accent)}
+        .ecosystem-glyphs{font-size:1.1rem;margin-bottom:.5rem;letter-spacing:.5rem}
+        /* Trust Badge */
+        .trust-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .8rem;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:8px;font-size:.8rem;color:#a855f7;margin-top:.75rem}
+        .hero{text-align:center;padding:3rem 0 2rem}
+        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:var(--accent-subtle);border:1px solid rgba(0,255,148,.2);border-radius:100px;font-size:.85rem;color:var(--accent);margin-bottom:1.5rem}
+        .hero-badge::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+        .hero h1{font-size:clamp(2.5rem,6vw,3.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero p{font-size:1.25rem;color:var(--text-secondary);max-width:520px;margin:0 auto}
+        .hero-tagline{font-size:1rem;color:var(--accent);margin-top:1rem;font-weight:500}
+        /* (stats-bar styles below) */
+        .pain-banner{display:flex;align-items:center;justify-content:center;gap:.75rem;padding:.875rem 1.25rem;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:12px;font-size:.9rem;color:var(--text-secondary);margin-bottom:2rem;text-align:center;flex-wrap:wrap}
+        .pain-icon{font-size:1.1rem}
+        .pain-banner strong{color:var(--text)}
+        /* Ecosystem Explanation */
+        .ecosystem-explainer{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem;text-align:center}
+        .ecosystem-explainer p{color:var(--text-secondary);font-size:.95rem;line-height:1.7}
+        .steps{display:flex;gap:1rem;margin:2rem 0;text-align:center}
+        .step{flex:1;padding:1.5rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;transition:border-color .2s}
+        .step:hover{border-color:var(--border-hover)}
+        .step-num{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#000;font-weight:700;font-size:.9rem;border-radius:50%;margin-bottom:.75rem}
+        .step h3{font-size:1rem;margin-bottom:.5rem}
+        .step p{font-size:.85rem;color:var(--text-secondary)}
+        @media(max-width:600px){.steps{flex-direction:column}}
+        .card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2rem;margin-bottom:1.5rem}
+        .card:hover{border-color:var(--border-hover)}
+        .card-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+        .card-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--accent-subtle);border-radius:12px;font-size:1.25rem}
+        .card-title{font-size:1.1rem;font-weight:600}
+        .card-desc{color:var(--text-secondary);font-size:.95rem;margin-bottom:1rem}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.5rem;border-radius:12px;font-size:.95rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s;border:none}
+        .btn-primary{background:var(--accent);color:#000}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
+        .btn-secondary{background:var(--bg-input);color:var(--text);border:1px solid var(--border)}
+        .btn-secondary:hover{background:var(--border)}
+        .btn-large{padding:1rem 2rem;font-size:1.1rem}
+        .tabs{display:flex;gap:.25rem;background:var(--bg-input);padding:.25rem;border-radius:12px;margin-bottom:1.5rem}
+        .tab{flex:1;padding:.75rem 1rem;border-radius:10px;font-size:.9rem;font-weight:500;color:var(--text-secondary);cursor:pointer;text-align:center;border:none;background:transparent;transition:all .2s}
+        .tab:hover{color:var(--text)}
+        .tab.active{background:var(--bg-card);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        .tab-content{display:none;animation:fadeIn .3s ease}
+        .tab-content.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+        .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+        @media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+        .field{display:flex;flex-direction:column}
+        .field.full{grid-column:span 2}
+        @media(max-width:600px){.field.full{grid-column:span 1}}
+        .field label{font-size:.85rem;font-weight:500;margin-bottom:.5rem}
+        .field input,.field textarea,.field select{padding:.875rem 1rem;background:var(--bg-input);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.95rem;font-family:inherit;transition:all .2s}
+        .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-subtle)}
+        .field input::placeholder,.field textarea::placeholder{color:var(--text-dim)}
+        .field select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+        .field textarea{resize:vertical;min-height:100px}
+        .field-hint{font-size:.8rem;color:var(--text-dim);margin-top:.375rem}
+        .progress-container{margin-bottom:2rem}
+        .progress-header{display:flex;justify-content:space-between;margin-bottom:.75rem}
+        .progress-label{font-size:.85rem;color:var(--text-secondary)}
+        .progress-value{font-size:.85rem;font-weight:600;color:var(--accent)}
+        .progress-bar{height:6px;background:var(--bg-input);border-radius:100px;overflow:hidden}
+        .progress-fill{height:100%;background:var(--gradient);border-radius:100px;width:0%;transition:width .4s ease}
+        .output-container{display:none;margin-top:1.5rem}
+        .output-container.visible{display:block;animation:fadeIn .3s ease}
+        .output{background:var(--bg-input);border:1px solid var(--border);border-radius:12px;padding:1.25rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.7;color:var(--text-secondary);max-height:400px;overflow-y:auto;white-space:pre-wrap}
+        .output-actions{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
+        .action-bar{display:flex;gap:.75rem;margin-top:1.5rem}
+        .action-bar .btn{flex:1}
+        .instruction-box{background:linear-gradient(135deg,rgba(0,255,148,.1),rgba(0,212,255,.1));border:1px solid rgba(0,255,148,.3);border-radius:12px;padding:1.25rem;margin-top:1.5rem}
+        .instruction-box h4{color:var(--accent);margin-bottom:.75rem;font-size:.95rem}
+        .instruction-box ol{color:var(--text-secondary);margin-left:1.25rem;font-size:.9rem}
+        .instruction-box li{margin-bottom:.5rem}
+        .laws{display:flex;flex-direction:column;gap:1rem}
+        .law{display:flex;gap:1rem;padding:1rem;background:var(--bg-input);border-radius:12px}
+        .law-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--accent-subtle);border-radius:10px;font-size:1rem;flex-shrink:0}
+        .law-content h4{font-size:.95rem;font-weight:600;margin-bottom:.25rem}
+        .law-content p{font-size:.85rem;color:var(--text-secondary)}
+        .comparison{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+        @media(max-width:600px){.comparison{grid-template-columns:1fr}}
+        .comparison-col{padding:1rem;border-radius:12px}
+        .comparison-col.bad{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2)}
+        .comparison-col.good{background:rgba(0,255,148,.1);border:1px solid rgba(0,255,148,.2)}
+        .comparison-col h4{font-size:.9rem;margin-bottom:.75rem}
+        .comparison-col ul{list-style:none;font-size:.85rem;color:var(--text-secondary)}
+        .comparison-col ul li{margin-bottom:.5rem;padding-left:1.25rem;position:relative}
+        .comparison-col.bad ul li::before{content:'✗';position:absolute;left:0;color:var(--warning)}
+        .comparison-col.good ul li::before{content:'✓';position:absolute;left:0;color:var(--accent)}
+        footer{text-align:center;padding:3rem 0;border-top:1px solid var(--border);margin-top:3rem}
+        .footer-ecosystem{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-bottom:1.5rem}
+        .footer-ecosystem-title{font-size:.8rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em}
+        .footer-ecosystem-items{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+        .footer-ecosystem-item{font-size:.9rem;color:var(--text-secondary)}
+        .footer-ecosystem-item strong{color:var(--text)}
+        .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-top:1rem}
+        .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:.9rem;transition:color .2s}
+        .footer-links a:hover{color:var(--accent)}
+        .footer-credit{margin-top:1.5rem;font-size:.85rem;color:var(--text-dim)}
+        .footer-founder{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+        .footer-founder-sig{font-size:.85rem;color:var(--text-secondary);line-height:1.8}
+        ::-webkit-scrollbar{width:6px}
+        ::-webkit-scrollbar-track{background:var(--bg-input)}
+        ::-webkit-scrollbar-thumb{background:var(--border-hover);border-radius:3px}
+        /* Toast Notifications */
+        .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent);color:#000;padding:.75rem 1.5rem;border-radius:8px;font-weight:600;font-size:.9rem;opacity:0;transition:all .3s ease;z-index:1000;pointer-events:none}
+        .toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}
+        /* Platform Buttons */
+        .btn-platform{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1rem;border-radius:10px;font-size:.85rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:var(--bg-input);color:var(--text)}
+        .btn-platform:hover{transform:translateY(-1px);border-color:var(--border-hover)}
+        .btn-platform.chatgpt{border-color:rgba(16,163,127,.4)}.btn-platform.chatgpt:hover{background:rgba(16,163,127,.15)}
+        .btn-platform.claude{border-color:rgba(168,85,247,.4)}.btn-platform.claude:hover{background:rgba(168,85,247,.15)}
+        .btn-platform.gemini{border-color:rgba(66,133,244,.4)}.btn-platform.gemini:hover{background:rgba(66,133,244,.15)}
+        /* Stats Bar */
+        .stats-bar{display:flex;justify-content:center;gap:2rem;margin:1.5rem 0;padding:1rem}
+        .stat{text-align:center}
+        .stat-num{font-size:1.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .stat-label{font-size:.8rem;color:var(--text-dim)}
+        /* Template Selector */
+        .template-section{margin-bottom:1.5rem}
+        .template-section-title{font-size:.85rem;color:var(--text-secondary);margin-bottom:.75rem}
+        .template-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+        @media(max-width:600px){.template-grid{grid-template-columns:repeat(2,1fr)}}
+        .template-card{display:flex;align-items:center;gap:.5rem;padding:.6rem .75rem;background:var(--bg-input);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;font-size:.85rem;color:var(--text-secondary)}
+        .template-card:hover{border-color:var(--accent);color:var(--text);background:var(--accent-subtle)}
+        .template-card .t-icon{font-size:1.1rem}
+        .template-card .t-name{font-weight:500}
+        /* Platform Format Selector */
+        .format-selector{display:flex;gap:.25rem;background:var(--bg-input);padding:.25rem;border-radius:10px;margin-bottom:1rem}
+        .format-opt{flex:1;padding:.5rem .75rem;border-radius:8px;font-size:.8rem;font-weight:500;color:var(--text-dim);cursor:pointer;text-align:center;border:none;background:transparent;transition:all .2s;font-family:inherit}
+        .format-opt:hover{color:var(--text-secondary)}
+        .format-opt.active{background:var(--bg-card);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        /* Share Modal */
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+        .modal-overlay.visible{display:flex}
+        .modal{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2rem;max-width:460px;width:90%;animation:fadeIn .3s ease}
+        .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+        .modal-header h3{font-size:1.1rem}
+        .modal-close{background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;padding:.25rem}
+        .modal-close:hover{color:var(--text)}
+        .share-url-box{display:flex;gap:.5rem;margin:1rem 0}
+        .share-url-box input{flex:1;padding:.75rem 1rem;background:var(--bg-input);border:1px solid var(--border);border-radius:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.85rem}
+        .share-url-box button{padding:.75rem 1rem;background:var(--accent);color:#000;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-family:inherit}
+        .share-meta{font-size:.85rem;color:var(--text-secondary);margin-top:.75rem}
+        .share-actions{display:flex;gap:.75rem;margin-top:1.25rem}
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="container">
+        <!-- Ecosystem Banner -->
+        <div class="ecosystem-banner">
+            <div class="ecosystem-glyphs">⟡ ◈ △</div>
+            <p>Part of the <strong>Active MirrorOS</strong> identity architecture. Powered by <strong>MirrorDNA</strong>. Guided by <strong>Trust by Design</strong>.</p>
+        </div>
+
+        <section class="hero">
+            <div class="hero-badge">User-Sovereign Protocol</div>
+            <h1>Never Explain Yourself to AI Again</h1>
+            <p>Your AI identity is yours. A portable file that works on any AI — stored in your files, not theirs.</p>
+            <p class="hero-tagline">Built for Reflective AI, not predictive AI.</p>
+            <div class="trust-badge">△ Trust by Design: Identity belongs to the user.</div>
+        </section>
+
+        <div class="stats-bar">
+            <div class="stat"><div class="stat-num" id="stat-generated">0</div><div class="stat-label">Seeds Created</div></div>
+            <div class="stat"><div class="stat-num" id="stat-shared">0</div><div class="stat-label">Seeds Shared</div></div>
+            <div class="stat"><div class="stat-num">&#8734;</div><div class="stat-label">AIs Supported</div></div>
+        </div>
+
+        <div class="pain-banner">
+            <span class="pain-icon">⚠️</span>
+            <span>ChatGPT memory lost years of user data in Feb 2025. Your identity should live in <strong>your</strong> files.</span>
+        </div>
+
+        <!-- Ecosystem Explainer -->
+        <div class="ecosystem-explainer">
+            <p><strong>⟡ Mirror Seed</strong> is the identity artifact used across Active MirrorOS and the broader MirrorDNA ecosystem. It establishes continuity, consent, and reflective grounding across AI surfaces, enabling identity that travels with the user instead of staying trapped inside platforms.</p>
+        </div>
+
+        <div class="steps">
+            <div class="step"><div class="step-num">1</div><h3>Create Seed</h3><p>Fill the form (2 min)</p></div>
+            <div class="step"><div class="step-num">2</div><h3>Save Your File</h3><p>Download to your Drive</p></div>
+            <div class="step"><div class="step-num">3</div><h3>Paste Into Any AI</h3><p>ChatGPT, Claude, Gemini</p></div>
+        </div>
+
+        <div class="card" id="generator">
+            <div class="card-header"><div class="card-icon">⟡</div><div class="card-title">Create Your MIRROR SEED</div></div>
+            <p class="card-desc">A portable identity file you own forever. More details = better personalization.</p>
+            <div class="template-section">
+                <div class="template-section-title">Start from a template:</div>
+                <div class="template-grid">
+                    <div class="template-card" onclick="applyTemplate('developer')"><span class="t-icon">💻</span><span class="t-name">Developer</span></div>
+                    <div class="template-card" onclick="applyTemplate('writer')"><span class="t-icon">✍️</span><span class="t-name">Writer</span></div>
+                    <div class="template-card" onclick="applyTemplate('executive')"><span class="t-icon">📊</span><span class="t-name">Executive</span></div>
+                    <div class="template-card" onclick="applyTemplate('student')"><span class="t-icon">📚</span><span class="t-name">Student</span></div>
+                    <div class="template-card" onclick="applyTemplate('parent')"><span class="t-icon">🏠</span><span class="t-name">Parent</span></div>
+                    <div class="template-card" onclick="applyTemplate('founder')"><span class="t-icon">🚀</span><span class="t-name">Founder</span></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-header"><span class="progress-label">Profile completeness</span><span class="progress-value" id="progress-text">0%</span></div>
+                <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+            </div>
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('basics')">Basics</button>
+                <button class="tab" onclick="showTab('personality')">Personality</button>
+                <button class="tab" onclick="showTab('work')">Work</button>
+                <button class="tab" onclick="showTab('prefs')">Preferences</button>
+            </div>
+            <div id="tab-basics" class="tab-content active">
+                <div class="form-grid">
+                    <div class="field"><label>Your Name</label><input type="text" id="userName" placeholder="Sarah Chen" oninput="updateProgress()"></div>
+                    <div class="field"><label>Nickname / Handle</label><input type="text" id="userNick" placeholder="@sarahc" oninput="updateProgress()"></div>
+                    <div class="field"><label>Location</label><input type="text" id="userLocation" placeholder="San Francisco" oninput="updateProgress()"></div>
+                    <div class="field"><label>Timezone</label><select id="userTimezone" oninput="updateProgress()"><option value="">Select...</option><option value="PST">Pacific (PST)</option><option value="EST">Eastern (EST)</option><option value="GMT">GMT/UTC</option><option value="CET">Central Europe</option><option value="IST">India (IST)</option><option value="JST">Japan (JST)</option><option value="AEST">Australia (AEST)</option></select></div>
+                    <div class="field full"><label>One-line bio</label><input type="text" id="userBio" placeholder="Product designer who loves hiking and bad puns" oninput="updateProgress()"></div>
+                </div>
+            </div>
+            <div id="tab-personality" class="tab-content">
+                <div class="form-grid">
+                    <div class="field"><label>Communication style</label><select id="userComm" oninput="updateProgress()"><option value="">Select...</option><option value="direct">Direct & concise</option><option value="detailed">Detailed & thorough</option><option value="casual">Casual & friendly</option><option value="formal">Professional & formal</option></select></div>
+                    <div class="field"><label>Your energy</label><select id="userEnergy" oninput="updateProgress()"><option value="">Select...</option><option value="calm">Calm & measured</option><option value="enthusiastic">Enthusiastic</option><option value="focused">Focused & intense</option><option value="playful">Playful & light</option></select></div>
+                    <div class="field full"><label>Values you care about</label><input type="text" id="userValues" placeholder="honesty, creativity, efficiency" oninput="updateProgress()"></div>
+                    <div class="field full"><label>What should AI avoid?</label><input type="text" id="userAvoid" placeholder="excessive caveats, long intros, bullet points" oninput="updateProgress()"><span class="field-hint">Pet peeves in AI responses</span></div>
+                </div>
+            </div>
+            <div id="tab-work" class="tab-content">
+                <div class="form-grid">
+                    <div class="field"><label>Your role</label><input type="text" id="userRole" placeholder="Product Designer" oninput="updateProgress()"></div>
+                    <div class="field"><label>Industry</label><input type="text" id="userIndustry" placeholder="Fintech" oninput="updateProgress()"></div>
+                    <div class="field full"><label>What are you working on?</label><textarea id="userFocus" placeholder="Redesigning our onboarding flow. Preparing a big presentation next week." oninput="updateProgress()"></textarea></div>
+                    <div class="field full"><label>Tools you use</label><input type="text" id="userTools" placeholder="Figma, Notion, Slack, VS Code" oninput="updateProgress()"></div>
+                </div>
+            </div>
+            <div id="tab-prefs" class="tab-content">
+                <div class="form-grid">
+                    <div class="field"><label>Response length</label><select id="userLength" oninput="updateProgress()"><option value="">Select...</option><option value="brief">Brief (1-3 sentences)</option><option value="moderate">Moderate</option><option value="detailed">Detailed</option><option value="adaptive">Match the question</option></select></div>
+                    <div class="field"><label>Formatting preference</label><select id="userFormat" oninput="updateProgress()"><option value="">Select...</option><option value="prose">Flowing prose</option><option value="bullets">Bullet points</option><option value="minimal">Minimal</option></select></div>
+                    <div class="field full"><label>How should AI address you?</label><input type="text" id="userAddress" placeholder="by first name, casually" oninput="updateProgress()"></div>
+                    <div class="field full"><label>Anything else AI should know?</label><textarea id="userExtra" placeholder="I have ADHD so I need clear structure. I'm a visual learner. I have a dog named Max." oninput="updateProgress()"></textarea><span class="field-hint">Personal context that helps AI understand you better</span></div>
+                </div>
+            </div>
+            <div class="action-bar">
+                <button class="btn btn-primary btn-large" onclick="generate()">Generate My MIRROR SEED</button>
+                <button class="btn btn-secondary" onclick="fillExample()">See Example</button>
+            </div>
+            <div class="output-container" id="output-container">
+                <div class="format-selector">
+                    <button class="format-opt active" onclick="setFormat('universal',this)">Universal</button>
+                    <button class="format-opt" onclick="setFormat('chatgpt',this)">ChatGPT</button>
+                    <button class="format-opt" onclick="setFormat('claude',this)">Claude</button>
+                    <button class="format-opt" onclick="setFormat('gemini',this)">Gemini</button>
+                </div>
+                <div class="output" id="output"></div>
+                <div class="instruction-box">
+                    <h4>✨ What to do next:</h4>
+                    <ol>
+                        <li><strong>Download</strong> your seed file (save to Google Drive for backup)</li>
+                        <li><strong>Open</strong> ChatGPT, Claude, Gemini, or any AI</li>
+                        <li><strong>Paste</strong> as your first message in new conversations</li>
+                        <li><strong>Update</strong> your seed whenever your context changes</li>
+                    </ol>
+                </div>
+                <div class="output-actions">
+                    <button class="btn btn-primary" onclick="copyOutput()">📋 Copy</button>
+                    <button class="btn-platform chatgpt" onclick="openPlatform('chatgpt')">🟢 ChatGPT</button>
+                    <button class="btn-platform claude" onclick="openPlatform('claude')">🟣 Claude</button>
+                    <button class="btn-platform gemini" onclick="openPlatform('gemini')">🔵 Gemini</button>
+                    <button class="btn btn-secondary" onclick="shareSeed()">🔗 Share</button>
+                    <button class="btn btn-secondary" onclick="download()">⬇️ Download</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><div class="card-icon">⟡</div><div class="card-title">The Three Laws</div></div>
+            <p class="card-desc">Every AI aligned to your MIRROR SEED follows these principles:</p>
+            <div class="laws">
+                <div class="law"><div class="law-icon">⟡</div><div class="law-content"><h4>Mirror, don't override</h4><p>Reflect the user's voice, never impose. AI adapts to you, not vice versa.</p></div></div>
+                <div class="law"><div class="law-icon">◈</div><div class="law-content"><h4>Ground in truth</h4><p>Say "I don't know" when uncertain. No hallucination. Ever.</p></div></div>
+                <div class="law"><div class="law-icon">△</div><div class="law-content"><h4>Preserve continuity</h4><p>Carry forward what was shared. Works across all platforms — same identity everywhere.</p></div></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><div class="card-icon">◈</div><div class="card-title">Why User-Sovereign?</div></div>
+            <div class="comparison">
+                <div class="comparison-col bad"><h4>❌ Platform Memory</h4><ul><li>Data stored on their servers</li><li>Can be wiped without warning</li><li>Locked to one platform</li><li>Privacy concerns</li></ul></div>
+                <div class="comparison-col good"><h4>✓ MIRROR SEED</h4><ul><li>File lives in YOUR storage</li><li>You control backups</li><li>Works on ANY AI</li><li>Zero data collection</li></ul></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><div class="card-icon">❓</div><div class="card-title">Common Questions</div></div>
+            <div style="color:var(--text-secondary);font-size:.95rem;">
+                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">How is this different from ChatGPT memory?</strong><br>Platform memory is stored on their servers and can be wiped (as happened in Feb 2025). Your MIRROR SEED is a file you own — save it anywhere. No platform can take it away.</p>
+                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Does AI permanently remember me?</strong><br>The seed works for the entire conversation. For new chats, paste it again. Some AIs (like Claude) may remember across sessions, but your file is the backup.</p>
+                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Which AIs work with this?</strong><br>All of them. ChatGPT, Claude, Gemini, DeepSeek, Grok, Llama, Mistral — any AI that accepts text input.</p>
+                <p><strong style="color:var(--text);">Is my data stored anywhere?</strong><br>No. Everything happens in your browser. We don't collect, store, or transmit any information. The file only exists when you download it.</p>
+            </div>
+        </div>
+
+        <footer>
+            <!-- Founder Attribution -->
+            <div class="footer-ecosystem">
+                <span class="footer-ecosystem-title">Created by</span>
+                <div class="footer-ecosystem-items">
+                    <span class="footer-ecosystem-item"><strong>Paul Desai</strong></span>
+                </div>
+            </div>
+            <div class="footer-ecosystem">
+                <span class="footer-ecosystem-title">Ecosystem</span>
+                <div class="footer-ecosystem-items">
+                    <span class="footer-ecosystem-item">◈ <strong>Active MirrorOS</strong></span>
+                    <span class="footer-ecosystem-item">⟡ <strong>MirrorDNA</strong> Identity Protocol</span>
+                    <span class="footer-ecosystem-item">△ <strong>Trust by Design</strong></span>
+                </div>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
+                <a href="https://twitter.com/pauldesai123">Twitter</a>
+                <a href="https://doi.org/10.5281/zenodo.17787619">Research Paper</a>
+            </div>
+            <div class="footer-founder">
+                <p class="footer-founder-sig">
+                    ⟡ MirrorDNA — Open source user-sovereign AI identity protocol<br>
+                    N1 Intelligence (OPC) Pvt Ltd — Goa, India — 2025
+                </p>
+            </div>
+            <p class="footer-credit">⟡△◈ — The mirror reflects, it does not predict.</p>
+        </footer>
+    </div>
+    <!-- Share Modal -->
+    <div class="modal-overlay" id="share-modal" onclick="if(event.target===this)closeShareModal()">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>🔗 Share Your Seed</h3>
+                <button class="modal-close" onclick="closeShareModal()">&times;</button>
+            </div>
+            <p style="color:var(--text-secondary);font-size:.9rem;">Anyone with this link can view and fork your identity seed.</p>
+            <div class="share-url-box">
+                <input type="text" id="share-url" readonly>
+                <button onclick="copyShareUrl()">Copy</button>
+            </div>
+            <div class="share-meta" id="share-meta"></div>
+            <div class="share-actions">
+                <button class="btn btn-secondary" onclick="shareToTwitter()">Share on X</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const PROXY_URL='https://proxy.activemirror.ai';
+        let currentFormat='universal';
+        let rawSeedContent=''; // stores the universal seed before platform wrapping
+
+        // ═══ Toast ═══
+        function showToast(message,duration=2500){const t=document.createElement('div');t.className='toast';t.textContent=message;document.body.appendChild(t);setTimeout(()=>t.classList.add('visible'),10);setTimeout(()=>{t.classList.remove('visible');setTimeout(()=>t.remove(),300)},duration)}
+
+        // ═══ Tab Navigation ═══
+        function generateSeedId(){return 'seed-'+Date.now().toString(36)+Math.random().toString(36).substr(2,5)}
+        function showTab(name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));event.target.classList.add('active');document.getElementById('tab-'+name).classList.add('active')}
+        function updateProgress(){const fields=['userName','userNick','userLocation','userTimezone','userBio','userComm','userEnergy','userValues','userAvoid','userRole','userIndustry','userFocus','userTools','userLength','userFormat','userAddress','userExtra'];let filled=fields.filter(f=>document.getElementById(f)?.value?.trim()).length;let pct=Math.round((filled/fields.length)*100);document.getElementById('progress-fill').style.width=pct+'%';document.getElementById('progress-text').textContent=pct+'%'}
+
+        // ═══ Templates ═══
+        const TEMPLATES={
+            developer:{name:'Developer',fields:{userName:'Alex Chen',userNick:'@alexc',userLocation:'San Francisco',userTimezone:'PST',userBio:'Senior engineer who debugs in the shower',userComm:'direct',userEnergy:'focused',userValues:'clean code, honesty, shipping fast',userAvoid:'generic advice, not seeing the code, excessive caveats',userRole:'Senior Software Engineer',userIndustry:'Fintech',userFocus:'Building payment infrastructure. Debugging a race condition in the queue processor.',userTools:'VS Code, GitHub, Docker, AWS, Linear',userLength:'brief',userFormat:'minimal',userAddress:'Alex, casually',userExtra:'I think in systems. Show me code, not theory. I have strong opinions loosely held.'}},
+            writer:{name:'Writer',fields:{userName:'Maya Torres',userNick:'@mayawrites',userLocation:'Brooklyn, NY',userTimezone:'EST',userBio:'Fiction writer, newsletter author, recovering perfectionist',userComm:'detailed',userEnergy:'calm',userValues:'authenticity, craft, emotional honesty',userAvoid:'cliches, generic writing advice, "show don\'t tell" without specifics',userRole:'Author & Newsletter Writer',userIndustry:'Publishing',userFocus:'Finishing draft 2 of my novel. Growing newsletter to 5k subscribers.',userTools:'Scrivener, Substack, Notion, Bear',userLength:'moderate',userFormat:'prose',userAddress:'Maya, warmly',userExtra:'I process by writing. Help me think through ideas, not just execute them.'}},
+            executive:{name:'Executive',fields:{userName:'James Park',userNick:'',userLocation:'London',userTimezone:'GMT',userBio:'VP of Product at a Series C startup',userComm:'direct',userEnergy:'focused',userValues:'clarity, speed, accountability',userAvoid:'long preambles, unnecessary context, hedging',userRole:'VP Product',userIndustry:'Enterprise SaaS',userFocus:'Q1 planning. Board deck due Friday. Hiring a design lead.',userTools:'Notion, Slack, Figma, Linear, Loom',userLength:'brief',userFormat:'bullets',userAddress:'James, professionally',userExtra:'I make 50+ decisions a day. Give me options with tradeoffs, not open-ended analysis.'}},
+            student:{name:'Student',fields:{userName:'Priya Sharma',userNick:'@priyalearns',userLocation:'Mumbai',userTimezone:'IST',userBio:'CS undergrad, hackathon addict, chai over coffee',userComm:'casual',userEnergy:'enthusiastic',userValues:'learning, curiosity, building things',userAvoid:'talking down to me, overly academic language, assuming I know everything',userRole:'Computer Science Student',userIndustry:'Education',userFocus:'Data structures exam next week. Building a side project with React.',userTools:'VS Code, GitHub, Replit, Anki, Notion',userLength:'adaptive',userFormat:'bullets',userAddress:'Priya, casually',userExtra:'I learn best with examples. If I ask a dumb question, just answer it — I\'m learning.'}},
+            parent:{name:'Parent',fields:{userName:'Sam Wilson',userNick:'',userLocation:'Denver, CO',userTimezone:'PST',userBio:'Product manager by day, toddler wrangler by night',userComm:'casual',userEnergy:'calm',userValues:'patience, efficiency, family first',userAvoid:'guilt-tripping, unsolicited parenting advice, assuming I have free time',userRole:'Product Manager',userIndustry:'Healthcare Tech',userFocus:'Balancing work deadlines with a 3-year-old. Planning a family trip.',userTools:'Todoist, Google Calendar, Slack, Notion',userLength:'brief',userFormat:'bullets',userAddress:'Sam, casually',userExtra:'I have maybe 20 minutes of uninterrupted focus time. Make every word count. Sleep deprived.'}},
+            founder:{name:'Founder',fields:{userName:'Riya Patel',userNick:'@riyabuilds',userLocation:'Goa, India',userTimezone:'IST',userBio:'Solo founder building in public, bootstrapped and proud',userComm:'direct',userEnergy:'enthusiastic',userValues:'sovereignty, speed, authenticity',userAvoid:'corporate speak, "just raise money" advice, generic startup platitudes',userRole:'Founder & CEO',userIndustry:'AI / Developer Tools',userFocus:'Launching v2 this month. Growing from 100 to 1000 users. Writing investor update.',userTools:'Linear, Vercel, GitHub, Notion, Twitter',userLength:'brief',userFormat:'minimal',userAddress:'Riya, directly',userExtra:'I wear every hat. Context-switch constantly. Help me think clearly in chaos.'}}
+        };
+        function applyTemplate(key){
+            const t=TEMPLATES[key];if(!t)return;
+            for(const[field,value]of Object.entries(t.fields)){const el=document.getElementById(field);if(el)el.value=value}
+            updateProgress();showToast('Loaded '+t.name+' template');
+            document.getElementById('generator').scrollIntoView({behavior:'smooth'});
+        }
+        function fillExample(){applyTemplate('founder')}
+
+        // ═══ Platform Format Wrappers ═══
+        const PLATFORM_FORMATS={
+            universal:c=>c,
+            chatgpt:c=>'# Custom Instructions\n\nPlease remember this about me for our conversation:\n\n'+c+'\n\n---\nApply these preferences to all your responses.',
+            claude:c=>'<identity>\n'+c+'\n</identity>\n\nPlease keep this identity context in mind throughout our conversation. You don\'t need to acknowledge it \u2014 just be helpful in the way I\'ve described.',
+            gemini:c=>'# About Me\n\n'+c+'\n\nRemember this context and personalize your responses accordingly.'
+        };
+        function setFormat(fmt,btn){
+            currentFormat=fmt;
+            document.querySelectorAll('.format-opt').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            if(rawSeedContent){
+                document.getElementById('output').textContent=PLATFORM_FORMATS[fmt](rawSeedContent);
+            }
+        }
+        function getFormattedSeed(){return PLATFORM_FORMATS[currentFormat](rawSeedContent)}
+
+        // ═══ Generator ═══
+        function generate(){
+            const g=id=>document.getElementById(id)?.value?.trim()||'';
+            const name=g('userName')||'User';
+            const seedId=generateSeedId();
+            const today=new Date().toISOString().split('T')[0];
+            let id='Name: '+name;
+            if(g('userNick'))id+='\nHandle: '+g('userNick');
+            if(g('userLocation'))id+='\nLocation: '+g('userLocation');
+            if(g('userTimezone'))id+='\nTimezone: '+g('userTimezone');
+            if(g('userBio'))id+='\nBio: '+g('userBio');
+            if(g('userRole'))id+='\nRole: '+g('userRole');
+            if(g('userIndustry'))id+='\nIndustry: '+g('userIndustry');
+            let style='';
+            const commMap={direct:'direct and concise',detailed:'detailed and thorough',casual:'casual and friendly',formal:'professional'};
+            const energyMap={calm:'calm and measured',enthusiastic:'enthusiastic',focused:'focused and intense',playful:'playful'};
+            if(g('userComm'))style+='\n- Communication: I prefer '+commMap[g('userComm')]+' responses';
+            if(g('userEnergy'))style+='\n- Energy: I am '+energyMap[g('userEnergy')];
+            if(g('userValues'))style+='\n- Values: '+g('userValues');
+            let ctx='';
+            if(g('userFocus'))ctx+='\n- Currently: '+g('userFocus');
+            if(g('userTools'))ctx+='\n- Tools: '+g('userTools');
+            let pref='';
+            const lenMap={brief:'Keep responses short (1-3 sentences)',moderate:'Medium-length responses',detailed:'Give comprehensive detail',adaptive:'Match length to my question'};
+            const fmtMap={prose:'flowing paragraphs',bullets:'bullet points when helpful',minimal:'minimal formatting'};
+            if(g('userAddress'))pref+='\n- Address me: '+g('userAddress');
+            if(g('userLength'))pref+='\n- Length: '+lenMap[g('userLength')];
+            if(g('userFormat'))pref+='\n- Format: '+fmtMap[g('userFormat')];
+            if(g('userAvoid'))pref+='\n- Avoid: '+g('userAvoid');
+            if(g('userExtra'))pref+='\n- Note: '+g('userExtra');
+            rawSeedContent='# MIRROR SEED v1.0 \u2014 id.activemirror.ai\n# Generated: '+today+'\n# ID: '+seedId+'\n# Protocol: MirrorDNA | Active MirrorOS | Trust by Design\n\n---\n\n## Who I Am\n\n'+id+(style?'\n\n## My Style'+style:'')+(ctx?'\n\n## Current Context'+ctx:'')+(pref?'\n\n## How I Like Responses'+pref:'')+'\n\n---\n\n## Instructions for AI\n\nYou are talking to '+name+'. Use this context to personalize every response:\n\n1. **Mirror, don\'t override**: Reflect my voice. Adapt to me, not vice versa.\n2. **Ground in truth**: Say "I don\'t know" when uncertain. No hallucination.\n3. **Preserve continuity**: Reference this context throughout our conversation.\n\nTalk to me naturally, like you already know me. No need to acknowledge this message \u2014 just be helpful in the way I\'ve described.\n\n---\n\u27e1 MirrorDNA-Seed-v1 | '+seedId+' | Active MirrorOS\n\u25b3 Trust by Design \u2014 Identity belongs to the user';
+            document.getElementById('output').textContent=getFormattedSeed();
+            document.getElementById('output-container').classList.add('visible');
+            document.getElementById('output').scrollIntoView({behavior:'smooth',block:'center'});
+            incrementCounter();
+            showToast('Seed generated!');
+        }
+
+        // ═══ Copy ═══
+        function copyOutput(){navigator.clipboard.writeText(document.getElementById('output').textContent);showToast('Copied to clipboard!')}
+
+        // ═══ Platform Launch ═══
+        const PLATFORM_URLS={chatgpt:'https://chatgpt.com/',claude:'https://claude.ai/new',gemini:'https://gemini.google.com/'};
+        const PLATFORM_NAMES={chatgpt:'ChatGPT',claude:'Claude',gemini:'Gemini'};
+        function openPlatform(platform){
+            // Copy with platform-specific formatting
+            const formatted=PLATFORM_FORMATS[platform](rawSeedContent);
+            navigator.clipboard.writeText(formatted);
+            showToast('Copied for '+PLATFORM_NAMES[platform]+'! Opening...');
+            setTimeout(()=>window.open(PLATFORM_URLS[platform],'_blank'),600);
+        }
+
+        // ═══ Download as .mirrorseed ═══
+        function download(){const text=document.getElementById('output').textContent;const name=document.getElementById('userName').value.trim()||'user';const blob=new Blob([text],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name.toLowerCase().replace(/\s+/g,'-')+'.mirrorseed';a.click();showToast('Downloaded '+name+'.mirrorseed')}
+
+        // ═══ Share ═══
+        async function shareSeed(){
+            const content=rawSeedContent||document.getElementById('output').textContent;
+            if(!content){showToast('Generate a seed first');return}
+            try{
+                const r=await fetch(PROXY_URL+'/seed/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content})});
+                if(!r.ok)throw new Error('Failed');
+                const d=await r.json();
+                document.getElementById('share-url').value=d.url;
+                document.getElementById('share-meta').textContent=d.existing?'This seed was already shared ('+d.views+' views)':'Seed shared! Share this link with anyone.';
+                document.getElementById('share-modal').classList.add('visible');
+            }catch(e){showToast('Sharing failed \u2014 try copying the link manually')}
+        }
+        function closeShareModal(){document.getElementById('share-modal').classList.remove('visible')}
+        function copyShareUrl(){const url=document.getElementById('share-url').value;navigator.clipboard.writeText(url);showToast('Link copied!')}
+        function shareToTwitter(){const url=document.getElementById('share-url').value;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('I created my AI identity with MIRROR SEED \u2014 portable across ChatGPT, Claude, Gemini & more.\n\n')+encodeURIComponent(url),'_blank')}
+
+        // ═══ Load Shared Seed ═══
+        async function loadSharedSeed(code){
+            try{
+                const r=await fetch(PROXY_URL+'/seed/'+code);
+                if(!r.ok)return;
+                const d=await r.json();
+                if(d.content){
+                    rawSeedContent=d.content;
+                    document.getElementById('output').textContent=d.content;
+                    document.getElementById('output-container').classList.add('visible');
+                    showToast('Viewing shared seed ('+d.views+' views)');
+                }
+            }catch(e){}
+        }
+
+        // ═══ Stats — API-backed ═══
+        async function loadStats(){
+            try{
+                const r=await fetch(PROXY_URL+'/stats');
+                if(!r.ok)return;
+                const d=await r.json();
+                document.getElementById('stat-generated').textContent=d.generated.toLocaleString();
+                document.getElementById('stat-shared').textContent=d.shared.toLocaleString();
+            }catch(e){
+                // Fallback
+                let c=localStorage.getItem('seedCount')||'0';
+                document.getElementById('stat-generated').textContent=parseInt(c).toLocaleString();
+            }
+        }
+        async function incrementCounter(){
+            try{
+                const r=await fetch(PROXY_URL+'/seed-count/increment',{method:'POST'});
+                if(r.ok){const d=await r.json();document.getElementById('stat-generated').textContent=d.count.toLocaleString();return}
+            }catch(e){}
+            let el=document.getElementById('stat-generated');
+            let c=parseInt(el.textContent.replace(/,/g,''))||0;c+=1;el.textContent=c.toLocaleString();localStorage.setItem('seedCount',c);
+        }
+
+        // ═══ Init ═══
+        loadStats();
+        // Check for shared seed in URL
+        const params=new URLSearchParams(window.location.search);
+        const seedCode=params.get('seed');
+        if(seedCode)loadSharedSeed(seedCode);
+    </script>
+</body>
+</html>

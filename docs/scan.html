@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainScan — Scan Your Brain</title>
+    <meta name="description" content="Take the BrainScan quiz. 8 questions, 2 minutes, your brain type revealed.">
+    <meta property="og:title" content="BrainScan — What's Your Brain Type?">
+    <meta property="og:description" content="8 questions. 2 minutes. Discover your cognitive archetype.">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030303;
+            --bg-card: #0a0a0a;
+            --bg-elevated: #111;
+            --border: #1a1a1a;
+            --border-hover: #2a2a2a;
+            --text: #fafafa;
+            --text-secondary: #888;
+            --text-dim: #555;
+            --accent: #00ff94;
+            --accent-glow: rgba(0,255,148,.15);
+            --accent-subtle: rgba(0,255,148,.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(3,3,3,.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-logo .glyph { color: var(--accent); font-size: 1.3rem; }
+
+        /* ── QUIZ CONTAINER ── */
+        .quiz-container {
+            max-width: 640px;
+            width: 100%;
+            padding: 6rem 1.5rem 3rem;
+        }
+
+        /* ── PROGRESS ── */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width .4s ease;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .progress-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .75rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            text-align: right;
+        }
+
+        /* ── QUESTION ── */
+        .question {
+            display: none;
+            animation: fadeIn .4s ease;
+        }
+
+        .question.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .question-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8rem;
+            color: var(--accent);
+            margin-bottom: .5rem;
+        }
+
+        /* ── OPTIONS ── */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all .2s;
+            font-size: 1rem;
+            color: var(--text);
+            text-align: left;
+        }
+
+        .option:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-elevated);
+            transform: translateX(4px);
+        }
+
+        .option.selected {
+            border-color: var(--accent);
+            background: var(--accent-subtle);
+        }
+
+        .option-marker {
+            width: 20px; height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            flex-shrink: 0;
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option.selected .option-marker {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+
+        .option.selected .option-marker::after {
+            content: '';
+            width: 8px; height: 8px;
+            background: #000;
+            border-radius: 2px;
+        }
+
+        /* ── SCANNING SCREEN ── */
+        .scanning {
+            display: none;
+            text-align: center;
+            padding: 4rem 0;
+            animation: fadeIn .5s ease;
+        }
+
+        .scanning.active { display: block; }
+
+        .scan-ring {
+            width: 200px; height: 200px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .scan-ring svg {
+            width: 100%; height: 100%;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .scan-ring .inner {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+        }
+
+        .scan-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .9rem;
+            color: var(--accent);
+            margin-bottom: .5rem;
+        }
+
+        .scan-detail {
+            font-size: .85rem;
+            color: var(--text-dim);
+        }
+
+        /* ── RESULTS ── */
+        .results {
+            display: none;
+            animation: fadeIn .6s ease;
+        }
+
+        .results.active { display: block; }
+
+        .result-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-archetype-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-archetype-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: .02em;
+            margin-bottom: .5rem;
+        }
+
+        .result-archetype-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 400px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* ── STAT BARS ── */
+        .stat-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .stat-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-label {
+            font-size: .85rem;
+            color: var(--text-secondary);
+            width: 100px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        .stat-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        .stat-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8rem;
+            color: var(--text-dim);
+            width: 40px;
+        }
+
+        /* ── NODE COUNT ── */
+        .node-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .9rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+
+        .node-count .num {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* ── MINI GRAPH ── */
+        .result-graph {
+            width: 100%;
+            height: 250px;
+            margin-bottom: 2rem;
+        }
+
+        .result-graph canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+
+        /* ── SHARE BUTTONS ── */
+        .share-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .875rem 1.5rem;
+            border-radius: 12px;
+            font-size: .95rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all .2s;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: var(--bg-elevated);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-twitter { background: #1DA1F2; color: #fff; }
+        .btn-linkedin { background: #0077B5; color: #fff; }
+
+        /* ── BACK LINK ── */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: .85rem;
+            margin-top: 2rem;
+            transition: color .2s;
+        }
+
+        .back-link:hover { color: var(--text-secondary); }
+
+        @media (max-width: 600px) {
+            .quiz-container { padding: 5rem 1rem 2rem; }
+            .question h2 { font-size: 1.25rem; }
+            .share-actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="nav-logo">
+        <span class="glyph">&#9671;</span> BrainScan
+    </a>
+</nav>
+
+<div class="quiz-container">
+
+    <!-- Progress -->
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div></div>
+    <div class="progress-text" id="progress-text">Question 1 of 8</div>
+
+    <!-- Questions -->
+    <div class="question active" data-q="0">
+        <div class="question-num">01</div>
+        <h2>When you learn something new, you...</h2>
+        <div class="options">
+            <div class="option" data-scores='{"architect":3,"analyst":1}'>
+                <div class="option-marker"></div>
+                <span>Dive deep into one thing</span>
+            </div>
+            <div class="option" data-scores='{"explorer":3,"connector":1}'>
+                <div class="option-marker"></div>
+                <span>Connect it to everything else</span>
+            </div>
+            <div class="option" data-scores='{"builder":3,"strategist":1}'>
+                <div class="option-marker"></div>
+                <span>Find the practical application</span>
+            </div>
+            <div class="option" data-scores='{"analyst":3,"scholar":1}'>
+                <div class="option-marker"></div>
+                <span>Question the assumptions</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question" data-q="1">
+        <div class="question-num">02</div>
+        <h2>Your browser tabs right now:</h2>
+        <div class="options">
+            <div class="option" data-scores='{"builder":2,"strategist":2}'>
+                <div class="option-marker"></div>
+                <span>5 or fewer (focused)</span>
+            </div>
+            <div class="option" data-scores='{"scholar":2,"analyst":2}'>
+                <div class="option-marker"></div>
+                <span>10-20 (curious)</span>
+            </div>
+            <div class="option" data-scores='{"explorer":2,"connector":2}'>
+                <div class="option-marker"></div>
+                <span>20-50 (explorer)</span>
+            </div>
+            <div class="option" data-scores='{"creative":2,"explorer":2}'>
+                <div class="option-marker"></div>
+                <span>50+ (chaos genius)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question" data-q="2">
+        <div class="question-num">03</div>
+        <h2>When explaining ideas, you prefer:</h2>
+        <div class="options">
+            <div class="option" data-scores='{"architect":2,"strategist":2}'>
+                <div class="option-marker"></div>
+                <span>Bullet points</span>
+            </div>
+            <div class="option" data-scores='{"connector":2,"creative":2}'>
+                <div class="option-marker"></div>
+                <span>Stories and analogies</span>
+            </div>
+            <div class="option" data-scores='{"explorer":2,"analyst":2}'>
+                <div class="option-marker"></div>
+                <span>Diagrams and visuals</span>
+            </div>
+            <div class="option" data-scores='{"builder":3,"architect":1}'>
+                <div class="option-marker"></div>
+                <span>Just show me the code</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question" data-q="3">
+        <div class="question-num">04</div>
+        <h2>Your notes are:</h2>
+        <div class="options">
+            <div class="option" data-scores='{"builder":3,"creative":1}'>
+                <div class="option-marker"></div>
+                <span>Nonexistent</span>
+            </div>
+            <div class="option" data-scores='{"scholar":2,"strategist":2}'>
+                <div class="option-marker"></div>
+                <span>Linear documents</span>
+            </div>
+            <div class="option" data-scores='{"architect":3,"explorer":1}'>
+                <div class="option-marker"></div>
+                <span>Connected web</span>
+            </div>
+            <div class="option" data-scores='{"creative":2,"explorer":2}'>
+                <div class="option-marker"></div>
+                <span>Organized chaos</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question" data-q="4">
+        <div class="question-num">05</div>
+        <h2>What drives you:</h2>
+        <div class="options">
+            <div class="option" data-scores='{"builder":3,"architect":1}'>
+                <div class="option-marker"></div>
+                <span>Building things</span>
+            </div>
+            <div class="option" data-scores='{"scholar":2,"analyst":2}'>
+                <div class="option-marker"></div>
+                <span>Understanding things</span>
+            </div>
+            <div class="option" data-scores='{"connector":2,"explorer":2}'>
+                <div class="option-marker"></div>
+                <span>Connecting things</span>
+            </div>
+            <div class="option" data-scores='{"strategist":2,"architect":2}'>
+                <div class="option-marker"></div>
+                <span>Improving things</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question" data-q="5">
+        <div class="question-num">06</div>
+        <h2>Your thinking speed:</h2>
+        <div class="options">
+            <div class="option" data-scores='{"scholar":3,"analyst":1}'>
+                <div class="option-marker"></div>
+                <span>Slow and deep</span>
+            </div>
+            <div class="option" data-scores='{"builder":2,"strategist":2}'>
+                <div class="option-marker"></div>
+                <span>Fast and iterative</span>
+            </div>
+            <div class="option" data-scores='{"creative":3,"explorer":1}'>
+                <div class="option-marker"></div>
+                <span>Bursts of insight</span>
+            </div>
+            <div class="option" data-scores='{"architect":2,"connector":2}'>
+                <div class="option-marker"></div>
+                <span>Always running</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question" data-q="6">
+        <div class="question-num">07</div>
+        <h2>When stuck, you:</h2>
+        <div class="options">
+            <div class="option" data-scores='{"builder":3,"strategist":1}'>
+                <div class="option-marker"></div>
+                <span>Push through</span>
+            </div>
+            <div class="option" data-scores='{"creative":2,"explorer":2}'>
+                <div class="option-marker"></div>
+                <span>Step away</span>
+            </div>
+            <div class="option" data-scores='{"connector":3,"explorer":1}'>
+                <div class="option-marker"></div>
+                <span>Talk it out</span>
+            </div>
+            <div class="option" data-scores='{"scholar":2,"analyst":2}'>
+                <div class="option-marker"></div>
+                <span>Research more</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question" data-q="7">
+        <div class="question-num">08</div>
+        <h2>Your ideal AI is:</h2>
+        <div class="options">
+            <div class="option" data-scores='{"builder":3,"architect":1}'>
+                <div class="option-marker"></div>
+                <span>A fast executor</span>
+            </div>
+            <div class="option" data-scores='{"strategist":2,"analyst":2}'>
+                <div class="option-marker"></div>
+                <span>A thinking partner</span>
+            </div>
+            <div class="option" data-scores='{"scholar":3,"connector":1}'>
+                <div class="option-marker"></div>
+                <span>A knowledge base</span>
+            </div>
+            <div class="option" data-scores='{"creative":2,"explorer":2}'>
+                <div class="option-marker"></div>
+                <span>A creative spark</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scanning Animation -->
+    <div class="scanning" id="scanning">
+        <div class="scan-ring">
+            <svg viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#00ff94" stroke-width="2"
+                    stroke-dasharray="141 424" stroke-linecap="round"/>
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#a855f7" stroke-width="1.5"
+                    stroke-dasharray="110 330" stroke-linecap="round"
+                    style="animation: spin 2s linear infinite reverse"/>
+            </svg>
+            <div class="inner">&#9671;</div>
+        </div>
+        <div class="scan-status" id="scan-status">Initializing scan...</div>
+        <div class="scan-detail" id="scan-detail">Mapping neural pathways</div>
+    </div>
+
+    <!-- Results -->
+    <div class="results" id="results">
+        <div class="result-card">
+            <div class="result-archetype-icon" id="result-icon"></div>
+            <div class="result-archetype-name" id="result-name"></div>
+            <div class="result-archetype-desc" id="result-desc"></div>
+
+            <div class="result-graph">
+                <canvas id="result-graph-canvas"></canvas>
+            </div>
+
+            <div class="stat-bars" id="stat-bars"></div>
+
+            <div class="node-count">
+                <span class="num" id="result-nodes">0</span> nodes &middot;
+                <span class="num" id="result-edges">0</span> connections
+            </div>
+        </div>
+
+        <div class="share-actions">
+            <button class="btn btn-twitter" onclick="shareTwitter()">Share on X</button>
+            <button class="btn btn-linkedin" onclick="shareLinkedIn()">Share on LinkedIn</button>
+            <button class="btn btn-secondary" onclick="downloadCard()">Download Card</button>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="btn btn-primary" onclick="location.reload()">Scan Again</button>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="/" class="back-link">&larr; Back to BrainScan</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// ARCHETYPE DEFINITIONS
+// ═══════════════════════════════════════════
+const archetypes = {
+    architect: {
+        name: 'THE ARCHITECT',
+        icon: '&#9671;',
+        color: '#00d4ff',
+        desc: 'You see systems where others see chaos. Your mind builds frameworks, connects structures, and designs from first principles. The world is your blueprint.',
+        stats: { Systems: 89, Depth: 72, Speed: 81, Creativity: 58, Connection: 64 }
+    },
+    explorer: {
+        name: 'THE EXPLORER',
+        icon: '&#9671;',
+        color: '#a855f7',
+        desc: 'Curiosity is your compass. You follow threads wherever they lead, making connections others miss. Your brain is a web of discovery.',
+        stats: { Systems: 52, Depth: 61, Speed: 74, Creativity: 83, Connection: 78 }
+    },
+    builder: {
+        name: 'THE BUILDER',
+        icon: '&#9671;',
+        color: '#00ff94',
+        desc: 'Ship it. You think with your hands. Ideas are only as good as their execution, and you execute relentlessly.',
+        stats: { Systems: 68, Depth: 45, Speed: 92, Creativity: 55, Connection: 48 }
+    },
+    analyst: {
+        name: 'THE ANALYST',
+        icon: '&#9671;',
+        color: '#ffd700',
+        desc: 'Precision is not optional. You dive deeper than anyone else, questioning assumptions until you find bedrock truth.',
+        stats: { Systems: 76, Depth: 94, Speed: 42, Creativity: 51, Connection: 53 }
+    },
+    connector: {
+        name: 'THE CONNECTOR',
+        icon: '&#9671;',
+        color: '#3b82f6',
+        desc: 'You bridge worlds. Ideas, people, domains — you see the links between things that seem unrelated. Your superpower is synthesis.',
+        stats: { Systems: 58, Depth: 55, Speed: 67, Creativity: 72, Connection: 91 }
+    },
+    creative: {
+        name: 'THE CREATIVE',
+        icon: '&#9671;',
+        color: '#f97316',
+        desc: 'Your mind makes leaps others can\'t follow. Unexpected connections, lateral thinking, artistic vision — you see what doesn\'t exist yet.',
+        stats: { Systems: 44, Depth: 58, Speed: 71, Creativity: 95, Connection: 69 }
+    },
+    scholar: {
+        name: 'THE SCHOLAR',
+        icon: '&#9671;',
+        color: '#10b981',
+        desc: 'Knowledge is power, and you accumulate it methodically. Your brain is a library — organized, deep, and always growing.',
+        stats: { Systems: 65, Depth: 88, Speed: 38, Creativity: 47, Connection: 62 }
+    },
+    strategist: {
+        name: 'THE STRATEGIST',
+        icon: '&#9671;',
+        color: '#ec4899',
+        desc: 'You play the long game. While others focus on the move, you see the whole board. Big picture thinking with surgical precision.',
+        stats: { Systems: 82, Depth: 71, Speed: 56, Creativity: 63, Connection: 74 }
+    }
+};
+
+// ═══════════════════════════════════════════
+// QUIZ ENGINE
+// ═══════════════════════════════════════════
+const scores = {};
+let currentQuestion = 0;
+const totalQuestions = 8;
+
+// Initialize scores
+Object.keys(archetypes).forEach(k => scores[k] = 0);
+
+// Option click handlers
+document.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', function() {
+        // Deselect siblings
+        this.parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+
+        // Add scores
+        const optScores = JSON.parse(this.dataset.scores);
+        Object.entries(optScores).forEach(([k, v]) => {
+            scores[k] = (scores[k] || 0) + v;
+        });
+
+        // Auto-advance after brief delay
+        setTimeout(() => advanceQuestion(), 400);
+    });
+});
+
+function advanceQuestion() {
+    currentQuestion++;
+
+    if (currentQuestion >= totalQuestions) {
+        showScanning();
+        return;
+    }
+
+    // Update progress
+    const pct = (currentQuestion / totalQuestions) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${totalQuestions}`;
+
+    // Show next question
+    document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+    document.querySelector(`.question[data-q="${currentQuestion}"]`).classList.add('active');
+}
+
+// ═══════════════════════════════════════════
+// SCANNING ANIMATION
+// ═══════════════════════════════════════════
+function showScanning() {
+    document.getElementById('progress').style.width = '100%';
+    document.getElementById('progress-text').textContent = 'Scanning...';
+    document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+    document.getElementById('scanning').classList.add('active');
+
+    const phases = [
+        ['Mapping neural pathways...', 'Analyzing cognitive patterns'],
+        ['Identifying knowledge clusters...', 'Detecting connection density'],
+        ['Classifying archetype...', 'Calculating brain topology'],
+        ['Rendering visualization...', 'Generating brain card'],
+    ];
+
+    let phase = 0;
+    const interval = setInterval(() => {
+        phase++;
+        if (phase >= phases.length) {
+            clearInterval(interval);
+            setTimeout(showResults, 800);
+            return;
+        }
+        document.getElementById('scan-status').textContent = phases[phase][0];
+        document.getElementById('scan-detail').textContent = phases[phase][1];
+    }, 900);
+}
+
+// ═══════════════════════════════════════════
+// RESULTS
+// ═══════════════════════════════════════════
+function showResults() {
+    document.getElementById('scanning').classList.remove('active');
+    document.querySelector('.progress-bar').style.display = 'none';
+    document.querySelector('.progress-text').style.display = 'none';
+
+    // Find winner
+    const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    const winner = sorted[0][0];
+    const arch = archetypes[winner];
+
+    // Populate result
+    document.getElementById('result-icon').innerHTML = arch.icon;
+    document.getElementById('result-icon').style.color = arch.color;
+    document.getElementById('result-name').textContent = arch.name;
+    document.getElementById('result-name').style.color = arch.color;
+    document.getElementById('result-desc').textContent = arch.desc;
+
+    // Stat bars
+    const statsEl = document.getElementById('stat-bars');
+    statsEl.innerHTML = '';
+    Object.entries(arch.stats).forEach(([label, value]) => {
+        const row = document.createElement('div');
+        row.className = 'stat-row';
+        row.innerHTML = `
+            <div class="stat-label">${label}</div>
+            <div class="stat-bar-bg">
+                <div class="stat-bar-fill" style="width: 0%; background: ${arch.color};"></div>
+            </div>
+            <div class="stat-pct">${value}%</div>
+        `;
+        statsEl.appendChild(row);
+    });
+
+    // Animate stat bars
+    setTimeout(() => {
+        document.querySelectorAll('.stat-bar-fill').forEach((bar, i) => {
+            const vals = Object.values(arch.stats);
+            bar.style.width = vals[i] + '%';
+        });
+    }, 100);
+
+    // Node count (generated from score)
+    const nodeBase = sorted[0][1] * 150 + 800;
+    const edgeBase = Math.floor(nodeBase * 3.2);
+    animateNumber('result-nodes', nodeBase);
+    animateNumber('result-edges', edgeBase);
+
+    // Show results
+    document.getElementById('results').classList.add('active');
+
+    // Render mini graph
+    renderResultGraph(winner, arch.color);
+
+    // Store for sharing
+    window._brainResult = { archetype: arch.name, color: arch.color, nodes: nodeBase, edges: edgeBase };
+}
+
+function animateNumber(id, target) {
+    const el = document.getElementById(id);
+    const duration = 1500;
+    const start = Date.now();
+    const tick = () => {
+        const elapsed = Date.now() - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(target * eased).toLocaleString();
+        if (progress < 1) requestAnimationFrame(tick);
+    };
+    tick();
+}
+
+// ═══════════════════════════════════════════
+// RESULT MINI GRAPH
+// ═══════════════════════════════════════════
+function renderResultGraph(type, color) {
+    const canvas = document.getElementById('result-graph-canvas');
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    const w = rect.width;
+    const h = rect.height;
+
+    // Generate nodes
+    const nodes = [];
+    const edges = [];
+    const count = 80;
+
+    // Core
+    nodes.push({ x: w/2, y: h/2, r: 6, color: color, glow: true, vx: 0, vy: 0 });
+
+    // Cluster nodes
+    for (let i = 1; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 30 + Math.random() * Math.min(w, h) * 0.35;
+        nodes.push({
+            x: w/2 + Math.cos(angle) * dist,
+            y: h/2 + Math.sin(angle) * dist,
+            r: 1 + Math.random() * 3,
+            color: i < 15 ? color : i < 35 ? shiftHue(color) : '#555',
+            glow: i < 8,
+            vx: 0, vy: 0
+        });
+
+        // Edges
+        if (i < 8) {
+            edges.push({ from: 0, to: i, alpha: 0.2, color: color });
+        }
+        const connections = Math.floor(Math.random() * 2) + 1;
+        for (let c = 0; c < connections; c++) {
+            const target = Math.floor(Math.random() * i);
+            edges.push({ from: i, to: target, alpha: 0.08, color: '#888' });
+        }
+    }
+
+    let frame = 0;
+    function draw() {
+        frame++;
+        ctx.clearRect(0, 0, w, h);
+
+        // Edges
+        for (const e of edges) {
+            const from = nodes[e.from];
+            const to = nodes[e.to];
+            if (!from || !to) continue;
+            ctx.beginPath();
+            ctx.moveTo(from.x, from.y);
+            ctx.lineTo(to.x, to.y);
+            const pulse = 0.7 + 0.3 * Math.sin(frame * 0.015 + e.from);
+            ctx.strokeStyle = hexToRGBA(e.color, e.alpha * pulse);
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+        }
+
+        // Nodes
+        for (const n of nodes) {
+            const breathe = 1 + 0.08 * Math.sin(frame * 0.025 + nodes.indexOf(n));
+            if (n.glow) {
+                const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+                glow.addColorStop(0, hexToRGBA(n.color, 0.25));
+                glow.addColorStop(1, hexToRGBA(n.color, 0));
+                ctx.fillStyle = glow;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r * breathe, 0, Math.PI * 2);
+            ctx.fillStyle = n.color;
+            ctx.fill();
+
+            // Gentle drift
+            n.x += Math.sin(frame * 0.005 + nodes.indexOf(n)) * 0.15;
+            n.y += Math.cos(frame * 0.004 + nodes.indexOf(n) * 1.3) * 0.1;
+        }
+
+        requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+function shiftHue(hex) {
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    return `rgb(${Math.min(255, r + 40)}, ${Math.min(255, g + 20)}, ${Math.min(255, b + 60)})`;
+}
+
+function hexToRGBA(hex, alpha) {
+    if (hex.startsWith('rgb')) {
+        return hex.replace('rgb', 'rgba').replace(')', `,${alpha})`);
+    }
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    return `rgba(${r},${g},${b},${alpha})`;
+}
+
+// ═══════════════════════════════════════════
+// SHARE FUNCTIONS
+// ═══════════════════════════════════════════
+function shareTwitter() {
+    const r = window._brainResult;
+    if (!r) return;
+    const text = encodeURIComponent(
+        `I'm ${r.archetype}\n\n` +
+        `${r.nodes.toLocaleString()} nodes \u00b7 ${r.edges.toLocaleString()} connections\n\n` +
+        `What does YOUR brain look like?\n` +
+        `\u2192 id.activemirror.ai/scan.html\n\n` +
+        `#BrainScan #MirrorDNA`
+    );
+    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+}
+
+function shareLinkedIn() {
+    const url = encodeURIComponent('https://id.activemirror.ai/scan.html');
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function downloadCard() {
+    // Generate a simple card on canvas
+    const r = window._brainResult;
+    if (!r) return;
+    const c = document.createElement('canvas');
+    c.width = 1200; c.height = 630;
+    const x = c.getContext('2d');
+
+    // Background
+    x.fillStyle = '#030303';
+    x.fillRect(0, 0, 1200, 630);
+
+    // Border
+    x.strokeStyle = '#1a1a1a';
+    x.lineWidth = 2;
+    x.strokeRect(20, 20, 1160, 590);
+
+    // Archetype
+    x.fillStyle = r.color;
+    x.font = 'bold 64px Inter, sans-serif';
+    x.textAlign = 'center';
+    x.fillText(r.archetype, 600, 250);
+
+    // Glyph
+    x.font = '80px serif';
+    x.fillText('\u25C7', 600, 150);
+
+    // Stats
+    x.fillStyle = '#888';
+    x.font = '28px JetBrains Mono, monospace';
+    x.fillText(`${r.nodes.toLocaleString()} nodes \u00b7 ${r.edges.toLocaleString()} connections`, 600, 340);
+
+    // Watermark
+    x.fillStyle = '#00ff94';
+    x.font = '22px JetBrains Mono, monospace';
+    x.fillText('brainscan \u25C7 id.activemirror.ai', 600, 560);
+
+    // Download
+    const link = document.createElement('a');
+    link.download = 'my-brain-scan.png';
+    link.href = c.toDataURL('image/png');
+    link.click();
+}
+</script>
+
+</body>
+</html>
