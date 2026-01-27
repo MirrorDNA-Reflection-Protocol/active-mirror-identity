@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainScan — Famous Brain</title>
+    <meta name="description" content="Explore a famous mind, visualized as a knowledge graph.">
+    <meta property="og:title" content="BrainScan — Famous Minds Visualized">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#030303;--bg-card:#0a0a0a;--bg-elevated:#111;--bg-input:#141414;--border:#1a1a1a;--border-hover:#2a2a2a;--text:#fafafa;--text-secondary:#999;--text-dim:#555;--accent:#00ff94;--accent-glow:rgba(0,255,148,.15);--accent-subtle:rgba(0,255,148,.06)}
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(3,3,3,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+        .nav-logo{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.05rem;text-decoration:none;color:var(--text)}
+        .nav-logo .g{color:var(--accent);font-size:1.2rem}
+        .nav-links{display:flex;gap:1rem;align-items:center}
+        .nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
+        .nav-links a:hover{color:var(--text)}
+        .nav-cta{padding:.45rem 1rem;background:var(--accent);color:#000 !important;border-radius:8px;font-weight:600}
+
+        .page{max-width:1000px;margin:0 auto;padding:5rem 1.5rem 4rem}
+
+        /* HEADER */
+        .brain-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+        .portrait{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;flex-shrink:0}
+        .brain-name{font-size:1.8rem;font-weight:800;margin-bottom:.15rem}
+        .brain-type{font-size:.9rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+        .brain-meta{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--text-dim);margin-bottom:.6rem}
+        .brain-desc{font-size:.95rem;color:var(--text-secondary);line-height:1.6;max-width:600px}
+        .brain-source{font-size:.75rem;color:var(--text-dim);margin-top:.4rem;font-style:italic}
+
+        /* GRAPH */
+        .graph-section{margin-bottom:2.5rem}
+        .graph-container{height:450px;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative}
+        .graph-container canvas{width:100%;height:100%;display:block}
+        .graph-hint{position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);font-size:.7rem;color:var(--text-dim);background:rgba(3,3,3,.7);padding:.3rem .8rem;border-radius:5px;backdrop-filter:blur(6px);pointer-events:none}
+
+        /* STATS */
+        .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.5rem}
+        .stat-box{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center}
+        .stat-num{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--accent)}
+        .stat-label{font-size:.75rem;color:var(--text-dim);margin-top:.2rem}
+
+        /* CLUSTERS */
+        .insights{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem}
+        .insight-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem}
+        .insight-card h3{font-size:.9rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.4rem}
+        .cluster-item{display:flex;align-items:center;gap:.6rem;padding:.45rem 0;font-size:.85rem}
+        .cluster-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+        .cluster-name{flex:1;color:var(--text-secondary)}
+        .cluster-count{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text-dim)}
+        .sig-item{padding:.45rem 0;font-size:.85rem;color:var(--text-secondary);display:flex;align-items:center;gap:.5rem}
+        .sig-arrow{color:var(--accent);font-weight:700}
+
+        /* TRAITS */
+        .trait-bars{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2.5rem}
+        .trait-row{display:flex;align-items:center;gap:.75rem}
+        .trait-label{font-size:.8rem;color:var(--text-secondary);width:90px;flex-shrink:0;text-align:right}
+        .trait-bar-bg{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+        .trait-bar-fill{height:100%;border-radius:4px;transition:width 1s ease}
+        .trait-val{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text-dim);width:36px}
+
+        /* ACTIONS */
+        .actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.8rem 1.5rem;border-radius:10px;font-size:.9rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s;border:none;text-decoration:none}
+        .btn-primary{background:var(--accent);color:#000}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 30px var(--accent-glow)}
+        .btn-ghost{background:transparent;color:var(--text-secondary);border:1px solid var(--border)}
+        .btn-ghost:hover{background:var(--bg-elevated);color:var(--text)}
+
+        .back-link{display:block;text-align:center;color:var(--text-dim);font-size:.85rem;text-decoration:none;transition:color .2s}
+        .back-link:hover{color:var(--text-secondary)}
+
+        /* OTHER FAMOUS */
+        .others{margin-bottom:2.5rem}
+        .others h3{font-size:.9rem;font-weight:600;color:var(--text-dim);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.1em}
+        .others-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+        .other-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;cursor:pointer;transition:all .2s}
+        .other-card:hover{border-color:var(--border-hover);transform:translateY(-2px)}
+        .other-card.current{border-color:var(--accent);opacity:.5;pointer-events:none}
+        .other-icon{font-size:1.8rem;margin-bottom:.4rem}
+        .other-name{font-weight:600;font-size:.85rem;margin-bottom:.15rem}
+        .other-type{font-size:.7rem;color:var(--text-dim)}
+
+        @media(max-width:768px){
+            .brain-header{flex-direction:column;text-align:center}
+            .stat-row{grid-template-columns:1fr 1fr}
+            .insights{grid-template-columns:1fr}
+            .others-grid{grid-template-columns:1fr 1fr}
+        }
+        @media(max-width:500px){
+            nav{padding:.75rem 1rem}
+            .nav-links a:not(.nav-cta){display:none}
+            .page{padding:4.5rem 1rem 3rem}
+            .stat-row{grid-template-columns:1fr 1fr}
+            .others-grid{grid-template-columns:1fr 1fr}
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="nav-logo"><span class="g">&#9671;</span> BrainScan</a>
+    <div class="nav-links">
+        <a href="brain.html">Explore</a>
+        <a href="compare.html">Compare</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="scan.html" class="nav-cta">Scan My Brain</a>
+    </div>
+</nav>
+
+<div class="page">
+    <div class="brain-header" id="header"></div>
+    <div class="stat-row" id="stat-row"></div>
+    <div class="graph-section">
+        <div class="graph-container">
+            <canvas id="graph"></canvas>
+            <div class="graph-hint">Hover to explore &middot; Nodes drift naturally</div>
+        </div>
+    </div>
+    <div class="trait-bars" id="trait-bars"></div>
+    <div class="insights" id="insights"></div>
+    <div class="actions" id="actions"></div>
+    <div class="others" id="others"></div>
+    <a href="/" class="back-link">&#8592; Back to BrainScan</a>
+</div>
+
+<script>
+const FAMOUS = {
+    einstein: {
+        name:'Albert Einstein',initial:'E',
+        archetype:'THE EXPLORER',color:'#a855f7',
+        nodes:3420,edges:12847,
+        portrait:'rgba(168,85,247,.1)',portraitBorder:'#a855f7',
+        desc:'The mind that reimagined space and time. Einstein\'s brain was a web of thought experiments, deep mathematical structures, and the conviction that nature is fundamentally simple and elegant.',
+        source:'Reconstructed from published papers, letters, and documented conversations.',
+        stats:{Systems:71,Depth:95,Speed:48,Creativity:88,Connection:62},
+        clusters:[
+            {name:'Relativity & Spacetime',color:'#a855f7',count:847,concepts:['General Relativity','Special Relativity','Spacetime Curvature','E=mc\u00B2','Gravitational Waves','Time Dilation','Length Contraction','Equivalence Principle']},
+            {name:'Quantum Mechanics',color:'#00d4ff',count:423,concepts:['Photoelectric Effect','Wave-Particle Duality','Quantum Entanglement','EPR Paradox','Uncertainty','Statistical Mechanics']},
+            {name:'Philosophy of Science',color:'#ec4899',count:312,concepts:['Thought Experiments','Imagination','Simplicity','Beauty in Physics','Determinism','Epistemology','Unification']},
+            {name:'Thought Experiments',color:'#ffd700',count:289,concepts:['Light Beam Riding','Elevator Experiment','Twin Paradox','Brownian Motion','Spinning Disk','Clock Synchronization']},
+        ],
+        signatures:[
+            ['Imagination','Discovery'],['Simplicity','Truth'],['Curiosity','First Principles'],
+            ['Mathematics','Physical Reality'],['Thought Experiment','Theory'],['Beauty','Elegance'],
+        ]
+    },
+    jobs: {
+        name:'Steve Jobs',initial:'S',
+        archetype:'THE ARCHITECT',color:'#00d4ff',
+        nodes:2891,edges:9847,
+        portrait:'rgba(0,212,255,.1)',portraitBorder:'#00d4ff',
+        desc:'The architect of the personal computing revolution. Jobs\' mind connected technology, design, and human experience into products that felt inevitable in retrospect.',
+        source:'Built from public interviews, keynote presentations, and Isaacson biography.',
+        stats:{Systems:85,Depth:62,Speed:91,Creativity:92,Connection:78},
+        clusters:[
+            {name:'Product Design',color:'#00d4ff',count:680,concepts:['Simplicity','User Experience','Form Factor','Materials','Packaging','Unboxing','Integration','Polish']},
+            {name:'Business Strategy',color:'#ffd700',count:520,concepts:['Vertical Integration','Ecosystem','Platform','Pricing','Retail','Supply Chain','Margins','Timing']},
+            {name:'Creative Vision',color:'#f97316',count:410,concepts:['Typography','Calligraphy','Bauhaus','Minimalism','Zen','Taste','Curation','Intersection']},
+            {name:'Technology',color:'#3b82f6',count:380,concepts:['GUI','Touch Interface','Mobile Computing','Digital Music','App Economy','Cloud','Silicon','Chips']},
+        ],
+        signatures:[
+            ['Design','Technology'],['Simplicity','Power'],['Focus','Elimination'],
+            ['Taste','Engineering'],['User Experience','Emotion'],['Integration','Control'],
+        ]
+    },
+    aurelius: {
+        name:'Marcus Aurelius',initial:'M',
+        archetype:'THE SCHOLAR',color:'#10b981',
+        nodes:847,edges:2341,
+        portrait:'rgba(16,185,129,.1)',portraitBorder:'#10b981',
+        desc:'Emperor and philosopher. Aurelius turned inward to find order in chaos, building a framework for human resilience that endures two millennia later.',
+        source:'Extracted from Meditations \u2014 his personal journal of Stoic philosophy.',
+        stats:{Systems:58,Depth:92,Speed:32,Creativity:45,Connection:71},
+        clusters:[
+            {name:'Stoic Philosophy',color:'#10b981',count:312,concepts:['Virtue','Duty','Logos','Nature','Rational Order','Providence','Cosmos','Harmony']},
+            {name:'Self-Governance',color:'#3b82f6',count:215,concepts:['Discipline','Self-Examination','Journaling','Morning Routine','Emotional Control','Equanimity','Acceptance']},
+            {name:'Ethics & Leadership',color:'#ffd700',count:178,concepts:['Justice','Common Good','Service','Responsibility','Humility','Patience','Forgiveness','Mercy']},
+            {name:'Mortality & Time',color:'#ec4899',count:142,concepts:['Impermanence','Memento Mori','Legacy','Perspective','Present Moment','Urgency','Vanity']},
+        ],
+        signatures:[
+            ['Obstacle','Way Forward'],['Duty','Joy'],['Control','Acceptance'],
+            ['Mortality','Purpose'],['Simplicity','Virtue'],['Journaling','Clarity'],
+        ]
+    },
+    davinci: {
+        name:'Leonardo da Vinci',initial:'L',
+        archetype:'THE CREATIVE',color:'#f97316',
+        nodes:4102,edges:18920,
+        portrait:'rgba(249,115,22,.1)',portraitBorder:'#f97316',
+        desc:'The ultimate polymath. Da Vinci\'s brain was a cathedral of cross-domain connections \u2014 art informed by anatomy, engineering inspired by nature, science driven by beauty.',
+        source:'Reconstructed from his famous notebooks and documented works.',
+        stats:{Systems:74,Depth:83,Speed:45,Creativity:98,Connection:89},
+        clusters:[
+            {name:'Art & Painting',color:'#f97316',count:920,concepts:['Sfumato','Chiaroscuro','Perspective','Composition','Color Mixing','Portrait','Landscape','Fresco']},
+            {name:'Anatomy & Nature',color:'#ec4899',count:780,concepts:['Human Body','Muscles','Skeleton','Proportion','Embryology','Botany','Water','Geology']},
+            {name:'Engineering & Invention',color:'#3b82f6',count:650,concepts:['Flying Machine','War Machine','Bridges','Hydraulics','Gears','Pulleys','Automata','Urban Design']},
+            {name:'Science & Method',color:'#00d4ff',count:580,concepts:['Observation','Experimentation','Optics','Light','Shadow','Fluid Dynamics','Mathematics','Geometry']},
+            {name:'Expression & Craft',color:'#10b981',count:440,concepts:['Notebooks','Sketching','Mirror Writing','Music','Lyre','Performance','Documentation','Teaching']},
+        ],
+        signatures:[
+            ['Art','Science'],['Observation','Innovation'],['Nature','Engineering'],
+            ['Curiosity','Mastery'],['Beauty','Function'],['Cross-Domain','Synthesis'],
+        ]
+    }
+};
+
+// ═══════════════════════════════════════════════════════════
+// LOAD BRAIN FROM URL
+// ═══════════════════════════════════════════════════════════
+const params = new URLSearchParams(window.location.search);
+const brainId = params.get('brain') || params.get('b') || 'einstein';
+const brain = FAMOUS[brainId] || FAMOUS.einstein;
+
+document.title = `BrainScan \u2014 ${brain.name}`;
+
+// ═══ HEADER ═══
+document.getElementById('header').innerHTML = `
+    <div class="portrait" style="background:${brain.portrait};border:3px solid ${brain.portraitBorder};">
+        ${brain.initial}
+    </div>
+    <div>
+        <div class="brain-name">${brain.name}</div>
+        <div class="brain-type" style="color:${brain.color};">${brain.archetype}</div>
+        <div class="brain-meta">${brain.nodes.toLocaleString()} nodes &middot; ${brain.edges.toLocaleString()} connections &middot; ${brain.clusters.length} clusters</div>
+        <div class="brain-desc">${brain.desc}</div>
+        <div class="brain-source">${brain.source}</div>
+    </div>
+`;
+
+// ═══ STAT BOXES ═══
+document.getElementById('stat-row').innerHTML = `
+    <div class="stat-box"><div class="stat-num">${brain.nodes.toLocaleString()}</div><div class="stat-label">Nodes</div></div>
+    <div class="stat-box"><div class="stat-num">${brain.edges.toLocaleString()}</div><div class="stat-label">Connections</div></div>
+    <div class="stat-box"><div class="stat-num">${brain.clusters.length}</div><div class="stat-label">Clusters</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:${brain.color}">${(brain.edges/brain.nodes).toFixed(1)}x</div><div class="stat-label">Density</div></div>
+`;
+
+// ═══ TRAIT BARS ═══
+const traitBars = document.getElementById('trait-bars');
+Object.entries(brain.stats).forEach(([label, value]) => {
+    const row = document.createElement('div');
+    row.className = 'trait-row';
+    row.innerHTML = `
+        <div class="trait-label">${label}</div>
+        <div class="trait-bar-bg"><div class="trait-bar-fill" style="width:0%;background:${brain.color};"></div></div>
+        <div class="trait-val">${value}%</div>
+    `;
+    traitBars.appendChild(row);
+});
+requestAnimationFrame(() => {
+    traitBars.querySelectorAll('.trait-bar-fill').forEach((bar, i) => {
+        bar.style.width = Object.values(brain.stats)[i] + '%';
+    });
+});
+
+// ═══ INSIGHTS ═══
+const insightsEl = document.getElementById('insights');
+const clustersHtml = brain.clusters.map(c => `
+    <div class="cluster-item">
+        <span class="cluster-dot" style="background:${c.color}"></span>
+        <span class="cluster-name">${c.name}</span>
+        <span class="cluster-count">${c.count}</span>
+    </div>
+`).join('');
+const sigHtml = brain.signatures.map(([from, to]) => `
+    <div class="sig-item"><span>${from}</span> <span class="sig-arrow">\u2192</span> <span>${to}</span></div>
+`).join('');
+insightsEl.innerHTML = `
+    <div class="insight-card"><h3>Knowledge Clusters</h3>${clustersHtml}</div>
+    <div class="insight-card"><h3>Signature Connections</h3>${sigHtml}</div>
+`;
+
+// ═══ ACTIONS ═══
+document.getElementById('actions').innerHTML = `
+    <a href="compare.html?vs=${brainId}" class="btn btn-primary">Compare With My Brain</a>
+    <a href="scan.html" class="btn btn-ghost">Scan My Brain</a>
+    <a href="gallery.html" class="btn btn-ghost">Browse Gallery</a>
+`;
+
+// ═══ OTHER FAMOUS ═══
+const othersEl = document.getElementById('others');
+othersEl.innerHTML = '<h3>Other Famous Minds</h3><div class="others-grid" id="others-grid"></div>';
+const grid = document.getElementById('others-grid');
+Object.entries(FAMOUS).forEach(([id, b]) => {
+    const card = document.createElement('div');
+    card.className = 'other-card' + (id === brainId ? ' current' : '');
+    card.onclick = () => { window.location.href = `famous.html?brain=${id}`; };
+    card.innerHTML = `
+        <div class="other-icon" style="color:${b.color}">${b.initial}</div>
+        <div class="other-name">${b.name}</div>
+        <div class="other-type" style="color:${b.color}">${b.archetype}</div>
+    `;
+    grid.appendChild(card);
+});
+
+// ═══════════════════════════════════════════════════════════
+// GRAPH
+// ═══════════════════════════════════════════════════════════
+function hexA(hex,a){
+    if(!hex||hex[0]!=='#')return `rgba(100,100,100,${a})`;
+    return `rgba(${parseInt(hex.slice(1,3),16)},${parseInt(hex.slice(3,5),16)},${parseInt(hex.slice(5,7),16)},${a})`;
+}
+
+(function renderGraph(){
+    const canvas = document.getElementById('graph');
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    const w = rect.width, h = rect.height;
+
+    const nodes = [];
+    const edges = [];
+    const cCount = brain.clusters.length;
+
+    // Core
+    nodes.push({x:w/2,y:h/2,r:8,color:brain.color,glow:true,label:brain.name});
+
+    brain.clusters.forEach((cluster, ci) => {
+        const cAngle = (Math.PI*2*ci)/cCount - Math.PI/2;
+        const cx = w/2 + Math.cos(cAngle) * w * .28;
+        const cy = h/2 + Math.sin(cAngle) * h * .28;
+
+        cluster.concepts.forEach((concept, ni) => {
+            const nAngle = (Math.PI*2*ni)/cluster.concepts.length + Math.random()*.4;
+            const dist = 20 + Math.random() * w * .12;
+            const lvl = ni < 2 ? 1 : ni < 5 ? 2 : 3;
+            const r = lvl===1?5:lvl===2?3.5:2;
+            nodes.push({
+                x: cx + Math.cos(nAngle)*dist,
+                y: cy + Math.sin(nAngle)*dist,
+                r, color: cluster.color, glow: lvl===1,
+                label: concept
+            });
+            const idx = nodes.length - 1;
+            if(ni < 2) edges.push({from:0,to:idx,alpha:.2,color:cluster.color});
+            if(ni > 0) edges.push({from:idx-1,to:idx,alpha:.1,color:cluster.color});
+            if(Math.random()>.5 && ni>2) edges.push({from:idx,to:Math.floor(Math.random()*(idx-1))+1,alpha:.06,color:cluster.color});
+        });
+    });
+
+    // Bridges
+    for(let i=0;i<20;i++){
+        const a=1+Math.floor(Math.random()*(nodes.length-1));
+        const b=1+Math.floor(Math.random()*(nodes.length-1));
+        if(a!==b) edges.push({from:a,to:b,alpha:.04,color:'#555'});
+    }
+
+    let hovered = null;
+    let mouseX=0, mouseY=0;
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+        hovered = null;
+        for(const n of nodes){
+            const dx=n.x-mouseX, dy=n.y-mouseY;
+            if(Math.sqrt(dx*dx+dy*dy) < n.r+6){ hovered=n; break; }
+        }
+        canvas.style.cursor = hovered ? 'pointer' : 'default';
+    });
+    canvas.addEventListener('mouseleave', () => { hovered = null; });
+
+    let frame = 0;
+    function draw(){
+        frame++;
+        ctx.clearRect(0,0,w,h);
+        const bg=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w*.5);
+        bg.addColorStop(0,hexA(brain.color,.03));bg.addColorStop(.5,hexA(brain.color,.01));bg.addColorStop(1,'transparent');
+        ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+
+        const hovConns = new Set();
+        if(hovered){
+            const hi = nodes.indexOf(hovered);
+            edges.forEach(e => {
+                if(e.from===hi) hovConns.add(e.to);
+                if(e.to===hi) hovConns.add(e.from);
+            });
+            hovConns.add(hi);
+        }
+
+        for(const e of edges){
+            const from=nodes[e.from],to=nodes[e.to];
+            if(!from||!to)continue;
+            const p=.7+.3*Math.sin(frame*.01+e.from);
+            let a = e.alpha*p;
+            let lw = .5;
+            if(hovered){
+                const hi=nodes.indexOf(hovered);
+                if(e.from===hi||e.to===hi){a=.5;lw=1.5;}
+                else a=.02;
+            }
+            ctx.beginPath();ctx.moveTo(from.x,from.y);ctx.lineTo(to.x,to.y);
+            ctx.strokeStyle=hexA(e.color,a);ctx.lineWidth=lw;ctx.stroke();
+        }
+
+        for(let i=0;i<nodes.length;i++){
+            const n=nodes[i];
+            const b=1+.06*Math.sin(frame*.018+i*.8);
+            let alpha = n.glow?1:i<3?.9:.6;
+            if(hovered && !hovConns.has(i)) alpha=.1;
+            if(hovered && n===hovered) alpha=1;
+
+            if(n.glow||n===hovered){
+                const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*4);
+                g.addColorStop(0,hexA(n.color,.3*alpha));g.addColorStop(1,hexA(n.color,0));
+                ctx.fillStyle=g;ctx.beginPath();ctx.arc(n.x,n.y,n.r*4,0,Math.PI*2);ctx.fill();
+            }
+            ctx.beginPath();ctx.arc(n.x,n.y,n.r*b,0,Math.PI*2);
+            ctx.fillStyle=hexA(n.color,alpha);ctx.fill();
+
+            if(n===hovered||n.glow&&n.r>4){
+                ctx.fillStyle=hexA('#ffffff',alpha*.8);
+                ctx.font=(n===hovered?'600 12px':'11px')+' Inter';
+                ctx.textAlign='center';
+                ctx.fillText(n.label,n.x,n.y+n.r+14);
+            }
+
+            n.x+=Math.sin(frame*.004+i*1.1)*.12;
+            n.y+=Math.cos(frame*.003+i*1.3)*.08;
+        }
+        requestAnimationFrame(draw);
+    }
+    draw();
+
+    window.addEventListener('resize', () => {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+    });
+})();
+</script>
+
+</body>
+</html>

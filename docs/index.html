@@ -620,8 +620,8 @@
     <div class="nav-links">
         <a href="brain.html">Explore</a>
         <a href="compare.html">Compare</a>
-        <a href="#archetypes">Brain Types</a>
-        <a href="#famous">Famous Brains</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="#famous">Famous</a>
         <a href="scan.html" class="nav-cta">Scan My Brain</a>
     </div>
 </nav>
@@ -712,12 +712,12 @@
         <h2 class="section-title">Everything your brain needs</h2>
         <p class="section-desc">Not just a quiz. A platform for understanding how you think.</p>
         <div class="features-grid">
-            <div class="feature-card">
+            <div class="feature-card" style="cursor:pointer;" onclick="location.href='brain.html'">
                 <div class="feature-icon" style="background: rgba(0,255,148,.1);">&#9671;</div>
                 <h3>Living Visualization</h3>
                 <p>Interactive force-directed graph. Zoom, pan, explore. Watch your brain breathe.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card" style="cursor:pointer;" onclick="location.href='scan.html'">
                 <div class="feature-icon" style="background: rgba(168,85,247,.1);">&#9632;</div>
                 <h3>Shareable Brain Card</h3>
                 <p>Beautiful card with your brain type, stats, and mini graph. Share to Twitter, LinkedIn, anywhere.</p>
@@ -732,7 +732,7 @@
                 <h3>Knowledge Import</h3>
                 <p>Connect Obsidian, Notion, Roam, or any markdown vault. See your real knowledge graph.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card" style="cursor:pointer;" onclick="location.href='gallery.html'">
                 <div class="feature-icon" style="background: rgba(236,72,153,.1);">&#9650;</div>
                 <h3>Brain Leaderboard</h3>
                 <p>Most connected minds. Fastest growing. Where do you rank among all brains?</p>
@@ -804,30 +804,33 @@
         <h2 class="section-title">History's greatest thinkers, visualized</h2>
         <p class="section-desc">What did their brains look like? Reconstructed from their writings and documented thought.</p>
         <div class="famous-grid">
-            <div class="famous-card">
-                <div class="famous-portrait" style="background: rgba(168,85,247,.1); border-color: var(--brain-trait);">&#x1D41C;</div>
+            <div class="famous-card" onclick="location.href='famous.html?brain=einstein'">
+                <div class="famous-portrait" style="background: rgba(168,85,247,.1); border-color: var(--brain-trait);">E</div>
                 <div class="famous-name">Albert Einstein</div>
                 <div class="famous-type">THE EXPLORER</div>
                 <div class="famous-nodes">3,420 nodes</div>
             </div>
-            <div class="famous-card">
-                <div class="famous-portrait" style="background: rgba(0,212,255,.1); border-color: var(--brain-skill);">&#x1D412;</div>
+            <div class="famous-card" onclick="location.href='famous.html?brain=jobs'">
+                <div class="famous-portrait" style="background: rgba(0,212,255,.1); border-color: var(--brain-skill);">S</div>
                 <div class="famous-name">Steve Jobs</div>
                 <div class="famous-type">THE ARCHITECT</div>
                 <div class="famous-nodes">2,891 nodes</div>
             </div>
-            <div class="famous-card">
-                <div class="famous-portrait" style="background: rgba(16,185,129,.1); border-color: var(--brain-person);">&#x1D40C;</div>
+            <div class="famous-card" onclick="location.href='famous.html?brain=aurelius'">
+                <div class="famous-portrait" style="background: rgba(16,185,129,.1); border-color: var(--brain-person);">M</div>
                 <div class="famous-name">Marcus Aurelius</div>
                 <div class="famous-type">THE SCHOLAR</div>
                 <div class="famous-nodes">847 nodes</div>
             </div>
-            <div class="famous-card">
-                <div class="famous-portrait" style="background: rgba(249,115,22,.1); border-color: var(--brain-project);">&#x1D40B;</div>
+            <div class="famous-card" onclick="location.href='famous.html?brain=davinci'">
+                <div class="famous-portrait" style="background: rgba(249,115,22,.1); border-color: var(--brain-project);">L</div>
                 <div class="famous-name">Leonardo da Vinci</div>
                 <div class="famous-type">THE CREATIVE</div>
                 <div class="famous-nodes">4,102 nodes</div>
             </div>
+        </div>
+        <div style="text-align:center;margin-top:2rem;">
+            <a href="gallery.html" class="btn btn-ghost" style="display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.5rem;border-radius:10px;font-size:.9rem;font-weight:600;color:var(--text-secondary);border:1px solid var(--border);text-decoration:none;transition:all .2s;">Browse All Public Brains &rarr;</a>
         </div>
     </div>
 </section>

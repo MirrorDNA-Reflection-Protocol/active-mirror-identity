@@ -411,6 +411,11 @@
     <a href="/" class="nav-logo">
         <span class="glyph">&#9671;</span> BrainScan
     </a>
+    <div style="display:flex;gap:1rem;align-items:center;">
+        <a href="brain.html" style="color:#999;text-decoration:none;font-size:.85rem;font-weight:500;">Explore</a>
+        <a href="compare.html" style="color:#999;text-decoration:none;font-size:.85rem;font-weight:500;">Compare</a>
+        <a href="gallery.html" style="color:#999;text-decoration:none;font-size:.85rem;font-weight:500;">Gallery</a>
+    </div>
 </nav>
 
 <div class="quiz-container">
@@ -647,11 +652,14 @@
             <button class="btn btn-secondary" onclick="downloadCard()">Download Card</button>
         </div>
 
-        <div style="text-align: center;">
-            <button class="btn btn-primary" onclick="location.reload()">Scan Again</button>
+        <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;">
+            <a href="brain.html" class="btn btn-primary">Explore Full Brain</a>
+            <a href="compare.html" class="btn btn-secondary">Compare With Famous Minds</a>
+            <button class="btn btn-secondary" onclick="location.reload()">Scan Again</button>
         </div>
 
-        <div style="text-align: center;">
+        <div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;">
+            <a href="gallery.html" class="back-link">Browse Gallery</a>
             <a href="/" class="back-link">&larr; Back to BrainScan</a>
         </div>
     </div>

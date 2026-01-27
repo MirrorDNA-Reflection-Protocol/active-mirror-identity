@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainScan Embed</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Inter',-apple-system,sans-serif;background:#030303;color:#fafafa;overflow:hidden;-webkit-font-smoothing:antialiased}
+        .embed{width:100%;height:100vh;display:flex;flex-direction:column;border-radius:12px;overflow:hidden}
+        .embed-graph{flex:1;position:relative;min-height:0}
+        .embed-graph canvas{width:100%;height:100%;display:block}
+        .embed-bar{display:flex;align-items:center;justify-content:space-between;padding:.6rem .8rem;background:#0a0a0a;border-top:1px solid #1a1a1a}
+        .embed-left{display:flex;align-items:center;gap:.5rem}
+        .embed-dot{width:8px;height:8px;border-radius:50%}
+        .embed-name{font-size:.75rem;font-weight:600}
+        .embed-type{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;opacity:.7}
+        .embed-right{display:flex;align-items:center;gap:.8rem}
+        .embed-stat{text-align:right}
+        .embed-stat-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;color:#00ff94}
+        .embed-stat-label{font-size:.55rem;color:#555}
+        .embed-link{font-size:.6rem;color:#555;text-decoration:none;display:flex;align-items:center;gap:.25rem;transition:color .2s}
+        .embed-link:hover{color:#999}
+        .embed-link .g{color:#00ff94;font-size:.75rem}
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="embed">
+    <div class="embed-graph"><canvas id="graph"></canvas></div>
+    <div class="embed-bar">
+        <div class="embed-left">
+            <span class="embed-dot" id="dot"></span>
+            <div>
+                <div class="embed-name" id="name"></div>
+                <div class="embed-type" id="type"></div>
+            </div>
+        </div>
+        <div class="embed-right">
+            <div class="embed-stat">
+                <div class="embed-stat-num" id="nodes"></div>
+                <div class="embed-stat-label">nodes</div>
+            </div>
+            <div class="embed-stat">
+                <div class="embed-stat-num" id="edges"></div>
+                <div class="embed-stat-label">connections</div>
+            </div>
+            <a href="https://id.activemirror.ai" target="_blank" class="embed-link"><span class="g">&#9671;</span> brainscan</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const PRESETS = {
+    paul: {name:'@paul_desai',type:'THE ARCHITECT',color:'#00ff94',nodes:27676,edges:142847,
+        clusters:['#00ff94','#a855f7','#00d4ff','#3b82f6','#ffd700','#ec4899','#f97316','#10b981']},
+    einstein: {name:'Albert Einstein',type:'THE EXPLORER',color:'#a855f7',nodes:3420,edges:12847,
+        clusters:['#a855f7','#00d4ff','#ec4899','#ffd700']},
+    jobs: {name:'Steve Jobs',type:'THE ARCHITECT',color:'#00d4ff',nodes:2891,edges:9847,
+        clusters:['#00d4ff','#f97316','#ffd700','#3b82f6']},
+    aurelius: {name:'Marcus Aurelius',type:'THE SCHOLAR',color:'#10b981',nodes:847,edges:2341,
+        clusters:['#10b981','#3b82f6','#ffd700','#ec4899']},
+    davinci: {name:'Leonardo da Vinci',type:'THE CREATIVE',color:'#f97316',nodes:4102,edges:18920,
+        clusters:['#f97316','#ec4899','#3b82f6','#00d4ff','#10b981']},
+};
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get('brain') || params.get('b') || 'paul';
+const brain = PRESETS[id] || PRESETS.paul;
+
+document.getElementById('dot').style.background = brain.color;
+document.getElementById('name').textContent = brain.name;
+document.getElementById('type').textContent = brain.type;
+document.getElementById('type').style.color = brain.color;
+document.getElementById('nodes').textContent = brain.nodes.toLocaleString();
+document.getElementById('edges').textContent = brain.edges.toLocaleString();
+
+function hexA(hex,a){return `rgba(${parseInt(hex.slice(1,3),16)},${parseInt(hex.slice(3,5),16)},${parseInt(hex.slice(5,7),16)},${a})`;}
+
+(function renderGraph(){
+    const canvas = document.getElementById('graph');
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    function resize(){
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        return {w:rect.width,h:rect.height};
+    }
+    let {w,h} = resize();
+
+    const nodes=[];const edges=[];
+    const colors = brain.clusters;
+    nodes.push({x:w/2,y:h/2,r:6,color:brain.color,glow:true});
+
+    for(let c=0;c<colors.length;c++){
+        const cA=(Math.PI*2*c)/colors.length-Math.PI/2;
+        const cx=w/2+Math.cos(cA)*w*.26;
+        const cy=h/2+Math.sin(cA)*h*.26;
+        const count=6+Math.floor(Math.random()*5);
+        for(let i=0;i<count;i++){
+            const a=(Math.PI*2*i)/count+Math.random()*.5;
+            const d=12+Math.random()*Math.min(w,h)*.1;
+            const lvl=i<2?1:i<4?2:3;
+            const r=lvl===1?4:lvl===2?2.5:1.5;
+            nodes.push({x:cx+Math.cos(a)*d,y:cy+Math.sin(a)*d,r,color:colors[c],glow:lvl===1});
+            const idx=nodes.length-1;
+            if(i<2) edges.push({from:0,to:idx,alpha:.18,color:colors[c]});
+            if(i>0) edges.push({from:idx-1,to:idx,alpha:.1,color:colors[c]});
+        }
+    }
+    for(let i=0;i<10;i++){
+        const a=1+Math.floor(Math.random()*(nodes.length-1));
+        const b=1+Math.floor(Math.random()*(nodes.length-1));
+        if(a!==b)edges.push({from:a,to:b,alpha:.04,color:'#555'});
+    }
+
+    let frame=0;
+    function draw(){
+        frame++;
+        ctx.clearRect(0,0,w,h);
+        const bg=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w*.5);
+        bg.addColorStop(0,hexA(brain.color,.03));bg.addColorStop(1,'transparent');
+        ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+
+        for(const e of edges){
+            const from=nodes[e.from],to=nodes[e.to];
+            if(!from||!to)continue;
+            const p=.7+.3*Math.sin(frame*.012+e.from);
+            ctx.beginPath();ctx.moveTo(from.x,from.y);ctx.lineTo(to.x,to.y);
+            ctx.strokeStyle=hexA(e.color||'#555',e.alpha*p);ctx.lineWidth=.5;ctx.stroke();
+        }
+        for(let i=0;i<nodes.length;i++){
+            const n=nodes[i];const b=1+.06*Math.sin(frame*.02+i*.8);
+            if(n.glow){
+                const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*3.5);
+                g.addColorStop(0,hexA(n.color,.25));g.addColorStop(1,hexA(n.color,0));
+                ctx.fillStyle=g;ctx.beginPath();ctx.arc(n.x,n.y,n.r*3.5,0,Math.PI*2);ctx.fill();
+            }
+            ctx.beginPath();ctx.arc(n.x,n.y,n.r*b,0,Math.PI*2);ctx.fillStyle=n.color;ctx.fill();
+            n.x+=Math.sin(frame*.004+i*1.1)*.1;n.y+=Math.cos(frame*.003+i*1.3)*.07;
+        }
+        requestAnimationFrame(draw);
+    }
+    draw();
+    window.addEventListener('resize',()=>{({w,h}=resize());});
+})();
+</script>
+
+</body>
+</html>
