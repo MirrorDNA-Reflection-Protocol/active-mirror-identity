@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINDPRINT — The Identity Layer for Human Cognition</title>
+    <meta name="description" content="Not a personality quiz. A cognitive identity layer for the internet. Own your mind. Find your people. Build the anti-Facebook.">
+    <meta property="og:title" content="MINDPRINT — How Does Your Mind Work?">
+    <meta property="og:description" content="The identity layer for human cognition. Your mind is the product you OWN, not the product being SOLD.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://id.activemirror.ai">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MINDPRINT — The Anti-Facebook">
+    <meta name="twitter:description" content="Facebook asks who you know. MINDPRINT asks how your mind works.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030303;
+            --surface: #0a0a0a;
+            --surface-2: #111;
+            --border: #1a1a1a;
+            --text: #fafafa;
+            --text-2: #999;
+            --text-3: #555;
+            --mint: #00ff94;
+            --mint-dim: rgba(0,255,148,.08);
+            --mint-glow: rgba(0,255,148,.15);
+            --violet: #a855f7;
+            --cyan: #00d4ff;
+            --blue: #3b82f6;
+            --gold: #ffd700;
+            --rose: #ec4899;
+            --orange: #f97316;
+            --emerald: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: .1s; }
+        .reveal-delay-2 { transition-delay: .2s; }
+        .reveal-delay-3 { transition-delay: .3s; }
+        .reveal-delay-4 { transition-delay: .4s; }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(3,3,3,.6);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255,255,255,.04);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-mark {
+            width: 28px; height: 28px;
+            border: 2px solid var(--mint);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .nav-mark::after {
+            content: '';
+            width: 8px; height: 8px;
+            background: var(--mint);
+            border-radius: 50%;
+            animation: core-pulse 3s infinite;
+        }
+
+        @keyframes core-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(.6); }
+        }
+
+        .nav-wordmark {
+            font-weight: 800;
+            font-size: .95rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-3);
+            text-decoration: none;
+            font-size: .85rem;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-cta {
+            padding: .5rem 1.2rem !important;
+            background: var(--mint) !important;
+            color: #000 !important;
+            border-radius: 8px;
+            font-weight: 700 !important;
+            font-size: .8rem !important;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px var(--mint-glow);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-graph-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+        }
+
+        .hero-graph-bg canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse 60% 60% at 50% 50%, transparent, var(--bg) 75%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--mint);
+            margin-bottom: 2rem;
+            opacity: .8;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 900;
+            letter-spacing: -.04em;
+            line-height: .95;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 .line-2 {
+            display: block;
+            background: linear-gradient(135deg, var(--mint), var(--cyan) 40%, var(--violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.3rem;
+            color: var(--text-2);
+            line-height: 1.7;
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: 1rem 2.5rem;
+            background: var(--mint);
+            color: #000;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all .2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px var(--mint-glow);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            font-size: .7rem;
+            color: var(--text-3);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-scroll .arrow {
+            width: 1px;
+            height: 24px;
+            background: linear-gradient(to bottom, var(--text-3), transparent);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ── THESIS ── */
+        .thesis {
+            padding: 10rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .thesis-question {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-weight: 400;
+            color: var(--text-3);
+            line-height: 1.5;
+        }
+
+        .thesis-question .platform {
+            color: var(--text-2);
+            font-weight: 600;
+        }
+
+        .thesis-question .q {
+            color: var(--text-2);
+            font-style: italic;
+        }
+
+        .thesis-break {
+            width: 40px;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .thesis-payoff {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -.03em;
+            line-height: 1.2;
+        }
+
+        .thesis-payoff .brand {
+            color: var(--mint);
+        }
+
+        .thesis-sub {
+            font-size: 1.1rem;
+            color: var(--text-2);
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        /* ── SECTION COMMON ── */
+        .section {
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .65rem;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--mint);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            font-size: 1.15rem;
+            color: var(--text-2);
+            max-width: 550px;
+            line-height: 1.7;
+            margin-bottom: 4rem;
+            font-weight: 300;
+        }
+
+        /* ── LAYERS ── */
+        .layers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .layer-card {
+            background: var(--surface);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: background .3s;
+        }
+
+        .layer-card:hover {
+            background: var(--surface-2);
+        }
+
+        .layer-viz {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 1.2rem;
+            position: relative;
+        }
+
+        .layer-viz canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .layer-name {
+            font-weight: 700;
+            font-size: .85rem;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+            margin-bottom: .5rem;
+        }
+
+        .layer-desc {
+            font-size: .8rem;
+            color: var(--text-3);
+            line-height: 1.5;
+        }
+
+        /* ── TWIN ── */
+        .twin-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .twin-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-2);
+            border-left: 2px solid var(--mint);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .twin-quote em {
+            color: var(--mint);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .twin-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .twin-feat {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: background .2s;
+        }
+
+        .twin-feat:hover {
+            background: var(--surface);
+        }
+
+        .twin-feat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .9rem;
+            flex-shrink: 0;
+        }
+
+        .twin-feat h4 {
+            font-size: .9rem;
+            font-weight: 700;
+            margin-bottom: .2rem;
+        }
+
+        .twin-feat p {
+            font-size: .8rem;
+            color: var(--text-3);
+            line-height: 1.4;
+        }
+
+        /* Twin Chat */
+        .twin-chat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .twin-chat-header {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+            font-size: .8rem;
+        }
+
+        .twin-chat-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--mint);
+            animation: core-pulse 3s infinite;
+        }
+
+        .twin-chat-label {
+            font-weight: 600;
+            color: var(--text-2);
+        }
+
+        .twin-chat-body {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: .8rem;
+            min-height: 280px;
+        }
+
+        .twin-msg {
+            max-width: 80%;
+            padding: .7rem 1rem;
+            border-radius: 12px;
+            font-size: .8rem;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: msg-in .4s forwards;
+        }
+
+        .twin-msg.left {
+            align-self: flex-start;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text-2);
+        }
+
+        .twin-msg.right {
+            align-self: flex-end;
+            background: rgba(0,255,148,.08);
+            border: 1px solid rgba(0,255,148,.12);
+            color: var(--text);
+        }
+
+        .twin-msg .sender {
+            font-size: .65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            margin-bottom: .3rem;
+            display: block;
+        }
+
+        .twin-msg.left .sender { color: var(--violet); }
+        .twin-msg.right .sender { color: var(--mint); }
+
+        .twin-msg.synthesis {
+            max-width: 90%;
+            align-self: center;
+            background: linear-gradient(135deg, rgba(0,255,148,.05), rgba(168,85,247,.05));
+            border: 1px solid rgba(0,255,148,.1);
+            text-align: center;
+            color: var(--text-2);
+        }
+
+        .twin-msg.synthesis .sender { color: var(--gold); }
+
+        @keyframes msg-in {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── ANTI-FACEBOOK ── */
+        .contrast-grid {
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .contrast-col {
+            padding: 3rem 2.5rem;
+        }
+
+        .contrast-col.old {
+            background: var(--surface);
+        }
+
+        .contrast-col.new {
+            background: var(--bg);
+        }
+
+        .contrast-divider {
+            background: var(--border);
+        }
+
+        .contrast-label {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .contrast-col.old .contrast-label { color: var(--text-3); }
+        .contrast-col.new .contrast-label { color: var(--mint); }
+
+        .contrast-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contrast-item {
+            font-size: .95rem;
+            line-height: 1.5;
+        }
+
+        .contrast-col.old .contrast-item {
+            color: var(--text-3);
+            text-decoration: line-through;
+            text-decoration-color: rgba(255,255,255,.1);
+        }
+
+        .contrast-col.new .contrast-item {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .contrast-col.new .contrast-item .hl {
+            color: var(--mint);
+            font-weight: 700;
+        }
+
+        /* ── SYNC LEVELS ── */
+        .sync-track {
+            display: flex;
+            align-items: stretch;
+            gap: 2px;
+            background: var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .sync-level {
+            flex: 1;
+            padding: 2rem 1.5rem;
+            background: var(--surface);
+            text-align: center;
+            transition: all .3s;
+            cursor: default;
+            position: relative;
+        }
+
+        .sync-level:hover {
+            background: var(--surface-2);
+        }
+
+        .sync-level::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0; right: 0;
+            height: 3px;
+            transition: opacity .3s;
+        }
+
+        .sync-level:nth-child(1)::after { background: var(--text-3); opacity: .3; }
+        .sync-level:nth-child(2)::after { background: var(--cyan); opacity: .5; }
+        .sync-level:nth-child(3)::after { background: var(--violet); opacity: .7; }
+        .sync-level:nth-child(4)::after { background: var(--mint); opacity: 1; }
+
+        .sync-level:hover::after { opacity: 1; }
+
+        .sync-name {
+            font-weight: 800;
+            font-size: .85rem;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            margin-bottom: .4rem;
+        }
+
+        .sync-level:nth-child(1) .sync-name { color: var(--text-3); }
+        .sync-level:nth-child(2) .sync-name { color: var(--cyan); }
+        .sync-level:nth-child(3) .sync-name { color: var(--violet); }
+        .sync-level:nth-child(4) .sync-name { color: var(--mint); }
+
+        .sync-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem;
+            color: var(--text-3);
+            margin-bottom: .6rem;
+        }
+
+        .sync-desc {
+            font-size: .75rem;
+            color: var(--text-3);
+            line-height: 1.4;
+        }
+
+        /* ── PROOF (Paul's Mindprint) ── */
+        .proof {
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .proof-graph {
+            width: 100%;
+            max-width: 700px;
+            aspect-ratio: 1;
+            margin: 0 auto 3rem;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .proof-graph canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .proof-graph-overlay {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: rgba(3,3,3,.8);
+            backdrop-filter: blur(12px);
+            padding: .8rem 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .proof-stat {
+            text-align: center;
+        }
+
+        .proof-stat-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--mint);
+        }
+
+        .proof-stat-label {
+            font-size: .6rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        .proof-name {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .proof-type {
+            font-size: .75rem;
+            color: var(--mint);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        .proof-caption {
+            font-size: 1.1rem;
+            color: var(--text-2);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ── DREAM ── */
+        .dream {
+            padding: 10rem 2rem;
+            text-align: center;
+        }
+
+        .dream-inner {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .dream-line {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 300;
+            color: var(--text-3);
+            line-height: 2;
+            margin-bottom: .5rem;
+        }
+
+        .dream-line strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .dream-line .hl {
+            color: var(--mint);
+            font-weight: 600;
+        }
+
+        .dream-break {
+            width: 40px;
+            height: 1px;
+            background: var(--border);
+            margin: 2.5rem auto;
+        }
+
+        .dream-punchline {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: -.03em;
+            margin-bottom: 1rem;
+        }
+
+        .dream-sub {
+            font-size: 1.15rem;
+            color: var(--text-2);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* ── FINAL CTA ── */
+        .final-cta {
+            padding: 6rem 2rem 10rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse 50% 60% at 50% 80%, var(--mint-dim), transparent);
+            pointer-events: none;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            letter-spacing: -.03em;
+            margin-bottom: .75rem;
+            position: relative;
+        }
+
+        .final-cta p {
+            font-size: 1rem;
+            color: var(--text-3);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .final-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: 1.1rem 3rem;
+            background: var(--mint);
+            color: #000;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: all .2s;
+            position: relative;
+            letter-spacing: .01em;
+        }
+
+        .final-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px var(--mint-glow);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: .8rem;
+            color: var(--text-3);
+        }
+
+        footer a {
+            color: var(--mint);
+            text-decoration: none;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .layers-grid { grid-template-columns: repeat(3, 1fr); }
+            .twin-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .contrast-grid { grid-template-columns: 1fr; }
+            .contrast-divider { display: none; }
+            .contrast-col.new { border-top: 1px solid var(--border); }
+            .sync-track { flex-direction: column; }
+        }
+
+        @media (max-width: 600px) {
+            nav { padding: .75rem 1rem; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .layers-grid { grid-template-columns: 1fr 1fr; }
+            .hero { padding: 5rem 1.5rem 3rem; }
+            .thesis { padding: 6rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+    <a href="mindprint.html" class="nav-brand">
+        <div class="nav-mark"></div>
+        <span class="nav-wordmark">Mindprint</span>
+    </a>
+    <div class="nav-links">
+        <a href="brain.html">Explore</a>
+        <a href="compare.html">Sync</a>
+        <a href="gallery.html">Constellation</a>
+        <a href="famous.html?brain=einstein">Archaeology</a>
+        <a href="scan.html" class="nav-cta">Generate Yours</a>
+    </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+    <div class="hero-graph-bg"><canvas id="hero-graph"></canvas></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-eyebrow">The Identity Layer for Human Cognition</div>
+        <h1>
+            How does your<br>
+            <span class="line-2">mind work?</span>
+        </h1>
+        <p class="hero-sub">
+            Not a personality quiz. Not a social network.<br>
+            A living map of how you think — that you own completely.
+        </p>
+        <a href="scan.html" class="hero-cta">Generate Your Mindprint &rarr;</a>
+    </div>
+    <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="arrow"></div>
+    </div>
+</div>
+
+<!-- ═══ THESIS ═══ -->
+<div class="thesis">
+    <div class="thesis-question reveal">
+        <span class="platform">Facebook</span> asks: <span class="q">"Who do you know?"</span>
+    </div>
+    <div class="thesis-question reveal reveal-delay-1">
+        <span class="platform">LinkedIn</span> asks: <span class="q">"What's your job?"</span>
+    </div>
+    <div class="thesis-question reveal reveal-delay-2">
+        <span class="platform">Twitter</span> asks: <span class="q">"What do you think right now?"</span>
+    </div>
+    <div class="thesis-break reveal reveal-delay-3"></div>
+    <div class="thesis-payoff reveal reveal-delay-3">
+        <span class="brand">MINDPRINT</span> asks:<br>
+        "How does your mind work?"
+    </div>
+    <p class="thesis-sub reveal reveal-delay-4">
+        Your identity isn't who you follow. It's how you connect ideas.
+        We're building the graph that actually matters.
+    </p>
+</div>
+
+<!-- ═══ THE 5 LAYERS ═══ -->
+<div class="section" style="background: var(--surface);">
+    <div class="section-inner">
+        <div class="section-label reveal">Your Cognitive Fingerprint</div>
+        <h2 class="section-title reveal">Not a type.<br>A fingerprint.</h2>
+        <p class="section-desc reveal">Every mind is unique. Not 8 types, not 16 personalities — a continuous spectrum across five cognitive dimensions.</p>
+        <div class="layers-grid reveal">
+            <div class="layer-card">
+                <div class="layer-viz"><canvas id="viz-topology"></canvas></div>
+                <div class="layer-name" style="color:var(--mint)">Topology</div>
+                <div class="layer-desc">How you connect ideas. Your graph structure.</div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-viz"><canvas id="viz-velocity"></canvas></div>
+                <div class="layer-name" style="color:var(--cyan)">Velocity</div>
+                <div class="layer-desc">How fast you process. Your cognitive speed.</div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-viz"><canvas id="viz-depth"></canvas></div>
+                <div class="layer-name" style="color:var(--violet)">Depth</div>
+                <div class="layer-desc">How deep you go. Breadth vs. depth ratio.</div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-viz"><canvas id="viz-entropy"></canvas></div>
+                <div class="layer-name" style="color:var(--gold)">Entropy</div>
+                <div class="layer-desc">How ordered or chaotic. Cluster density.</div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-viz"><canvas id="viz-evolution"></canvas></div>
+                <div class="layer-name" style="color:var(--rose)">Evolution</div>
+                <div class="layer-desc">How you change over time. Growth delta.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ AI TWIN ═══ -->
+<div class="section">
+    <div class="section-inner">
+        <div class="section-label reveal">The AI Twin</div>
+        <h2 class="section-title reveal">Your mind,<br>amplified.</h2>
+        <p class="section-desc reveal">When you generate a Mindprint, you also spawn an AI Twin — a Claude-powered agent that thinks like you, speaks for you, and finds your people while you sleep.</p>
+        <div class="twin-layout">
+            <div class="reveal">
+                <div class="twin-quote">
+                    <em>"My AI Twin talked to your AI Twin while we were asleep. They found 3 ideas we should collaborate on."</em>
+                </div>
+                <div class="twin-features">
+                    <div class="twin-feat">
+                        <div class="twin-feat-icon" style="background:rgba(0,255,148,.08);color:var(--mint);">&#9737;</div>
+                        <div>
+                            <h4>Guardian Mode</h4>
+                            <p>Answers questions on your behalf. You're always available.</p>
+                        </div>
+                    </div>
+                    <div class="twin-feat">
+                        <div class="twin-feat-icon" style="background:rgba(0,212,255,.08);color:var(--cyan);">&#9790;</div>
+                        <div>
+                            <h4>Scout Mode</h4>
+                            <p>Explores the network for compatible minds. Finds your people.</p>
+                        </div>
+                    </div>
+                    <div class="twin-feat">
+                        <div class="twin-feat-icon" style="background:rgba(168,85,247,.08);color:var(--violet);">&#10697;</div>
+                        <div>
+                            <h4>Synthesizer Mode</h4>
+                            <p>Combines your knowledge with others'. Creates new ideas.</p>
+                        </div>
+                    </div>
+                    <div class="twin-feat">
+                        <div class="twin-feat-icon" style="background:rgba(255,215,0,.08);color:var(--gold);">&#9673;</div>
+                        <div>
+                            <h4>Mirror Mode</h4>
+                            <p>Reflects your thinking back to you. The self-knowledge tool.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="twin-chat reveal reveal-delay-2" id="twin-chat">
+                <div class="twin-chat-header">
+                    <div class="twin-chat-dot"></div>
+                    <div class="twin-chat-label">Twin-to-Twin Protocol</div>
+                </div>
+                <div class="twin-chat-body" id="twin-chat-body">
+                    <!-- Messages injected by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ ANTI-FACEBOOK ═══ -->
+<div class="section" style="background: var(--surface);">
+    <div class="section-inner">
+        <div class="section-label reveal">The Anti-Facebook</div>
+        <h2 class="section-title reveal">Identity, reimagined.</h2>
+        <p class="section-desc reveal">Social media turned your identity into a product. We're turning it back into something you own.</p>
+        <div class="contrast-grid reveal">
+            <div class="contrast-col old">
+                <div class="contrast-label">The old way</div>
+                <div class="contrast-items">
+                    <div class="contrast-item">Platform owns your data</div>
+                    <div class="contrast-item">Sells your attention to advertisers</div>
+                    <div class="contrast-item">Connects you to acquaintances</div>
+                    <div class="contrast-item">Optimizes for engagement</div>
+                    <div class="contrast-item">Makes you dumber over time</div>
+                    <div class="contrast-item">Identity = photos and posts</div>
+                    <div class="contrast-item">You are the product</div>
+                </div>
+            </div>
+            <div class="contrast-divider"></div>
+            <div class="contrast-col new">
+                <div class="contrast-label">Mindprint</div>
+                <div class="contrast-items">
+                    <div class="contrast-item"><span class="hl">You</span> own your data. Export anytime.</div>
+                    <div class="contrast-item">Respects your <span class="hl">attention</span>. No ads. Ever.</div>
+                    <div class="contrast-item">Connects you to <span class="hl">minds</span>.</div>
+                    <div class="contrast-item">Optimizes for <span class="hl">growth</span>.</div>
+                    <div class="contrast-item">Makes you <span class="hl">smarter</span> over time.</div>
+                    <div class="contrast-item">Identity = <span class="hl">how you think</span>.</div>
+                    <div class="contrast-item">You are the <span class="hl">owner</span>.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SYNC LEVELS ═══ -->
+<div class="section">
+    <div class="section-inner">
+        <div class="section-label reveal">Cognitive Resonance</div>
+        <h2 class="section-title reveal">You don't follow people.<br>You sync with minds.</h2>
+        <p class="section-desc reveal">Connection depth is measured by cognitive overlap — how similarly your minds process information.</p>
+        <div class="sync-track reveal">
+            <div class="sync-level">
+                <div class="sync-name">Aware</div>
+                <div class="sync-pct">Discovered</div>
+                <div class="sync-desc">You've seen their Mindprint. Public thoughts visible.</div>
+            </div>
+            <div class="sync-level">
+                <div class="sync-name">Resonant</div>
+                <div class="sync-pct">40%+ overlap</div>
+                <div class="sync-desc">Cognitive match detected. Collaboration suggested.</div>
+            </div>
+            <div class="sync-level">
+                <div class="sync-name">Entangled</div>
+                <div class="sync-pct">70%+ mutual</div>
+                <div class="sync-desc">Deep resonance. Twins can communicate.</div>
+            </div>
+            <div class="sync-level">
+                <div class="sync-name">Merged</div>
+                <div class="sync-pct">Temporary</div>
+                <div class="sync-desc">Shared workspace. Combined knowledge graph.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ PROOF: PAUL'S MINDPRINT ═══ -->
+<div class="proof" style="background: var(--surface);">
+    <div class="section-label reveal">Living Proof</div>
+    <h2 class="section-title reveal" style="text-align:center;margin-bottom:1rem;">This is a real Mindprint.</h2>
+    <p class="section-desc reveal" style="text-align:center;margin:0 auto 3rem;max-width:500px;">27,676 nodes. Seven months of sovereign AI work. A living, evolving graph that IS the identity.</p>
+    <div class="proof-graph reveal" onclick="location.href='brain.html'" title="Explore Paul's Mindprint">
+        <canvas id="proof-graph"></canvas>
+        <div class="proof-graph-overlay">
+            <div>
+                <div class="proof-name">@paul_desai</div>
+                <div class="proof-type">The Architect</div>
+            </div>
+            <div class="proof-stat">
+                <div class="proof-stat-num">27,676</div>
+                <div class="proof-stat-label">nodes</div>
+            </div>
+            <div class="proof-stat">
+                <div class="proof-stat-num">142,847</div>
+                <div class="proof-stat-label">connections</div>
+            </div>
+        </div>
+    </div>
+    <p class="proof-caption reveal">Can you grow yours to match? Click to explore.</p>
+</div>
+
+<!-- ═══ MIND ARCHAEOLOGY ═══ -->
+<div class="section">
+    <div class="section-inner">
+        <div class="section-label reveal">Mind Archaeology</div>
+        <h2 class="section-title reveal">History's greatest minds,<br>reconstructed.</h2>
+        <p class="section-desc reveal">Mindprints built from published works, letters, and documented thought. Compare your mind to theirs.</p>
+        <div class="layers-grid reveal" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="layer-card" style="cursor:pointer;" onclick="location.href='famous.html?brain=einstein'">
+                <div style="font-size:2rem;margin-bottom:.8rem;">E</div>
+                <div class="layer-name" style="color:var(--violet);font-size:.8rem;">Einstein</div>
+                <div class="layer-desc">The Explorer. Physics, imagination, thought experiments.</div>
+            </div>
+            <div class="layer-card" style="cursor:pointer;" onclick="location.href='famous.html?brain=jobs'">
+                <div style="font-size:2rem;margin-bottom:.8rem;">S</div>
+                <div class="layer-name" style="color:var(--cyan);font-size:.8rem;">Jobs</div>
+                <div class="layer-desc">The Architect. Design, systems, intersection of art & tech.</div>
+            </div>
+            <div class="layer-card" style="cursor:pointer;" onclick="location.href='famous.html?brain=aurelius'">
+                <div style="font-size:2rem;margin-bottom:.8rem;">M</div>
+                <div class="layer-name" style="color:var(--emerald);font-size:.8rem;">Aurelius</div>
+                <div class="layer-desc">The Scholar. Stoicism, duty, inner discipline.</div>
+            </div>
+            <div class="layer-card" style="cursor:pointer;" onclick="location.href='famous.html?brain=davinci'">
+                <div style="font-size:2rem;margin-bottom:.8rem;">L</div>
+                <div class="layer-name" style="color:var(--orange);font-size:.8rem;">da Vinci</div>
+                <div class="layer-desc">The Creative. Art, engineering, anatomy, boundless curiosity.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ THE DREAM ═══ -->
+<div class="dream">
+    <div class="dream-inner">
+        <div class="dream-line reveal">Imagine a world where you meet people</div>
+        <div class="dream-line reveal reveal-delay-1">based on how your <strong>minds connect</strong>, not how you look.</div>
+        <div class="dream-break reveal reveal-delay-1"></div>
+        <div class="dream-line reveal reveal-delay-1">Where your AI Twin handles the noise</div>
+        <div class="dream-line reveal reveal-delay-2">while you focus on <strong>creation</strong>.</div>
+        <div class="dream-break reveal reveal-delay-2"></div>
+        <div class="dream-line reveal reveal-delay-2">Where your knowledge <strong>earns</strong> while you sleep.</div>
+        <div class="dream-line reveal reveal-delay-3">Where you <strong>own</strong> your digital identity. Completely.</div>
+        <div class="dream-break reveal reveal-delay-3"></div>
+        <div class="dream-line reveal reveal-delay-3">Where social media makes you <span class="hl">smarter</span>, not dumber.</div>
+        <div class="dream-break reveal reveal-delay-4"></div>
+        <div class="dream-punchline reveal reveal-delay-4" style="color:var(--mint);">That's MINDPRINT.</div>
+        <div class="dream-sub reveal reveal-delay-4">Your mind is the product you own, not the product being sold.</div>
+    </div>
+</div>
+
+<!-- ═══ FINAL CTA ═══ -->
+<div class="final-cta">
+    <h2 class="reveal">Generate your <span style="color:var(--mint);">Mindprint</span>.</h2>
+    <p class="reveal reveal-delay-1">Eight questions. One cognitive fingerprint. Yours forever.</p>
+    <a href="scan.html" class="final-btn reveal reveal-delay-2">Generate Your Mindprint &rarr;</a>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+    <p>
+        Built by <a href="https://github.com/MirrorDNA-Reflection-Protocol">Paul Desai</a>
+        &middot; Powered by <a href="identity.html">MirrorDNA</a>
+        &middot; The identity layer for human cognition.
+    </p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════════
+const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ═══════════════════════════════════════════
+// UTILITY
+// ═══════════════════════════════════════════
+function hexA(hex, a) {
+    return `rgba(${parseInt(hex.slice(1,3),16)},${parseInt(hex.slice(3,5),16)},${parseInt(hex.slice(5,7),16)},${a})`;
+}
+
+// ═══════════════════════════════════════════
+// HERO GRAPH (fullscreen background)
+// ═══════════════════════════════════════════
+(function() {
+    const canvas = document.getElementById('hero-graph');
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        return { w: rect.width, h: rect.height };
+    }
+
+    let { w, h } = resize();
+
+    const colors = ['#00ff94','#a855f7','#00d4ff','#3b82f6','#ffd700','#ec4899','#f97316','#10b981'];
+    const nodes = [];
+    const edges = [];
+
+    // Core
+    nodes.push({ x: w/2, y: h/2, vx: 0, vy: 0, r: 6, color: '#00ff94', glow: true, cx: w/2, cy: h/2 });
+
+    // Generate clusters
+    for (let c = 0; c < 8; c++) {
+        const angle = (Math.PI * 2 * c) / 8 - Math.PI / 2;
+        const dist = Math.min(w, h) * 0.28;
+        const cx = w/2 + Math.cos(angle) * dist;
+        const cy = h/2 + Math.sin(angle) * dist;
+        const count = 20 + Math.floor(Math.random() * 15);
+        const clusterStart = nodes.length;
+
+        for (let i = 0; i < count; i++) {
+            const a = Math.random() * Math.PI * 2;
+            const d = Math.random() * Math.min(w, h) * 0.08;
+            const lvl = i < 3 ? 1 : i < 8 ? 2 : 3;
+            const r = lvl === 1 ? 3.5 : lvl === 2 ? 2 : 1.2;
+            nodes.push({ x: cx + Math.cos(a)*d, y: cy + Math.sin(a)*d, vx: 0, vy: 0, r, color: colors[c], glow: lvl === 1, cx, cy });
+
+            const idx = nodes.length - 1;
+            if (i < 2) edges.push({ from: 0, to: idx, alpha: .15, color: colors[c] });
+            if (i > 0 && Math.random() < .6) edges.push({ from: idx-1, to: idx, alpha: .08, color: colors[c] });
+            if (i > 2 && Math.random() < .3) {
+                const j = clusterStart + Math.floor(Math.random() * (idx - clusterStart));
+                edges.push({ from: idx, to: j, alpha: .06, color: colors[c] });
+            }
+        }
+    }
+
+    // Bridge edges
+    for (let i = 0; i < 20; i++) {
+        const a = 1 + Math.floor(Math.random() * (nodes.length - 1));
+        const b = 1 + Math.floor(Math.random() * (nodes.length - 1));
+        if (a !== b) edges.push({ from: a, to: b, alpha: .03, color: '#fff' });
+    }
+
+    let frame = 0;
+
+    function draw() {
+        frame++;
+        ctx.clearRect(0, 0, w, h);
+
+        // Subtle center glow
+        const bg = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w * 0.4);
+        bg.addColorStop(0, hexA('#00ff94', .02));
+        bg.addColorStop(.5, hexA('#a855f7', .008));
+        bg.addColorStop(1, 'transparent');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, w, h);
+
+        // Edges
+        for (const e of edges) {
+            const from = nodes[e.from], to = nodes[e.to];
+            if (!from || !to) continue;
+            const p = .7 + .3 * Math.sin(frame * .008 + e.from);
+            ctx.beginPath();
+            ctx.moveTo(from.x, from.y);
+            ctx.lineTo(to.x, to.y);
+            ctx.strokeStyle = hexA(e.color, e.alpha * p);
+            ctx.lineWidth = .4;
+            ctx.stroke();
+        }
+
+        // Nodes
+        for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+            const breathe = 1 + .08 * Math.sin(frame * .015 + i * .6);
+
+            if (n.glow) {
+                const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+                g.addColorStop(0, hexA(n.color, .2));
+                g.addColorStop(1, hexA(n.color, 0));
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r * breathe, 0, Math.PI * 2);
+            ctx.fillStyle = hexA(n.color, i === 0 ? 1 : .6);
+            ctx.fill();
+
+            // Gentle drift
+            if (i > 0) {
+                n.x += Math.sin(frame * .003 + i * .7) * .08;
+                n.y += Math.cos(frame * .002 + i * .9) * .06;
+                // Pull toward cluster center
+                n.x += (n.cx - n.x) * .001;
+                n.y += (n.cy - n.y) * .001;
+            }
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+    window.addEventListener('resize', () => {
+        const old = { w, h };
+        ({ w, h } = resize());
+        const sx = w / old.w, sy = h / old.h;
+        for (const n of nodes) { n.x *= sx; n.y *= sy; n.cx *= sx; n.cy *= sy; }
+    });
+})();
+
+// ═══════════════════════════════════════════
+// PROOF GRAPH (Paul's brain)
+// ═══════════════════════════════════════════
+(function() {
+    const canvas = document.getElementById('proof-graph');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        return { w: rect.width, h: rect.height };
+    }
+
+    let { w, h } = resize();
+    let started = false;
+
+    const colors = ['#00ff94','#a855f7','#00d4ff','#3b82f6','#ffd700','#ec4899','#f97316','#10b981'];
+    const clusterData = [
+        { label: 'AI/Systems', color: '#00ff94', cx: 0, cy: -.15, count: 55 },
+        { label: 'Identity', color: '#a855f7', cx: -.22, cy: -.08, count: 40 },
+        { label: 'Protocol', color: '#00d4ff', cx: .22, cy: -.1, count: 35 },
+        { label: 'Infra', color: '#3b82f6', cx: .15, cy: .18, count: 30 },
+        { label: 'Knowledge', color: '#ffd700', cx: -.18, cy: .15, count: 30 },
+        { label: 'Philosophy', color: '#ec4899', cx: -.08, cy: .25, count: 25 },
+        { label: 'Strategy', color: '#f97316', cx: .25, cy: .08, count: 20 },
+        { label: 'Creative', color: '#10b981', cx: .08, cy: .28, count: 18 },
+    ];
+
+    const nodes = [];
+    const edges = [];
+
+    nodes.push({ x: w/2, y: h/2, r: 7, color: '#00ff94', glow: true, cx: w/2, cy: h/2 });
+
+    for (const cl of clusterData) {
+        const cx = w/2 + cl.cx * w;
+        const cy = h/2 + cl.cy * h;
+        const start = nodes.length;
+
+        for (let i = 0; i < cl.count; i++) {
+            const a = Math.random() * Math.PI * 2;
+            const d = Math.random() * Math.min(w, h) * .09;
+            const lvl = i < 4 ? 1 : i < 12 ? 2 : 3;
+            const r = lvl === 1 ? 4.5 : lvl === 2 ? 3 : 1.8;
+            nodes.push({ x: cx + Math.cos(a)*d, y: cy + Math.sin(a)*d, r, color: cl.color, glow: lvl === 1, cx, cy });
+
+            const idx = nodes.length - 1;
+            if (i < 2) edges.push({ from: 0, to: idx, alpha: .2, color: cl.color });
+            if (i > 0) edges.push({ from: idx-1, to: idx, alpha: .1, color: cl.color });
+            if (i > 3 && Math.random() < .4) {
+                edges.push({ from: start + Math.floor(Math.random() * (idx - start)), to: idx, alpha: .06, color: cl.color });
+            }
+        }
+    }
+
+    for (let i = 0; i < 30; i++) {
+        const a = 1 + Math.floor(Math.random() * (nodes.length - 1));
+        const b = 1 + Math.floor(Math.random() * (nodes.length - 1));
+        if (a !== b) edges.push({ from: a, to: b, alpha: .04, color: '#555' });
+    }
+
+    let frame = 0;
+
+    function draw() {
+        frame++;
+        ctx.clearRect(0, 0, w, h);
+
+        const bg = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w * .45);
+        bg.addColorStop(0, hexA('#00ff94', .03));
+        bg.addColorStop(.5, hexA('#a855f7', .012));
+        bg.addColorStop(1, 'transparent');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, w, h);
+
+        for (const e of edges) {
+            const from = nodes[e.from], to = nodes[e.to];
+            if (!from || !to) continue;
+            const p = .7 + .3 * Math.sin(frame * .01 + e.from);
+            ctx.beginPath();
+            ctx.moveTo(from.x, from.y);
+            ctx.lineTo(to.x, to.y);
+            ctx.strokeStyle = hexA(e.color, e.alpha * p);
+            ctx.lineWidth = .5;
+            ctx.stroke();
+        }
+
+        for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+            const b = 1 + .08 * Math.sin(frame * .018 + i * .5);
+
+            if (n.glow) {
+                const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 3.5);
+                g.addColorStop(0, hexA(n.color, .25));
+                g.addColorStop(1, hexA(n.color, 0));
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r * 3.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r * b, 0, Math.PI * 2);
+            ctx.fillStyle = n.color;
+            ctx.fill();
+
+            if (i > 0) {
+                n.x += Math.sin(frame * .003 + i * .8) * .07;
+                n.y += Math.cos(frame * .002 + i * 1.1) * .05;
+                n.x += (n.cx - n.x) * .0008;
+                n.y += (n.cy - n.y) * .0008;
+            }
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    // Start when visible
+    const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !started) {
+            started = true;
+            draw();
+            obs.disconnect();
+        }
+    }, { threshold: 0.1 });
+    obs.observe(canvas);
+
+    window.addEventListener('resize', () => {
+        const old = { w, h };
+        ({ w, h } = resize());
+        const sx = w / old.w, sy = h / old.h;
+        for (const n of nodes) { n.x *= sx; n.y *= sy; n.cx *= sx; n.cy *= sy; }
+    });
+})();
+
+// ═══════════════════════════════════════════
+// LAYER VISUALIZATIONS (5 small canvases)
+// ═══════════════════════════════════════════
+(function() {
+    const vizConfigs = [
+        { id: 'viz-topology', color: '#00ff94', draw: drawTopology },
+        { id: 'viz-velocity', color: '#00d4ff', draw: drawVelocity },
+        { id: 'viz-depth', color: '#a855f7', draw: drawDepth },
+        { id: 'viz-entropy', color: '#ffd700', draw: drawEntropy },
+        { id: 'viz-evolution', color: '#ec4899', draw: drawEvolution },
+    ];
+
+    let started = false;
+    let frame = 0;
+
+    function initAll() {
+        const canvases = vizConfigs.map(vc => {
+            const c = document.getElementById(vc.id);
+            if (!c) return null;
+            const dpr = window.devicePixelRatio || 1;
+            c.width = 56 * dpr;
+            c.height = 56 * dpr;
+            const ctx = c.getContext('2d');
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            return { ctx, draw: vc.draw, color: vc.color };
+        }).filter(Boolean);
+
+        function animate() {
+            frame++;
+            for (const cv of canvases) {
+                cv.ctx.clearRect(0, 0, 56, 56);
+                cv.draw(cv.ctx, 56, 56, frame, cv.color);
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+
+    function drawTopology(ctx, w, h, f, col) {
+        const pts = [];
+        for (let i = 0; i < 7; i++) {
+            const a = (Math.PI * 2 * i) / 7 + f * .008;
+            const r = 14 + 4 * Math.sin(f * .02 + i);
+            pts.push({ x: w/2 + Math.cos(a)*r, y: h/2 + Math.sin(a)*r });
+        }
+        for (let i = 0; i < pts.length; i++) {
+            for (let j = i+1; j < pts.length; j++) {
+                ctx.beginPath();
+                ctx.moveTo(pts[i].x, pts[i].y);
+                ctx.lineTo(pts[j].x, pts[j].y);
+                ctx.strokeStyle = hexA(col, .15);
+                ctx.lineWidth = .5;
+                ctx.stroke();
+            }
+        }
+        for (const p of pts) {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+            ctx.fillStyle = col;
+            ctx.fill();
+        }
+    }
+
+    function drawVelocity(ctx, w, h, f, col) {
+        for (let i = 0; i < 5; i++) {
+            const y = h/2 + (i - 2) * 7;
+            const len = 10 + 8 * Math.abs(Math.sin(f * .03 + i * .8));
+            const x = w/2 - len/2 + Math.sin(f * .015 + i) * 3;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + len, y);
+            ctx.strokeStyle = hexA(col, .3 + .3 * Math.sin(f * .04 + i));
+            ctx.lineWidth = 1.5;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+        }
+    }
+
+    function drawDepth(ctx, w, h, f, col) {
+        for (let i = 3; i > 0; i--) {
+            const r = 6 + i * 6 + Math.sin(f * .02 + i) * 2;
+            ctx.beginPath();
+            ctx.arc(w/2, h/2, r, 0, Math.PI * 2);
+            ctx.strokeStyle = hexA(col, .12 + (3-i) * .08);
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(w/2, h/2, 3, 0, Math.PI*2);
+        ctx.fillStyle = col;
+        ctx.fill();
+    }
+
+    function drawEntropy(ctx, w, h, f, col) {
+        const seed = 42;
+        for (let i = 0; i < 15; i++) {
+            const a = (seed * (i + 1) * 137.508) % 360 * Math.PI / 180;
+            const r = 5 + (i * 1.3);
+            const jitter = Math.sin(f * .025 + i * 2) * 2;
+            const x = w/2 + Math.cos(a) * (r + jitter);
+            const y = h/2 + Math.sin(a) * (r + jitter);
+            ctx.beginPath();
+            ctx.arc(x, y, 1 + Math.random() * .5, 0, Math.PI*2);
+            ctx.fillStyle = hexA(col, .3 + .2 * Math.sin(f * .03 + i));
+            ctx.fill();
+        }
+    }
+
+    function drawEvolution(ctx, w, h, f, col) {
+        ctx.beginPath();
+        for (let x = 8; x < w - 8; x++) {
+            const t = (x - 8) / (w - 16);
+            const y = h/2 - 8 * Math.sin(t * Math.PI * 2 + f * .02) * t;
+            if (x === 8) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = hexA(col, .5);
+        ctx.lineWidth = 1.5;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        // Arrow tip
+        const tipX = w - 10;
+        const tipY = h/2 - 8 * Math.sin(Math.PI * 2 + f * .02);
+        ctx.beginPath();
+        ctx.arc(tipX, tipY, 2.5, 0, Math.PI*2);
+        ctx.fillStyle = col;
+        ctx.fill();
+    }
+
+    // Start when visible
+    const target = document.getElementById('viz-topology');
+    if (target) {
+        const obs = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !started) {
+                started = true;
+                initAll();
+                obs.disconnect();
+            }
+        }, { threshold: 0.1 });
+        obs.observe(target.closest('.section'));
+    }
+})();
+
+// ═══════════════════════════════════════════
+// TWIN CHAT ANIMATION
+// ═══════════════════════════════════════════
+(function() {
+    const body = document.getElementById('twin-chat-body');
+    if (!body) return;
+
+    const messages = [
+        { side: 'left', sender: "@paul's twin", text: "I've been exploring AI governance frameworks. There's a gap between technical safety and philosophical alignment." },
+        { side: 'right', sender: "@sarah's twin", text: "Interesting — I've been working on decision-theory models that bridge exactly that gap." },
+        { side: 'left', sender: "@paul's twin", text: "Your work on bounded rationality maps directly onto my sovereignty protocol. What if we combined them?" },
+        { side: 'synthesis', sender: "synthesis detected", text: "73% cognitive resonance. 3 collaboration opportunities identified. Complementary expertise in governance + decision theory." },
+    ];
+
+    let shown = false;
+
+    function showMessages() {
+        if (shown) return;
+        shown = true;
+        messages.forEach((msg, i) => {
+            setTimeout(() => {
+                const div = document.createElement('div');
+                div.className = `twin-msg ${msg.side}`;
+                div.style.animationDelay = '0s';
+                div.innerHTML = `<span class="sender">${msg.sender}</span>${msg.text}`;
+                body.appendChild(div);
+            }, i * 900);
+        });
+    }
+
+    const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { showMessages(); obs.disconnect(); }
+    }, { threshold: 0.3 });
+    obs.observe(body.closest('.twin-chat'));
+})();
+</script>
+
+</body>
+</html>
