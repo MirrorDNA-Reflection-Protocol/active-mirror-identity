@@ -278,6 +278,9 @@
         }
         .back-link:hover { color: var(--text-secondary); }
 
+        .brain-estimate{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:.6rem .8rem;margin:.75rem 1rem 0;display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:#f59e0b;line-height:1.4}
+        .brain-estimate-icon{font-size:.95rem;flex-shrink:0}
+
         /* ═══ RESPONSIVE ═══ */
         @media (max-width: 900px) {
             .compare-grid { grid-template-columns: 1fr; }
@@ -850,6 +853,16 @@ function loadComparison() {
     document.getElementById('name-right').textContent = opponent.name;
     document.getElementById('type-right').textContent = opponent.archetype;
     document.getElementById('type-right').style.color = opponent.color;
+
+    // Estimate banner for non-Paul brains
+    let existingBanner = document.getElementById('estimate-banner');
+    if (existingBanner) existingBanner.remove();
+    const headerRight = document.getElementById('header-right');
+    const banner = document.createElement('div');
+    banner.id = 'estimate-banner';
+    banner.className = 'brain-estimate';
+    banner.innerHTML = '<span class="brain-estimate-icon">&#9888;</span> Reconstructed estimate &mdash; not a verified cognitive profile';
+    headerRight.parentElement.insertBefore(banner, headerRight.nextSibling);
 
     // Stat bars
     renderStatBars('stats-left', PAUL.stats, PAUL.color);

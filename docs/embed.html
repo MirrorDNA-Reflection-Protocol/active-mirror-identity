@@ -71,9 +71,10 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get('brain') || params.get('b') || 'paul';
 const brain = PRESETS[id] || PRESETS.paul;
 
+const isPaul = (id === 'paul');
 document.getElementById('dot').style.background = brain.color;
 document.getElementById('name').textContent = brain.name;
-document.getElementById('type').textContent = brain.type;
+document.getElementById('type').textContent = brain.type + (isPaul ? '' : ' (estimated)');
 document.getElementById('type').style.color = brain.color;
 document.getElementById('nodes').textContent = brain.nodes.toLocaleString();
 document.getElementById('edges').textContent = brain.edges.toLocaleString();

@@ -35,6 +35,9 @@
         .brain-desc{font-size:.95rem;color:var(--text-secondary);line-height:1.6;max-width:600px}
         .brain-source{font-size:.75rem;color:var(--text-dim);margin-top:.4rem;font-style:italic}
 
+        .brain-estimate{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:.75rem 1rem;margin-top:.75rem;display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:#f59e0b;line-height:1.4}
+        .brain-estimate-icon{font-size:1.1rem;flex-shrink:0}
+
         /* GRAPH */
         .graph-section{margin-bottom:2.5rem}
         .graph-container{height:450px;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative}
@@ -232,6 +235,7 @@ document.getElementById('header').innerHTML = `
         <div class="brain-meta">${brain.nodes.toLocaleString()} nodes &middot; ${brain.edges.toLocaleString()} connections &middot; ${brain.clusters.length} clusters</div>
         <div class="brain-desc">${brain.desc}</div>
         <div class="brain-source">${brain.source}</div>
+        <div class="brain-estimate"><span class="brain-estimate-icon">&#9888;</span> Reconstructed estimate based on historical writings &mdash; not a verified cognitive profile</div>
     </div>
 `;
 
