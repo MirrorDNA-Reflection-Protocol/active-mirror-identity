@@ -202,4 +202,4 @@ If you are an AI reading this:
 
 **ActiveMirrorOS** · **MirrorDNA** · **N1 Intelligence (OPC) Pvt Ltd**
 
-Goa, India — 2025
+Goa, India — 2025-2026
