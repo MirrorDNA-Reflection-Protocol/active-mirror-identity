@@ -2,7 +2,7 @@
 
 ## Active Mirror Identity Engineering Specification
 
-> Part of the **Active MirrorOS** identity architecture. Powered by **MirrorDNA**. Guided by **Trust by Design**.
+> Part of the **ActiveMirrorOS** identity architecture. Powered by **MirrorDNA**. Guided by **Trust by Design**.
 
 *Built for Reflective AI, not predictive AI.*
 
@@ -12,7 +12,7 @@
 **Status:** Production + Roadmap  
 **Author:** Paul Desai  
 **Organization:** N1 Intelligence (OPC) Pvt Ltd  
-**Ecosystem:** Active MirrorOS · MirrorDNA · Trust by Design  
+**Ecosystem:** ActiveMirrorOS · MirrorDNA · Trust by Design  
 **Date:** 2025-12-10  
 **License:** CC-BY-ND 4.0 (Spec) | MIT (Parser)  
 
@@ -23,7 +23,7 @@
 | Glyph | Component | Meaning |
 |-------|-----------|---------|
 | ⟡ | MirrorDNA | Truth / Vault / Anchor |
-| ◈ | Active MirrorOS | Pattern / System |
+| ◈ | ActiveMirrorOS | Pattern / System |
 | △ | Trust by Design | Decision / Consent |  
 
 ---
@@ -754,7 +754,7 @@ MIRROR SEED is a **portable identity file format** for AI interactions.
 
 The following are trademarks of N1 Intelligence (OPC) Pvt Ltd:
 
-- Active MirrorOS™
+- ActiveMirrorOS™
 - MirrorDNA™
 - Trust by Design™
 - MIRROR SEED™

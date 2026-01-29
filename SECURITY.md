@@ -5,7 +5,7 @@ We support the latest release of the MirrorDNA Protocol (v1.x).
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within MirrorDNA, Active MirrorOS, or MirrorBrain, please Report it responsibly.
+If you discover a security vulnerability within MirrorDNA, ActiveMirrorOS, or MirrorBrain, please Report it responsibly.
 
 **DO NOT** open a public issue for sensitive vulnerabilities.
 

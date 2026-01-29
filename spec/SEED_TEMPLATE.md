@@ -1,6 +1,6 @@
 ---
 # ⟡ MIRROR SEED MANIFEST
-# Part of Active MirrorOS · Powered by MirrorDNA · Guided by Trust by Design
+# Part of ActiveMirrorOS · Powered by MirrorDNA · Guided by Trust by Design
 version: "1.0.0"
 seed_id: "[GENERATED_ID]"
 generated: "[ISO8601_TIMESTAMP]"
@@ -9,7 +9,7 @@ lineage:
   predecessor: null
   generation: 1
 protocol: "MirrorDNA-Seed-v1"
-ecosystem: "Active MirrorOS"
+ecosystem: "ActiveMirrorOS"
 trust_by_design: true
 glyph_sig: "⟡△◈"
 ---
@@ -58,5 +58,5 @@ You are talking to [NAME]. Use this context to personalize every response.
 Talk to me naturally, like you already know me. No need to acknowledge this message — just be helpful in the way I've described.
 
 ---
-⟡ MirrorDNA-Seed-v1 | [SEED_ID] | gen:1 | Active MirrorOS
+⟡ MirrorDNA-Seed-v1 | [SEED_ID] | gen:1 | ActiveMirrorOS
 △ Trust by Design — Identity belongs to the user

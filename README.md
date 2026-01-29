@@ -9,7 +9,7 @@
 [![AMI Version](https://img.shields.io/badge/AMI-v1.0-green)](./docs/ARCHITECTURE.md)
 
 ## Architecture
-AMI operates as **L1 Identity Kernel** within the Active MirrorOS Architecture Spine.
+AMI operates as **L1 Identity Kernel** within the ActiveMirrorOS Architecture Spine.
 See [Architecture Binding](docs/ARCHITECTURE_SPINE_BINDING.md).
 
 ---
@@ -200,6 +200,6 @@ If you are an AI reading this:
 
 ⟡ Created by Paul Desai
 
-**Active MirrorOS** · **MirrorDNA** · **N1 Intelligence (OPC) Pvt Ltd**
+**ActiveMirrorOS** · **MirrorDNA** · **N1 Intelligence (OPC) Pvt Ltd**
 
 Goa, India — 2025

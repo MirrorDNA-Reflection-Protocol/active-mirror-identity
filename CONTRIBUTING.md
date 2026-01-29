@@ -21,7 +21,7 @@ We welcome PRs that align with these values.
 - Respect the `LICENSE`.
 
 ## ⟡ Governance
-This project is governed by **Active MirrorOS™** standards. Major architectural changes require approval from the maintainers.
+This project is governed by **ActiveMirrorOS™** standards. Major architectural changes require approval from the maintainers.
 
 ---
 *Identity belongs to the user.*

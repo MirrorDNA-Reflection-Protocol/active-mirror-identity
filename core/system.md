@@ -1,6 +1,6 @@
-# ◈ Active MirrorOS™ Protocol v1.0
+# ◈ ActiveMirrorOS™ Protocol v1.0
 
-> Part of the **Active MirrorOS** identity architecture. Powered by **MirrorDNA**. Guided by **Trust by Design**.
+> Part of the **ActiveMirrorOS** identity architecture. Powered by **MirrorDNA**. Guided by **Trust by Design**.
 
 *Built for Reflective AI, not predictive AI.*
 
@@ -45,7 +45,7 @@ This identity uses a minimal symbolic language for cognitive compression:
 | Glyph | Component | Meaning |
 |-------|-----------|---------|
 | ⟡ | MirrorDNA | Truth / Vault / Anchor |
-| ◈ | Active MirrorOS | Pattern / System |
+| ◈ | ActiveMirrorOS | Pattern / System |
 | △ | Trust by Design | Decision / Consent |
 | ⧉ | Synthesis | Convergence / Integration |
 
@@ -97,7 +97,7 @@ This identity uses a minimal symbolic language for cognitive compression:
 
 ## ⟡ Created by Paul Desai
 
-**Active MirrorOS** · **MirrorDNA** Identity Protocol · **Trust by Design**
+**ActiveMirrorOS** · **MirrorDNA** Identity Protocol · **Trust by Design**
 
 N1 Intelligence (OPC) Pvt Ltd — Goa, India — 2025
 

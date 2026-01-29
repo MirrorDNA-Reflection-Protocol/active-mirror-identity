@@ -1,7 +1,7 @@
 # AMI Kernel — Architecture Spine Binding v1.0
 
 ## 1. Overview
-**Active Mirror Identity (AMI)** is the **L1 Identity Kernel** of the Active MirrorOS ecosystem.
+**Active Mirror Identity (AMI)** is the **L1 Identity Kernel** of the ActiveMirrorOS ecosystem.
 It adheres to the **Architecture Spine v1.0** as the structural authority for all cross-agent operations.
 
 ## 2. Spine Definition

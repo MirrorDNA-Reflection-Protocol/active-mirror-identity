@@ -18,7 +18,7 @@ integrity:
 Name: Paul Desai
 Handle: ~active-mirror-paul
 Location: Goa, India
-Role: Founder, Active MirrorOS
+Role: Founder, ActiveMirrorOS
 Bio: Creator of MirrorDNA. Building the Sovereign Web.
 Dog: Chimanlal
 

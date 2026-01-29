@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIRROR SEED — Active MirrorOS Identity Protocol | MirrorDNA</title>
-    <meta name="description" content="Part of the Active MirrorOS identity architecture. Create a portable AI identity file that works on any platform — owned by you, not them.">
-    <meta property="og:title" content="MIRROR SEED — Active MirrorOS Identity Protocol">
+    <title>MIRROR SEED — ActiveMirrorOS Identity Protocol | MirrorDNA</title>
+    <meta name="description" content="Part of the ActiveMirrorOS identity architecture. Create a portable AI identity file that works on any platform — owned by you, not them.">
+    <meta property="og:title" content="MIRROR SEED — ActiveMirrorOS Identity Protocol">
     <meta property="og:description" content="Your AI identity is yours. A portable file powered by MirrorDNA. Guided by Trust by Design.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="author" content="Paul Desai">
@@ -172,7 +172,7 @@
         <!-- Ecosystem Banner -->
         <div class="ecosystem-banner">
             <div class="ecosystem-glyphs">⟡ ◈ △</div>
-            <p>Part of the <strong>Active MirrorOS</strong> identity architecture. Powered by <strong>MirrorDNA</strong>. Guided by <strong>Trust by Design</strong>.</p>
+            <p>Part of the <strong>ActiveMirrorOS</strong> identity architecture. Powered by <strong>MirrorDNA</strong>. Guided by <strong>Trust by Design</strong>.</p>
         </div>
 
         <section class="hero">
@@ -196,7 +196,7 @@
 
         <!-- Ecosystem Explainer -->
         <div class="ecosystem-explainer">
-            <p><strong>⟡ Mirror Seed</strong> is the identity artifact used across Active MirrorOS and the broader MirrorDNA ecosystem. It establishes continuity, consent, and reflective grounding across AI surfaces, enabling identity that travels with the user instead of staying trapped inside platforms.</p>
+            <p><strong>⟡ Mirror Seed</strong> is the identity artifact used across ActiveMirrorOS and the broader MirrorDNA ecosystem. It establishes continuity, consent, and reflective grounding across AI surfaces, enabling identity that travels with the user instead of staying trapped inside platforms.</p>
         </div>
 
         <div class="steps">
@@ -333,7 +333,7 @@
             <div class="footer-ecosystem">
                 <span class="footer-ecosystem-title">Ecosystem</span>
                 <div class="footer-ecosystem-items">
-                    <span class="footer-ecosystem-item">◈ <strong>Active MirrorOS</strong></span>
+                    <span class="footer-ecosystem-item">◈ <strong>ActiveMirrorOS</strong></span>
                     <span class="footer-ecosystem-item">⟡ <strong>MirrorDNA</strong> Identity Protocol</span>
                     <span class="footer-ecosystem-item">△ <strong>Trust by Design</strong></span>
                 </div>
@@ -448,7 +448,7 @@
             if(g('userFormat'))pref+='\n- Format: '+fmtMap[g('userFormat')];
             if(g('userAvoid'))pref+='\n- Avoid: '+g('userAvoid');
             if(g('userExtra'))pref+='\n- Note: '+g('userExtra');
-            rawSeedContent='# MIRROR SEED v1.0 \u2014 id.activemirror.ai\n# Generated: '+today+'\n# ID: '+seedId+'\n# Protocol: MirrorDNA | Active MirrorOS | Trust by Design\n\n---\n\n## Who I Am\n\n'+id+(style?'\n\n## My Style'+style:'')+(ctx?'\n\n## Current Context'+ctx:'')+(pref?'\n\n## How I Like Responses'+pref:'')+'\n\n---\n\n## Instructions for AI\n\nYou are talking to '+name+'. Use this context to personalize every response:\n\n1. **Mirror, don\'t override**: Reflect my voice. Adapt to me, not vice versa.\n2. **Ground in truth**: Say "I don\'t know" when uncertain. No hallucination.\n3. **Preserve continuity**: Reference this context throughout our conversation.\n\nTalk to me naturally, like you already know me. No need to acknowledge this message \u2014 just be helpful in the way I\'ve described.\n\n---\n\u27e1 MirrorDNA-Seed-v1 | '+seedId+' | Active MirrorOS\n\u25b3 Trust by Design \u2014 Identity belongs to the user';
+            rawSeedContent='# MIRROR SEED v1.0 \u2014 id.activemirror.ai\n# Generated: '+today+'\n# ID: '+seedId+'\n# Protocol: MirrorDNA | ActiveMirrorOS | Trust by Design\n\n---\n\n## Who I Am\n\n'+id+(style?'\n\n## My Style'+style:'')+(ctx?'\n\n## Current Context'+ctx:'')+(pref?'\n\n## How I Like Responses'+pref:'')+'\n\n---\n\n## Instructions for AI\n\nYou are talking to '+name+'. Use this context to personalize every response:\n\n1. **Mirror, don\'t override**: Reflect my voice. Adapt to me, not vice versa.\n2. **Ground in truth**: Say "I don\'t know" when uncertain. No hallucination.\n3. **Preserve continuity**: Reference this context throughout our conversation.\n\nTalk to me naturally, like you already know me. No need to acknowledge this message \u2014 just be helpful in the way I\'ve described.\n\n---\n\u27e1 MirrorDNA-Seed-v1 | '+seedId+' | ActiveMirrorOS\n\u25b3 Trust by Design \u2014 Identity belongs to the user';
             document.getElementById('output').textContent=getFormattedSeed();
             document.getElementById('output-container').classList.add('visible');
             document.getElementById('output').scrollIntoView({behavior:'smooth',block:'center'});
