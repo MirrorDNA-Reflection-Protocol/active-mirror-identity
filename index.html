@@ -841,8 +841,8 @@
 
         <div class="counter-container">
             <div class="counter-item">
-                <div class="counter-num" id="seed-counter">0</div>
-                <div class="counter-label">Seeds Generated</div>
+                <div class="counter-num">⟡</div>
+                <div class="counter-label">Portable Identity</div>
             </div>
             <div class="counter-item">
                 <div class="counter-num">∞</div>
@@ -1245,9 +1245,9 @@
         function download() { const text = document.getElementById('output').textContent; const name = document.getElementById('userName').value.trim() || 'user'; const blob = new Blob([text], { type: 'text/markdown' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'mirror-seed-' + name.toLowerCase().replace(/\s+/g, '-') + '.md'; a.click(); showCompletionScreen(); }
         function showCompletionScreen() { document.getElementById('completion-screen').style.display = 'block'; document.getElementById('completion-screen').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
         function showUsageGuide() { document.getElementById('usage-guide').style.display = 'block'; document.getElementById('usage-guide').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-        function incrementCounter() { const counter = document.getElementById('seed-counter'); let current = parseInt(counter.textContent.replace(/,/g, '')); current += 1; counter.textContent = current.toLocaleString(); localStorage.setItem('seedCount', current) }
-        function initCounter() { let count = localStorage.getItem('seedCount'); if (!count) { count = 0; localStorage.setItem('seedCount', count) } document.getElementById('seed-counter').textContent = parseInt(count).toLocaleString() }
-        initCounter();
+        // Counter removed — was localStorage-based (misleading per-browser metric)
+        // For future: implement global counter via Cloudflare KV or similar
+        function incrementCounter() { /* no-op */ }
     </script>
 </body>
 
