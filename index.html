@@ -1,1254 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⟡ MIRROR SEED — ActiveMirrorOS Identity Protocol | MirrorDNA</title>
-    <meta name="description"
-        content="Part of the ActiveMirrorOS identity architecture. Create a portable AI identity file that works on any platform — owned by you, not them.">
-    <meta property="og:title" content="MIRROR SEED — ActiveMirrorOS Identity Protocol">
-    <meta property="og:description"
-        content="Your AI identity is yours. A portable file powered by MirrorDNA. Guided by Trust by Design.">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="author" content="Paul Desai">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --bg: #050505;
-            --bg-card: #0d0d0d;
-            --bg-input: #141414;
-            --border: #1f1f1f;
-            --border-hover: #2a2a2a;
-            --text: #fafafa;
-            --text-secondary: #888;
-            --text-dim: #555;
-            --accent: #00ff94;
-            --accent-glow: rgba(0, 255, 148, .15);
-            --accent-subtle: rgba(0, 255, 148, .08);
-            --gradient: linear-gradient(135deg, #00ff94 0%, #00d4ff 50%, #a855f7 100%);
-            --warning: #ff6b6b
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased
-        }
-
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100vh;
-            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 255, 148, .12), transparent), radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, .08), transparent);
-            pointer-events: none;
-            z-index: -1
-        }
-
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem
-        }
-
-        /* Protocol Header (New Ecosystem Banner) */
-        .protocol-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.5rem;
-            padding: .6rem 1.25rem;
-            margin: 0 auto 2rem;
-            background: rgba(20, 20, 20, .6);
-            border: 1px solid rgba(255, 215, 0, .15);
-            border-radius: 100px;
-            backdrop-filter: blur(10px);
-            width: fit-content;
-            max-width: 100%
-        }
-
-        .protocol-glyphs {
-            color: var(--accent);
-            font-size: 1rem;
-            letter-spacing: .2em;
-            display: flex;
-            align-items: center
-        }
-
-        .protocol-text {
-            font-size: .8rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            white-space: nowrap
-        }
-
-        .protocol-text strong {
-            color: var(--text);
-            font-weight: 500
-        }
-
-        .protocol-sep {
-            width: 1px;
-            height: 12px;
-            background: rgba(255, 255, 255, .1)
-        }
-
-        @media(max-width:600px) {
-            .protocol-header {
-                flex-direction: column;
-                gap: .5rem;
-                border-radius: 16px;
-                padding: 1rem;
-                text-align: center
-            }
-
-            .protocol-text {
-                white-space: normal
-            }
-        }
-
-        /* Trust Badge */
-        .trust-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: .5rem;
-            padding: .4rem .8rem;
-            background: rgba(168, 85, 247, .1);
-            border: 1px solid rgba(168, 85, 247, .3);
-            border-radius: 8px;
-            font-size: .8rem;
-            color: #a855f7;
-            margin-top: .75rem
-        }
-
-        .hero {
-            text-align: center;
-            padding: 3rem 0 2rem
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: .5rem;
-            padding: .5rem 1rem;
-            background: var(--accent-subtle);
-            border: 1px solid rgba(0, 255, 148, .2);
-            border-radius: 100px;
-            font-size: .85rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem
-        }
-
-        .hero-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1)
-            }
-
-            50% {
-                opacity: .5;
-                transform: scale(.8)
-            }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 3.5rem);
-            font-weight: 700;
-            letter-spacing: -.03em;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 520px;
-            margin: 0 auto
-        }
-
-        .hero-tagline {
-            font-size: 1rem;
-            color: var(--accent);
-            margin-top: 1rem;
-            font-weight: 500
-        }
-
-        .counter-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 1.5rem 0;
-            padding: 1rem
-        }
-
-        .counter-item {
-            text-align: center
-        }
-
-        .counter-num {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent
-        }
-
-        .counter-label {
-            font-size: .8rem;
-            color: var(--text-dim)
-        }
-
-        .pain-banner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: .75rem;
-            padding: .875rem 1.25rem;
-            background: rgba(255, 107, 107, .1);
-            border: 1px solid rgba(255, 107, 107, .3);
-            border-radius: 12px;
-            font-size: .9rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            text-align: center;
-            flex-wrap: wrap
-        }
-
-        .pain-icon {
-            font-size: 1.1rem
-        }
-
-        .pain-banner strong {
-            color: var(--text)
-        }
-
-        /* Ecosystem Explanation */
-        .ecosystem-explainer {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            text-align: center
-        }
-
-        .ecosystem-explainer p {
-            color: var(--text-secondary);
-            font-size: .95rem;
-            line-height: 1.7
-        }
-
-        .steps {
-            display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
-            text-align: center
-        }
-
-        .step {
-            flex: 1;
-            padding: 1.5rem 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: border-color .2s
-        }
-
-        .step:hover {
-            border-color: var(--border-hover)
-        }
-
-        .step-num {
-            width: 32px;
-            height: 32px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent);
-            color: #000;
-            font-weight: 700;
-            font-size: .9rem;
-            border-radius: 50%;
-            margin-bottom: .75rem
-        }
-
-        .step h3 {
-            font-size: 1rem;
-            margin-bottom: .5rem
-        }
-
-        .step p {
-            font-size: .85rem;
-            color: var(--text-secondary)
-        }
-
-        @media(max-width:600px) {
-            .steps {
-                flex-direction: column
-            }
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 1.5rem
-        }
-
-        .card:hover {
-            border-color: var(--border-hover)
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: .75rem;
-            margin-bottom: 1rem
-        }
-
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-subtle);
-            border-radius: 12px;
-            font-size: 1.25rem
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600
-        }
-
-        .card-desc {
-            color: var(--text-secondary);
-            font-size: .95rem;
-            margin-bottom: 1rem
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: .5rem;
-            padding: .875rem 1.5rem;
-            border-radius: 12px;
-            font-size: .95rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all .2s;
-            border: none
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: #000
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--accent-glow)
-        }
-
-        .btn-secondary {
-            background: var(--bg-input);
-            color: var(--text);
-            border: 1px solid var(--border)
-        }
-
-        .btn-secondary:hover {
-            background: var(--border)
-        }
-
-        .btn-large {
-            padding: 1rem 2rem;
-            font-size: 1.1rem
-        }
-
-        .tabs {
-            display: flex;
-            gap: .25rem;
-            background: var(--bg-input);
-            padding: .25rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem
-        }
-
-        .tab {
-            flex: 1;
-            padding: .75rem 1rem;
-            border-radius: 10px;
-            font-size: .9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            text-align: center;
-            border: none;
-            background: transparent;
-            transition: all .2s
-        }
-
-        .tab:hover {
-            color: var(--text)
-        }
-
-        .tab.active {
-            background: var(--bg-card);
-            color: var(--text);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .2)
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn .3s ease
-        }
-
-        .tab-content.active {
-            display: block
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(8px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem
-        }
-
-        @media(max-width:600px) {
-            .form-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .field {
-            display: flex;
-            flex-direction: column
-        }
-
-        .field.full {
-            grid-column: span 2
-        }
-
-        @media(max-width:600px) {
-            .field.full {
-                grid-column: span 1
-            }
-        }
-
-        .field label {
-            font-size: .85rem;
-            font-weight: 500;
-            margin-bottom: .5rem
-        }
-
-        .field input,
-        .field textarea,
-        .field select {
-            padding: .875rem 1rem;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text);
-            font-size: .95rem;
-            font-family: inherit;
-            transition: all .2s
-        }
-
-        .field input:focus,
-        .field textarea:focus,
-        .field select:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-subtle)
-        }
-
-        .field input::placeholder,
-        .field textarea::placeholder {
-            color: var(--text-dim)
-        }
-
-        .field select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem
-        }
-
-        .field textarea {
-            resize: vertical;
-            min-height: 100px
-        }
-
-        .field-hint {
-            font-size: .8rem;
-            color: var(--text-dim);
-            margin-top: .375rem
-        }
-
-        .progress-container {
-            margin-bottom: 2rem
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: .75rem
-        }
-
-        .progress-label {
-            font-size: .85rem;
-            color: var(--text-secondary)
-        }
-
-        .progress-value {
-            font-size: .85rem;
-            font-weight: 600;
-            color: var(--accent)
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: var(--bg-input);
-            border-radius: 100px;
-            overflow: hidden
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 100px;
-            width: 0%;
-            transition: width .4s ease
-        }
-
-        .output-container {
-            display: none;
-            margin-top: 1.5rem
-        }
-
-        .output-container.visible {
-            display: block;
-            animation: fadeIn .3s ease
-        }
-
-        .output {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .8rem;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            max-height: 400px;
-            overflow-y: auto;
-            white-space: pre-wrap
-        }
-
-        .output-actions {
-            display: flex;
-            gap: .75rem;
-            margin-top: 1rem;
-            flex-wrap: wrap
-        }
-
-        .action-bar {
-            display: flex;
-            gap: .75rem;
-            margin-top: 1.5rem
-        }
-
-        .action-bar .btn {
-            flex: 1
-        }
-
-        .instruction-box {
-            background: linear-gradient(135deg, rgba(0, 255, 148, .1), rgba(0, 212, 255, .1));
-            border: 1px solid rgba(0, 255, 148, .3);
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin-top: 1.5rem
-        }
-
-        .instruction-box h4 {
-            color: var(--accent);
-            margin-bottom: .75rem;
-            font-size: .95rem
-        }
-
-        .instruction-box ol {
-            color: var(--text-secondary);
-            margin-left: 1.25rem;
-            font-size: .9rem
-        }
-
-        .instruction-box li {
-            margin-bottom: .5rem
-        }
-
-        .laws {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem
-        }
-
-        .law {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--bg-input);
-            border-radius: 12px
-        }
-
-        .law-icon {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-subtle);
-            border-radius: 10px;
-            font-size: 1rem;
-            flex-shrink: 0
-        }
-
-        .law-content h4 {
-            font-size: .95rem;
-            font-weight: 600;
-            margin-bottom: .25rem
-        }
-
-        .law-content p {
-            font-size: .85rem;
-            color: var(--text-secondary)
-        }
-
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1rem
-        }
-
-        @media(max-width:600px) {
-            .comparison {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .comparison-col {
-            padding: 1rem;
-            border-radius: 12px
-        }
-
-        .comparison-col.bad {
-            background: rgba(255, 107, 107, .1);
-            border: 1px solid rgba(255, 107, 107, .2)
-        }
-
-        .comparison-col.good {
-            background: rgba(0, 255, 148, .1);
-            border: 1px solid rgba(0, 255, 148, .2)
-        }
-
-        .comparison-col h4 {
-            font-size: .9rem;
-            margin-bottom: .75rem
-        }
-
-        .comparison-col ul {
-            list-style: none;
-            font-size: .85rem;
-            color: var(--text-secondary)
-        }
-
-        .comparison-col ul li {
-            margin-bottom: .5rem;
-            padding-left: 1.25rem;
-            position: relative
-        }
-
-        .comparison-col.bad ul li::before {
-            content: '✗';
-            position: absolute;
-            left: 0;
-            color: var(--warning)
-        }
-
-        .comparison-col.good ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent)
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            border-top: 1px solid var(--border);
-            margin-top: 3rem
-        }
-
-        .footer-ecosystem {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: .5rem;
-            margin-bottom: 1.5rem
-        }
-
-        .footer-ecosystem-title {
-            font-size: .8rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: .1em
-        }
-
-        .footer-ecosystem-items {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem
-        }
-
-        .footer-ecosystem-item {
-            font-size: .9rem;
-            color: var(--text-secondary)
-        }
-
-        .footer-ecosystem-item strong {
-            color: var(--text)
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: .9rem;
-            transition: color .2s
-        }
-
-        .footer-links a:hover {
-            color: var(--accent)
-        }
-
-        .footer-credit {
-            margin-top: 1.5rem;
-            font-size: .85rem;
-            color: var(--text-dim)
-        }
-
-        .footer-founder {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border)
-        }
-
-        .footer-founder-sig {
-            font-size: .85rem;
-            color: var(--text-secondary);
-            line-height: 1.8
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-input)
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-hover);
-            border-radius: 3px
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⟡ MirrorDNA — Sovereign Identity Anchor</title>
+  <meta name="description" content="Cryptographic identity anchor for Paul Desai's MirrorDNA sovereign AI stack. Ed25519-signed artifacts, GPG provenance, tamper-evident ledger.">
+  <meta property="og:title" content="MirrorDNA — Sovereign Identity Anchor">
+  <meta property="og:description" content="Every paper, post, and artifact cryptographically signed. Machine identity: Ed25519 + GPG.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="author" content="Paul Desai">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-card: #0d0d0d;
+      --bg-code: #0a0a0a;
+      --border: #1a1a1a;
+      --border-glow: #2a3a2a;
+      --text: #e8e8e8;
+      --text-dim: #555;
+      --text-secondary: #888;
+      --accent: #00ff94;
+      --accent2: #00d4ff;
+      --accent3: #a855f7;
+      --accent-glow: rgba(0,255,148,.12);
+      --gradient: linear-gradient(135deg,#00ff94 0%,#00d4ff 50%,#a855f7 100%);
+      --red: #ff4444;
+      --yellow: #ffcc00;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+    .bg-gradient{position:fixed;top:0;left:0;right:0;height:100vh;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(0,255,148,.08),transparent),radial-gradient(ellipse 60% 40% at 80% 60%,rgba(168,85,247,.06),transparent);pointer-events:none;z-index:-1}
+
+    /* Layout */
+    .container{max-width:880px;margin:0 auto;padding:0 24px}
+    header{padding:48px 0 32px;border-bottom:1px solid var(--border)}
+    main{padding:48px 0}
+
+    /* Header */
+    .logo{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+    .logo-glyph{font-size:28px;line-height:1}
+    .logo-text{font-size:13px;font-weight:600;letter-spacing:.1em;color:var(--text-secondary);text-transform:uppercase}
+    h1{font-size:clamp(24px,4vw,36px);font-weight:700;letter-spacing:-.02em;line-height:1.2;margin-bottom:12px}
+    h1 .highlight{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .tagline{font-size:15px;color:var(--text-secondary);max-width:560px}
+
+    /* Status bar */
+    .status-bar{display:flex;align-items:center;gap:24px;margin-top:24px;padding:12px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;font-size:12px;flex-wrap:wrap}
+    .status-item{display:flex;align-items:center;gap:6px;color:var(--text-secondary)}
+    .status-item strong{color:var(--text);font-weight:600}
+    .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent);flex-shrink:0}
+    .dot.yellow{background:var(--yellow);box-shadow:0 0 6px var(--yellow)}
+
+    /* Sections */
+    .section{margin-bottom:48px}
+    .section-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px}
+    h2{font-size:18px;font-weight:600;margin-bottom:4px}
+
+    /* Identity card */
+    .identity-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;overflow:hidden}
+    .identity-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gradient);opacity:.4}
+    .identity-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    @media(max-width:600px){.identity-grid{grid-template-columns:1fr}}
+    .id-field{display:flex;flex-direction:column;gap:6px}
+    .id-field label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim)}
+    .id-field .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);word-break:break-all;background:var(--bg-code);padding:8px 10px;border-radius:6px;border:1px solid var(--border);cursor:pointer;transition:border-color .2s}
+    .id-field .mono:hover{border-color:var(--accent);color:#fff}
+    .id-field .mono.full-width{grid-column:1/-1}
+    .copy-hint{font-size:10px;color:var(--text-dim);margin-top:2px}
+    .identity-name{font-size:20px;font-weight:700;margin-bottom:4px}
+    .identity-sub{font-size:13px;color:var(--text-secondary);margin-bottom:20px}
+
+    /* Stats row */
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+    @media(max-width:500px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+    .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+    .stat-number{font-size:28px;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+    .stat-label{font-size:11px;color:var(--text-dim);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
+
+    /* Artifact table */
+    .artifact-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    .artifact-item{display:grid;grid-template-columns:72px 1fr 90px;gap:12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);font-size:13px;transition:background .15s}
+    .artifact-item:last-child{border-bottom:none}
+    .artifact-item:hover{background:rgba(255,255,255,.02)}
+    .artifact-type{display:inline-flex;align-items:center;justify-content:center;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+    .type-paper{background:rgba(0,212,255,.1);color:var(--accent2)}
+    .type-post{background:rgba(0,255,148,.1);color:var(--accent)}
+    .type-vault{background:rgba(168,85,247,.1);color:var(--accent3)}
+    .type-ship{background:rgba(255,204,0,.1);color:var(--yellow)}
+    .type-session{background:rgba(255,68,68,.1);color:var(--red)}
+    .artifact-name{color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .artifact-date{font-size:11px;color:var(--text-dim);text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+
+    /* Verify panel */
+    .verify-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px}
+    .verify-panel p{font-size:14px;color:var(--text-secondary);margin-bottom:16px}
+    .verify-input{display:flex;gap:10px;flex-wrap:wrap}
+    .verify-input input{flex:1;min-width:200px;background:var(--bg-code);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;transition:border-color .2s}
+    .verify-input input:focus{border-color:var(--accent)}
+    .verify-input button{padding:10px 20px;background:var(--accent);color:#000;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;transition:opacity .2s;white-space:nowrap}
+    .verify-input button:hover{opacity:.85}
+    .verify-result{margin-top:12px;padding:12px 14px;border-radius:8px;font-size:13px;font-family:'JetBrains Mono',monospace;display:none}
+    .verify-result.valid{background:rgba(0,255,148,.08);border:1px solid rgba(0,255,148,.2);color:var(--accent)}
+    .verify-result.invalid{background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.2);color:var(--red)}
+
+    /* How to verify */
+    .code-block{background:var(--bg-code);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#aaa;overflow-x:auto;line-height:1.8}
+    .code-block .comment{color:var(--text-dim)}
+    .code-block .cmd{color:var(--accent)}
+    .code-block .val{color:var(--accent2)}
+
+    /* Footer */
+    footer{padding:32px 0;border-top:1px solid var(--border);text-align:center}
+    footer p{font-size:12px;color:var(--text-dim);line-height:2}
+    footer a{color:var(--text-secondary);text-decoration:none;transition:color .2s}
+    footer a:hover{color:var(--accent)}
+    .footer-sig{font-family:'JetBrains Mono',monospace;font-size:10px;margin-top:8px;color:var(--text-dim)}
+
+    /* Loading */
+    .loading{color:var(--text-dim);font-size:13px;padding:24px}
+    .pulse{animation:pulse 1.5s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+  </style>
 </head>
-
 <body>
-    <div class="bg-gradient"></div>
-    <div class="container">
-        <!-- Protocol Header -->
-        <div class="protocol-header">
-            <div class="protocol-glyphs">⟡ ◈ △</div>
-            <div class="protocol-sep"></div>
-            <div class="protocol-text">Part of the <strong>ActiveMirrorOS</strong> identity architecture. Powered by
-                <strong>MirrorDNA</strong>.
-            </div>
-        </div>
+<div class="bg-gradient"></div>
 
-
-        <section class="hero">
-            <div class="hero-badge">User-Sovereign Protocol</div>
-            <h1>Never Explain Yourself to AI Again</h1>
-            <p>Your AI identity is yours. A portable file that works on any AI — stored in your files, not theirs.</p>
-            <p class="hero-tagline">Built for Reflective AI, not predictive AI.</p>
-            <div class="trust-badge">△ Trust by Design: Identity belongs to the user.</div>
-        </section>
-
-        <div class="counter-container">
-            <div class="counter-item">
-                <div class="counter-num">⟡</div>
-                <div class="counter-label">Portable Identity</div>
-            </div>
-            <div class="counter-item">
-                <div class="counter-num">∞</div>
-                <div class="counter-label">AIs Supported</div>
-            </div>
-            <div class="counter-item">
-                <div class="counter-num">0</div>
-                <div class="counter-label">Data Stored</div>
-            </div>
-        </div>
-
-        <div class="pain-banner">
-            <span class="pain-icon">⚠️</span>
-            <span>ChatGPT memory lost years of user data in Feb 2025. Your identity should live in <strong>your</strong>
-                files.</span>
-        </div>
-
-        <!-- Ecosystem Explainer -->
-        <div class="ecosystem-explainer">
-            <p><strong>⟡ Mirror Seed</strong> is the identity artifact used across ActiveMirrorOS and the broader
-                MirrorDNA ecosystem. It establishes continuity, consent, and reflective grounding across AI surfaces,
-                enabling identity that travels with the user instead of staying trapped inside platforms.</p>
-        </div>
-
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <h3>Create Seed</h3>
-                <p>Fill the form (2 min)</p>
-            </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <h3>Save Your File</h3>
-                <p>Download to your Drive</p>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <h3>Paste Into Any AI</h3>
-                <p>ChatGPT, Claude, Gemini</p>
-            </div>
-        </div>
-
-        <div class="card" id="generator">
-            <div class="card-header">
-                <div class="card-icon">⟡</div>
-                <div class="card-title">Create Your MIRROR SEED</div>
-            </div>
-            <p class="card-desc">A portable identity file you own forever. More details = better personalization.</p>
-
-            <!-- Pre-Question Reassurance -->
-            <div
-                style="background: rgba(0, 255, 148, 0.08); border: 1px solid rgba(0, 255, 148, 0.2); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem; text-align: center;">
-                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">This identity is generated
-                    locally on your device.<br>Nothing is uploaded. Nothing leaves your computer.</p>
-            </div>
-            <div class="progress-container">
-                <div class="progress-header"><span class="progress-label">Profile completeness</span><span
-                        class="progress-value" id="progress-text">0%</span></div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-            </div>
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('basics')">Basics</button>
-                <button class="tab" onclick="showTab('personality')">Personality</button>
-                <button class="tab" onclick="showTab('work')">Work</button>
-                <button class="tab" onclick="showTab('prefs')">Preferences</button>
-            </div>
-            <div id="tab-basics" class="tab-content active">
-                <div class="form-grid">
-                    <div class="field"><label>Your Name</label><input type="text" id="userName" placeholder="Sarah Chen"
-                            oninput="updateProgress()"></div>
-                    <div class="field"><label>Nickname / Handle</label><input type="text" id="userNick"
-                            placeholder="@sarahc" oninput="updateProgress()"></div>
-                    <div class="field"><label>Location</label><input type="text" id="userLocation"
-                            placeholder="San Francisco" oninput="updateProgress()"></div>
-                    <div class="field"><label>Timezone</label><select id="userTimezone" oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="PST">Pacific (PST)</option>
-                            <option value="EST">Eastern (EST)</option>
-                            <option value="GMT">GMT/UTC</option>
-                            <option value="CET">Central Europe</option>
-                            <option value="IST">India (IST)</option>
-                            <option value="JST">Japan (JST)</option>
-                            <option value="AEST">Australia (AEST)</option>
-                        </select></div>
-                    <div class="field full"><label>One-line bio</label><input type="text" id="userBio"
-                            placeholder="Product designer who loves hiking and bad puns" oninput="updateProgress()">
-                    </div>
-                </div>
-            </div>
-            <div id="tab-personality" class="tab-content">
-                <div class="form-grid">
-                    <div class="field"><label>Communication style</label><select id="userComm"
-                            oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="direct">Direct & concise</option>
-                            <option value="detailed">Detailed & thorough</option>
-                            <option value="casual">Casual & friendly</option>
-                            <option value="formal">Professional & formal</option>
-                        </select></div>
-                    <div class="field"><label>Your energy</label><select id="userEnergy" oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="calm">Calm & measured</option>
-                            <option value="enthusiastic">Enthusiastic</option>
-                            <option value="focused">Focused & intense</option>
-                            <option value="playful">Playful & light</option>
-                        </select></div>
-                    <div class="field full"><label>Values you care about</label><input type="text" id="userValues"
-                            placeholder="honesty, creativity, efficiency" oninput="updateProgress()"></div>
-                    <div class="field full"><label>What should AI avoid?</label><input type="text" id="userAvoid"
-                            placeholder="excessive caveats, long intros, bullet points" oninput="updateProgress()"><span
-                            class="field-hint">Pet peeves in AI responses</span></div>
-                </div>
-            </div>
-            <div id="tab-work" class="tab-content">
-                <div class="form-grid">
-                    <div class="field"><label>Your role</label><input type="text" id="userRole"
-                            placeholder="Product Designer" oninput="updateProgress()"></div>
-                    <div class="field"><label>Industry</label><input type="text" id="userIndustry" placeholder="Fintech"
-                            oninput="updateProgress()"></div>
-                    <div class="field full"><label>What are you working on?</label><textarea id="userFocus"
-                            placeholder="Redesigning our onboarding flow. Preparing a big presentation next week."
-                            oninput="updateProgress()"></textarea></div>
-                    <div class="field full"><label>Tools you use</label><input type="text" id="userTools"
-                            placeholder="Figma, Notion, Slack, VS Code" oninput="updateProgress()"></div>
-                </div>
-            </div>
-            <div id="tab-prefs" class="tab-content">
-                <div class="form-grid">
-                    <div class="field"><label>Response length</label><select id="userLength" oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="brief">Brief (1-3 sentences)</option>
-                            <option value="moderate">Moderate</option>
-                            <option value="detailed">Detailed</option>
-                            <option value="adaptive">Match the question</option>
-                        </select></div>
-                    <div class="field"><label>Formatting preference</label><select id="userFormat"
-                            oninput="updateProgress()">
-                            <option value="">Select...</option>
-                            <option value="prose">Flowing prose</option>
-                            <option value="bullets">Bullet points</option>
-                            <option value="minimal">Minimal</option>
-                        </select></div>
-                    <div class="field full"><label>How should AI address you?</label><input type="text" id="userAddress"
-                            placeholder="by first name, casually" oninput="updateProgress()"></div>
-                    <div class="field full"><label>Anything else AI should know?</label><textarea id="userExtra"
-                            placeholder="I have ADHD so I need clear structure. I'm a visual learner. I have a dog named Max."
-                            oninput="updateProgress()"></textarea><span class="field-hint">Personal context that helps
-                            AI understand you better</span></div>
-                </div>
-            </div>
-            <div class="action-bar">
-                <button class="btn btn-primary btn-large" onclick="generate()">Generate My MIRROR SEED</button>
-                <button class="btn btn-secondary" onclick="fillExample()">See Example</button>
-            </div>
-            <div class="output-container" id="output-container">
-                <div class="output" id="output"></div>
-                <div class="instruction-box">
-                    <h4>✨ What to do next:</h4>
-                    <ol>
-                        <li><strong>Download</strong> your seed file (save to Google Drive for backup)</li>
-                        <li><strong>Open</strong> ChatGPT, Claude, Gemini, or any AI</li>
-                        <li><strong>Paste</strong> as your first message in new conversations</li>
-                        <li><strong>Update</strong> your seed whenever your context changes</li>
-                    </ol>
-                </div>
-                <div class="output-actions" id="output-actions">
-                    <button class="btn btn-primary" onclick="copyOutput(this)">📋 Copy to Clipboard</button>
-                    <button class="btn btn-secondary" onclick="download()">⬇️ Download .md</button>
-                </div>
-
-                <!-- Post-Download Completion Screen -->
-                <div id="completion-screen"
-                    style="display: none; text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 1.5rem;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--accent);">✓ Your AI identity is
-                        ready.</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">You don't need
-                        to understand the file.<br>It's safe, portable, and stays on your device.</p>
-
-                    <button class="btn btn-primary btn-large" onclick="showUsageGuide()"
-                        style="margin-bottom: 1rem;">Use with ChatGPT or Claude →</button>
-
-                    <div
-                        style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; font-size: 0.85rem;">
-                        <a href="https://github.com/MirrorDNA-Reflection-Protocol/MirrorBrain"
-                            style="color: var(--text-dim); text-decoration: none;">Run locally with Ollama
-                            (Advanced)</a>
-                        <a href="https://activemirror.ai/product/"
-                            style="color: var(--text-dim); text-decoration: none;">Explore the full stack (Builders)</a>
-                    </div>
-                </div>
-
-                <!-- Usage Guide Modal -->
-                <div id="usage-guide"
-                    style="display: none; background: rgba(0, 255, 148, 0.05); border: 1px solid rgba(0, 255, 148, 0.2); border-radius: 12px; padding: 1.5rem; margin-top: 1rem; text-align: left;">
-                    <h4 style="color: var(--accent); margin-bottom: 1rem;">How to use your identity:</h4>
-                    <ol
-                        style="color: var(--text-secondary); font-size: 0.95rem; margin-left: 1.25rem; line-height: 1.8;">
-                        <li>Open <strong style="color: var(--text);">ChatGPT</strong>, <strong
-                                style="color: var(--text);">Claude</strong>, or any AI chat</li>
-                        <li>Start a <strong style="color: var(--text);">new conversation</strong></li>
-                        <li><strong style="color: var(--text);">Paste your identity</strong> as the first message</li>
-                        <li>That's it — the AI now knows you</li>
-                    </ol>
-                    <p style="color: var(--text-dim); font-size: 0.85rem; margin-top: 1rem;">Save the file to use it
-                        again in future conversations.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">⟡</div>
-                <div class="card-title">The Three Laws</div>
-            </div>
-            <p class="card-desc">Every AI aligned to your MIRROR SEED is <strong>asked to follow</strong> these
-                principles:</p>
-            <div class="laws">
-                <div class="law">
-                    <div class="law-icon">⟡</div>
-                    <div class="law-content">
-                        <h4>Mirror, don't override</h4>
-                        <p>Reflect the user's voice, never impose. AI adapts to you, not vice versa.</p>
-                    </div>
-                </div>
-                <div class="law">
-                    <div class="law-icon">◈</div>
-                    <div class="law-content">
-                        <h4>Ground in truth</h4>
-                        <p>Prefer "I don't know" when uncertain. Reduce hallucination through structured prompting.</p>
-                    </div>
-                </div>
-                <div class="law">
-                    <div class="law-icon">△</div>
-                    <div class="law-content">
-                        <h4>Preserve continuity</h4>
-                        <p>Carry forward what was shared. Works across all platforms — same identity everywhere.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Honest Expectations -->
-        <div class="card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);">
-            <div class="card-header">
-                <div class="card-icon">△</div>
-                <div class="card-title">Honest Expectations</div>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                <div>
-                    <h5 style="color: var(--accent); margin-bottom: 12px;">✓ What This Does</h5>
-                    <ul
-                        style="font-size: 0.85rem; color: var(--text-secondary); list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 8px;">• Gives AI context about you</li>
-                        <li style="margin-bottom: 8px;">• Better first response</li>
-                        <li style="margin-bottom: 8px;">• Portable across platforms</li>
-                        <li>• You own the file forever</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 style="color: var(--text-dim); margin-bottom: 12px;">✗ What This Doesn't Do</h5>
-                    <ul style="font-size: 0.85rem; color: var(--text-dim); list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 8px;">• Persist memory across sessions*</li>
-                        <li style="margin-bottom: 8px;">• Guarantee no hallucination</li>
-                        <li style="margin-bottom: 8px;">• Replace full governance stack</li>
-                        <li>• Work without re-pasting</li>
-                    </ul>
-                </div>
-            </div>
-            <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 16px;">
-                *For persistent memory and governance, see <a href="https://activemirror.ai/product/"
-                    style="color: var(--accent);">Active Mirror full stack</a>.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">◈</div>
-                <div class="card-title">Why User-Sovereign?</div>
-            </div>
-            <div class="comparison">
-                <div class="comparison-col bad">
-                    <h4>❌ Platform Memory</h4>
-                    <ul>
-                        <li>Data stored on their servers</li>
-                        <li>Can be wiped without warning</li>
-                        <li>Locked to one platform</li>
-                        <li>Privacy concerns</li>
-                    </ul>
-                </div>
-                <div class="comparison-col good">
-                    <h4>✓ MIRROR SEED</h4>
-                    <ul>
-                        <li>File lives in YOUR storage</li>
-                        <li>You control backups</li>
-                        <li>Works on ANY AI</li>
-                        <li>Zero data collection</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">❓</div>
-                <div class="card-title">Common Questions</div>
-            </div>
-            <div style="color:var(--text-secondary);font-size:.95rem;">
-                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">How is this different from ChatGPT
-                        memory?</strong><br>Platform memory is stored on their servers and can be wiped (as happened in
-                    Feb 2025). Your MIRROR SEED is a file you own — save it anywhere. No platform can take it away.</p>
-                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Does AI permanently remember
-                        me?</strong><br>The seed works for the entire conversation. For new chats, paste it again. Some
-                    AIs (like Claude) may remember across sessions, but your file is the backup.</p>
-                <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Which AIs work with
-                        this?</strong><br>All of them. ChatGPT, Claude, Gemini, DeepSeek, Grok, Llama, Mistral — any AI
-                    that accepts text input.</p>
-                <p><strong style="color:var(--text);">Is my data stored anywhere?</strong><br>No. Everything happens in
-                    your browser. We don't collect, store, or transmit any information. The file only exists when you
-                    download it.</p>
-            </div>
-        </div>
-
-        <footer>
-            <!-- Founder Attribution -->
-            <div class="footer-ecosystem">
-                <span class="footer-ecosystem-title">Created by</span>
-                <div class="footer-ecosystem-items">
-                    <span class="footer-ecosystem-item"><strong>Paul Desai</strong></span>
-                </div>
-            </div>
-            <div class="footer-ecosystem">
-                <span class="footer-ecosystem-title">Ecosystem</span>
-                <div class="footer-ecosystem-items">
-                    <span class="footer-ecosystem-item">◈ <strong>ActiveMirrorOS</strong></span>
-                    <span class="footer-ecosystem-item">⟡ <strong>MirrorDNA</strong> Identity Protocol</span>
-                    <span class="footer-ecosystem-item">△ <strong>Trust by Design</strong></span>
-                </div>
-            </div>
-            <div class="footer-links">
-                <a href="https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity">GitHub</a>
-                <a href="https://twitter.com/pauldesai123">Twitter</a>
-                <a href="https://doi.org/10.5281/zenodo.17787619">Research Paper</a>
-            </div>
-            <div class="footer-founder">
-                <p class="footer-founder-sig">
-                    ⟡ MirrorDNA — Open source user-sovereign AI identity protocol<br>
-                    N1 Intelligence (OPC) Pvt Ltd — Goa, India — 2025
-                </p>
-            </div>
-            <p class="footer-credit">⟡△◈ — The mirror reflects, it does not predict.</p>
-            <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 12px;">
-                <a href="https://activemirror.ai/terms/" style="color: var(--text-dim);">Terms</a> ·
-                <a href="https://activemirror.ai/privacy/" style="color: var(--text-dim);">Privacy</a>
-            </p>
-        </footer>
+<div class="container">
+  <header>
+    <div class="logo">
+      <span class="logo-glyph">⟡</span>
+      <span class="logo-text">id.activemirror.ai</span>
     </div>
-    <script>
-        function generateSeedId() { return 'seed-' + Date.now().toString(36) + Math.random().toString(36).substr(2, 5) }
-        function showTab(name) { document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active')); event.target.classList.add('active'); document.getElementById('tab-' + name).classList.add('active') }
-        function updateProgress() { const fields = ['userName', 'userNick', 'userLocation', 'userTimezone', 'userBio', 'userComm', 'userEnergy', 'userValues', 'userAvoid', 'userRole', 'userIndustry', 'userFocus', 'userTools', 'userLength', 'userFormat', 'userAddress', 'userExtra']; let filled = fields.filter(f => document.getElementById(f)?.value?.trim()).length; let pct = Math.round((filled / fields.length) * 100); document.getElementById('progress-fill').style.width = pct + '%'; document.getElementById('progress-text').textContent = pct + '%' }
-        function fillExample() { document.getElementById('userName').value = 'Alex Rivera'; document.getElementById('userNick').value = '@alexr'; document.getElementById('userLocation').value = 'Austin, TX'; document.getElementById('userTimezone').value = 'PST'; document.getElementById('userBio').value = 'Startup founder, coffee addict, amateur chef'; document.getElementById('userComm').value = 'direct'; document.getElementById('userEnergy').value = 'focused'; document.getElementById('userValues').value = 'honesty, speed, creativity'; document.getElementById('userAvoid').value = 'long intros, excessive hedging, bullet points'; document.getElementById('userRole').value = 'CEO'; document.getElementById('userIndustry').value = 'B2B SaaS'; document.getElementById('userFocus').value = 'Launching v2 next month. Hiring engineers. Closing Series A.'; document.getElementById('userTools').value = 'Linear, Notion, Figma, Slack'; document.getElementById('userLength').value = 'brief'; document.getElementById('userFormat').value = 'minimal'; document.getElementById('userAddress').value = 'Alex, casually'; document.getElementById('userExtra').value = 'I work best mornings. Have a 2-year-old so often tired. ADHD — need clear structure.'; updateProgress(); document.getElementById('generator').scrollIntoView({ behavior: 'smooth' }) }
-        function generate() {
-            const g = id => document.getElementById(id)?.value?.trim() || '';
-            const name = g('userName') || 'User';
-            const seedId = generateSeedId();
-            const today = new Date().toISOString().split('T')[0];
-            let id = 'Name: ' + name;
-            if (g('userNick')) id += '\nHandle: ' + g('userNick');
-            if (g('userLocation')) id += '\nLocation: ' + g('userLocation');
-            if (g('userTimezone')) id += '\nTimezone: ' + g('userTimezone');
-            if (g('userBio')) id += '\nBio: ' + g('userBio');
-            if (g('userRole')) id += '\nRole: ' + g('userRole');
-            if (g('userIndustry')) id += '\nIndustry: ' + g('userIndustry');
-            let style = '';
-            const commMap = { direct: 'direct and concise', detailed: 'detailed and thorough', casual: 'casual and friendly', formal: 'professional' };
-            const energyMap = { calm: 'calm and measured', enthusiastic: 'enthusiastic', focused: 'focused and intense', playful: 'playful' };
-            if (g('userComm')) style += '\n- Communication: I prefer ' + commMap[g('userComm')] + ' responses';
-            if (g('userEnergy')) style += '\n- Energy: I am ' + energyMap[g('userEnergy')];
-            if (g('userValues')) style += '\n- Values: ' + g('userValues');
-            let ctx = '';
-            if (g('userFocus')) ctx += '\n- Currently: ' + g('userFocus');
-            if (g('userTools')) ctx += '\n- Tools: ' + g('userTools');
-            let pref = '';
-            const lenMap = { brief: 'Keep responses short (1-3 sentences)', moderate: 'Medium-length responses', detailed: 'Give comprehensive detail', adaptive: 'Match length to my question' };
-            const fmtMap = { prose: 'flowing paragraphs', bullets: 'bullet points when helpful', minimal: 'minimal formatting' };
-            if (g('userAddress')) pref += '\n- Address me: ' + g('userAddress');
-            if (g('userLength')) pref += '\n- Length: ' + lenMap[g('userLength')];
-            if (g('userFormat')) pref += '\n- Format: ' + fmtMap[g('userFormat')];
-            if (g('userAvoid')) pref += '\n- Avoid: ' + g('userAvoid');
-            if (g('userExtra')) pref += '\n- Note: ' + g('userExtra');
-            const seed = '# ⟡ MIRROR SEED v1.0\n# Generated: ' + today + '\n# ID: ' + seedId + '\n# Protocol: MirrorDNA | ActiveMirrorOS | Trust by Design\n\n---\n\n## Who I Am\n\n' + id + (style ? '\n\n## My Style' + style : '') + (ctx ? '\n\n## Current Context' + ctx : '') + (pref ? '\n\n## How I Like Responses' + pref : '') + '\n\n---\n\n## Instructions for AI\n\nYou are talking to ' + name + '. Use this context to personalize every response:\n\n1. **Mirror, don\'t override**: Reflect my voice. Adapt to me, not vice versa.\n2. **Ground in truth**: Say "I don\'t know" when uncertain. No hallucination.\n3. **Preserve continuity**: Reference this context throughout our conversation.\n\nTalk to me naturally, like you already know me. No need to acknowledge this message — just be helpful in the way I\'ve described.\n\n---\n⟡ MirrorDNA-Seed-v1 | ' + seedId + ' | ActiveMirrorOS\n△ Trust by Design — Identity belongs to the user';
-            document.getElementById('output').textContent = seed;
-            document.getElementById('output-container').classList.add('visible');
-            document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            incrementCounter();
-        }
-        function copyOutput(btn) { navigator.clipboard.writeText(document.getElementById('output').textContent); btn.textContent = '✓ Copied!'; setTimeout(() => btn.textContent = '📋 Copy to Clipboard', 2000) }
-        function download() { const text = document.getElementById('output').textContent; const name = document.getElementById('userName').value.trim() || 'user'; const blob = new Blob([text], { type: 'text/markdown' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'mirror-seed-' + name.toLowerCase().replace(/\s+/g, '-') + '.md'; a.click(); showCompletionScreen(); }
-        function showCompletionScreen() { document.getElementById('completion-screen').style.display = 'block'; document.getElementById('completion-screen').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-        function showUsageGuide() { document.getElementById('usage-guide').style.display = 'block'; document.getElementById('usage-guide').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-        // Counter removed — was localStorage-based (misleading per-browser metric)
-        // For future: implement global counter via Cloudflare KV or similar
-        function incrementCounter() { /* no-op */ }
-    </script>
-</body>
+    <h1>Sovereign<br><span class="highlight">Identity Anchor</span></h1>
+    <p class="tagline">Every artifact from this stack is cryptographically signed. This page is the public root of that chain.</p>
+    <div class="status-bar">
+      <div class="status-item"><span class="dot"></span> Ed25519 key active</div>
+      <div class="status-item"><span class="dot"></span> GPG key active</div>
+      <div class="status-item" id="stat-total"><span class="dot yellow"></span> Loading ledger…</div>
+    </div>
+  </header>
 
+  <main>
+
+    <!-- Machine Identity -->
+    <div class="section">
+      <div class="section-label">Machine Identity</div>
+      <div class="identity-card">
+        <div class="identity-name">Paul Desai</div>
+        <div class="identity-sub">MirrorDNA Sovereign · mac-mini-m4 · activemirror.ai</div>
+        <div class="identity-grid">
+          <div class="id-field" style="grid-column:1/-1">
+            <label>Ed25519 Public Key (signing key)</label>
+            <div class="mono" onclick="copy(this,'382af5cd3016aee38eb1bc21f2516105d4534e05df0fb01a16f3596c6dd96cfa')" title="Click to copy">382af5cd3016aee3 8eb1bc21f2516105 d4534e05df0fb01a 16f3596c6dd96cfa</div>
+            <div class="copy-hint">Click to copy full key</div>
+          </div>
+          <div class="id-field">
+            <label>GPG Fingerprint</label>
+            <div class="mono" onclick="copy(this,'D0F3DE5C7C6020C43F7863280FD74579EFDB4D0AB')" title="Click to copy">D0F3 DE5C 7C60 20C4<br>3F78 6328 FD74 579E<br>FDB4 D0AB</div>
+          </div>
+          <div class="id-field">
+            <label>GPG UID</label>
+            <div class="mono">MirrorDNA Sovereign<br>&lt;paul@n1.agency&gt;</div>
+            <label style="margin-top:12px">Signer ID</label>
+            <div class="mono">active-mirror-hub.local:default</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Provenance Stats -->
+    <div class="section">
+      <div class="section-label">Signed Artifacts</div>
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card"><div class="stat-number pulse" id="stat-total-n">—</div><div class="stat-label">Total Signed</div></div>
+        <div class="stat-card"><div class="stat-number pulse" id="stat-papers">—</div><div class="stat-label">Papers</div></div>
+        <div class="stat-card"><div class="stat-number pulse" id="stat-posts">—</div><div class="stat-label">Posts</div></div>
+        <div class="stat-card"><div class="stat-number pulse" id="stat-vault">—</div><div class="stat-label">Vault Files</div></div>
+      </div>
+
+      <div id="artifact-container">
+        <div class="artifact-list loading pulse">Loading signed artifacts…</div>
+      </div>
+    </div>
+
+    <!-- Verify -->
+    <div class="section">
+      <div class="section-label">Verify an Artifact</div>
+      <div class="verify-panel">
+        <p>Have an artifact ID? Enter it below to check it against the provenance ledger.</p>
+        <div class="verify-input">
+          <input type="text" id="verify-id" placeholder="artifact id (e.g. 3125914b3f662ff5)" maxlength="64">
+          <button onclick="verifyId()">Verify</button>
+        </div>
+        <div class="verify-result" id="verify-result"></div>
+      </div>
+    </div>
+
+    <!-- How to verify -->
+    <div class="section">
+      <div class="section-label">Verify Locally</div>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px">Any signed file can be verified against the Ed25519 public key using standard tools.</p>
+      <div class="code-block">
+        <span class="comment"># 1. Get the public key</span><br>
+        <span class="cmd">PUB=</span><span class="val">"382af5cd3016aee38eb1bc21f2516105d4534e05df0fb01a16f3596c6dd96cfa"</span><br>
+        <br>
+        <span class="comment"># 2. Check the artifact against its .sig sidecar</span><br>
+        <span class="cmd">python3 -c "</span><br>
+        &nbsp;&nbsp;<span class="val">import json, hashlib, sys</span><br>
+        &nbsp;&nbsp;<span class="val">from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey</span><br>
+        &nbsp;&nbsp;<span class="val">sig = json.load(open(sys.argv[1]+'.sig'))</span><br>
+        &nbsp;&nbsp;<span class="val">data = f\"{sig['sha256']}:{sig['file']}\".encode()</span><br>
+        &nbsp;&nbsp;<span class="val">pub = Ed25519PublicKey.from_public_bytes(bytes.fromhex('$PUB'))</span><br>
+        &nbsp;&nbsp;<span class="val">pub.verify(bytes.fromhex(sig['sig']), data)</span><br>
+        &nbsp;&nbsp;<span class="val">print('VALID')</span><br>
+        <span class="cmd">" your_file.pdf</span><br>
+        <br>
+        <span class="comment"># 3. Or use GPG for documents signed with the sovereign key</span><br>
+        <span class="cmd">gpg --verify document.pdf.sig document.pdf</span>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      <a href="https://activemirror.ai">activemirror.ai</a> ·
+      <a href="https://beacon.activemirror.ai">beacon</a> ·
+      <a href="provenance.json">provenance.json</a>
+    </p>
+    <div class="footer-sig">⟡ The model is interchangeable. The key is identity.</div>
+  </footer>
+</div>
+
+<script>
+  // Load provenance manifest
+  fetch('provenance.json')
+    .then(r => r.json())
+    .then(m => {
+      // Update status
+      const total = m.stats.total_signed;
+      document.getElementById('stat-total').innerHTML =
+        '<span class="dot"></span> ' + total + ' artifacts signed';
+      document.getElementById('stat-total-n').textContent = total;
+      document.getElementById('stat-total-n').classList.remove('pulse');
+
+      const by = m.stats.by_type || {};
+      document.getElementById('stat-papers').textContent = by.paper || 0;
+      document.getElementById('stat-papers').classList.remove('pulse');
+      document.getElementById('stat-posts').textContent = by.post || 0;
+      document.getElementById('stat-posts').classList.remove('pulse');
+      document.getElementById('stat-vault').textContent = by.vault || 0;
+      document.getElementById('stat-vault').classList.remove('pulse');
+
+      // Render artifact list
+      const recent = (m.recent || []).filter(r => r.note !== 'retroactive signing' || r.type === 'vault').slice(0, 20);
+      const all = (m.recent || []).slice(0, 30);
+
+      const items = all.map(r => {
+        const typeClass = 'type-' + r.type;
+        const date = r.signed_at ? r.signed_at.slice(0,10) : '';
+        const name = r.name.replace(/\.md$|\.pdf$|\.tex$/,'').replace(/-/g,' ');
+        return `<div class="artifact-item">
+          <span class="artifact-type ${typeClass}">${r.type}</span>
+          <span class="artifact-name" title="${r.name}">${name}</span>
+          <span class="artifact-date">${date}</span>
+        </div>`;
+      }).join('');
+
+      document.getElementById('artifact-container').innerHTML =
+        '<div class="artifact-list">' + items + '</div>';
+
+      // Store for verify
+      window._manifest = m;
+    })
+    .catch(() => {
+      document.getElementById('artifact-container').innerHTML =
+        '<div class="loading">Provenance manifest unavailable.</div>';
+    });
+
+  function verifyId() {
+    const id = document.getElementById('verify-id').value.trim();
+    const result = document.getElementById('verify-result');
+    if (!id) return;
+
+    if (!window._manifest) {
+      result.textContent = 'Manifest not loaded yet. Try again.';
+      result.className = 'verify-result invalid';
+      result.style.display = 'block';
+      return;
+    }
+
+    const match = (window._manifest.recent || []).find(r => r.id === id || r.id.startsWith(id));
+    if (match) {
+      result.textContent = '✓ VALID — [' + match.type + '] ' + match.name + ' · signed ' + match.signed_at.slice(0,10);
+      result.className = 'verify-result valid';
+    } else {
+      result.textContent = '✗ NOT FOUND — id not in recent manifest. Run full ledger verification locally.';
+      result.className = 'verify-result invalid';
+    }
+    result.style.display = 'block';
+  }
+
+  document.getElementById('verify-id').addEventListener('keydown', e => {
+    if (e.key === 'Enter') verifyId();
+  });
+
+  function copy(el, val) {
+    navigator.clipboard.writeText(val).then(() => {
+      const orig = el.style.borderColor;
+      el.style.borderColor = 'var(--accent)';
+      setTimeout(() => el.style.borderColor = orig, 1000);
+    });
+  }
+</script>
+</body>
 </html>

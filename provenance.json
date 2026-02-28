@@ -1,0 +1,200 @@
+{
+  "identity": {
+    "name": "Paul Desai \u2014 MirrorDNA Sovereign",
+    "ed25519_public_key": "382af5cd3016aee38eb1bc21f2516105d4534e05df0fb01a16f3596c6dd96cfa",
+    "gpg_fingerprint": "D0F3DE5C7C6020C43F7863280FD74579EFDB4D0AB",
+    "gpg_uid": "MirrorDNA Sovereign <paul@n1.agency>",
+    "signer_id": "active-mirror-hub.local:default"
+  },
+  "stats": {
+    "total_signed": 89,
+    "by_type": {
+      "post": 30,
+      "paper": 56,
+      "vault": 3
+    },
+    "generated_at": "2026-02-28T10:28:51.406206+00:00"
+  },
+  "recent": [
+    {
+      "id": "2c69e5f2f64b7715",
+      "type": "post",
+      "name": "about.md",
+      "sha256": "df50ea7f3db2f4c5\u2026",
+      "signed_at": "2026-02-28T10:28:51.370271+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "2f59b01b7aee885c",
+      "type": "post",
+      "name": "verify.md",
+      "sha256": "2abf3ef0d9cb012a\u2026",
+      "signed_at": "2026-02-28T10:28:51.317760+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "87957a6c7b1bb179",
+      "type": "post",
+      "name": "the-visibility-paradox.md",
+      "sha256": "29df9b5ac3feff31\u2026",
+      "signed_at": "2026-02-28T10:28:51.262036+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "7471bec8e6991c08",
+      "type": "post",
+      "name": "_index.md",
+      "sha256": "ea08d7d494936786\u2026",
+      "signed_at": "2026-02-28T10:28:51.206509+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "6c145a82d90fabe6",
+      "type": "post",
+      "name": "45-tests-and-the-peripheral-gravity-problem.md",
+      "sha256": "857ca1db5d14d806\u2026",
+      "signed_at": "2026-02-28T10:28:51.153455+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "dcb21ffec4924a79",
+      "type": "post",
+      "name": "the-mirror-that-detects-fakes.md",
+      "sha256": "b50356b5cb71d260\u2026",
+      "signed_at": "2026-02-28T10:28:51.096167+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "b01396fe33c5d0a2",
+      "type": "post",
+      "name": "the-agents-don-t-tell-me-what-they-built.md",
+      "sha256": "75183f5f91474f89\u2026",
+      "signed_at": "2026-02-28T10:28:51.043057+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "fdc025916e3cc597",
+      "type": "post",
+      "name": "the-threat-model-was-incomplete.md",
+      "sha256": "058ce0a473e71e70\u2026",
+      "signed_at": "2026-02-28T10:28:50.987304+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "bf4f0f6eb1391b1e",
+      "type": "post",
+      "name": "the-gap-between-building-and-shipping.md",
+      "sha256": "40ffc3d6f5994563\u2026",
+      "signed_at": "2026-02-28T10:28:50.926462+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "dc735a4137e18233",
+      "type": "post",
+      "name": "the-model-is-interchangeable.md",
+      "sha256": "fb67cd5c878618a5\u2026",
+      "signed_at": "2026-02-28T10:28:50.869456+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "b487f3ad688ee675",
+      "type": "post",
+      "name": "trust-is-the-substrate-not-the-feature.md",
+      "sha256": "896ee0647b962998\u2026",
+      "signed_at": "2026-02-28T10:28:50.813628+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "e5e50063bbdabf27",
+      "type": "post",
+      "name": "the-infrastructure-nobody-can-see.md",
+      "sha256": "9abbc5e9f51adb5a\u2026",
+      "signed_at": "2026-02-28T10:28:50.757364+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "a2af2e6f6dcadcaf",
+      "type": "post",
+      "name": "autonomy-without-legibility-is-just-opacity.md",
+      "sha256": "c08c9b4b75981a20\u2026",
+      "signed_at": "2026-02-28T10:28:50.701022+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "08829472567576d2",
+      "type": "post",
+      "name": "the-bus-is-not-the-feature.md",
+      "sha256": "c48e779892813aad\u2026",
+      "signed_at": "2026-02-28T10:28:50.644327+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "b4f84cb7f038ec8b",
+      "type": "post",
+      "name": "governance-that-runs.md",
+      "sha256": "d622a78ed4703d5f\u2026",
+      "signed_at": "2026-02-28T10:28:50.590884+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "adbd3997bff8e4d4",
+      "type": "post",
+      "name": "systems-that-heal-themselves.md",
+      "sha256": "24659dddb710bba0\u2026",
+      "signed_at": "2026-02-28T10:28:50.536731+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "c4d2956eef1dd2b4",
+      "type": "post",
+      "name": "optimization-without-philosophy-is-just-refactoring.md",
+      "sha256": "ab2147704c88feb9\u2026",
+      "signed_at": "2026-02-28T10:28:50.481377+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "54370e6f35121534",
+      "type": "post",
+      "name": "kavach-is-not-a-product-it-s-a-proof.md",
+      "sha256": "cf3231c16dbd9319\u2026",
+      "signed_at": "2026-02-28T10:28:50.426942+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "8760c83e9796a506",
+      "type": "post",
+      "name": "ten-months-of-infrastructure-nobody-sees.md",
+      "sha256": "f91b5b7969cb1ea9\u2026",
+      "signed_at": "2026-02-28T10:28:50.372400+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    },
+    {
+      "id": "0dd8b4413d1c66af",
+      "type": "post",
+      "name": "the-paradox-of-sovereign-evolution.md",
+      "sha256": "29cb3634a6d47be4\u2026",
+      "signed_at": "2026-02-28T10:28:50.315218+00:00",
+      "url": "",
+      "note": "retroactive signing"
+    }
+  ]
+}
