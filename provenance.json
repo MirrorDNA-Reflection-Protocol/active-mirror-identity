@@ -7,16 +7,160 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 103,
+    "total_signed": 119,
     "by_type": {
-      "ship": 14,
+      "ship": 30,
       "post": 30,
       "paper": 56,
       "vault": 3
     },
-    "generated_at": "2026-03-02T21:30:02.586036+00:00"
+    "generated_at": "2026-03-03T21:30:04.502851+00:00"
   },
   "recent": [
+    {
+      "id": "6f65fefc1bc9fafd",
+      "type": "ship",
+      "name": "agent-shell-guard PreToolUse hook",
+      "sha256": "4cf2327014e67473\u2026",
+      "signed_at": "2026-03-03T13:25:31.475277+00:00",
+      "url": "",
+      "note": "Claude Code PreToolUse hook: blocks force-push and hard-reset unless .agent_manifest.json with valid TTL exists in CWD"
+    },
+    {
+      "id": "5c9f704c5ac6cf29",
+      "type": "ship",
+      "name": "MirrorGate MCP Adapter",
+      "sha256": "610f878a676fc274\u2026",
+      "signed_at": "2026-03-03T13:25:19.160260+00:00",
+      "url": "",
+      "note": "FastAPI governance wrapper for MCP knowledge providers: policy gate, cache, provenance stamps, audit log"
+    },
+    {
+      "id": "6eac6f086f05a9fe",
+      "type": "ship",
+      "name": "Kavach v0.4 core-api",
+      "sha256": "d7537353594c1522\u2026",
+      "signed_at": "2026-03-03T13:25:14.576590+00:00",
+      "url": "",
+      "note": "Scam/deepfake detection: text risk scoring, URL reputation, OCR pipeline, event log, civic resource guidance"
+    },
+    {
+      "id": "f576e4f3a51c5456",
+      "type": "ship",
+      "name": "SkillRL mirrorcontrol v2",
+      "sha256": "0a6827606e9c6376\u2026",
+      "signed_at": "2026-03-03T13:25:07.245435+00:00",
+      "url": "",
+      "note": "FastAPI control-anchored RL enforcement: ed25519 signing, LingOS constraint compiler, MirrorExec gate, SkillBank"
+    },
+    {
+      "id": "ae87526ac4cdff13",
+      "type": "ship",
+      "name": "Continuity Gateway v0.3",
+      "sha256": "fa8f1ed5afc414a4\u2026",
+      "signed_at": "2026-03-03T12:59:56.205277+00:00",
+      "url": "",
+      "note": "Sovereign continuity gateway CLI \u2014 boot/shutdown/witness/drift/redteam/killswitch; bootstrapped at ~/.mirrordna/continuity-gateway; global cmd: continuity-gateway"
+    },
+    {
+      "id": "c6a17cc4477bad4f",
+      "type": "ship",
+      "name": "OPA Policy Server",
+      "sha256": "e4650c2c094fbce1\u2026",
+      "signed_at": "2026-03-03T12:59:56.126376+00:00",
+      "url": "",
+      "note": "OPA v1 Rego policy for semantic cache governance \u2014 allow/deny + namespace/TTL/threshold by surface+data_class+risk"
+    },
+    {
+      "id": "500ca783d93193ce",
+      "type": "ship",
+      "name": "Semantic Cache Router v2.2",
+      "sha256": "9dbdc51836a868c1\u2026",
+      "signed_at": "2026-03-03T12:59:56.061767+00:00",
+      "url": "",
+      "note": "OPA-governed semantic cache router \u2014 policy gate \u2192 cache read/write \u2192 Ollama upstream, port 8430; OPA at 8181 with Rego v1 policy"
+    },
+    {
+      "id": "87cd712b7867c316",
+      "type": "ship",
+      "name": "MirrorMesh Core",
+      "sha256": "afc9fcc4716b0da6\u2026",
+      "signed_at": "2026-03-03T08:41:19.496282+00:00",
+      "url": "",
+      "note": "FastAPI Redis state hash store for MirrorMesh \u2014 POST/GET node state as SHA-256 hashes, port 8420"
+    },
+    {
+      "id": "cfe6dd9b211065be",
+      "type": "ship",
+      "name": "Mirror EndToEnd v5.1",
+      "sha256": "76397dd5a05eceee\u2026",
+      "signed_at": "2026-03-03T08:13:38.540753+00:00",
+      "url": "",
+      "note": "EndToEnd v5.1 scaffold: FastAPI api(8410), WebSocket mesh relay(8766), drift detector, arbitration engine"
+    },
+    {
+      "id": "5cbdcfcd97e37c30",
+      "type": "ship",
+      "name": "MirrorGate E Pack Microservices",
+      "sha256": "b20335a44b6f3c99\u2026",
+      "signed_at": "2026-03-03T08:13:34.569628+00:00",
+      "url": "",
+      "note": "E Pack native services: router(8380), dbac(8381), validator(8382), ledger(8383), hitl(8390)"
+    },
+    {
+      "id": "87a3b1e3951f7c0f",
+      "type": "ship",
+      "name": "MirrorGate E Pack Microservices",
+      "sha256": "b20335a44b6f3c99\u2026",
+      "signed_at": "2026-03-03T08:13:30.367347+00:00",
+      "url": "",
+      "note": "E Pack native services: router(8380), dbac(8381), validator(8382), ledger(8383), hitl(8390)"
+    },
+    {
+      "id": "50fcfa7a33e48673",
+      "type": "ship",
+      "name": "JudgeMesh Runner (OMNI+MOES v2)",
+      "sha256": "0c732e8d9a35016f\u2026",
+      "signed_at": "2026-03-03T08:07:29.118403+00:00",
+      "url": "",
+      "note": "Static+Ollama judge pipeline: forbidden_aliases, placeholder check, LLM judge, fail-closed merge"
+    },
+    {
+      "id": "17c8f038fa08f418",
+      "type": "ship",
+      "name": "MirrorGate E+ Gateway",
+      "sha256": "5b1067d78ced24ec\u2026",
+      "signed_at": "2026-03-03T08:07:25.726233+00:00",
+      "url": "",
+      "note": "Production gateway: DBAC+HITL+AppendOnlyLedger+Providers (Ollama/Claude/Gemini), /console UI"
+    },
+    {
+      "id": "aeefef731ccb8b3f",
+      "type": "ship",
+      "name": "migrate-to-supervisor script",
+      "sha256": "5f5ed7ef8588e3d3\u2026",
+      "signed_at": "2026-03-03T07:35:01.104759+00:00",
+      "url": "",
+      "note": "Safe migration script with rollback: stops launchd, moves plist to disabled/, starts in supervisord"
+    },
+    {
+      "id": "2054674918e5d293",
+      "type": "ship",
+      "name": "supervisord migration",
+      "sha256": "234f3b0ca9d0043f\u2026",
+      "signed_at": "2026-03-03T07:35:01.048055+00:00",
+      "url": "",
+      "note": "Migrated 31 Python services from launchd to supervisord \u2014 permanent fix for root/user log permission conflicts"
+    },
+    {
+      "id": "2c603f658c35548e",
+      "type": "ship",
+      "name": "MirrorSupervisor",
+      "sha256": "a1f3de69863881f2\u2026",
+      "signed_at": "2026-03-03T07:02:12.723119+00:00",
+      "url": "",
+      "note": "LaunchAgent manager MCP: health, restart, heal, dedup. Port 8795. Fixes permission drift, distinguishes real crashes from SIGTERM noise. CLI: msv."
+    },
     {
       "id": "f6887278a0446faf",
       "type": "ship",
@@ -52,150 +196,6 @@
       "signed_at": "2026-02-28T11:00:31.344553+00:00",
       "url": "",
       "note": "Nightly Ollama-based synthetic rule testing at 03:00 \u2014 no Claude session needed, drives rule_validator on regression"
-    },
-    {
-      "id": "15a5c748b7b76169",
-      "type": "ship",
-      "name": "Student-Teacher Verifier Fix \u2014 5% \u2192 80% accuracy",
-      "sha256": "36693671e9352446\u2026",
-      "signed_at": "2026-02-28T10:55:18.751257+00:00",
-      "url": "",
-      "note": "Fixed MirrorGate verifier: injected FACTS.md context into train prompts (root cause of 85% false positive rate). Added semantic fact extraction, accumulated knowledge loop, knowledge injection into production verify(). Wired sync_verifier_to_lora.py to close LoRA feedback loop (528 training examples). Weekly LaunchAgent added. Accuracy: 5% \u2192 80%, false positives: 17 \u2192 0."
-    },
-    {
-      "id": "3c6e0b1cd12e1f95",
-      "type": "ship",
-      "name": "Memory Compressor",
-      "sha256": "39e3e5069f7ae373\u2026",
-      "signed_at": "2026-02-28T10:46:35.254311+00:00",
-      "url": "",
-      "note": "Weekly bus entropy culling: weekly_digest from self_critique archive old health alerts Sunday 06:00"
-    },
-    {
-      "id": "ab549d2a290fe012",
-      "type": "ship",
-      "name": "Benchmark Runner",
-      "sha256": "5b63ec6e5f4e2596\u2026",
-      "signed_at": "2026-02-28T10:46:31.498702+00:00",
-      "url": "",
-      "note": "Session-end harness: B1 hallucination B3 corrections B4 gate fires logged to benchmark_results.jsonl"
-    },
-    {
-      "id": "4d8466a0ae76dc3d",
-      "type": "ship",
-      "name": "Benchmark Runner",
-      "sha256": "5b63ec6e5f4e2596\u2026",
-      "signed_at": "2026-02-28T10:46:24.782190+00:00",
-      "url": "",
-      "note": "Session-end harness: B1 hallucination, B3 corrections, B4 gate fires logged to benchmark_results.jsonl"
-    },
-    {
-      "id": "07f288c7f384fc7d",
-      "type": "ship",
-      "name": "Rule Synthesizer",
-      "sha256": "f7d7e4bd2f4cb150\u2026",
-      "signed_at": "2026-02-28T10:46:20.351564+00:00",
-      "url": "",
-      "note": "Auto-synthesizes CLAUDE.md rules from recurring failures via Ollama nightly 02:00"
-    },
-    {
-      "id": "207d134aec24af23",
-      "type": "ship",
-      "name": "Rule Synthesizer",
-      "sha256": "f7d7e4bd2f4cb150\u2026",
-      "signed_at": "2026-02-28T10:46:15.997757+00:00",
-      "url": "",
-      "note": "Auto-synthesizes CLAUDE.md rules from recurring failure patterns via Ollama \u2014 runs nightly at 02:00"
-    },
-    {
-      "id": "ae28ce9ec3441d53",
-      "type": "ship",
-      "name": "Service Bind Hardening \u2014 Tailscale + Localhost",
-      "sha256": "2906d472a3cb9f33\u2026",
-      "signed_at": "2026-02-28T10:31:34.190076+00:00",
-      "url": "",
-      "note": "Hardened 10 services: 8 locked to 127.0.0.1 (briefing_api, factory_trigger, voice_orchestrator, pulse_swarm_hub, swarm_coordinator, mirror_supervisor, web_dashboard, ticker_server). 2 mesh services locked to Tailscale IP 100.114.247.53 (mesh_relay:8766, mirror_radio:4700/4701). ADMIN_TOKEN fixed in safety_proxy."
-    },
-    {
-      "id": "fd179c87441ddbe3",
-      "type": "ship",
-      "name": "id.activemirror.ai v2 \u2014 Sovereign Identity Anchor",
-      "sha256": "03e1c6be8baa2f8d\u2026",
-      "signed_at": "2026-02-28T10:31:27.431867+00:00",
-      "url": "",
-      "note": "Rebuilt identity page as cryptographic anchor: Ed25519 pub key + GPG fingerprint display, live provenance manifest (89 artifacts), artifact browser, in-page verification, local verify instructions. Daily auto-publish via LaunchAgent."
-    },
-    {
-      "id": "3e2009b28f5c4bdd",
-      "type": "ship",
-      "name": "Provenance Infrastructure",
-      "sha256": "12f87e9b7d2cead3\u2026",
-      "signed_at": "2026-02-28T10:31:22.428346+00:00",
-      "url": "",
-      "note": "Ed25519 artifact signing ledger with retroactive coverage of 89 artifacts (56 papers, 30 posts, 3 vault files). Auto-signs on ship_register. Daily manifest publish to id.activemirror.ai."
-    },
-    {
-      "id": "b885e9be2b075a36",
-      "type": "ship",
-      "name": "Provenance Infrastructure",
-      "sha256": "12f87e9b7d2cead3\u2026",
-      "signed_at": "2026-02-28T10:31:17.716451+00:00",
-      "url": "",
-      "note": "Ed25519 artifact signing ledger + manifest + vault_sign_hook expansion"
-    },
-    {
-      "id": "2c69e5f2f64b7715",
-      "type": "post",
-      "name": "about.md",
-      "sha256": "df50ea7f3db2f4c5\u2026",
-      "signed_at": "2026-02-28T10:28:51.370271+00:00",
-      "url": "",
-      "note": "retroactive signing"
-    },
-    {
-      "id": "2f59b01b7aee885c",
-      "type": "post",
-      "name": "verify.md",
-      "sha256": "2abf3ef0d9cb012a\u2026",
-      "signed_at": "2026-02-28T10:28:51.317760+00:00",
-      "url": "",
-      "note": "retroactive signing"
-    },
-    {
-      "id": "87957a6c7b1bb179",
-      "type": "post",
-      "name": "the-visibility-paradox.md",
-      "sha256": "29df9b5ac3feff31\u2026",
-      "signed_at": "2026-02-28T10:28:51.262036+00:00",
-      "url": "",
-      "note": "retroactive signing"
-    },
-    {
-      "id": "7471bec8e6991c08",
-      "type": "post",
-      "name": "_index.md",
-      "sha256": "ea08d7d494936786\u2026",
-      "signed_at": "2026-02-28T10:28:51.206509+00:00",
-      "url": "",
-      "note": "retroactive signing"
-    },
-    {
-      "id": "6c145a82d90fabe6",
-      "type": "post",
-      "name": "45-tests-and-the-peripheral-gravity-problem.md",
-      "sha256": "857ca1db5d14d806\u2026",
-      "signed_at": "2026-02-28T10:28:51.153455+00:00",
-      "url": "",
-      "note": "retroactive signing"
-    },
-    {
-      "id": "dcb21ffec4924a79",
-      "type": "post",
-      "name": "the-mirror-that-detects-fakes.md",
-      "sha256": "b50356b5cb71d260\u2026",
-      "signed_at": "2026-02-28T10:28:51.096167+00:00",
-      "url": "",
-      "note": "retroactive signing"
     }
   ]
 }
