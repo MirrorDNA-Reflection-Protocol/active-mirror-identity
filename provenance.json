@@ -7,16 +7,79 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 119,
+    "total_signed": 126,
     "by_type": {
+      "vault": 10,
       "ship": 30,
       "post": 30,
-      "paper": 56,
-      "vault": 3
+      "paper": 56
     },
-    "generated_at": "2026-03-04T21:30:04.527875+00:00"
+    "generated_at": "2026-03-05T21:30:00.713889+00:00"
   },
   "recent": [
+    {
+      "id": "0e91e716d8eff795",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "076f7964823dbfe6\u2026",
+      "signed_at": "2026-03-05T09:09:23.113608+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "5906f4896fa0560e",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "85bc6a300f279838\u2026",
+      "signed_at": "2026-03-05T09:09:12.289600+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "2e06b89552bd3e5a",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "72dc67094ba4ef90\u2026",
+      "signed_at": "2026-03-05T09:08:59.999770+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "850583b22d691345",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "1701b249ae634492\u2026",
+      "signed_at": "2026-03-05T09:08:48.493835+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "5e5e306b0c32ca34",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "67de1fa176d3029e\u2026",
+      "signed_at": "2026-03-05T09:08:37.907128+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "d7d4bb03d4420163",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "0b1d6ba5365f94c0\u2026",
+      "signed_at": "2026-03-05T09:08:31.780254+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "50fc983b7a4ba6aa",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "832df4212f6b648f\u2026",
+      "signed_at": "2026-03-05T09:08:24.243939+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
     {
       "id": "6f65fefc1bc9fafd",
       "type": "ship",
@@ -133,69 +196,6 @@
       "signed_at": "2026-03-03T08:07:25.726233+00:00",
       "url": "",
       "note": "Production gateway: DBAC+HITL+AppendOnlyLedger+Providers (Ollama/Claude/Gemini), /console UI"
-    },
-    {
-      "id": "aeefef731ccb8b3f",
-      "type": "ship",
-      "name": "migrate-to-supervisor script",
-      "sha256": "5f5ed7ef8588e3d3\u2026",
-      "signed_at": "2026-03-03T07:35:01.104759+00:00",
-      "url": "",
-      "note": "Safe migration script with rollback: stops launchd, moves plist to disabled/, starts in supervisord"
-    },
-    {
-      "id": "2054674918e5d293",
-      "type": "ship",
-      "name": "supervisord migration",
-      "sha256": "234f3b0ca9d0043f\u2026",
-      "signed_at": "2026-03-03T07:35:01.048055+00:00",
-      "url": "",
-      "note": "Migrated 31 Python services from launchd to supervisord \u2014 permanent fix for root/user log permission conflicts"
-    },
-    {
-      "id": "2c603f658c35548e",
-      "type": "ship",
-      "name": "MirrorSupervisor",
-      "sha256": "a1f3de69863881f2\u2026",
-      "signed_at": "2026-03-03T07:02:12.723119+00:00",
-      "url": "",
-      "note": "LaunchAgent manager MCP: health, restart, heal, dedup. Port 8795. Fixes permission drift, distinguishes real crashes from SIGTERM noise. CLI: msv."
-    },
-    {
-      "id": "f6887278a0446faf",
-      "type": "ship",
-      "name": "Rule Validator",
-      "sha256": "43a70eae1d894474\u2026",
-      "signed_at": "2026-02-28T11:00:43.444080+00:00",
-      "url": "",
-      "note": "Regression-triggered rollback of failing CLAUDE.md rules"
-    },
-    {
-      "id": "8d34bcf4e7717ff4",
-      "type": "ship",
-      "name": "Autonomous Benchmark",
-      "sha256": "06ea323fd47e4aaf\u2026",
-      "signed_at": "2026-02-28T11:00:37.997320+00:00",
-      "url": "",
-      "note": "Nightly Ollama synthetic rule testing at 03:00"
-    },
-    {
-      "id": "abb472e4a7937e22",
-      "type": "ship",
-      "name": "Autonomous Benchmark",
-      "sha256": "06ea323fd47e4aaf\u2026",
-      "signed_at": "2026-02-28T11:00:34.971853+00:00",
-      "url": "",
-      "note": "Nightly Ollama synthetic rule testing at 03:00 no Claude session needed"
-    },
-    {
-      "id": "f663277d0df101e2",
-      "type": "ship",
-      "name": "Autonomous Benchmark",
-      "sha256": "06ea323fd47e4aaf\u2026",
-      "signed_at": "2026-02-28T11:00:31.344553+00:00",
-      "url": "",
-      "note": "Nightly Ollama-based synthetic rule testing at 03:00 \u2014 no Claude session needed, drives rule_validator on regression"
     }
   ]
 }
