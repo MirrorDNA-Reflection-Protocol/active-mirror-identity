@@ -7,195 +7,195 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 126,
+    "total_signed": 299,
     "by_type": {
-      "vault": 10,
-      "ship": 30,
-      "post": 30,
-      "paper": 56
+      "ship": 76,
+      "vault": 63,
+      "paper": 129,
+      "post": 31
     },
-    "generated_at": "2026-03-05T21:30:00.713889+00:00"
+    "generated_at": "2026-03-06T21:30:04.040641+00:00"
   },
   "recent": [
     {
-      "id": "0e91e716d8eff795",
+      "id": "530d511ac6f9ba6c",
+      "type": "ship",
+      "name": "Restart Immunity v3",
+      "sha256": "6451d9e59fb0f7a1\u2026",
+      "signed_at": "2026-03-06T20:03:33.715995+00:00",
+      "url": "",
+      "note": "Deterministic contract convergence guard with strict health semantics, owner validation, bounded restarts, and chaos-drill verification for proxy/hub/eplus/openclaw."
+    },
+    {
+      "id": "655cd2802bab63b2",
+      "type": "ship",
+      "name": "Resurrection Skill",
+      "sha256": "61c385e6f3700c94\u2026",
+      "signed_at": "2026-03-06T19:12:18.113396+00:00",
+      "url": "",
+      "note": "One-command full recovery loop with multi-cycle verification"
+    },
+    {
+      "id": "62646a807d44747b",
+      "type": "ship",
+      "name": "State Ring Backup (100)",
+      "sha256": "4fa714386ca209db\u2026",
+      "signed_at": "2026-03-06T19:12:18.012616+00:00",
+      "url": "",
+      "note": "Rolling runtime snapshots every 5m with max 100 retention"
+    },
+    {
+      "id": "512dee04c351a7c8",
+      "type": "ship",
+      "name": "Core Port Guard",
+      "sha256": "a0b3070dad7eafc5\u2026",
+      "signed_at": "2026-03-06T19:12:17.933931+00:00",
+      "url": "",
+      "note": "Auto-restore disabled core plists + enforce core ports/endpoints every 60s"
+    },
+    {
+      "id": "a259396ba63cf386",
       "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "076f7964823dbfe6\u2026",
-      "signed_at": "2026-03-05T09:09:23.113608+00:00",
+      "name": "CONTINUITY.md",
+      "sha256": "af3682e4dd837728\u2026",
+      "signed_at": "2026-03-06T18:06:59.426394+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     },
     {
-      "id": "5906f4896fa0560e",
+      "id": "64ff2af35cfa4dec",
+      "type": "ship",
+      "name": "Kavach Telegram Token Fix",
+      "sha256": "0ebdbf298ae22674\u2026",
+      "signed_at": "2026-03-06T18:06:47.690639+00:00",
+      "url": "",
+      "note": "Strip export prefix from secrets.env lines so KAVACH_TELEGRAM_TOKEN is found"
+    },
+    {
+      "id": "c85c17cbd66312f7",
+      "type": "ship",
+      "name": "LaunchAgent Mass Recovery",
+      "sha256": "a052ad56dda6f92d\u2026",
+      "signed_at": "2026-03-06T18:06:47.116909+00:00",
+      "url": "",
+      "note": "Fixed 9 crashed agents: kavach-telegram token prefix, orphan PID, stop hooks blocking\u2192non-blocking for swarm"
+    },
+    {
+      "id": "26a04b147e771c83",
+      "type": "ship",
+      "name": "Skills Registry Generator",
+      "sha256": "5549f1e96979259d\u2026",
+      "signed_at": "2026-03-06T18:06:46.811551+00:00",
+      "url": "",
+      "note": "Parses 144 skill .md files into skills.json + categories.json registry"
+    },
+    {
+      "id": "abfe703d0752d482",
+      "type": "ship",
+      "name": "Skill Install Script",
+      "sha256": "f49473cbac591de2\u2026",
+      "signed_at": "2026-03-06T18:06:46.688500+00:00",
+      "url": "",
+      "note": "Curl-able installer: --skill, --category, --list, --update. Works macOS+Linux."
+    },
+    {
+      "id": "0065c356a783a768",
+      "type": "ship",
+      "name": "Skill Marketplace Site",
+      "sha256": "52c8a7a575722bf3\u2026",
+      "signed_at": "2026-03-06T18:06:46.487674+00:00",
+      "url": "",
+      "note": "Browsable marketplace for 144 Claude Code skills with search, categories, one-click install, JSON-LD provenance, llms.txt"
+    },
+    {
+      "id": "043a90e9c8a9e1f7",
+      "type": "paper",
+      "name": "SCD_v4_Deployed_State_Management.md",
+      "sha256": "79f26f80cddd5826\u2026",
+      "signed_at": "2026-03-06T17:59:44.108619+00:00",
+      "url": "",
+      "note": "paper \u2014 auto-signed on write"
+    },
+    {
+      "id": "c8c4c84a07d9f756",
+      "type": "paper",
+      "name": "SCD_v4_Deployed_State_Management.md",
+      "sha256": "5e09d35f2927de57\u2026",
+      "signed_at": "2026-03-06T17:59:40.204497+00:00",
+      "url": "",
+      "note": "paper \u2014 auto-signed on write"
+    },
+    {
+      "id": "59cdb83da9a37a2c",
+      "type": "paper",
+      "name": "SCD_v4_Deployed_State_Management.md",
+      "sha256": "2354566f2638f3f7\u2026",
+      "signed_at": "2026-03-06T17:59:36.347821+00:00",
+      "url": "",
+      "note": "paper \u2014 auto-signed on write"
+    },
+    {
+      "id": "fcb0b3ac64c3b14b",
+      "type": "paper",
+      "name": "SCD_v4_Deployed_State_Management.md",
+      "sha256": "1e3841a3dce271cb\u2026",
+      "signed_at": "2026-03-06T17:59:19.118922+00:00",
+      "url": "",
+      "note": "paper \u2014 auto-signed on write"
+    },
+    {
+      "id": "d72003ddbaf27af2",
       "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "85bc6a300f279838\u2026",
-      "signed_at": "2026-03-05T09:09:12.289600+00:00",
+      "name": "CONTINUITY.md",
+      "sha256": "825d665b8c6f5a6f\u2026",
+      "signed_at": "2026-03-06T17:54:32.782297+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     },
     {
-      "id": "2e06b89552bd3e5a",
+      "id": "64c4acfb7d16a04c",
       "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "72dc67094ba4ef90\u2026",
-      "signed_at": "2026-03-05T09:08:59.999770+00:00",
+      "name": "CONTINUITY.md",
+      "sha256": "25d4a7893311e4ad\u2026",
+      "signed_at": "2026-03-06T17:54:18.424853+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     },
     {
-      "id": "850583b22d691345",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "1701b249ae634492\u2026",
-      "signed_at": "2026-03-05T09:08:48.493835+00:00",
+      "id": "28d5bd17f9020305",
+      "type": "paper",
+      "name": "SCD_v4_Deployed_State_Management.md",
+      "sha256": "8853a8ca01344306\u2026",
+      "signed_at": "2026-03-06T17:54:08.896780+00:00",
       "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
+      "note": "paper \u2014 auto-signed on write"
     },
     {
-      "id": "5e5e306b0c32ca34",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "67de1fa176d3029e\u2026",
-      "signed_at": "2026-03-05T09:08:37.907128+00:00",
+      "id": "6a4f571c408da857",
+      "type": "paper",
+      "name": "SCD_v4_Deployed_State_Management.md",
+      "sha256": "c7b8272d37217447\u2026",
+      "signed_at": "2026-03-06T17:53:58.577509+00:00",
       "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
+      "note": "paper \u2014 auto-signed on write"
     },
     {
-      "id": "d7d4bb03d4420163",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "0b1d6ba5365f94c0\u2026",
-      "signed_at": "2026-03-05T09:08:31.780254+00:00",
+      "id": "7e943baea59e4509",
+      "type": "paper",
+      "name": "SCD_v4_Deployed_State_Management.md",
+      "sha256": "875bc285fb01d3d4\u2026",
+      "signed_at": "2026-03-06T17:53:50.102984+00:00",
       "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
+      "note": "paper \u2014 auto-signed on write"
     },
     {
-      "id": "50fc983b7a4ba6aa",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "832df4212f6b648f\u2026",
-      "signed_at": "2026-03-05T09:08:24.243939+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "6f65fefc1bc9fafd",
+      "id": "bcbf9f4a0af94d76",
       "type": "ship",
-      "name": "agent-shell-guard PreToolUse hook",
-      "sha256": "4cf2327014e67473\u2026",
-      "signed_at": "2026-03-03T13:25:31.475277+00:00",
+      "name": "Triple Backup",
+      "sha256": "2627a43e0acaa0a4\u2026",
+      "signed_at": "2026-03-06T17:53:24.397361+00:00",
       "url": "",
-      "note": "Claude Code PreToolUse hook: blocks force-push and hard-reset unless .agent_manifest.json with valid TTL exists in CWD"
-    },
-    {
-      "id": "5c9f704c5ac6cf29",
-      "type": "ship",
-      "name": "MirrorGate MCP Adapter",
-      "sha256": "610f878a676fc274\u2026",
-      "signed_at": "2026-03-03T13:25:19.160260+00:00",
-      "url": "",
-      "note": "FastAPI governance wrapper for MCP knowledge providers: policy gate, cache, provenance stamps, audit log"
-    },
-    {
-      "id": "6eac6f086f05a9fe",
-      "type": "ship",
-      "name": "Kavach v0.4 core-api",
-      "sha256": "d7537353594c1522\u2026",
-      "signed_at": "2026-03-03T13:25:14.576590+00:00",
-      "url": "",
-      "note": "Scam/deepfake detection: text risk scoring, URL reputation, OCR pipeline, event log, civic resource guidance"
-    },
-    {
-      "id": "f576e4f3a51c5456",
-      "type": "ship",
-      "name": "SkillRL mirrorcontrol v2",
-      "sha256": "0a6827606e9c6376\u2026",
-      "signed_at": "2026-03-03T13:25:07.245435+00:00",
-      "url": "",
-      "note": "FastAPI control-anchored RL enforcement: ed25519 signing, LingOS constraint compiler, MirrorExec gate, SkillBank"
-    },
-    {
-      "id": "ae87526ac4cdff13",
-      "type": "ship",
-      "name": "Continuity Gateway v0.3",
-      "sha256": "fa8f1ed5afc414a4\u2026",
-      "signed_at": "2026-03-03T12:59:56.205277+00:00",
-      "url": "",
-      "note": "Sovereign continuity gateway CLI \u2014 boot/shutdown/witness/drift/redteam/killswitch; bootstrapped at ~/.mirrordna/continuity-gateway; global cmd: continuity-gateway"
-    },
-    {
-      "id": "c6a17cc4477bad4f",
-      "type": "ship",
-      "name": "OPA Policy Server",
-      "sha256": "e4650c2c094fbce1\u2026",
-      "signed_at": "2026-03-03T12:59:56.126376+00:00",
-      "url": "",
-      "note": "OPA v1 Rego policy for semantic cache governance \u2014 allow/deny + namespace/TTL/threshold by surface+data_class+risk"
-    },
-    {
-      "id": "500ca783d93193ce",
-      "type": "ship",
-      "name": "Semantic Cache Router v2.2",
-      "sha256": "9dbdc51836a868c1\u2026",
-      "signed_at": "2026-03-03T12:59:56.061767+00:00",
-      "url": "",
-      "note": "OPA-governed semantic cache router \u2014 policy gate \u2192 cache read/write \u2192 Ollama upstream, port 8430; OPA at 8181 with Rego v1 policy"
-    },
-    {
-      "id": "87cd712b7867c316",
-      "type": "ship",
-      "name": "MirrorMesh Core",
-      "sha256": "afc9fcc4716b0da6\u2026",
-      "signed_at": "2026-03-03T08:41:19.496282+00:00",
-      "url": "",
-      "note": "FastAPI Redis state hash store for MirrorMesh \u2014 POST/GET node state as SHA-256 hashes, port 8420"
-    },
-    {
-      "id": "cfe6dd9b211065be",
-      "type": "ship",
-      "name": "Mirror EndToEnd v5.1",
-      "sha256": "76397dd5a05eceee\u2026",
-      "signed_at": "2026-03-03T08:13:38.540753+00:00",
-      "url": "",
-      "note": "EndToEnd v5.1 scaffold: FastAPI api(8410), WebSocket mesh relay(8766), drift detector, arbitration engine"
-    },
-    {
-      "id": "5cbdcfcd97e37c30",
-      "type": "ship",
-      "name": "MirrorGate E Pack Microservices",
-      "sha256": "b20335a44b6f3c99\u2026",
-      "signed_at": "2026-03-03T08:13:34.569628+00:00",
-      "url": "",
-      "note": "E Pack native services: router(8380), dbac(8381), validator(8382), ledger(8383), hitl(8390)"
-    },
-    {
-      "id": "87a3b1e3951f7c0f",
-      "type": "ship",
-      "name": "MirrorGate E Pack Microservices",
-      "sha256": "b20335a44b6f3c99\u2026",
-      "signed_at": "2026-03-03T08:13:30.367347+00:00",
-      "url": "",
-      "note": "E Pack native services: router(8380), dbac(8381), validator(8382), ledger(8383), hitl(8390)"
-    },
-    {
-      "id": "50fcfa7a33e48673",
-      "type": "ship",
-      "name": "JudgeMesh Runner (OMNI+MOES v2)",
-      "sha256": "0c732e8d9a35016f\u2026",
-      "signed_at": "2026-03-03T08:07:29.118403+00:00",
-      "url": "",
-      "note": "Static+Ollama judge pipeline: forbidden_aliases, placeholder check, LLM judge, fail-closed merge"
-    },
-    {
-      "id": "17c8f038fa08f418",
-      "type": "ship",
-      "name": "MirrorGate E+ Gateway",
-      "sha256": "5b1067d78ced24ec\u2026",
-      "signed_at": "2026-03-03T08:07:25.726233+00:00",
-      "url": "",
-      "note": "Production gateway: DBAC+HITL+AppendOnlyLedger+Providers (Ollama/Claude/Gemini), /console UI"
+      "note": "Triple-redundancy backup: local tar.gz + T7 Shield rsync + git push all repos. Daily 2am. LaunchAgent loaded."
     }
   ]
 }
