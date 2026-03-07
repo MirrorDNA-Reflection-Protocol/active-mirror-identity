@@ -7,195 +7,195 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 299,
+    "total_signed": 345,
     "by_type": {
-      "ship": 76,
-      "vault": 63,
-      "paper": 129,
+      "vault": 91,
+      "ship": 90,
+      "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-06T21:30:04.040641+00:00"
+    "generated_at": "2026-03-07T21:30:04.892251+00:00"
   },
   "recent": [
     {
-      "id": "530d511ac6f9ba6c",
-      "type": "ship",
-      "name": "Restart Immunity v3",
-      "sha256": "6451d9e59fb0f7a1\u2026",
-      "signed_at": "2026-03-06T20:03:33.715995+00:00",
-      "url": "",
-      "note": "Deterministic contract convergence guard with strict health semantics, owner validation, bounded restarts, and chaos-drill verification for proxy/hub/eplus/openclaw."
-    },
-    {
-      "id": "655cd2802bab63b2",
-      "type": "ship",
-      "name": "Resurrection Skill",
-      "sha256": "61c385e6f3700c94\u2026",
-      "signed_at": "2026-03-06T19:12:18.113396+00:00",
-      "url": "",
-      "note": "One-command full recovery loop with multi-cycle verification"
-    },
-    {
-      "id": "62646a807d44747b",
-      "type": "ship",
-      "name": "State Ring Backup (100)",
-      "sha256": "4fa714386ca209db\u2026",
-      "signed_at": "2026-03-06T19:12:18.012616+00:00",
-      "url": "",
-      "note": "Rolling runtime snapshots every 5m with max 100 retention"
-    },
-    {
-      "id": "512dee04c351a7c8",
-      "type": "ship",
-      "name": "Core Port Guard",
-      "sha256": "a0b3070dad7eafc5\u2026",
-      "signed_at": "2026-03-06T19:12:17.933931+00:00",
-      "url": "",
-      "note": "Auto-restore disabled core plists + enforce core ports/endpoints every 60s"
-    },
-    {
-      "id": "a259396ba63cf386",
+      "id": "f838a0ea43bd29fa",
       "type": "vault",
       "name": "CONTINUITY.md",
-      "sha256": "af3682e4dd837728\u2026",
-      "signed_at": "2026-03-06T18:06:59.426394+00:00",
+      "sha256": "1d2ca1d4df3ea14e\u2026",
+      "signed_at": "2026-03-07T19:19:07.862548+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     },
     {
-      "id": "64ff2af35cfa4dec",
-      "type": "ship",
-      "name": "Kavach Telegram Token Fix",
-      "sha256": "0ebdbf298ae22674\u2026",
-      "signed_at": "2026-03-06T18:06:47.690639+00:00",
-      "url": "",
-      "note": "Strip export prefix from secrets.env lines so KAVACH_TELEGRAM_TOKEN is found"
-    },
-    {
-      "id": "c85c17cbd66312f7",
-      "type": "ship",
-      "name": "LaunchAgent Mass Recovery",
-      "sha256": "a052ad56dda6f92d\u2026",
-      "signed_at": "2026-03-06T18:06:47.116909+00:00",
-      "url": "",
-      "note": "Fixed 9 crashed agents: kavach-telegram token prefix, orphan PID, stop hooks blocking\u2192non-blocking for swarm"
-    },
-    {
-      "id": "26a04b147e771c83",
-      "type": "ship",
-      "name": "Skills Registry Generator",
-      "sha256": "5549f1e96979259d\u2026",
-      "signed_at": "2026-03-06T18:06:46.811551+00:00",
-      "url": "",
-      "note": "Parses 144 skill .md files into skills.json + categories.json registry"
-    },
-    {
-      "id": "abfe703d0752d482",
-      "type": "ship",
-      "name": "Skill Install Script",
-      "sha256": "f49473cbac591de2\u2026",
-      "signed_at": "2026-03-06T18:06:46.688500+00:00",
-      "url": "",
-      "note": "Curl-able installer: --skill, --category, --list, --update. Works macOS+Linux."
-    },
-    {
-      "id": "0065c356a783a768",
-      "type": "ship",
-      "name": "Skill Marketplace Site",
-      "sha256": "52c8a7a575722bf3\u2026",
-      "signed_at": "2026-03-06T18:06:46.487674+00:00",
-      "url": "",
-      "note": "Browsable marketplace for 144 Claude Code skills with search, categories, one-click install, JSON-LD provenance, llms.txt"
-    },
-    {
-      "id": "043a90e9c8a9e1f7",
-      "type": "paper",
-      "name": "SCD_v4_Deployed_State_Management.md",
-      "sha256": "79f26f80cddd5826\u2026",
-      "signed_at": "2026-03-06T17:59:44.108619+00:00",
-      "url": "",
-      "note": "paper \u2014 auto-signed on write"
-    },
-    {
-      "id": "c8c4c84a07d9f756",
-      "type": "paper",
-      "name": "SCD_v4_Deployed_State_Management.md",
-      "sha256": "5e09d35f2927de57\u2026",
-      "signed_at": "2026-03-06T17:59:40.204497+00:00",
-      "url": "",
-      "note": "paper \u2014 auto-signed on write"
-    },
-    {
-      "id": "59cdb83da9a37a2c",
-      "type": "paper",
-      "name": "SCD_v4_Deployed_State_Management.md",
-      "sha256": "2354566f2638f3f7\u2026",
-      "signed_at": "2026-03-06T17:59:36.347821+00:00",
-      "url": "",
-      "note": "paper \u2014 auto-signed on write"
-    },
-    {
-      "id": "fcb0b3ac64c3b14b",
-      "type": "paper",
-      "name": "SCD_v4_Deployed_State_Management.md",
-      "sha256": "1e3841a3dce271cb\u2026",
-      "signed_at": "2026-03-06T17:59:19.118922+00:00",
-      "url": "",
-      "note": "paper \u2014 auto-signed on write"
-    },
-    {
-      "id": "d72003ddbaf27af2",
+      "id": "4d4f0b8193120fef",
       "type": "vault",
       "name": "CONTINUITY.md",
-      "sha256": "825d665b8c6f5a6f\u2026",
-      "signed_at": "2026-03-06T17:54:32.782297+00:00",
+      "sha256": "190f80cbbef06fa5\u2026",
+      "signed_at": "2026-03-07T18:36:49.810851+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     },
     {
-      "id": "64c4acfb7d16a04c",
+      "id": "8fc7acc0a8aad9bc",
       "type": "vault",
       "name": "CONTINUITY.md",
-      "sha256": "25d4a7893311e4ad\u2026",
-      "signed_at": "2026-03-06T17:54:18.424853+00:00",
+      "sha256": "23b0f72b124e4226\u2026",
+      "signed_at": "2026-03-07T18:36:47.888331+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     },
     {
-      "id": "28d5bd17f9020305",
-      "type": "paper",
-      "name": "SCD_v4_Deployed_State_Management.md",
-      "sha256": "8853a8ca01344306\u2026",
-      "signed_at": "2026-03-06T17:54:08.896780+00:00",
-      "url": "",
-      "note": "paper \u2014 auto-signed on write"
-    },
-    {
-      "id": "6a4f571c408da857",
-      "type": "paper",
-      "name": "SCD_v4_Deployed_State_Management.md",
-      "sha256": "c7b8272d37217447\u2026",
-      "signed_at": "2026-03-06T17:53:58.577509+00:00",
-      "url": "",
-      "note": "paper \u2014 auto-signed on write"
-    },
-    {
-      "id": "7e943baea59e4509",
-      "type": "paper",
-      "name": "SCD_v4_Deployed_State_Management.md",
-      "sha256": "875bc285fb01d3d4\u2026",
-      "signed_at": "2026-03-06T17:53:50.102984+00:00",
-      "url": "",
-      "note": "paper \u2014 auto-signed on write"
-    },
-    {
-      "id": "bcbf9f4a0af94d76",
+      "id": "e36e75ff2c87319e",
       "type": "ship",
-      "name": "Triple Backup",
-      "sha256": "2627a43e0acaa0a4\u2026",
-      "signed_at": "2026-03-06T17:53:24.397361+00:00",
+      "name": "SCD v4 Submission Package v10",
+      "sha256": "dee59ed40ae19b94\u2026",
+      "signed_at": "2026-03-07T10:13:20.884259+00:00",
       "url": "",
-      "note": "Triple-redundancy backup: local tar.gz + T7 Shield rsync + git push all repos. Daily 2am. LaunchAgent loaded."
+      "note": "Artifact-backed SCD v4 paper rewrite with claim ledger, figures, appendices, and reproducibility docs"
+    },
+    {
+      "id": "0e159e7785c628ec",
+      "type": "ship",
+      "name": "SCD v4 Artifact Build Harness",
+      "sha256": "4fa47a2b82342096\u2026",
+      "signed_at": "2026-03-07T10:13:20.797638+00:00",
+      "url": "",
+      "note": "Regenerates SCD v4 tables, appendix artifacts, redacted samples, and release bundle from live MirrorDNA state"
+    },
+    {
+      "id": "87393bdcfa82ddd0",
+      "type": "ship",
+      "name": "Self-Evolution Infrastructure",
+      "sha256": "3a1d204ed8871502\u2026",
+      "signed_at": "2026-03-07T10:05:34.853232+00:00",
+      "url": "",
+      "note": "Complete self-governance stack: SELF.md scripture, shame engine, red team, paul model, judgment transfer, force multiplier, context crystal, self-evolve, COMMANDMENTS.md \u2014 8 tools, 8 commandments, 100% agent coverage"
+    },
+    {
+      "id": "34c5436a8b9a32c2",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "14c8022d167497fa\u2026",
+      "signed_at": "2026-03-07T10:05:16.228473+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "0390ef4a0528ffd2",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "1986d8c04a76b0a7\u2026",
+      "signed_at": "2026-03-07T10:05:07.225665+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "18fa5e0881226a84",
+      "type": "ship",
+      "name": "Chetana Signal Newsletter + Consent Store",
+      "sha256": "5a2b360e8a2a840a\u2026",
+      "signed_at": "2026-03-07T09:21:21.509640+00:00",
+      "url": "",
+      "note": "Consent-based newsletter capture with local SQLite storage, hashed tokens at rest, public stats, and confirm/unsubscribe flows."
+    },
+    {
+      "id": "358e4096d4fe26ba",
+      "type": "ship",
+      "name": "Chetana Discovery + Trust Surface Hardening",
+      "sha256": "28814f6bf4457764\u2026",
+      "signed_at": "2026-03-07T09:21:21.509439+00:00",
+      "url": "",
+      "note": "Honest timing/privacy claims, official resources hub, Atom feed, AI-discovery metadata, and live-route hardening for chetana.activemirror.ai."
+    },
+    {
+      "id": "efeb06dd861772b7",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "036b2a579d0f2a14\u2026",
+      "signed_at": "2026-03-07T08:41:55.912253+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "46ffee4287090dcc",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "6c49183fad432b69\u2026",
+      "signed_at": "2026-03-07T08:41:49.933939+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "a93dd095ce34984a",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "2f79f4ccfbba7059\u2026",
+      "signed_at": "2026-03-07T08:04:44.106003+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "2becad0da5e8f7d2",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "094cfc8bd06c7647\u2026",
+      "signed_at": "2026-03-07T08:04:39.473239+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "040fd0917d66f060",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "7677870baa31bef0\u2026",
+      "signed_at": "2026-03-07T07:49:29.787128+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "782653962f603617",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "29eecfd853025658\u2026",
+      "signed_at": "2026-03-07T06:29:13.577734+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "c1ea6216708c047d",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "ab49a0ff48d3e100\u2026",
+      "signed_at": "2026-03-07T06:29:03.486434+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "9c9bd0260c7eef62",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "7159a7a592acdd86\u2026",
+      "signed_at": "2026-03-07T06:26:42.957666+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "4bafb0354c5881d8",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "db7b1ab5e985c399\u2026",
+      "signed_at": "2026-03-07T06:26:36.874079+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "8ec64b7d999bff46",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "574ff67785d80f45\u2026",
+      "signed_at": "2026-03-07T06:17:51.313493+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
     }
   ]
 }
