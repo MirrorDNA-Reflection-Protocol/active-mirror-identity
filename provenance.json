@@ -7,195 +7,195 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 345,
+    "total_signed": 372,
     "by_type": {
-      "vault": 91,
-      "ship": 90,
+      "ship": 107,
+      "vault": 101,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-07T21:30:04.892251+00:00"
+    "generated_at": "2026-03-08T21:30:00.708260+00:00"
   },
   "recent": [
     {
-      "id": "f838a0ea43bd29fa",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "1d2ca1d4df3ea14e\u2026",
-      "signed_at": "2026-03-07T19:19:07.862548+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "4d4f0b8193120fef",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "190f80cbbef06fa5\u2026",
-      "signed_at": "2026-03-07T18:36:49.810851+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "8fc7acc0a8aad9bc",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "23b0f72b124e4226\u2026",
-      "signed_at": "2026-03-07T18:36:47.888331+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "e36e75ff2c87319e",
+      "id": "a70f08fe3c36265b",
       "type": "ship",
-      "name": "SCD v4 Submission Package v10",
-      "sha256": "dee59ed40ae19b94\u2026",
-      "signed_at": "2026-03-07T10:13:20.884259+00:00",
+      "name": "Chetana Public HEAD Support",
+      "sha256": "5e1133da8e949f37\u2026",
+      "signed_at": "2026-03-08T17:08:06.236104+00:00",
       "url": "",
-      "note": "Artifact-backed SCD v4 paper rewrite with claim ledger, figures, appendices, and reproducibility docs"
+      "note": "Adds explicit HEAD support for Chetana public pages so crawlers, probes, and CDN checks get 200 alongside normal GET responses"
     },
     {
-      "id": "0e159e7785c628ec",
+      "id": "7607a8aa731b89ad",
+      "type": "vault",
+      "name": "INFRASTRUCTURE.md",
+      "sha256": "a2b8fa3fd88787d3\u2026",
+      "signed_at": "2026-03-08T17:04:21.462819+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "d957b06be5a46890",
+      "type": "vault",
+      "name": "INFRASTRUCTURE.md",
+      "sha256": "21d0fb29b1ba1a05\u2026",
+      "signed_at": "2026-03-08T17:04:07.294219+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "dcc5256e533d0482",
+      "type": "vault",
+      "name": "INFRASTRUCTURE.md",
+      "sha256": "f12bbfdf61064d22\u2026",
+      "signed_at": "2026-03-08T17:04:02.339067+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "ae4ca879b5bb0edc",
+      "type": "vault",
+      "name": "INFRASTRUCTURE.md",
+      "sha256": "214337f942d29008\u2026",
+      "signed_at": "2026-03-08T17:03:56.204230+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "d23aed99c36cd38c",
       "type": "ship",
-      "name": "SCD v4 Artifact Build Harness",
-      "sha256": "4fa47a2b82342096\u2026",
-      "signed_at": "2026-03-07T10:13:20.797638+00:00",
+      "name": "Chetana Legal Renderer + Truth Surface Repair",
+      "sha256": "1196718291f1c91d\u2026",
+      "signed_at": "2026-03-08T17:03:53.323895+00:00",
       "url": "",
-      "note": "Regenerates SCD v4 tables, appendix artifacts, redacted samples, and release bundle from live MirrorDNA state"
+      "note": "Fixes live legal markdown rendering, truthful landing-page browser-model copy, and internal legal links for Chetana's public surface"
     },
     {
-      "id": "87393bdcfa82ddd0",
+      "id": "424767c869daca52",
+      "type": "vault",
+      "name": "INFRASTRUCTURE.md",
+      "sha256": "de22272f8ff2819a\u2026",
+      "signed_at": "2026-03-08T17:03:52.310148+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "73d2be7e8d8af1bb",
+      "type": "vault",
+      "name": "INFRASTRUCTURE.md",
+      "sha256": "4957a97c52953083\u2026",
+      "signed_at": "2026-03-08T17:03:38.460501+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "317bfb799ad26826",
+      "type": "vault",
+      "name": "INFRASTRUCTURE.md",
+      "sha256": "392a395876fad95e\u2026",
+      "signed_at": "2026-03-08T17:03:33.571877+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "2e912c7acaebec81",
       "type": "ship",
-      "name": "Self-Evolution Infrastructure",
-      "sha256": "3a1d204ed8871502\u2026",
-      "signed_at": "2026-03-07T10:05:34.853232+00:00",
+      "name": "Reasoning Compression v1",
+      "sha256": "b860fd84423755d9\u2026",
+      "signed_at": "2026-03-08T16:30:30.314015+00:00",
       "url": "",
-      "note": "Complete self-governance stack: SELF.md scripture, shame engine, red team, paul model, judgment transfer, force multiplier, context crystal, self-evolve, COMMANDMENTS.md \u2014 8 tools, 8 commandments, 100% agent coverage"
+      "note": "Self-distilling reasoning: capture, compress, pattern store, reuse"
     },
     {
-      "id": "34c5436a8b9a32c2",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "14c8022d167497fa\u2026",
-      "signed_at": "2026-03-07T10:05:16.228473+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "0390ef4a0528ffd2",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "1986d8c04a76b0a7\u2026",
-      "signed_at": "2026-03-07T10:05:07.225665+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "18fa5e0881226a84",
+      "id": "1c6282e70d9e1e21",
       "type": "ship",
-      "name": "Chetana Signal Newsletter + Consent Store",
-      "sha256": "5a2b360e8a2a840a\u2026",
-      "signed_at": "2026-03-07T09:21:21.509640+00:00",
+      "name": "Dashboard Intelligence v1",
+      "sha256": "2fe1aed894ebd45d\u2026",
+      "signed_at": "2026-03-08T16:30:30.102502+00:00",
       "url": "",
-      "note": "Consent-based newsletter capture with local SQLite storage, hashed tokens at rest, public stats, and confirm/unsubscribe flows."
+      "note": "Signal arbitration, impact engine, entity memory, founder dashboard"
     },
     {
-      "id": "358e4096d4fe26ba",
+      "id": "7cb196f62490b5a9",
       "type": "ship",
-      "name": "Chetana Discovery + Trust Surface Hardening",
-      "sha256": "28814f6bf4457764\u2026",
-      "signed_at": "2026-03-07T09:21:21.509439+00:00",
+      "name": "Ghost Kernel v1",
+      "sha256": "f39f33ebbdcfa3f9\u2026",
+      "signed_at": "2026-03-08T16:30:29.786714+00:00",
       "url": "",
-      "note": "Honest timing/privacy claims, official resources hub, Atom feed, AI-discovery metadata, and live-route hardening for chetana.activemirror.ai."
+      "note": "Identity persistence: self packet, continuity checksum, guardian witness"
     },
     {
-      "id": "efeb06dd861772b7",
+      "id": "64f13fd3f9592420",
+      "type": "ship",
+      "name": "MirrorResearch Agents v1",
+      "sha256": "e86a7fcad57f3989\u2026",
+      "signed_at": "2026-03-08T16:30:29.650818+00:00",
+      "url": "",
+      "note": "Autonomous research agents: RSS+GitHub+papers collect, normalize, store"
+    },
+    {
+      "id": "bf4f446945a2eeaf",
+      "type": "ship",
+      "name": "MirrorFoundry v1",
+      "sha256": "54b5619b5f4d99bf\u2026",
+      "signed_at": "2026-03-08T16:30:29.499071+00:00",
+      "url": "",
+      "note": "Adapter registry, eval court, promotion gate, semantic BIOS \u2014 port 8091"
+    },
+    {
+      "id": "cdc012b2d8507751",
+      "type": "ship",
+      "name": "Chetana Browser Guard Sandbox",
+      "sha256": "37c8e305dabb37c5\u2026",
+      "signed_at": "2026-03-08T16:23:35.239000+00:00",
+      "url": "",
+      "note": "Local-only Chetana browser guard sandbox: MV3 side-panel extension, FastAPI analyzer on :8797, module/agent contracts, trust docs, and verified demo/test harness."
+    },
+    {
+      "id": "78809072d5881378",
+      "type": "ship",
+      "name": "Chetana Browser v6 Backend",
+      "sha256": "7d6230eee9e171ed\u2026",
+      "signed_at": "2026-03-08T12:41:15.563399+00:00",
+      "url": "",
+      "note": "Trust-by-design browser companion: 3-tier ScamGate (L0 pattern\u2192L2 cloud), 6 security gates, fact checker, domain intel, manipulation detector. 20 API endpoints on port 8798. 23/23 tests pass."
+    },
+    {
+      "id": "c85b57d6ff64509c",
       "type": "vault",
       "name": "CONTINUITY.md",
-      "sha256": "036b2a579d0f2a14\u2026",
-      "signed_at": "2026-03-07T08:41:55.912253+00:00",
+      "sha256": "97b31c65d1073561\u2026",
+      "signed_at": "2026-03-08T12:38:03.112163+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     },
     {
-      "id": "46ffee4287090dcc",
+      "id": "47cd776c63c44a9f",
+      "type": "ship",
+      "name": "MirrorHealth Immune System",
+      "sha256": "cb6b2990dc1d50c0\u2026",
+      "signed_at": "2026-03-08T12:06:20.138273+00:00",
+      "url": "",
+      "note": "Self-healing health infrastructure: monitor daemon (5min), trainer daemon (mirrorhealth:latest model), dep health gate (31 packages, 6h). Auto-restart, auto-remediation, anomaly detection."
+    },
+    {
+      "id": "dbe287994a68aace",
       "type": "vault",
       "name": "CONTINUITY.md",
-      "sha256": "6c49183fad432b69\u2026",
-      "signed_at": "2026-03-07T08:41:49.933939+00:00",
+      "sha256": "a6a5d0e1b91e0b85\u2026",
+      "signed_at": "2026-03-08T12:06:10.730380+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     },
     {
-      "id": "a93dd095ce34984a",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "2f79f4ccfbba7059\u2026",
-      "signed_at": "2026-03-07T08:04:44.106003+00:00",
+      "id": "fef87e3b4f9a049f",
+      "type": "ship",
+      "name": "Organism PULSE v2",
+      "sha256": "ee2dd3b76f4d4d4c\u2026",
+      "signed_at": "2026-03-08T11:06:35.856543+00:00",
       "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "2becad0da5e8f7d2",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "094cfc8bd06c7647\u2026",
-      "signed_at": "2026-03-07T08:04:39.473239+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "040fd0917d66f060",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "7677870baa31bef0\u2026",
-      "signed_at": "2026-03-07T07:49:29.787128+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "782653962f603617",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "29eecfd853025658\u2026",
-      "signed_at": "2026-03-07T06:29:13.577734+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "c1ea6216708c047d",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "ab49a0ff48d3e100\u2026",
-      "signed_at": "2026-03-07T06:29:03.486434+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "9c9bd0260c7eef62",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "7159a7a592acdd86\u2026",
-      "signed_at": "2026-03-07T06:26:42.957666+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "4bafb0354c5881d8",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "db7b1ab5e985c399\u2026",
-      "signed_at": "2026-03-07T06:26:36.874079+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "8ec64b7d999bff46",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "574ff67785d80f45\u2026",
-      "signed_at": "2026-03-07T06:17:51.313493+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
+      "note": "Rich organism vital signs: Mac + phones + services + brain + will + goals. Written by nerve every daemon cycle."
     }
   ]
 }
