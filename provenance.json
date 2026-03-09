@@ -7,16 +7,61 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 372,
+    "total_signed": 377,
     "by_type": {
-      "ship": 107,
+      "ship": 112,
       "vault": 101,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-08T21:30:00.708260+00:00"
+    "generated_at": "2026-03-09T21:30:05.312621+00:00"
   },
   "recent": [
+    {
+      "id": "b286a632e50dcd8f",
+      "type": "ship",
+      "name": "Universal Twin Skills v1",
+      "sha256": "56b5b06f7ad5bb21\u2026",
+      "signed_at": "2026-03-09T17:34:38.285512+00:00",
+      "url": "",
+      "note": "Adds a reusable skill layer for friction removal, morning packaging, stale-assumption audits, recovery-first trust design, and shared-body hygiene on the Mac mini."
+    },
+    {
+      "id": "b3a0008e020df653",
+      "type": "ship",
+      "name": "Mirror Life Package Automation Surface",
+      "sha256": "2018403bc7748c8d\u2026",
+      "signed_at": "2026-03-09T17:34:38.271053+00:00",
+      "url": "",
+      "note": "Adds a reproducible nightly sweep that reuses healthy local services, rebuilds the Downloads morning package, verifies the live v3 stack, and writes an automation report."
+    },
+    {
+      "id": "924f15d6713a3005",
+      "type": "ship",
+      "name": "Chetana Recovery Rails + Handoff Scripts",
+      "sha256": "61a3837bfab02bd8\u2026",
+      "signed_at": "2026-03-09T16:56:23.522070+00:00",
+      "url": "",
+      "note": "Adds official India recovery escalation, RBI CMS follow-through, removes stale Google Business Messages dependency, and generates bilingual user-ready handoff scripts for v3 recovery flows."
+    },
+    {
+      "id": "4716408b69645e8d",
+      "type": "ship",
+      "name": "Chetana Sandbox Signed Contract Gate",
+      "sha256": "3d490bbdf25f324d\u2026",
+      "signed_at": "2026-03-09T07:17:26.884693+00:00",
+      "url": "",
+      "note": "Detached signatures, trusted signer metadata, revocation checks, validator enforcement, and the 8898 port isolation fix for sandbox policy/module/agent contracts."
+    },
+    {
+      "id": "853dba5be5c4503d",
+      "type": "ship",
+      "name": "Chetana Mobile Privacy Contract",
+      "sha256": "484fa7b6dc3c33c4\u2026",
+      "signed_at": "2026-03-09T07:17:26.883390+00:00",
+      "url": "",
+      "note": "Release-gate privacy boundary for future call, notification, SMS, and native-chat claims in the Chetana mobile companion."
+    },
     {
       "id": "a70f08fe3c36265b",
       "type": "ship",
@@ -151,51 +196,6 @@
       "signed_at": "2026-03-08T16:23:35.239000+00:00",
       "url": "",
       "note": "Local-only Chetana browser guard sandbox: MV3 side-panel extension, FastAPI analyzer on :8797, module/agent contracts, trust docs, and verified demo/test harness."
-    },
-    {
-      "id": "78809072d5881378",
-      "type": "ship",
-      "name": "Chetana Browser v6 Backend",
-      "sha256": "7d6230eee9e171ed\u2026",
-      "signed_at": "2026-03-08T12:41:15.563399+00:00",
-      "url": "",
-      "note": "Trust-by-design browser companion: 3-tier ScamGate (L0 pattern\u2192L2 cloud), 6 security gates, fact checker, domain intel, manipulation detector. 20 API endpoints on port 8798. 23/23 tests pass."
-    },
-    {
-      "id": "c85b57d6ff64509c",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "97b31c65d1073561\u2026",
-      "signed_at": "2026-03-08T12:38:03.112163+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "47cd776c63c44a9f",
-      "type": "ship",
-      "name": "MirrorHealth Immune System",
-      "sha256": "cb6b2990dc1d50c0\u2026",
-      "signed_at": "2026-03-08T12:06:20.138273+00:00",
-      "url": "",
-      "note": "Self-healing health infrastructure: monitor daemon (5min), trainer daemon (mirrorhealth:latest model), dep health gate (31 packages, 6h). Auto-restart, auto-remediation, anomaly detection."
-    },
-    {
-      "id": "dbe287994a68aace",
-      "type": "vault",
-      "name": "CONTINUITY.md",
-      "sha256": "a6a5d0e1b91e0b85\u2026",
-      "signed_at": "2026-03-08T12:06:10.730380+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "fef87e3b4f9a049f",
-      "type": "ship",
-      "name": "Organism PULSE v2",
-      "sha256": "ee2dd3b76f4d4d4c\u2026",
-      "signed_at": "2026-03-08T11:06:35.856543+00:00",
-      "url": "",
-      "note": "Rich organism vital signs: Mac + phones + services + brain + will + goals. Written by nerve every daemon cycle."
     }
   ]
 }
