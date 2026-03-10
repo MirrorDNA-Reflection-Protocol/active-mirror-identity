@@ -7,16 +7,169 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 377,
+    "total_signed": 394,
     "by_type": {
-      "ship": 112,
-      "vault": 101,
+      "ship": 128,
+      "vault": 102,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-09T21:30:05.312621+00:00"
+    "generated_at": "2026-03-10T21:30:02.311226+00:00"
   },
   "recent": [
+    {
+      "id": "91565c59723f7a4c",
+      "type": "ship",
+      "name": "Supervisor Ownership Consolidation",
+      "sha256": "9ba9b7e3013c1cad\u2026",
+      "signed_at": "2026-03-10T12:41:15.618096+00:00",
+      "url": "",
+      "note": "Retires legacy mirror-supervisor ownership, points guards at ai.mirrordna.supervisor, and removes the phantom supervisord supervisor path."
+    },
+    {
+      "id": "d8a2dc009003d702",
+      "type": "ship",
+      "name": "Keychain Launchd Secret Wrapper",
+      "sha256": "ee19db91da03a850\u2026",
+      "signed_at": "2026-03-10T12:41:15.605041+00:00",
+      "url": "",
+      "note": "Standardizes launchd env loading through Keychain-backed secrets catalog, load_keys.sh, and secrets.env shim."
+    },
+    {
+      "id": "d57c48b136c0cede",
+      "type": "ship",
+      "name": "Operator Audit Dashboard",
+      "sha256": "a7a5037578e9bc34\u2026",
+      "signed_at": "2026-03-10T12:41:15.605004+00:00",
+      "url": "",
+      "note": "Consolidated live service ledger and dashboard at :8903/audit with public health, ownership, zombie, and secrets lanes."
+    },
+    {
+      "id": "114dc90e5e11c14b",
+      "type": "ship",
+      "name": "AMOS Memory Helper",
+      "sha256": "53a8ae6d2ec5d22d\u2026",
+      "signed_at": "2026-03-10T11:26:42.133993+00:00",
+      "url": "",
+      "note": "Session distillation, fact store, open-loop tracker, prompt packet generator for token efficiency. Port 8905."
+    },
+    {
+      "id": "b8a9cae8812ccce9",
+      "type": "ship",
+      "name": "MirrorGraph Substrate",
+      "sha256": "536c0c86970e163a\u2026",
+      "signed_at": "2026-03-10T11:26:42.059363+00:00",
+      "url": "",
+      "note": "Typed graph fabric: 58 nodes bootstrapped, typed edges, D3 export, mission subgraphs. Port 8904."
+    },
+    {
+      "id": "b96a4a57d089ef9e",
+      "type": "ship",
+      "name": "Mirror Observatory",
+      "sha256": "511f6ec309670ea5\u2026",
+      "signed_at": "2026-03-10T11:26:41.989588+00:00",
+      "url": "",
+      "note": "Live service topology graph UI, MirrorPulse feed, force-graph visualization. Port 8903."
+    },
+    {
+      "id": "76d112d2fcdfcd85",
+      "type": "ship",
+      "name": "MirrorResearchAgents",
+      "sha256": "c861cc36fcc8bdd9\u2026",
+      "signed_at": "2026-03-10T10:54:16.684224+00:00",
+      "url": "",
+      "note": "Autonomous research agents: RSS+GitHub+news pipeline. 40 signals collected. Runs hourly."
+    },
+    {
+      "id": "0622a95cc4aa2e4f",
+      "type": "ship",
+      "name": "AMOS Kernel",
+      "sha256": "19165e98b8911f0d\u2026",
+      "signed_at": "2026-03-10T10:54:16.541905+00:00",
+      "url": "",
+      "note": "AMOS Docker spine: Postgres(5433) + NATS(4223) + OTel + DBOS kernel. All containers healthy."
+    },
+    {
+      "id": "2c13cd371dfa8ccc",
+      "type": "ship",
+      "name": "Cognitive Kernel Stack",
+      "sha256": "b1286c0baa8b44f2\u2026",
+      "signed_at": "2026-03-10T10:54:16.411529+00:00",
+      "url": "",
+      "note": "Cognitive kernel + skill registry + skill runtime. 3 Docker services deployed."
+    },
+    {
+      "id": "87d0dae6cdb00309",
+      "type": "ship",
+      "name": "PAM v1",
+      "sha256": "92909f01005aeb4a\u2026",
+      "signed_at": "2026-03-10T10:35:10.182039+00:00",
+      "url": "",
+      "note": "Personal Agent Mesh with Ed25519 phone-signed approvals. LaunchAgent deployed."
+    },
+    {
+      "id": "ecd4dd70eb90c64d",
+      "type": "ship",
+      "name": "Browser Guardian v1",
+      "sha256": "c7b42a2a6f19ae5e\u2026",
+      "signed_at": "2026-03-10T10:35:10.081000+00:00",
+      "url": "",
+      "note": "Page risk scoring 0-100 with scam/phishing detection. LaunchAgent deployed."
+    },
+    {
+      "id": "b6a96f4a8920524c",
+      "type": "ship",
+      "name": "CPAG v2",
+      "sha256": "46d58153273f291b\u2026",
+      "signed_at": "2026-03-10T10:35:09.989315+00:00",
+      "url": "",
+      "note": "Mac brain decision engine: allow/warn/block/require_approval per page event. LaunchAgent deployed."
+    },
+    {
+      "id": "56a853cdba79248e",
+      "type": "vault",
+      "name": "MISTAKES.md",
+      "sha256": "d01de98e3b4ded05\u2026",
+      "signed_at": "2026-03-10T10:15:03.816925+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "15fc9d0ccdfc2e21",
+      "type": "ship",
+      "name": "Ollama Model Audit + Cleanup",
+      "sha256": "406332550a2bc9c2\u2026",
+      "signed_at": "2026-03-10T09:48:27.600710+00:00",
+      "url": "",
+      "note": "Audited 17 models across scripts/ and repos/. Deleted 6 unused: phi4:latest(9.1GB), chetana-guard:latest(9.1GB), olmo2:7b(4.5GB), qwen2.5vl:7b(6.0GB), vajra-shield(2GB), kavach-shield(2GB)=32.7GB freed. Rebuilt vajra-shield from ~/repos/kavach/Modelfile. Lesson: audit must include ~/repos/ not just ~/.mirrordna/scripts/"
+    },
+    {
+      "id": "67e9d59dfb453304",
+      "type": "ship",
+      "name": "S0 Sensory Substrate + Human-Like Memory Stack",
+      "sha256": "42bc8357464cd403\u2026",
+      "signed_at": "2026-03-10T09:48:15.325138+00:00",
+      "url": "",
+      "note": "VSM S0 transduction layer (30s polls Mac+phone vitals), nightly sleep consolidation at 3AM (SWS\u2192Mnemosyne + REM dreams), session seeder loading 30 active memories at boot, Mnemosyne activator (481/785 memories now active). 4 LaunchAgents. 32.7GB freed (6 Ollama models removed, vajra-shield rebuilt)"
+    },
+    {
+      "id": "f1540d324f5dc6a4",
+      "type": "ship",
+      "name": "Mirror Life Suite",
+      "sha256": "96447ffba6b64724\u2026",
+      "signed_at": "2026-03-10T06:38:24.709610+00:00",
+      "url": "",
+      "note": "Creates a dedicated product-line repo for Mirror Life, Active Mirror, and Active Mirror Enterprise with shared-core strategy, machine-readable manifests, and a local product studio."
+    },
+    {
+      "id": "1d02715985ddc50d",
+      "type": "ship",
+      "name": "Mirror Life Product Studio",
+      "sha256": "d8007cf44a5edaa2\u2026",
+      "signed_at": "2026-03-10T06:38:24.709596+00:00",
+      "url": "",
+      "note": "Adds a local visual studio for the personal, consumer, and enterprise product surfaces with a reusable launcher and shared-body-safe local serving flow."
+    },
     {
       "id": "b286a632e50dcd8f",
       "type": "ship",
@@ -43,159 +196,6 @@
       "signed_at": "2026-03-09T16:56:23.522070+00:00",
       "url": "",
       "note": "Adds official India recovery escalation, RBI CMS follow-through, removes stale Google Business Messages dependency, and generates bilingual user-ready handoff scripts for v3 recovery flows."
-    },
-    {
-      "id": "4716408b69645e8d",
-      "type": "ship",
-      "name": "Chetana Sandbox Signed Contract Gate",
-      "sha256": "3d490bbdf25f324d\u2026",
-      "signed_at": "2026-03-09T07:17:26.884693+00:00",
-      "url": "",
-      "note": "Detached signatures, trusted signer metadata, revocation checks, validator enforcement, and the 8898 port isolation fix for sandbox policy/module/agent contracts."
-    },
-    {
-      "id": "853dba5be5c4503d",
-      "type": "ship",
-      "name": "Chetana Mobile Privacy Contract",
-      "sha256": "484fa7b6dc3c33c4\u2026",
-      "signed_at": "2026-03-09T07:17:26.883390+00:00",
-      "url": "",
-      "note": "Release-gate privacy boundary for future call, notification, SMS, and native-chat claims in the Chetana mobile companion."
-    },
-    {
-      "id": "a70f08fe3c36265b",
-      "type": "ship",
-      "name": "Chetana Public HEAD Support",
-      "sha256": "5e1133da8e949f37\u2026",
-      "signed_at": "2026-03-08T17:08:06.236104+00:00",
-      "url": "",
-      "note": "Adds explicit HEAD support for Chetana public pages so crawlers, probes, and CDN checks get 200 alongside normal GET responses"
-    },
-    {
-      "id": "7607a8aa731b89ad",
-      "type": "vault",
-      "name": "INFRASTRUCTURE.md",
-      "sha256": "a2b8fa3fd88787d3\u2026",
-      "signed_at": "2026-03-08T17:04:21.462819+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "d957b06be5a46890",
-      "type": "vault",
-      "name": "INFRASTRUCTURE.md",
-      "sha256": "21d0fb29b1ba1a05\u2026",
-      "signed_at": "2026-03-08T17:04:07.294219+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "dcc5256e533d0482",
-      "type": "vault",
-      "name": "INFRASTRUCTURE.md",
-      "sha256": "f12bbfdf61064d22\u2026",
-      "signed_at": "2026-03-08T17:04:02.339067+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "ae4ca879b5bb0edc",
-      "type": "vault",
-      "name": "INFRASTRUCTURE.md",
-      "sha256": "214337f942d29008\u2026",
-      "signed_at": "2026-03-08T17:03:56.204230+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "d23aed99c36cd38c",
-      "type": "ship",
-      "name": "Chetana Legal Renderer + Truth Surface Repair",
-      "sha256": "1196718291f1c91d\u2026",
-      "signed_at": "2026-03-08T17:03:53.323895+00:00",
-      "url": "",
-      "note": "Fixes live legal markdown rendering, truthful landing-page browser-model copy, and internal legal links for Chetana's public surface"
-    },
-    {
-      "id": "424767c869daca52",
-      "type": "vault",
-      "name": "INFRASTRUCTURE.md",
-      "sha256": "de22272f8ff2819a\u2026",
-      "signed_at": "2026-03-08T17:03:52.310148+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "73d2be7e8d8af1bb",
-      "type": "vault",
-      "name": "INFRASTRUCTURE.md",
-      "sha256": "4957a97c52953083\u2026",
-      "signed_at": "2026-03-08T17:03:38.460501+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "317bfb799ad26826",
-      "type": "vault",
-      "name": "INFRASTRUCTURE.md",
-      "sha256": "392a395876fad95e\u2026",
-      "signed_at": "2026-03-08T17:03:33.571877+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "2e912c7acaebec81",
-      "type": "ship",
-      "name": "Reasoning Compression v1",
-      "sha256": "b860fd84423755d9\u2026",
-      "signed_at": "2026-03-08T16:30:30.314015+00:00",
-      "url": "",
-      "note": "Self-distilling reasoning: capture, compress, pattern store, reuse"
-    },
-    {
-      "id": "1c6282e70d9e1e21",
-      "type": "ship",
-      "name": "Dashboard Intelligence v1",
-      "sha256": "2fe1aed894ebd45d\u2026",
-      "signed_at": "2026-03-08T16:30:30.102502+00:00",
-      "url": "",
-      "note": "Signal arbitration, impact engine, entity memory, founder dashboard"
-    },
-    {
-      "id": "7cb196f62490b5a9",
-      "type": "ship",
-      "name": "Ghost Kernel v1",
-      "sha256": "f39f33ebbdcfa3f9\u2026",
-      "signed_at": "2026-03-08T16:30:29.786714+00:00",
-      "url": "",
-      "note": "Identity persistence: self packet, continuity checksum, guardian witness"
-    },
-    {
-      "id": "64f13fd3f9592420",
-      "type": "ship",
-      "name": "MirrorResearch Agents v1",
-      "sha256": "e86a7fcad57f3989\u2026",
-      "signed_at": "2026-03-08T16:30:29.650818+00:00",
-      "url": "",
-      "note": "Autonomous research agents: RSS+GitHub+papers collect, normalize, store"
-    },
-    {
-      "id": "bf4f446945a2eeaf",
-      "type": "ship",
-      "name": "MirrorFoundry v1",
-      "sha256": "54b5619b5f4d99bf\u2026",
-      "signed_at": "2026-03-08T16:30:29.499071+00:00",
-      "url": "",
-      "note": "Adapter registry, eval court, promotion gate, semantic BIOS \u2014 port 8091"
-    },
-    {
-      "id": "cdc012b2d8507751",
-      "type": "ship",
-      "name": "Chetana Browser Guard Sandbox",
-      "sha256": "37c8e305dabb37c5\u2026",
-      "signed_at": "2026-03-08T16:23:35.239000+00:00",
-      "url": "",
-      "note": "Local-only Chetana browser guard sandbox: MV3 side-panel extension, FastAPI analyzer on :8797, module/agent contracts, trust docs, and verified demo/test harness."
     }
   ]
 }
