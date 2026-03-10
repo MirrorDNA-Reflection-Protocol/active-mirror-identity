@@ -46,13 +46,21 @@ class TestAMIKernel(unittest.TestCase):
 
     def test_firewall_protection(self):
         # Allow normal update
-        valid, msg = self.firewall.validate_proposal({"note": "hello"})
+        valid, msg = self.firewall.validate_proposal({"note": "hello"}, source="internal_test")
         self.assertTrue(valid)
 
         # Block protected update
-        valid, msg = self.firewall.validate_proposal({"identity.human.name": "Different Name"})
+        valid, msg = self.firewall.validate_proposal(
+            {"identity.human.name": "Different Name"},
+            source="internal_test",
+        )
         self.assertFalse(valid)
         self.assertIn("protected identity fields", msg)
+
+        # Block unknown sources before content checks
+        valid, msg = self.firewall.validate_proposal({"note": "hello"}, source="unknown")
+        self.assertFalse(valid)
+        self.assertIn("Unauthorized Source", msg)
 
     def test_determinism(self):
         """Ensure same content yields same checksum"""

@@ -12,8 +12,26 @@ class VaultSyncModule(AMIKernelModule):
     
     def __init__(self, kernel_path: str = None, vault_path: str = None):
         super().__init__(kernel_path)
-        # Default Vault assumption
-        self.VAULT_ROOT = vault_path or os.path.expanduser("~/Documents/Obsidian/MirrorDNA-Vault")
+        self.VAULT_ROOT = vault_path or self._resolve_vault_root()
+
+    def _resolve_vault_root(self) -> str:
+        """Resolve the canonical vault path across older and newer layouts."""
+        candidates = [
+            os.environ.get("MIRRORDNA_VAULT"),
+            "~/MirrorDNA-Vault",
+            "~/Documents/MirrorDNA-Vault",
+            "~/Documents/Obsidian/MirrorDNA-Vault",
+        ]
+
+        for candidate in candidates:
+            if not candidate:
+                continue
+            expanded = os.path.expanduser(candidate)
+            if os.path.exists(expanded):
+                return expanded
+
+        # Preserve the modern preferred location even when the vault is offline.
+        return os.path.expanduser("~/MirrorDNA-Vault")
 
     def sync_vault(self, event_type: str, content: str) -> Dict[str, Any]:
         """

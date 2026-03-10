@@ -5,7 +5,24 @@ import re
 # ⟡ Vault Hydrator (Week 3)
 # Scans Obsidian Vault for SCD State and hydrates the Kernel.
 
-VAULT_PATH = os.path.expanduser("~/Documents/Obsidian/MirrorDNA-Vault")
+def resolve_vault_path():
+    candidates = [
+        os.environ.get("MIRRORDNA_VAULT"),
+        "~/MirrorDNA-Vault",
+        "~/Documents/MirrorDNA-Vault",
+        "~/Documents/Obsidian/MirrorDNA-Vault",
+    ]
+
+    for candidate in candidates:
+        if not candidate:
+            continue
+        expanded = os.path.expanduser(candidate)
+        if os.path.exists(expanded):
+            return expanded
+
+    return os.path.expanduser("~/MirrorDNA-Vault")
+
+VAULT_PATH = resolve_vault_path()
 # Auto-detect kernel
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)

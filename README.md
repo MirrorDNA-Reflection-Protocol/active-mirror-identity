@@ -11,6 +11,7 @@
 ## Architecture
 AMI operates as **L1 Identity Kernel** within the ActiveMirrorOS Architecture Spine.
 See [Architecture Binding](docs/ARCHITECTURE_SPINE_BINDING.md).
+AMI is also the shared first-class identity primitive across phones, Macs, and agent sessions: one `ami_id`, many embodiments, bounded by provenance and governance.
 
 ---
 
@@ -20,6 +21,7 @@ AMI is a **modular identity kernel** that gives you persistent, cross-platform A
 
 - **⟡ User-Sovereign**: The kernel file lives in YOUR storage
 - **◈ Cross-Platform**: Works on Claude, Antigravity, Ollama, any MCP-compatible AI
+- **Embodied**: One identity shared across phone, Mac, and model surfaces
 - **△ 10 Core Modules**: Temporal, Emotional, Consensus, Retrieval, Vault, Timeline, Mirrors, Recovery, Persona, Collaboration
 - **Open Source**: MIT licensed
 
@@ -117,6 +119,7 @@ See [docs/QUICKSTART.md](./docs/QUICKSTART.md) for full setup.
 |----------|-------------|
 | [QUICKSTART.md](./docs/QUICKSTART.md) | 5-minute setup guide |
 | [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | System design |
+| [AMI_CANON_COURT_v1.1.md](./docs/AMI_CANON_COURT_v1.1.md) | Shared identity, embodiment, and provenance canon |
 | [API_REFERENCE.md](./docs/API_REFERENCE.md) | All MCP tools |
 | [KERNEL_SPEC.md](./docs/KERNEL_SPEC.md) | JSON schema |
 | [FOR_HUMANS.md](./docs/FOR_HUMANS.md) | Non-technical overview |
