@@ -7,195 +7,195 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 394,
+    "total_signed": 422,
     "by_type": {
-      "ship": 128,
+      "ship": 156,
       "vault": 102,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-10T21:30:02.311226+00:00"
+    "generated_at": "2026-03-11T21:30:04.935924+00:00"
   },
   "recent": [
     {
-      "id": "91565c59723f7a4c",
+      "id": "f11f0de3181d8f7f",
       "type": "ship",
-      "name": "Supervisor Ownership Consolidation",
-      "sha256": "9ba9b7e3013c1cad\u2026",
-      "signed_at": "2026-03-10T12:41:15.618096+00:00",
+      "name": "Chetana Strict Public Scan Policy",
+      "sha256": "0278be255301928f\u2026",
+      "signed_at": "2026-03-11T14:05:54.601367+00:00",
       "url": "",
-      "note": "Retires legacy mirror-supervisor ownership, points guards at ai.mirrordna.supervisor, and removes the phantom supervisord supervisor path."
+      "note": "Wraps public Chetana scan outputs in strict disclaimers, softened certainty, fake-citation stripping, and recovery rails before they leave the edge."
     },
     {
-      "id": "d8a2dc009003d702",
+      "id": "aded33f54c20116c",
       "type": "ship",
-      "name": "Keychain Launchd Secret Wrapper",
-      "sha256": "ee19db91da03a850\u2026",
-      "signed_at": "2026-03-10T12:41:15.605041+00:00",
+      "name": "ActiveMirror App Route Fallback",
+      "sha256": "45491c6445b7a698\u2026",
+      "signed_at": "2026-03-11T14:05:54.601030+00:00",
       "url": "",
-      "note": "Standardizes launchd env loading through Keychain-backed secrets catalog, load_keys.sh, and secrets.env shim."
+      "note": "Adds the browser workspace to the static SPA fallback map so direct public hits to /app resolve cleanly with route-specific metadata."
     },
     {
-      "id": "d57c48b136c0cede",
+      "id": "edc4647c66056a86",
       "type": "ship",
-      "name": "Operator Audit Dashboard",
-      "sha256": "a7a5037578e9bc34\u2026",
-      "signed_at": "2026-03-10T12:41:15.605004+00:00",
+      "name": "ActiveMirror Visitor Mirror Polish",
+      "sha256": "39cfc5a1b8568d7b\u2026",
+      "signed_at": "2026-03-11T14:05:54.600422+00:00",
       "url": "",
-      "note": "Consolidated live service ledger and dashboard at :8903/audit with public health, ownership, zombie, and secrets lanes."
+      "note": "Removes public routing/model debug chrome, keeps the reflective entry state clean, and verifies the live mirror experience on the edge."
     },
     {
-      "id": "114dc90e5e11c14b",
+      "id": "9542d614b7cb2909",
       "type": "ship",
-      "name": "AMOS Memory Helper",
-      "sha256": "53a8ae6d2ec5d22d\u2026",
-      "signed_at": "2026-03-10T11:26:42.133993+00:00",
+      "name": "ActiveMirror Browser App Shell",
+      "sha256": "a63b9ea196174819\u2026",
+      "signed_at": "2026-03-11T13:19:14.240705+00:00",
       "url": "",
-      "note": "Session distillation, fact store, open-loop tracker, prompt packet generator for token efficiency. Port 8905."
+      "note": "Adds a local /app browser workspace with shared MirrorBrain glyph grammar, deep-linkable panes, pulse/atlas/memory/proof/actions surfaces, and route wiring across site navigation."
     },
     {
-      "id": "b8a9cae8812ccce9",
+      "id": "27f1049d30a1e178",
       "type": "ship",
-      "name": "MirrorGraph Substrate",
-      "sha256": "536c0c86970e163a\u2026",
-      "signed_at": "2026-03-10T11:26:42.059363+00:00",
+      "name": "Chetana Visible Assistant Surface",
+      "sha256": "94b441ca078645f1\u2026",
+      "signed_at": "2026-03-11T12:49:44.360491+00:00",
       "url": "",
-      "note": "Typed graph fabric: 58 nodes bootstrapped, typed edges, D3 export, mission subgraphs. Port 8904."
+      "note": "Makes the public Chetana shell visibly first-class by adding a top-of-page Talk to Chetana assistant, direct guided-intake launch, proof metrics for research/capture/recovery, and a Safety Chat route, then re-verifies the live browser flow and scan path."
     },
     {
-      "id": "b96a4a57d089ef9e",
+      "id": "ae0c2e751db9cd4e",
       "type": "ship",
-      "name": "Mirror Observatory",
-      "sha256": "511f6ec309670ea5\u2026",
-      "signed_at": "2026-03-10T11:26:41.989588+00:00",
+      "name": "Chetana Research Radar + Eval Lab",
+      "sha256": "55db3d51ec20fa37\u2026",
+      "signed_at": "2026-03-11T12:31:53.349980+00:00",
       "url": "",
-      "note": "Live service topology graph UI, MirrorPulse feed, force-graph visualization. Port 8903."
+      "note": "Adds a curated official/GitHub/paper source registry, ranked capture-method backlog, operator benchmark harness, live research-map and sync APIs, and repairs the public off-topic advice prompt so Chetana improves against tracked sources and exposed gaps rather than ad hoc notes."
     },
     {
-      "id": "76d112d2fcdfcd85",
+      "id": "d687b0bd1aadc86a",
       "type": "ship",
-      "name": "MirrorResearchAgents",
-      "sha256": "c861cc36fcc8bdd9\u2026",
-      "signed_at": "2026-03-10T10:54:16.684224+00:00",
+      "name": "ActiveMirror Homepage Balance Pass Live",
+      "sha256": "59ff89751c2efd0d\u2026",
+      "signed_at": "2026-03-11T10:54:37.331618+00:00",
       "url": "",
-      "note": "Autonomous research agents: RSS+GitHub+news pipeline. 40 signals collected. Runs hourly."
+      "note": "Shrinks and rebalances the homepage hero/atlas composition and publishes the live activemirror.ai front door with verified smoke checks."
     },
     {
-      "id": "0622a95cc4aa2e4f",
+      "id": "c194d73784566d81",
       "type": "ship",
-      "name": "AMOS Kernel",
-      "sha256": "19165e98b8911f0d\u2026",
-      "signed_at": "2026-03-10T10:54:16.541905+00:00",
+      "name": "Chetana Public Surface Hardening",
+      "sha256": "61b479d112eba025\u2026",
+      "signed_at": "2026-03-11T10:29:32.666874+00:00",
       "url": "",
-      "note": "AMOS Docker spine: Postgres(5433) + NATS(4223) + OTel + DBOS kernel. All containers healthy."
+      "note": "Hardens the live Chetana public surface by redirecting the root to the current UI, trusting forwarded client IPs behind Cloudflare for rate limiting, restricting raw state/privacy/event/legacy voice-path endpoints to operator access, rate-limiting public write and upload routes, capping OCR upload size, server-deriving public threat-report identity, and re-verifying the exposed routes blocked on the public edge while scan surfaces remain live."
     },
     {
-      "id": "2c13cd371dfa8ccc",
+      "id": "bf3ce635d018698b",
       "type": "ship",
-      "name": "Cognitive Kernel Stack",
-      "sha256": "b1286c0baa8b44f2\u2026",
-      "signed_at": "2026-03-10T10:54:16.411529+00:00",
+      "name": "Chetana Rescue + Merchant + Graph Runtime",
+      "sha256": "927ed00f405a32b6\u2026",
+      "signed_at": "2026-03-11T10:07:49.024655+00:00",
       "url": "",
-      "note": "Cognitive kernel + skill registry + skill runtime. 3 Docker services deployed."
+      "note": "Upgrades Chetana from score-only checks into recovery-first product flows by adding merchant proof review, graph memory across repeated entities, heuristic provenance checks in media analysis, dynamic product stats, Rescue Mode and case-packet actions in the expert UI, a Merchant tab, and stable legacy media summary/card routes, then re-verifies the live service and public edge."
     },
     {
-      "id": "87d0dae6cdb00309",
+      "id": "f713349243eabd43",
       "type": "ship",
-      "name": "PAM v1",
-      "sha256": "92909f01005aeb4a\u2026",
-      "signed_at": "2026-03-10T10:35:10.182039+00:00",
+      "name": "ActiveMirror Copy Decringe + BrainScan Fallback",
+      "sha256": "553f170415272198\u2026",
+      "signed_at": "2026-03-11T10:02:17.224954+00:00",
       "url": "",
-      "note": "Personal Agent Mesh with Ed25519 phone-signed approvals. LaunchAgent deployed."
+      "note": "Removes strategy-speak from current activemirror.ai user-facing entry surfaces and adds a local-safe BrainScan fallback so /start works cleanly off production origins."
     },
     {
-      "id": "ecd4dd70eb90c64d",
+      "id": "0bd0fe90efb252cf",
       "type": "ship",
-      "name": "Browser Guardian v1",
-      "sha256": "c7b42a2a6f19ae5e\u2026",
-      "signed_at": "2026-03-10T10:35:10.081000+00:00",
+      "name": "Approvald Keyring Rotation + CLI Auth",
+      "sha256": "06655991a47772c7\u2026",
+      "signed_at": "2026-03-11T08:38:02.020802+00:00",
       "url": "",
-      "note": "Page risk scoring 0-100 with scam/phishing detection. LaunchAgent deployed."
+      "note": "Adds key_id-aware verification, local CLI operator auth via sudo validation, and signing-key rotation with overlap windows for approval receipts and capability leases."
     },
     {
-      "id": "b6a96f4a8920524c",
+      "id": "5fa295833d87082b",
       "type": "ship",
-      "name": "CPAG v2",
-      "sha256": "46d58153273f291b\u2026",
-      "signed_at": "2026-03-10T10:35:09.989315+00:00",
+      "name": "Approvald Auth + Rotation Harnesses",
+      "sha256": "0da6a356199a5205\u2026",
+      "signed_at": "2026-03-11T08:38:02.020749+00:00",
       "url": "",
-      "note": "Mac brain decision engine: allow/warn/block/require_approval per page event. LaunchAgent deployed."
+      "note": "Adds CLI auth and key rotation regression harnesses and wires them into gate_evolution so signer hardening stays verified in the live scheduler lane."
     },
     {
-      "id": "56a853cdba79248e",
-      "type": "vault",
-      "name": "MISTAKES.md",
-      "sha256": "d01de98e3b4ded05\u2026",
-      "signed_at": "2026-03-10T10:15:03.816925+00:00",
+      "id": "a256f3a480b833d2",
+      "type": "ship",
+      "name": "ActiveMirror Homepage Atlas Alignment Fix",
+      "sha256": "14f6f8c28a783285\u2026",
+      "signed_at": "2026-03-11T08:22:03.555127+00:00",
       "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
+      "note": "Fixes the homepage atlas transform/clipping bug, re-centers the ecosystem nodes, and widens the journey sequence so desktop and mobile read cleanly."
     },
     {
-      "id": "15fc9d0ccdfc2e21",
+      "id": "88e57086a68a5cc8",
       "type": "ship",
-      "name": "Ollama Model Audit + Cleanup",
-      "sha256": "406332550a2bc9c2\u2026",
-      "signed_at": "2026-03-10T09:48:27.600710+00:00",
+      "name": "Chetana Trust Contract + Product Truth Cleanup",
+      "sha256": "de8e1e97d724af31\u2026",
+      "signed_at": "2026-03-11T08:15:03.091959+00:00",
       "url": "",
-      "note": "Audited 17 models across scripts/ and repos/. Deleted 6 unused: phi4:latest(9.1GB), chetana-guard:latest(9.1GB), olmo2:7b(4.5GB), qwen2.5vl:7b(6.0GB), vajra-shield(2GB), kavach-shield(2GB)=32.7GB freed. Rebuilt vajra-shield from ~/repos/kavach/Modelfile. Lesson: audit must include ~/repos/ not just ~/.mirrordna/scripts/"
+      "note": "Makes Chetana a more first-class public trust product by replacing stale Chakshu/TRAI and intel-source claims, adding a centralized trust_contract module with official recovery rails and C2PA provenance references, exposing /api/recovery/rails, /api/recovery/packet, and /api/provenance/stack, upgrading evidence bundles into structured recovery packets, and refreshing public/about/threat surfaces plus multilingual copy to match the live system."
     },
     {
-      "id": "67e9d59dfb453304",
+      "id": "6bdca89b5af4fa04",
       "type": "ship",
-      "name": "S0 Sensory Substrate + Human-Like Memory Stack",
-      "sha256": "42bc8357464cd403\u2026",
-      "signed_at": "2026-03-10T09:48:15.325138+00:00",
+      "name": "Verify-Only Approval Daemon Split",
+      "sha256": "a3d829e9a1f6f389\u2026",
+      "signed_at": "2026-03-11T08:05:50.698437+00:00",
       "url": "",
-      "note": "VSM S0 transduction layer (30s polls Mac+phone vitals), nightly sleep consolidation at 3AM (SWS\u2192Mnemosyne + REM dreams), session seeder loading 30 active memories at boot, Mnemosyne activator (481/785 memories now active). 4 LaunchAgents. 32.7GB freed (6 Ollama models removed, vajra-shield rebuilt)"
+      "note": "Separates launchd verification from human-triggered issuance by disabling HTTP issue endpoints in verify-only daemon mode while keeping CLI issuance available."
     },
     {
-      "id": "f1540d324f5dc6a4",
+      "id": "d28165af257a2e97",
       "type": "ship",
-      "name": "Mirror Life Suite",
-      "sha256": "96447ffba6b64724\u2026",
-      "signed_at": "2026-03-10T06:38:24.709610+00:00",
+      "name": "Approval Verify LaunchAgent Installer",
+      "sha256": "f6f11415212edef2\u2026",
+      "signed_at": "2026-03-11T08:05:50.698395+00:00",
       "url": "",
-      "note": "Creates a dedicated product-line repo for Mirror Life, Active Mirror, and Active Mirror Enterprise with shared-core strategy, machine-readable manifests, and a local product studio."
+      "note": "Installs and loads a dedicated verify-only approvald LaunchAgent with minimal runtime sync and standard newproject port_guard plumbing."
     },
     {
-      "id": "1d02715985ddc50d",
+      "id": "b76728a3c8c23ee2",
       "type": "ship",
-      "name": "Mirror Life Product Studio",
-      "sha256": "d8007cf44a5edaa2\u2026",
-      "signed_at": "2026-03-10T06:38:24.709596+00:00",
+      "name": "Containment-Safe Automation Scheduler",
+      "sha256": "4924aa3d945f102b\u2026",
+      "signed_at": "2026-03-11T07:16:54.090096+00:00",
       "url": "",
-      "note": "Adds a local visual studio for the personal, consumer, and enterprise product surfaces with a reusable launcher and shared-body-safe local serving flow."
+      "note": "Removes ad-hoc PyYAML dependency from the scheduler path so recurring automation still parses policy and logs correctly inside containment."
     },
     {
-      "id": "b286a632e50dcd8f",
+      "id": "8b383dad6f5d718d",
       "type": "ship",
-      "name": "Universal Twin Skills v1",
-      "sha256": "56b5b06f7ad5bb21\u2026",
-      "signed_at": "2026-03-09T17:34:38.285512+00:00",
+      "name": "Automation Containment Runtime",
+      "sha256": "e82a519bea5651de\u2026",
+      "signed_at": "2026-03-11T07:16:54.037617+00:00",
       "url": "",
-      "note": "Adds a reusable skill layer for friction removal, morning packaging, stale-assumption audits, recovery-first trust design, and shared-body hygiene on the Mac mini."
+      "note": "Adds sandbox-exec containment with local-loopback mode, readonly roots, nested-containment inheritance, and in-cell temp dirs for typed work orders."
     },
     {
-      "id": "b3a0008e020df653",
+      "id": "505c0bb5d914300b",
       "type": "ship",
-      "name": "Mirror Life Package Automation Surface",
-      "sha256": "2018403bc7748c8d\u2026",
-      "signed_at": "2026-03-09T17:34:38.271053+00:00",
+      "name": "Approval Signing Service",
+      "sha256": "fcf9be3dc94f90df\u2026",
+      "signed_at": "2026-03-11T07:16:54.000831+00:00",
       "url": "",
-      "note": "Adds a reproducible nightly sweep that reuses healthy local services, rebuilds the Downloads morning package, verifies the live v3 stack, and writes an automation report."
+      "note": "Adds a body-local approval signer with key bootstrap, issue/verify endpoints, and signed approval/lease documents."
     },
     {
-      "id": "924f15d6713a3005",
+      "id": "c83dd59669dca8d9",
       "type": "ship",
-      "name": "Chetana Recovery Rails + Handoff Scripts",
-      "sha256": "61a3837bfab02bd8\u2026",
-      "signed_at": "2026-03-09T16:56:23.522070+00:00",
+      "name": "Runtime Truth Cleanup + Brief Restore",
+      "sha256": "6f028d0b0216f733\u2026",
+      "signed_at": "2026-03-11T07:12:58.299738+00:00",
       "url": "",
-      "note": "Adds official India recovery escalation, RBI CMS follow-through, removes stale Google Business Messages dependency, and generates bilingual user-ready handoff scripts for v3 recovery flows."
+      "note": "Restores brief.activemirror.ai by bootstrapping ai.mirrordna.brief.api on :8200, rewrites kernel truth from phantom :8892 to com.mirrordna.newproject.kerneld on :8867 across registries and health scripts, parks stale cognitive-kernel/mcp-gateway plists, fixes bus-integrity false positives plus a malformed facts snapshot, repairs MirrorRadar launchd venv drift, and re-verifies 10/10 public domains with zero down services on the operator audit."
     }
   ]
 }
