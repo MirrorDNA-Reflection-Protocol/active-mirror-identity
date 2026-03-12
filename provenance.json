@@ -7,16 +7,34 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 422,
+    "total_signed": 424,
     "by_type": {
-      "ship": 156,
+      "ship": 158,
       "vault": 102,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-11T21:30:04.935924+00:00"
+    "generated_at": "2026-03-12T21:30:04.653679+00:00"
   },
   "recent": [
+    {
+      "id": "0de08e472fb0d269",
+      "type": "ship",
+      "name": "ActiveMirror YouTube Proof Rail",
+      "sha256": "2d23c1863502904f\u2026",
+      "signed_at": "2026-03-12T15:13:04.380033+00:00",
+      "url": "",
+      "note": "Added live proof media and YouTube build-log links to the ActiveMirror homepage and shipped them publicly."
+    },
+    {
+      "id": "7e3e59546c11440c",
+      "type": "ship",
+      "name": "ActiveMirror Flagship Site Spine",
+      "sha256": "29a4e58f4f741d78\u2026",
+      "signed_at": "2026-03-12T07:35:20.575955+00:00",
+      "url": "",
+      "note": "Reframes activemirror.ai around Chetana as the flagship wedge, adds first-class trust/platform pages, and anchors the redesign to the current Vite/React spine."
+    },
     {
       "id": "f11f0de3181d8f7f",
       "type": "ship",
@@ -178,24 +196,6 @@
       "signed_at": "2026-03-11T07:16:54.037617+00:00",
       "url": "",
       "note": "Adds sandbox-exec containment with local-loopback mode, readonly roots, nested-containment inheritance, and in-cell temp dirs for typed work orders."
-    },
-    {
-      "id": "505c0bb5d914300b",
-      "type": "ship",
-      "name": "Approval Signing Service",
-      "sha256": "fcf9be3dc94f90df\u2026",
-      "signed_at": "2026-03-11T07:16:54.000831+00:00",
-      "url": "",
-      "note": "Adds a body-local approval signer with key bootstrap, issue/verify endpoints, and signed approval/lease documents."
-    },
-    {
-      "id": "c83dd59669dca8d9",
-      "type": "ship",
-      "name": "Runtime Truth Cleanup + Brief Restore",
-      "sha256": "6f028d0b0216f733\u2026",
-      "signed_at": "2026-03-11T07:12:58.299738+00:00",
-      "url": "",
-      "note": "Restores brief.activemirror.ai by bootstrapping ai.mirrordna.brief.api on :8200, rewrites kernel truth from phantom :8892 to com.mirrordna.newproject.kerneld on :8867 across registries and health scripts, parks stale cognitive-kernel/mcp-gateway plists, fixes bus-integrity false positives plus a malformed facts snapshot, repairs MirrorRadar launchd venv drift, and re-verifies 10/10 public domains with zero down services on the operator audit."
     }
   ]
 }
