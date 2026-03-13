@@ -7,16 +7,61 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 424,
+    "total_signed": 429,
     "by_type": {
-      "ship": 158,
+      "ship": 163,
       "vault": 102,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-12T21:30:04.653679+00:00"
+    "generated_at": "2026-03-13T21:30:02.491841+00:00"
   },
   "recent": [
+    {
+      "id": "d65e5a3e126edd0f",
+      "type": "ship",
+      "name": "Cognitive Dashboard Public Surface Wiring",
+      "sha256": "73e648105d63cf04\u2026",
+      "signed_at": "2026-03-13T11:05:12.736379+00:00",
+      "url": "",
+      "note": "Rewrote the public cognitive dashboard page to align with the live cockpit, MirrorDash desktop profiles, and the desktop intelligence pipeline; removed the fake browser probe story and tightened status/product copy."
+    },
+    {
+      "id": "fee0a3a0b67392d2",
+      "type": "ship",
+      "name": "Shared Health Evaluator Adoption",
+      "sha256": "ea333e1f5e07b200\u2026",
+      "signed_at": "2026-03-13T10:36:46.987287+00:00",
+      "url": "",
+      "note": "Moves self-heal onto the shared service health contract so launchd-backed process services stop false flapping and restart churn."
+    },
+    {
+      "id": "4c6b602d1852c4cd",
+      "type": "ship",
+      "name": "Ollama Sentinel Health Unification",
+      "sha256": "c32410e80da36070\u2026",
+      "signed_at": "2026-03-13T10:36:46.985800+00:00",
+      "url": "",
+      "note": "Prevents self-restart loops, blocks adjacent restart hallucinations, and clears resolved sentinel incident items."
+    },
+    {
+      "id": "76304507ac3e6381",
+      "type": "ship",
+      "name": "Legacy LaunchAgent Bounded Healer",
+      "sha256": "cf6a6dc53ff1c5a6\u2026",
+      "signed_at": "2026-03-13T09:08:00.801301+00:00",
+      "url": "",
+      "note": "Added cooldown, quarantine, and bootstrap fallback plus healed the Kavach ownership/port conflict and hardened legacy automation recovery."
+    },
+    {
+      "id": "a69446abd3060110",
+      "type": "ship",
+      "name": "Automation Kernel Consolidation",
+      "sha256": "8e8f0d1394a37930\u2026",
+      "signed_at": "2026-03-13T09:08:00.799723+00:00",
+      "url": "",
+      "note": "Added Claude skill projections, contained dry-run kernel semantics, live capability matrix generation, and typed automation first-run health semantics."
+    },
     {
       "id": "0de08e472fb0d269",
       "type": "ship",
@@ -151,51 +196,6 @@
       "signed_at": "2026-03-11T08:22:03.555127+00:00",
       "url": "",
       "note": "Fixes the homepage atlas transform/clipping bug, re-centers the ecosystem nodes, and widens the journey sequence so desktop and mobile read cleanly."
-    },
-    {
-      "id": "88e57086a68a5cc8",
-      "type": "ship",
-      "name": "Chetana Trust Contract + Product Truth Cleanup",
-      "sha256": "de8e1e97d724af31\u2026",
-      "signed_at": "2026-03-11T08:15:03.091959+00:00",
-      "url": "",
-      "note": "Makes Chetana a more first-class public trust product by replacing stale Chakshu/TRAI and intel-source claims, adding a centralized trust_contract module with official recovery rails and C2PA provenance references, exposing /api/recovery/rails, /api/recovery/packet, and /api/provenance/stack, upgrading evidence bundles into structured recovery packets, and refreshing public/about/threat surfaces plus multilingual copy to match the live system."
-    },
-    {
-      "id": "6bdca89b5af4fa04",
-      "type": "ship",
-      "name": "Verify-Only Approval Daemon Split",
-      "sha256": "a3d829e9a1f6f389\u2026",
-      "signed_at": "2026-03-11T08:05:50.698437+00:00",
-      "url": "",
-      "note": "Separates launchd verification from human-triggered issuance by disabling HTTP issue endpoints in verify-only daemon mode while keeping CLI issuance available."
-    },
-    {
-      "id": "d28165af257a2e97",
-      "type": "ship",
-      "name": "Approval Verify LaunchAgent Installer",
-      "sha256": "f6f11415212edef2\u2026",
-      "signed_at": "2026-03-11T08:05:50.698395+00:00",
-      "url": "",
-      "note": "Installs and loads a dedicated verify-only approvald LaunchAgent with minimal runtime sync and standard newproject port_guard plumbing."
-    },
-    {
-      "id": "b76728a3c8c23ee2",
-      "type": "ship",
-      "name": "Containment-Safe Automation Scheduler",
-      "sha256": "4924aa3d945f102b\u2026",
-      "signed_at": "2026-03-11T07:16:54.090096+00:00",
-      "url": "",
-      "note": "Removes ad-hoc PyYAML dependency from the scheduler path so recurring automation still parses policy and logs correctly inside containment."
-    },
-    {
-      "id": "8b383dad6f5d718d",
-      "type": "ship",
-      "name": "Automation Containment Runtime",
-      "sha256": "e82a519bea5651de\u2026",
-      "signed_at": "2026-03-11T07:16:54.037617+00:00",
-      "url": "",
-      "note": "Adds sandbox-exec containment with local-loopback mode, readonly roots, nested-containment inheritance, and in-cell temp dirs for typed work orders."
     }
   ]
 }
