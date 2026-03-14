@@ -40,6 +40,19 @@
     main{padding:48px 0}
 
     /* Header */
+    /* Hero visual */
+    .hero-visual{display:flex;align-items:center;gap:40px;margin-bottom:32px}
+    .hero-text{flex:1}
+    .hero-fingerprint{width:200px;height:200px;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center}
+    .fp-ring{position:absolute;border-radius:50%;border:1.5px solid;animation:fp-pulse 3s ease-in-out infinite}
+    .fp-ring:nth-child(1){width:60px;height:60px;border-color:var(--accent);animation-delay:0s;opacity:.9}
+    .fp-ring:nth-child(2){width:100px;height:100px;border-color:var(--accent2);animation-delay:.4s;opacity:.7}
+    .fp-ring:nth-child(3){width:140px;height:140px;border-color:var(--accent3);animation-delay:.8s;opacity:.5}
+    .fp-ring:nth-child(4){width:180px;height:180px;border-color:var(--accent);animation-delay:1.2s;opacity:.3}
+    .fp-core{font-size:32px;z-index:1}
+    @keyframes fp-pulse{0%,100%{transform:scale(1);opacity:var(--o,.5)}50%{transform:scale(1.08);opacity:calc(var(--o,.5) + .2)}}
+    @media(max-width:600px){.hero-visual{flex-direction:column;text-align:center}.hero-fingerprint{width:150px;height:150px}}
+
     .logo{display:flex;align-items:center;gap:12px;margin-bottom:24px}
     .logo-glyph{font-size:28px;line-height:1}
     .logo-text{font-size:13px;font-weight:600;letter-spacing:.1em;color:var(--text-secondary);text-transform:uppercase}
@@ -134,8 +147,19 @@
       <span class="logo-glyph">⟡</span>
       <span class="logo-text">id.activemirror.ai</span>
     </div>
-    <h1>Sovereign<br><span class="highlight">Identity Anchor</span></h1>
-    <p class="tagline">Every artifact from this stack is cryptographically signed. This page is the public root of that chain.</p>
+    <div class="hero-visual">
+      <div class="hero-text">
+        <h1>Sovereign<br><span class="highlight">Identity Anchor</span></h1>
+        <p class="tagline">Every artifact from this stack is cryptographically signed. This page is the public root of that chain.</p>
+      </div>
+      <div class="hero-fingerprint">
+        <div class="fp-ring" style="--o:.9"></div>
+        <div class="fp-ring" style="--o:.7"></div>
+        <div class="fp-ring" style="--o:.5"></div>
+        <div class="fp-ring" style="--o:.3"></div>
+        <div class="fp-core">🔐</div>
+      </div>
+    </div>
     <div class="status-bar">
       <div class="status-item"><span class="dot"></span> Ed25519 key active</div>
       <div class="status-item"><span class="dot"></span> GPG key active</div>
