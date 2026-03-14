@@ -7,16 +7,25 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 429,
+    "total_signed": 430,
     "by_type": {
-      "ship": 163,
+      "ship": 164,
       "vault": 102,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-13T21:30:02.491841+00:00"
+    "generated_at": "2026-03-14T21:30:04.252922+00:00"
   },
   "recent": [
+    {
+      "id": "2270e47ea1bcb931",
+      "type": "ship",
+      "name": "TriMind v2",
+      "sha256": "5221e27a8b9ec945\u2026",
+      "signed_at": "2026-03-14T07:14:45.950501+00:00",
+      "url": "",
+      "note": "Three-AI council orchestrator (Claude+Codex+Gemini). Modes: council, chain, verify, skills, auto-route. LaunchAgent on 8333, gateway on 8045, CLI at ~/.mirrordna/bin/trimind. Paul-aware prompts, cross-mind hallucination catching, distilled skill memory, ADHD-proof session context, security middleware."
+    },
     {
       "id": "d65e5a3e126edd0f",
       "type": "ship",
@@ -187,15 +196,6 @@
       "signed_at": "2026-03-11T08:38:02.020749+00:00",
       "url": "",
       "note": "Adds CLI auth and key rotation regression harnesses and wires them into gate_evolution so signer hardening stays verified in the live scheduler lane."
-    },
-    {
-      "id": "a256f3a480b833d2",
-      "type": "ship",
-      "name": "ActiveMirror Homepage Atlas Alignment Fix",
-      "sha256": "14f6f8c28a783285\u2026",
-      "signed_at": "2026-03-11T08:22:03.555127+00:00",
-      "url": "",
-      "note": "Fixes the homepage atlas transform/clipping bug, re-centers the ecosystem nodes, and widens the journey sequence so desktop and mobile read cleanly."
     }
   ]
 }
