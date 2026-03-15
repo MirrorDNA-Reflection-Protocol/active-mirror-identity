@@ -199,30 +199,33 @@
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <video class="fade-in" autoplay muted loop playsinline src="mirrorseed-hero-video.mp4"></video>
+  <!-- Hero — full-bleed video -->
+  <section style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden">
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0" src="mirrorseed-hero-video.mp4"></video>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,6,16,0.3) 0%,rgba(6,6,16,0.75) 50%,rgba(6,6,16,1) 100%);z-index:1"></div>
 
-    <h1 class="fade-in fade-in-d1">Stop repeating yourself to AI.</h1>
+    <div style="position:relative;z-index:2;text-align:center;padding:0 20px;max-width:580px" class="fade-in">
+      <h1 style="font-size:clamp(2.2rem,7vw,4rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:16px">
+        <span class="highlight">Stop repeating yourself</span><br>to AI.
+      </h1>
 
-    <p class="subtext fade-in fade-in-d2">One small file. Every AI remembers you.<br>Works with ChatGPT, Claude, Gemini. Free. No login. No lock-in.</p>
+      <p style="font-size:clamp(0.9rem,2.5vw,1.1rem);line-height:1.7;color:rgba(255,255,255,0.55);max-width:440px;margin:0 auto">
+        One small file. Every AI remembers you. Works with ChatGPT, Claude, Gemini. Free. No login.
+      </p>
 
-    <div class="pills fade-in fade-in-d3">
-      <span class="pill">ChatGPT</span>
-      <span class="pill">Claude</span>
-      <span class="pill">Gemini</span>
-      <span class="pill">Free</span>
-      <span class="pill">No login</span>
-      <span class="pill">Portable</span>
-    </div>
+      <div class="fade-in fade-in-d2" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px">
+        <span class="pill">ChatGPT</span>
+        <span class="pill">Claude</span>
+        <span class="pill">Gemini</span>
+        <span class="pill">Free</span>
+        <span class="pill">No login</span>
+        <span class="pill">Portable</span>
+      </div>
 
-    <a class="cta-btn fade-in fade-in-d4" href="https://id.activemirror.ai">Create your Mirror Seed &#x2192;</a>
-
-    <div class="status-bar fade-in fade-in-d5">
-      <div class="status-item"><span class="dot"></span> Works with ChatGPT</div>
-      <div class="status-item"><span class="dot"></span> Works with Claude</div>
-      <div class="status-item"><span class="dot"></span> Works with Gemini</div>
-      <div class="status-item"><span class="dot"></span> No account needed</div>
+      <div class="fade-in fade-in-d3" style="display:flex;gap:12px;justify-content:center;margin-top:32px">
+        <a class="cta-btn" href="https://id.activemirror.ai">Create your Mirror Seed →</a>
+        <a style="padding:14px 28px;border-radius:50px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);font-size:14px;text-decoration:none" href="#how-it-works">How it works ↓</a>
+      </div>
     </div>
   </section>
 
