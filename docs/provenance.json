@@ -1,0 +1,201 @@
+{
+  "identity": {
+    "name": "Paul Desai \u2014 MirrorDNA Sovereign",
+    "ed25519_public_key": "382af5cd3016aee38eb1bc21f2516105d4534e05df0fb01a16f3596c6dd96cfa",
+    "gpg_fingerprint": "D0F3DE5C7C6020C43F7863280FD74579EFDB4D0AB",
+    "gpg_uid": "MirrorDNA Sovereign <paul@n1.agency>",
+    "signer_id": "active-mirror-hub.local:default"
+  },
+  "stats": {
+    "total_signed": 430,
+    "by_type": {
+      "ship": 164,
+      "vault": 102,
+      "paper": 133,
+      "post": 31
+    },
+    "generated_at": "2026-03-14T21:30:04.252922+00:00"
+  },
+  "recent": [
+    {
+      "id": "2270e47ea1bcb931",
+      "type": "ship",
+      "name": "TriMind v2",
+      "sha256": "5221e27a8b9ec945\u2026",
+      "signed_at": "2026-03-14T07:14:45.950501+00:00",
+      "url": "",
+      "note": "Three-AI council orchestrator (Claude+Codex+Gemini). Modes: council, chain, verify, skills, auto-route. LaunchAgent on 8333, gateway on 8045, CLI at ~/.mirrordna/bin/trimind. Paul-aware prompts, cross-mind hallucination catching, distilled skill memory, ADHD-proof session context, security middleware."
+    },
+    {
+      "id": "d65e5a3e126edd0f",
+      "type": "ship",
+      "name": "Cognitive Dashboard Public Surface Wiring",
+      "sha256": "73e648105d63cf04\u2026",
+      "signed_at": "2026-03-13T11:05:12.736379+00:00",
+      "url": "",
+      "note": "Rewrote the public cognitive dashboard page to align with the live cockpit, MirrorDash desktop profiles, and the desktop intelligence pipeline; removed the fake browser probe story and tightened status/product copy."
+    },
+    {
+      "id": "fee0a3a0b67392d2",
+      "type": "ship",
+      "name": "Shared Health Evaluator Adoption",
+      "sha256": "ea333e1f5e07b200\u2026",
+      "signed_at": "2026-03-13T10:36:46.987287+00:00",
+      "url": "",
+      "note": "Moves self-heal onto the shared service health contract so launchd-backed process services stop false flapping and restart churn."
+    },
+    {
+      "id": "4c6b602d1852c4cd",
+      "type": "ship",
+      "name": "Ollama Sentinel Health Unification",
+      "sha256": "c32410e80da36070\u2026",
+      "signed_at": "2026-03-13T10:36:46.985800+00:00",
+      "url": "",
+      "note": "Prevents self-restart loops, blocks adjacent restart hallucinations, and clears resolved sentinel incident items."
+    },
+    {
+      "id": "76304507ac3e6381",
+      "type": "ship",
+      "name": "Legacy LaunchAgent Bounded Healer",
+      "sha256": "cf6a6dc53ff1c5a6\u2026",
+      "signed_at": "2026-03-13T09:08:00.801301+00:00",
+      "url": "",
+      "note": "Added cooldown, quarantine, and bootstrap fallback plus healed the Kavach ownership/port conflict and hardened legacy automation recovery."
+    },
+    {
+      "id": "a69446abd3060110",
+      "type": "ship",
+      "name": "Automation Kernel Consolidation",
+      "sha256": "8e8f0d1394a37930\u2026",
+      "signed_at": "2026-03-13T09:08:00.799723+00:00",
+      "url": "",
+      "note": "Added Claude skill projections, contained dry-run kernel semantics, live capability matrix generation, and typed automation first-run health semantics."
+    },
+    {
+      "id": "0de08e472fb0d269",
+      "type": "ship",
+      "name": "ActiveMirror YouTube Proof Rail",
+      "sha256": "2d23c1863502904f\u2026",
+      "signed_at": "2026-03-12T15:13:04.380033+00:00",
+      "url": "",
+      "note": "Added live proof media and YouTube build-log links to the ActiveMirror homepage and shipped them publicly."
+    },
+    {
+      "id": "7e3e59546c11440c",
+      "type": "ship",
+      "name": "ActiveMirror Flagship Site Spine",
+      "sha256": "29a4e58f4f741d78\u2026",
+      "signed_at": "2026-03-12T07:35:20.575955+00:00",
+      "url": "",
+      "note": "Reframes activemirror.ai around Chetana as the flagship wedge, adds first-class trust/platform pages, and anchors the redesign to the current Vite/React spine."
+    },
+    {
+      "id": "f11f0de3181d8f7f",
+      "type": "ship",
+      "name": "Chetana Strict Public Scan Policy",
+      "sha256": "0278be255301928f\u2026",
+      "signed_at": "2026-03-11T14:05:54.601367+00:00",
+      "url": "",
+      "note": "Wraps public Chetana scan outputs in strict disclaimers, softened certainty, fake-citation stripping, and recovery rails before they leave the edge."
+    },
+    {
+      "id": "aded33f54c20116c",
+      "type": "ship",
+      "name": "ActiveMirror App Route Fallback",
+      "sha256": "45491c6445b7a698\u2026",
+      "signed_at": "2026-03-11T14:05:54.601030+00:00",
+      "url": "",
+      "note": "Adds the browser workspace to the static SPA fallback map so direct public hits to /app resolve cleanly with route-specific metadata."
+    },
+    {
+      "id": "edc4647c66056a86",
+      "type": "ship",
+      "name": "ActiveMirror Visitor Mirror Polish",
+      "sha256": "39cfc5a1b8568d7b\u2026",
+      "signed_at": "2026-03-11T14:05:54.600422+00:00",
+      "url": "",
+      "note": "Removes public routing/model debug chrome, keeps the reflective entry state clean, and verifies the live mirror experience on the edge."
+    },
+    {
+      "id": "9542d614b7cb2909",
+      "type": "ship",
+      "name": "ActiveMirror Browser App Shell",
+      "sha256": "a63b9ea196174819\u2026",
+      "signed_at": "2026-03-11T13:19:14.240705+00:00",
+      "url": "",
+      "note": "Adds a local /app browser workspace with shared MirrorBrain glyph grammar, deep-linkable panes, pulse/atlas/memory/proof/actions surfaces, and route wiring across site navigation."
+    },
+    {
+      "id": "27f1049d30a1e178",
+      "type": "ship",
+      "name": "Chetana Visible Assistant Surface",
+      "sha256": "94b441ca078645f1\u2026",
+      "signed_at": "2026-03-11T12:49:44.360491+00:00",
+      "url": "",
+      "note": "Makes the public Chetana shell visibly first-class by adding a top-of-page Talk to Chetana assistant, direct guided-intake launch, proof metrics for research/capture/recovery, and a Safety Chat route, then re-verifies the live browser flow and scan path."
+    },
+    {
+      "id": "ae0c2e751db9cd4e",
+      "type": "ship",
+      "name": "Chetana Research Radar + Eval Lab",
+      "sha256": "55db3d51ec20fa37\u2026",
+      "signed_at": "2026-03-11T12:31:53.349980+00:00",
+      "url": "",
+      "note": "Adds a curated official/GitHub/paper source registry, ranked capture-method backlog, operator benchmark harness, live research-map and sync APIs, and repairs the public off-topic advice prompt so Chetana improves against tracked sources and exposed gaps rather than ad hoc notes."
+    },
+    {
+      "id": "d687b0bd1aadc86a",
+      "type": "ship",
+      "name": "ActiveMirror Homepage Balance Pass Live",
+      "sha256": "59ff89751c2efd0d\u2026",
+      "signed_at": "2026-03-11T10:54:37.331618+00:00",
+      "url": "",
+      "note": "Shrinks and rebalances the homepage hero/atlas composition and publishes the live activemirror.ai front door with verified smoke checks."
+    },
+    {
+      "id": "c194d73784566d81",
+      "type": "ship",
+      "name": "Chetana Public Surface Hardening",
+      "sha256": "61b479d112eba025\u2026",
+      "signed_at": "2026-03-11T10:29:32.666874+00:00",
+      "url": "",
+      "note": "Hardens the live Chetana public surface by redirecting the root to the current UI, trusting forwarded client IPs behind Cloudflare for rate limiting, restricting raw state/privacy/event/legacy voice-path endpoints to operator access, rate-limiting public write and upload routes, capping OCR upload size, server-deriving public threat-report identity, and re-verifying the exposed routes blocked on the public edge while scan surfaces remain live."
+    },
+    {
+      "id": "bf3ce635d018698b",
+      "type": "ship",
+      "name": "Chetana Rescue + Merchant + Graph Runtime",
+      "sha256": "927ed00f405a32b6\u2026",
+      "signed_at": "2026-03-11T10:07:49.024655+00:00",
+      "url": "",
+      "note": "Upgrades Chetana from score-only checks into recovery-first product flows by adding merchant proof review, graph memory across repeated entities, heuristic provenance checks in media analysis, dynamic product stats, Rescue Mode and case-packet actions in the expert UI, a Merchant tab, and stable legacy media summary/card routes, then re-verifies the live service and public edge."
+    },
+    {
+      "id": "f713349243eabd43",
+      "type": "ship",
+      "name": "ActiveMirror Copy Decringe + BrainScan Fallback",
+      "sha256": "553f170415272198\u2026",
+      "signed_at": "2026-03-11T10:02:17.224954+00:00",
+      "url": "",
+      "note": "Removes strategy-speak from current activemirror.ai user-facing entry surfaces and adds a local-safe BrainScan fallback so /start works cleanly off production origins."
+    },
+    {
+      "id": "0bd0fe90efb252cf",
+      "type": "ship",
+      "name": "Approvald Keyring Rotation + CLI Auth",
+      "sha256": "06655991a47772c7\u2026",
+      "signed_at": "2026-03-11T08:38:02.020802+00:00",
+      "url": "",
+      "note": "Adds key_id-aware verification, local CLI operator auth via sudo validation, and signing-key rotation with overlap windows for approval receipts and capability leases."
+    },
+    {
+      "id": "5fa295833d87082b",
+      "type": "ship",
+      "name": "Approvald Auth + Rotation Harnesses",
+      "sha256": "0da6a356199a5205\u2026",
+      "signed_at": "2026-03-11T08:38:02.020749+00:00",
+      "url": "",
+      "note": "Adds CLI auth and key rotation regression harnesses and wires them into gate_evolution so signer hardening stays verified in the live scheduler lane."
+    }
+  ]
+}
