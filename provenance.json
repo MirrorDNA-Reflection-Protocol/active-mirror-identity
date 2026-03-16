@@ -7,16 +7,124 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 430,
+    "total_signed": 442,
     "by_type": {
+      "vault": 114,
       "ship": 164,
-      "vault": 102,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-15T21:30:01.854534+00:00"
+    "generated_at": "2026-03-16T21:30:05.443741+00:00"
   },
   "recent": [
+    {
+      "id": "3dcbde58a4b59cbb",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "49f54aba6e71489f\u2026",
+      "signed_at": "2026-03-16T11:49:13.638180+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "b739276f6ccca60e",
+      "type": "vault",
+      "name": "SHIPLOG.md",
+      "sha256": "8803f215d6ad0d48\u2026",
+      "signed_at": "2026-03-16T08:37:14.011321+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "99a7d1dd227f42b1",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "5f00b3ce7ead6004\u2026",
+      "signed_at": "2026-03-16T08:36:49.648708+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "90c75b89baae982f",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "8cbf7f60585c3863\u2026",
+      "signed_at": "2026-03-16T08:36:43.131630+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "82d484fba5b81964",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "63d2bd34bce082e9\u2026",
+      "signed_at": "2026-03-16T08:36:34.855166+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "ccba3012d61b08cc",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "493f4848b0fd58fe\u2026",
+      "signed_at": "2026-03-16T05:02:59.748176+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "759631a439ee3d02",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "6d7546dd5ab11439\u2026",
+      "signed_at": "2026-03-16T04:58:27.897789+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "62a29797ea850e0f",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "2dded5bea6e899aa\u2026",
+      "signed_at": "2026-03-16T04:53:40.460708+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "4ff17005d93c4708",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "6cfd3be7c023d686\u2026",
+      "signed_at": "2026-03-16T04:53:29.461185+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "314b418f5d4e54c6",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "7fd86dc6e2380b38\u2026",
+      "signed_at": "2026-03-16T04:53:22.318593+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "e831408110161887",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "a9b1e4924849b4d4\u2026",
+      "signed_at": "2026-03-16T04:52:59.591001+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "fe6bd53bf45da6cf",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "e8f568520a688a76\u2026",
+      "signed_at": "2026-03-16T04:52:46.510610+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
     {
       "id": "2270e47ea1bcb931",
       "type": "ship",
@@ -88,114 +196,6 @@
       "signed_at": "2026-03-12T07:35:20.575955+00:00",
       "url": "",
       "note": "Reframes activemirror.ai around Chetana as the flagship wedge, adds first-class trust/platform pages, and anchors the redesign to the current Vite/React spine."
-    },
-    {
-      "id": "f11f0de3181d8f7f",
-      "type": "ship",
-      "name": "Chetana Strict Public Scan Policy",
-      "sha256": "0278be255301928f\u2026",
-      "signed_at": "2026-03-11T14:05:54.601367+00:00",
-      "url": "",
-      "note": "Wraps public Chetana scan outputs in strict disclaimers, softened certainty, fake-citation stripping, and recovery rails before they leave the edge."
-    },
-    {
-      "id": "aded33f54c20116c",
-      "type": "ship",
-      "name": "ActiveMirror App Route Fallback",
-      "sha256": "45491c6445b7a698\u2026",
-      "signed_at": "2026-03-11T14:05:54.601030+00:00",
-      "url": "",
-      "note": "Adds the browser workspace to the static SPA fallback map so direct public hits to /app resolve cleanly with route-specific metadata."
-    },
-    {
-      "id": "edc4647c66056a86",
-      "type": "ship",
-      "name": "ActiveMirror Visitor Mirror Polish",
-      "sha256": "39cfc5a1b8568d7b\u2026",
-      "signed_at": "2026-03-11T14:05:54.600422+00:00",
-      "url": "",
-      "note": "Removes public routing/model debug chrome, keeps the reflective entry state clean, and verifies the live mirror experience on the edge."
-    },
-    {
-      "id": "9542d614b7cb2909",
-      "type": "ship",
-      "name": "ActiveMirror Browser App Shell",
-      "sha256": "a63b9ea196174819\u2026",
-      "signed_at": "2026-03-11T13:19:14.240705+00:00",
-      "url": "",
-      "note": "Adds a local /app browser workspace with shared MirrorBrain glyph grammar, deep-linkable panes, pulse/atlas/memory/proof/actions surfaces, and route wiring across site navigation."
-    },
-    {
-      "id": "27f1049d30a1e178",
-      "type": "ship",
-      "name": "Chetana Visible Assistant Surface",
-      "sha256": "94b441ca078645f1\u2026",
-      "signed_at": "2026-03-11T12:49:44.360491+00:00",
-      "url": "",
-      "note": "Makes the public Chetana shell visibly first-class by adding a top-of-page Talk to Chetana assistant, direct guided-intake launch, proof metrics for research/capture/recovery, and a Safety Chat route, then re-verifies the live browser flow and scan path."
-    },
-    {
-      "id": "ae0c2e751db9cd4e",
-      "type": "ship",
-      "name": "Chetana Research Radar + Eval Lab",
-      "sha256": "55db3d51ec20fa37\u2026",
-      "signed_at": "2026-03-11T12:31:53.349980+00:00",
-      "url": "",
-      "note": "Adds a curated official/GitHub/paper source registry, ranked capture-method backlog, operator benchmark harness, live research-map and sync APIs, and repairs the public off-topic advice prompt so Chetana improves against tracked sources and exposed gaps rather than ad hoc notes."
-    },
-    {
-      "id": "d687b0bd1aadc86a",
-      "type": "ship",
-      "name": "ActiveMirror Homepage Balance Pass Live",
-      "sha256": "59ff89751c2efd0d\u2026",
-      "signed_at": "2026-03-11T10:54:37.331618+00:00",
-      "url": "",
-      "note": "Shrinks and rebalances the homepage hero/atlas composition and publishes the live activemirror.ai front door with verified smoke checks."
-    },
-    {
-      "id": "c194d73784566d81",
-      "type": "ship",
-      "name": "Chetana Public Surface Hardening",
-      "sha256": "61b479d112eba025\u2026",
-      "signed_at": "2026-03-11T10:29:32.666874+00:00",
-      "url": "",
-      "note": "Hardens the live Chetana public surface by redirecting the root to the current UI, trusting forwarded client IPs behind Cloudflare for rate limiting, restricting raw state/privacy/event/legacy voice-path endpoints to operator access, rate-limiting public write and upload routes, capping OCR upload size, server-deriving public threat-report identity, and re-verifying the exposed routes blocked on the public edge while scan surfaces remain live."
-    },
-    {
-      "id": "bf3ce635d018698b",
-      "type": "ship",
-      "name": "Chetana Rescue + Merchant + Graph Runtime",
-      "sha256": "927ed00f405a32b6\u2026",
-      "signed_at": "2026-03-11T10:07:49.024655+00:00",
-      "url": "",
-      "note": "Upgrades Chetana from score-only checks into recovery-first product flows by adding merchant proof review, graph memory across repeated entities, heuristic provenance checks in media analysis, dynamic product stats, Rescue Mode and case-packet actions in the expert UI, a Merchant tab, and stable legacy media summary/card routes, then re-verifies the live service and public edge."
-    },
-    {
-      "id": "f713349243eabd43",
-      "type": "ship",
-      "name": "ActiveMirror Copy Decringe + BrainScan Fallback",
-      "sha256": "553f170415272198\u2026",
-      "signed_at": "2026-03-11T10:02:17.224954+00:00",
-      "url": "",
-      "note": "Removes strategy-speak from current activemirror.ai user-facing entry surfaces and adds a local-safe BrainScan fallback so /start works cleanly off production origins."
-    },
-    {
-      "id": "0bd0fe90efb252cf",
-      "type": "ship",
-      "name": "Approvald Keyring Rotation + CLI Auth",
-      "sha256": "06655991a47772c7\u2026",
-      "signed_at": "2026-03-11T08:38:02.020802+00:00",
-      "url": "",
-      "note": "Adds key_id-aware verification, local CLI operator auth via sudo validation, and signing-key rotation with overlap windows for approval receipts and capability leases."
-    },
-    {
-      "id": "5fa295833d87082b",
-      "type": "ship",
-      "name": "Approvald Auth + Rotation Harnesses",
-      "sha256": "0da6a356199a5205\u2026",
-      "signed_at": "2026-03-11T08:38:02.020749+00:00",
-      "url": "",
-      "note": "Adds CLI auth and key rotation regression harnesses and wires them into gate_evolution so signer hardening stays verified in the live scheduler lane."
     }
   ]
 }
