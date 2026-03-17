@@ -7,16 +7,70 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 442,
+    "total_signed": 448,
     "by_type": {
-      "vault": 114,
-      "ship": 164,
+      "vault": 116,
+      "ship": 168,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-16T21:30:05.443741+00:00"
+    "generated_at": "2026-03-17T21:30:05.392723+00:00"
   },
   "recent": [
+    {
+      "id": "c5cf3aedb5a9828c",
+      "type": "vault",
+      "name": "SHIPLOG.md",
+      "sha256": "21d35416df9af3f1\u2026",
+      "signed_at": "2026-03-17T06:32:35.663698+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "9f74af09af7f08f2",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "b1b864c649a3f100\u2026",
+      "signed_at": "2026-03-17T06:22:26.747030+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "e92dd2ca025e4dc8",
+      "type": "ship",
+      "name": "Continuity Pipeline Fix",
+      "sha256": "ddb8c7a21040121a\u2026",
+      "signed_at": "2026-03-17T04:59:33.312323+00:00",
+      "url": "",
+      "note": "Fixed CONTINUITY.md truncation bug, SESSION_LOG spam, stale pickups."
+    },
+    {
+      "id": "27bc4f64d2ee5b60",
+      "type": "ship",
+      "name": "SERVICE_REGISTRY Rebuild",
+      "sha256": "9097a0d6737ac16a\u2026",
+      "signed_at": "2026-03-17T04:59:33.183216+00:00",
+      "url": "",
+      "note": "8 core services with ports, health URLs, restart commands. Was overwritten with 0-port entries."
+    },
+    {
+      "id": "9482cfe6e708ae25",
+      "type": "ship",
+      "name": "Service Self-Healing Stack",
+      "sha256": "bbb156e96fd41a15\u2026",
+      "signed_at": "2026-03-17T04:59:33.087281+00:00",
+      "url": "",
+      "note": "4-layer heal: KeepAlive + port heal + guardian restart + memory recording. Fixed 2246 blind cycles."
+    },
+    {
+      "id": "4c95c5a9d1430b23",
+      "type": "ship",
+      "name": "mirror_memory.py \u2014 Living Memory Compiler",
+      "sha256": "eaf8b4e878efb853\u2026",
+      "signed_at": "2026-03-17T04:59:32.982868+00:00",
+      "url": "",
+      "note": "Auto-compiles live system state to Claude Code native memory every 5min. Triple-redundant delivery."
+    },
     {
       "id": "3dcbde58a4b59cbb",
       "type": "vault",
@@ -142,60 +196,6 @@
       "signed_at": "2026-03-13T11:05:12.736379+00:00",
       "url": "",
       "note": "Rewrote the public cognitive dashboard page to align with the live cockpit, MirrorDash desktop profiles, and the desktop intelligence pipeline; removed the fake browser probe story and tightened status/product copy."
-    },
-    {
-      "id": "fee0a3a0b67392d2",
-      "type": "ship",
-      "name": "Shared Health Evaluator Adoption",
-      "sha256": "ea333e1f5e07b200\u2026",
-      "signed_at": "2026-03-13T10:36:46.987287+00:00",
-      "url": "",
-      "note": "Moves self-heal onto the shared service health contract so launchd-backed process services stop false flapping and restart churn."
-    },
-    {
-      "id": "4c6b602d1852c4cd",
-      "type": "ship",
-      "name": "Ollama Sentinel Health Unification",
-      "sha256": "c32410e80da36070\u2026",
-      "signed_at": "2026-03-13T10:36:46.985800+00:00",
-      "url": "",
-      "note": "Prevents self-restart loops, blocks adjacent restart hallucinations, and clears resolved sentinel incident items."
-    },
-    {
-      "id": "76304507ac3e6381",
-      "type": "ship",
-      "name": "Legacy LaunchAgent Bounded Healer",
-      "sha256": "cf6a6dc53ff1c5a6\u2026",
-      "signed_at": "2026-03-13T09:08:00.801301+00:00",
-      "url": "",
-      "note": "Added cooldown, quarantine, and bootstrap fallback plus healed the Kavach ownership/port conflict and hardened legacy automation recovery."
-    },
-    {
-      "id": "a69446abd3060110",
-      "type": "ship",
-      "name": "Automation Kernel Consolidation",
-      "sha256": "8e8f0d1394a37930\u2026",
-      "signed_at": "2026-03-13T09:08:00.799723+00:00",
-      "url": "",
-      "note": "Added Claude skill projections, contained dry-run kernel semantics, live capability matrix generation, and typed automation first-run health semantics."
-    },
-    {
-      "id": "0de08e472fb0d269",
-      "type": "ship",
-      "name": "ActiveMirror YouTube Proof Rail",
-      "sha256": "2d23c1863502904f\u2026",
-      "signed_at": "2026-03-12T15:13:04.380033+00:00",
-      "url": "",
-      "note": "Added live proof media and YouTube build-log links to the ActiveMirror homepage and shipped them publicly."
-    },
-    {
-      "id": "7e3e59546c11440c",
-      "type": "ship",
-      "name": "ActiveMirror Flagship Site Spine",
-      "sha256": "29a4e58f4f741d78\u2026",
-      "signed_at": "2026-03-12T07:35:20.575955+00:00",
-      "url": "",
-      "note": "Reframes activemirror.ai around Chetana as the flagship wedge, adds first-class trust/platform pages, and anchors the redesign to the current Vite/React spine."
     }
   ]
 }
