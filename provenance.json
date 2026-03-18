@@ -7,16 +7,43 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 448,
+    "total_signed": 451,
     "by_type": {
-      "vault": 116,
+      "vault": 119,
       "ship": 168,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-17T21:30:05.392723+00:00"
+    "generated_at": "2026-03-18T21:30:05.120420+00:00"
   },
   "recent": [
+    {
+      "id": "dba1c02c92c9be71",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "68d33c2a343367d9\u2026",
+      "signed_at": "2026-03-18T09:08:35.412286+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "d150be6dcab33ca2",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "75c9caac21125cea\u2026",
+      "signed_at": "2026-03-18T09:08:31.440028+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "444c8ce8d3a4918b",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "d6909b903586e665\u2026",
+      "signed_at": "2026-03-18T09:08:20.644801+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
     {
       "id": "c5cf3aedb5a9828c",
       "type": "vault",
@@ -169,33 +196,6 @@
       "signed_at": "2026-03-16T04:52:59.591001+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "fe6bd53bf45da6cf",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "e8f568520a688a76\u2026",
-      "signed_at": "2026-03-16T04:52:46.510610+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "2270e47ea1bcb931",
-      "type": "ship",
-      "name": "TriMind v2",
-      "sha256": "5221e27a8b9ec945\u2026",
-      "signed_at": "2026-03-14T07:14:45.950501+00:00",
-      "url": "",
-      "note": "Three-AI council orchestrator (Claude+Codex+Gemini). Modes: council, chain, verify, skills, auto-route. LaunchAgent on 8333, gateway on 8045, CLI at ~/.mirrordna/bin/trimind. Paul-aware prompts, cross-mind hallucination catching, distilled skill memory, ADHD-proof session context, security middleware."
-    },
-    {
-      "id": "d65e5a3e126edd0f",
-      "type": "ship",
-      "name": "Cognitive Dashboard Public Surface Wiring",
-      "sha256": "73e648105d63cf04\u2026",
-      "signed_at": "2026-03-13T11:05:12.736379+00:00",
-      "url": "",
-      "note": "Rewrote the public cognitive dashboard page to align with the live cockpit, MirrorDash desktop profiles, and the desktop intelligence pipeline; removed the fake browser probe story and tightened status/product copy."
     }
   ]
 }
