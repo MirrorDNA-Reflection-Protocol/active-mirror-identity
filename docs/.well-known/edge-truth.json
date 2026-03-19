@@ -1,0 +1,50 @@
+{
+  "schema_version": "edge-truth.v1",
+  "generated_at": "2026-03-19T07:59:50.394569+00:00",
+  "surface": {
+    "id": "mirror-seed",
+    "product": "Mirror Seed",
+    "domain": "id.activemirror.ai",
+    "origin": "https://id.activemirror.ai",
+    "kind": "static_site",
+    "builder": "public_sync",
+    "served_paths": [
+      "/version.json",
+      "/.well-known/edge-truth.json"
+    ]
+  },
+  "source": {
+    "repo": "active-mirror-identity",
+    "branch": "main",
+    "commit": "5d82c7719a0035163a0958477ea05dfa0968895b",
+    "committed_at": "2026-03-19T03:00:05+05:30",
+    "remote": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity.git",
+    "dirty": true,
+    "dirty_file_count": 6,
+    "dirty_files_sample": [
+      "docs/index.html",
+      "docs/provenance.json",
+      "package.json",
+      "docs/.well-known/",
+      "scripts/edge_truth_receipt.py",
+      "scripts/sync_identity_public_artifacts.py"
+    ]
+  },
+  "content": {
+    "watch_roots": [
+      "index.html",
+      "docs/index.html",
+      "package.json",
+      "provenance.json"
+    ],
+    "watch_file_count": 4,
+    "missing_paths": [],
+    "watch_fingerprint": "3ba02fff1121c5bfc4abdc9d5a18026ec93455cb656d5f41866a93ac0a77cabf",
+    "newest_path": "package.json",
+    "newest_mtime": "2026-03-19T07:59:38.256093+00:00"
+  },
+  "notes": [
+    "Public root is docs/ for GitHub Pages.",
+    "provenance.json is mirrored into docs/ before publishing."
+  ]
+}

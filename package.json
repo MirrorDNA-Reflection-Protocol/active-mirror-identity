@@ -9,6 +9,7 @@
     "test": "tests"
   },
   "scripts": {
+    "edge:refresh": "python3 scripts/sync_identity_public_artifacts.py --repo-root .",
     "test": "npx playwright test",
     "test:e2e": "npx playwright test tests/e2e/mirror-seed.spec.js",
     "test:monitor": "npx playwright test tests/e2e/monitoring.spec.js",
