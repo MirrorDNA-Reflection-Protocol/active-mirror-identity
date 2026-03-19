@@ -7,16 +7,43 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 451,
+    "total_signed": 454,
     "by_type": {
-      "vault": 119,
+      "vault": 122,
       "ship": 168,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-18T21:30:05.120420+00:00"
+    "generated_at": "2026-03-19T21:30:02.837829+00:00"
   },
   "recent": [
+    {
+      "id": "285e7e89210dfc42",
+      "type": "vault",
+      "name": "SHIPLOG.md",
+      "sha256": "33c116681e152da3\u2026",
+      "signed_at": "2026-03-19T07:51:09.441959+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "42a62752cd4f01e5",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "ddbd5428cc5adc4f\u2026",
+      "signed_at": "2026-03-19T07:50:43.878375+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "63e6867a5486fdc1",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "5b83f7b9e1eb7386\u2026",
+      "signed_at": "2026-03-19T05:34:51.664592+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
     {
       "id": "dba1c02c92c9be71",
       "type": "vault",
@@ -167,33 +194,6 @@
       "name": "FACTS.md",
       "sha256": "2dded5bea6e899aa\u2026",
       "signed_at": "2026-03-16T04:53:40.460708+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "4ff17005d93c4708",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "6cfd3be7c023d686\u2026",
-      "signed_at": "2026-03-16T04:53:29.461185+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "314b418f5d4e54c6",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "7fd86dc6e2380b38\u2026",
-      "signed_at": "2026-03-16T04:53:22.318593+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "e831408110161887",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "a9b1e4924849b4d4\u2026",
-      "signed_at": "2026-03-16T04:52:59.591001+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     }
