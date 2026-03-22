@@ -1,6 +1,6 @@
 {
   "schema_version": "edge-truth.v1",
-  "generated_at": "2026-03-19T08:05:01.812385+00:00",
+  "generated_at": "2026-03-21T21:32:12.598454+00:00",
   "surface": {
     "id": "mirror-seed",
     "product": "Mirror Seed",
@@ -16,12 +16,15 @@
   "source": {
     "repo": "active-mirror-identity",
     "branch": "main",
-    "commit": "2e8c57f47467de3681c8dd77a0e3c228d8b22f4f",
-    "committed_at": "2026-03-19T13:34:34+05:30",
+    "commit": "b58032b5c41da6d7c60942414ff0d80487822715",
+    "committed_at": "2026-03-20T03:00:02+05:30",
     "remote": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity.git",
-    "dirty": false,
-    "dirty_file_count": 0,
-    "dirty_files_sample": []
+    "dirty": true,
+    "dirty_file_count": 2,
+    "dirty_files_sample": [
+      "docs/provenance.json",
+      "provenance.json"
+    ]
   },
   "content": {
     "watch_roots": [
@@ -32,9 +35,9 @@
     ],
     "watch_file_count": 4,
     "missing_paths": [],
-    "watch_fingerprint": "3ba02fff1121c5bfc4abdc9d5a18026ec93455cb656d5f41866a93ac0a77cabf",
-    "newest_path": "package.json",
-    "newest_mtime": "2026-03-19T07:59:38.256093+00:00"
+    "watch_fingerprint": "e0166984ae006ff642b097bb1514ccee072884206b1b1af19b28961ae025bf1f",
+    "newest_path": "provenance.json",
+    "newest_mtime": "2026-03-21T21:30:00.483675+00:00"
   },
   "notes": [
     "Public root is docs/ for GitHub Pages.",

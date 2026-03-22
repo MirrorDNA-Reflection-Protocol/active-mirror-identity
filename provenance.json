@@ -7,16 +7,25 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 454,
+    "total_signed": 455,
     "by_type": {
-      "vault": 122,
+      "vault": 123,
       "ship": 168,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-19T21:30:02.837829+00:00"
+    "generated_at": "2026-03-21T21:30:00.456821+00:00"
   },
   "recent": [
+    {
+      "id": "131bbcbae696ed14",
+      "type": "vault",
+      "name": "FACTS.md",
+      "sha256": "6d44e384c36b1cab\u2026",
+      "signed_at": "2026-03-20T07:47:09.392264+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
     {
       "id": "285e7e89210dfc42",
       "type": "vault",
@@ -185,15 +194,6 @@
       "name": "FACTS.md",
       "sha256": "6d7546dd5ab11439\u2026",
       "signed_at": "2026-03-16T04:58:27.897789+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "62a29797ea850e0f",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "2dded5bea6e899aa\u2026",
-      "signed_at": "2026-03-16T04:53:40.460708+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     }
