@@ -7,16 +7,34 @@
     "signer_id": "active-mirror-hub.local:default"
   },
   "stats": {
-    "total_signed": 455,
+    "total_signed": 457,
     "by_type": {
-      "vault": 123,
+      "vault": 125,
       "ship": 168,
       "paper": 133,
       "post": 31
     },
-    "generated_at": "2026-03-21T21:30:00.456821+00:00"
+    "generated_at": "2026-03-22T21:30:02.249619+00:00"
   },
   "recent": [
+    {
+      "id": "1d11824a971308ff",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "886bb12b304c277e\u2026",
+      "signed_at": "2026-03-22T05:43:27.896168+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
+    {
+      "id": "435d72312b72e921",
+      "type": "vault",
+      "name": "CONTINUITY.md",
+      "sha256": "7e9a7f26f182136a\u2026",
+      "signed_at": "2026-03-22T05:43:02.738932+00:00",
+      "url": "",
+      "note": "critical vault file \u2014 auto-signed on write"
+    },
     {
       "id": "131bbcbae696ed14",
       "type": "vault",
@@ -176,24 +194,6 @@
       "name": "FACTS.md",
       "sha256": "63d2bd34bce082e9\u2026",
       "signed_at": "2026-03-16T08:36:34.855166+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "ccba3012d61b08cc",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "493f4848b0fd58fe\u2026",
-      "signed_at": "2026-03-16T05:02:59.748176+00:00",
-      "url": "",
-      "note": "critical vault file \u2014 auto-signed on write"
-    },
-    {
-      "id": "759631a439ee3d02",
-      "type": "vault",
-      "name": "FACTS.md",
-      "sha256": "6d7546dd5ab11439\u2026",
-      "signed_at": "2026-03-16T04:58:27.897789+00:00",
       "url": "",
       "note": "critical vault file \u2014 auto-signed on write"
     }
