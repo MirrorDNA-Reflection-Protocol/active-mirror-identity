@@ -1,6 +1,6 @@
 {
   "schema_version": "edge-truth.v1",
-  "generated_at": "2026-03-22T21:30:54.600633+00:00",
+  "generated_at": "2026-03-29T06:40:38.596727+00:00",
   "surface": {
     "id": "mirror-seed",
     "product": "Mirror Seed",
@@ -16,15 +16,12 @@
   "source": {
     "repo": "active-mirror-identity",
     "branch": "main",
-    "commit": "1d88bd4d0052684601e309cb00ad2959352cf2df",
-    "committed_at": "2026-03-22T11:17:15+05:30",
+    "commit": "2e56b1d0ede4bd3669e0b20e18d775cec6dd161d",
+    "committed_at": "2026-03-23T15:13:08+05:30",
     "remote": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity.git",
-    "dirty": true,
-    "dirty_file_count": 2,
-    "dirty_files_sample": [
-      "docs/provenance.json",
-      "provenance.json"
-    ]
+    "dirty": false,
+    "dirty_file_count": 0,
+    "dirty_files_sample": []
   },
   "content": {
     "watch_roots": [
