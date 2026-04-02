@@ -1,6 +1,6 @@
 {
   "schema_version": "edge-truth.v1",
-  "generated_at": "2026-03-29T06:40:38.596727+00:00",
+  "generated_at": "2026-04-02T16:39:45.890933+00:00",
   "surface": {
     "id": "mirror-seed",
     "product": "Mirror Seed",
@@ -14,14 +14,20 @@
     ]
   },
   "source": {
-    "repo": "active-mirror-identity",
-    "branch": "main",
-    "commit": "2e56b1d0ede4bd3669e0b20e18d775cec6dd161d",
-    "committed_at": "2026-03-23T15:13:08+05:30",
+    "repo": "mirror-seed-refresh",
+    "branch": "codex/mirror-seed-refresh",
+    "commit": "7facd921b637b0e32bee64adeeb32fd381176146",
+    "committed_at": "2026-04-01T10:20:27+05:30",
     "remote": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity.git",
-    "dirty": false,
-    "dirty_file_count": 0,
-    "dirty_files_sample": []
+    "dirty": true,
+    "dirty_file_count": 5,
+    "dirty_files_sample": [
+      "docs/ai.txt",
+      "docs/identity.html",
+      "docs/llms.txt",
+      "docs/portal.html",
+      "docs/sitemap.xml"
+    ]
   },
   "content": {
     "watch_roots": [
@@ -34,7 +40,7 @@
     "missing_paths": [],
     "watch_fingerprint": "c6add1af15f3ef2454cefbecb008d0fbd674b85730f01055668e5883b39f45d9",
     "newest_path": "provenance.json",
-    "newest_mtime": "2026-03-22T21:30:02.259814+00:00"
+    "newest_mtime": "2026-04-02T16:28:40.553467+00:00"
   },
   "notes": [
     "Public root is docs/ for GitHub Pages.",

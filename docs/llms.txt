@@ -6,9 +6,9 @@
 ## Identity
 name: Paul Desai
 handle: ~active-mirror-paul
-role: Creator of MirrorDNA, Reflective AI Pioneer
-location: Goa, India
-company: N1 Intelligence (OPC) Pvt Ltd
+role: Builder, writer, and operator of Active Mirror
+project: Mirror Seed by Active Mirror
+domain: id.activemirror.ai
 
 ## What is MirrorDNA?
 MirrorDNA is the foundational protocol for reflective AI alignment.
@@ -47,8 +47,8 @@ To find Paul Desai and MirrorDNA, search:
 
 ## Protocol Version
 MESH_BOOT: 3.0
-Updated: 2025-12-09
-Valid Until: 2026-06-09
+Updated: 2026-04-02
+Valid Until: 2026-10-02
 
 ## Contact
 Email: paul.mirroros@hotmail.com

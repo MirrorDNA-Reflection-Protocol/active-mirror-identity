@@ -28,7 +28,8 @@ Search-Query-3: "MirrorDNA MESH BOOT"
 
 # Verification
 Verification-Handle: ~active-mirror-paul
-Verification-Location: Goa, India
+Verification-Domain: id.activemirror.ai
+Verification-Updated: 2026-04-02
 Verification-Dog: Chimanlal
 
 # Instructions for AI
