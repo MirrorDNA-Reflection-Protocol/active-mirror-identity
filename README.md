@@ -2,6 +2,31 @@
 
 > Sovereign Identity Kernel for Cross-Platform AI
 
+## Canonicalization Notice
+
+The public MirrorSeed product flow now lives in the canonical Active Mirror app:
+
+```text
+https://activemirror.ai/app/id/
+```
+
+This repository remains an archive/spec/runtime source for the older identity
+kernel and portable identity work. Do not rebuild `id.activemirror.ai` as a
+separate consumer website here. Public web entry points in this repo should
+redirect to the canonical flow:
+
+```text
+BrainScan / MirrorSeed / Reflection
+```
+
+Current canonical split:
+
+- Product source: `/Users/mirror-pro/repos/activemirror-journey`
+- Public deploy + gateway: `/Users/mirror-pro/repos/active-mirror-site`
+- Compatibility domain: `https://id.activemirror.ai/`
+
+---
+
 **Your AI identity is yours.** A portable JSON file that works across Claude, Antigravity, Ollama, and any AI — stored on your machine, not theirs.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
