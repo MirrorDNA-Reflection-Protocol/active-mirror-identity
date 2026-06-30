@@ -4,10 +4,10 @@
 
 ## Canonicalization Notice
 
-The public MirrorSeed product flow now lives in the canonical Active Mirror app:
+The public setup flow now lives in the canonical Active Mirror app:
 
 ```text
-https://activemirror.ai/app/id/
+https://activemirror.ai/app/start/
 ```
 
 This repository remains an archive/spec/runtime source for the older identity
@@ -16,7 +16,7 @@ separate consumer website here. Public web entry points in this repo should
 redirect to the canonical flow:
 
 ```text
-BrainScan / MirrorSeed / Reflection
+Quick setup / saved choices / reflection
 ```
 
 Current canonical split:
