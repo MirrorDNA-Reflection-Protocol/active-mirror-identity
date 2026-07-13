@@ -13,6 +13,22 @@ def sync_identity_public_artifacts(repo_root: Path) -> None:
     provenance_target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(provenance_source, provenance_target)
 
+    # GitHub Pages currently publishes this repository from `/`. Keep `docs/`
+    # as the editable artifact source while mirroring the public trust routes.
+    public_mirrors = [
+        ("docs/.well-known/did.json", ".well-known/did.json"),
+        ("docs/.well-known/mirrorproof.json", ".well-known/mirrorproof.json"),
+        ("docs/issuers/chetana/v1.json", "issuers/chetana/v1.json"),
+        ("docs/schemas/mirrorproof.chetana.assessment.v0.1.json", "schemas/mirrorproof.chetana.assessment.v0.1.json"),
+        ("docs/status/chetana-v1.json", "status/chetana-v1.json"),
+        ("docs/trust/index.html", "trust/index.html"),
+        ("docs/sitemap.xml", "sitemap.xml"),
+    ]
+    for source_name, target_name in public_mirrors:
+        target = repo_root / target_name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(repo_root / source_name, target)
+
     parser = argparse.Namespace(
         repo_root=str(repo_root),
         surface_id="mirror-seed",
@@ -24,6 +40,12 @@ def sync_identity_public_artifacts(repo_root: Path) -> None:
         served_path=["/version.json", "/.well-known/edge-truth.json"],
         watch_path=[
             "index.html",
+            ".well-known/did.json",
+            ".well-known/mirrorproof.json",
+            "issuers",
+            "schemas",
+            "status",
+            "trust",
             "docs/index.html",
             "docs/.well-known",
             "docs/issuers",
@@ -34,8 +56,9 @@ def sync_identity_public_artifacts(repo_root: Path) -> None:
             "provenance.json",
         ],
         note=[
-            "Public root is docs/ for GitHub Pages.",
-            "provenance.json is mirrored into docs/ before publishing.",
+            "GitHub Pages publishes from the repository root.",
+            "Trust artifacts are authored in docs/ and mirrored into the public root.",
+            "provenance.json is mirrored into docs/ for the alternate docs layout.",
         ],
         exclude_name=["version.json", "edge-truth.json"],
         output=[],
@@ -44,6 +67,8 @@ def sync_identity_public_artifacts(repo_root: Path) -> None:
     write_receipt(
         payload,
         [
+            repo_root / "version.json",
+            repo_root / ".well-known" / "edge-truth.json",
             repo_root / "docs" / "version.json",
             repo_root / "docs" / ".well-known" / "edge-truth.json",
         ],

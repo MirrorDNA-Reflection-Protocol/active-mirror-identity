@@ -1,0 +1,9 @@
+{
+  "schema_version": "mirrorproof.discovery.v0.1",
+  "service": "Active Mirror ID Trust Registry",
+  "issuer_registry": "https://id.activemirror.ai/issuers/chetana/v1.json",
+  "key_status": "https://id.activemirror.ai/status/chetana-v1.json",
+  "did_document": "https://id.activemirror.ai/.well-known/did.json",
+  "verifier": "https://id.activemirror.ai/trust/",
+  "receipt_schema": "https://id.activemirror.ai/schemas/mirrorproof.chetana.assessment.v0.1.json"
+}

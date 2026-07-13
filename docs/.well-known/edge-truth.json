@@ -1,6 +1,6 @@
 {
   "schema_version": "edge-truth.v1",
-  "generated_at": "2026-07-13T07:02:40.237849+00:00",
+  "generated_at": "2026-07-13T07:13:11.259053+00:00",
   "surface": {
     "id": "mirror-seed",
     "product": "Mirror Seed",
@@ -16,29 +16,30 @@
   "source": {
     "repo": "active-mirror-identity",
     "branch": "main",
-    "commit": "ef61a55d72b4c4d06b6783efdcaec4444f4027f8",
-    "committed_at": "2026-07-02T19:05:19+05:30",
+    "commit": "ea0ed6f427b55c6d7f5fb5b71fe3b92b4aef640e",
+    "committed_at": "2026-07-13T12:41:30+05:30",
     "remote": "https://github.com/MirrorDNA-Reflection-Protocol/active-mirror-identity.git",
     "dirty": true,
-    "dirty_file_count": 12,
+    "dirty_file_count": 7,
     "dirty_files_sample": [
-      "docs/sitemap.xml",
-      "package.json",
-      "playwright.config.js",
       "scripts/sync_identity_public_artifacts.py",
-      "docs/.well-known/did.json",
-      "docs/.well-known/mirrorproof.json",
-      "docs/issuers/",
-      "docs/schemas/",
-      "docs/status/",
-      "docs/trust/",
-      "tests/e2e/trust.spec.js",
-      "tests/fixtures/"
+      ".well-known/",
+      "issuers/",
+      "schemas/",
+      "sitemap.xml",
+      "status/",
+      "trust/"
     ]
   },
   "content": {
     "watch_roots": [
       "index.html",
+      ".well-known/did.json",
+      ".well-known/mirrorproof.json",
+      "issuers",
+      "schemas",
+      "status",
+      "trust",
       "docs/index.html",
       "docs/.well-known",
       "docs/issuers",
@@ -48,14 +49,15 @@
       "package.json",
       "provenance.json"
     ],
-    "watch_file_count": 10,
+    "watch_file_count": 16,
     "missing_paths": [],
-    "watch_fingerprint": "284ffe9212bdaf1eb4edff89dd9fde7a625c0af0e7f1c60cdde2b2bf1951920b",
-    "newest_path": "package.json",
-    "newest_mtime": "2026-07-13T06:59:58.271941+00:00"
+    "watch_fingerprint": "9ce57c86fc9ab9ee215bee037de8da7ef7b7c943213d0423c0c24c9667e64b91",
+    "newest_path": "trust/index.html",
+    "newest_mtime": "2026-07-13T07:13:11.225215+00:00"
   },
   "notes": [
-    "Public root is docs/ for GitHub Pages.",
-    "provenance.json is mirrored into docs/ before publishing."
+    "GitHub Pages publishes from the repository root.",
+    "Trust artifacts are authored in docs/ and mirrored into the public root.",
+    "provenance.json is mirrored into docs/ for the alternate docs layout."
   ]
 }
