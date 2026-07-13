@@ -1,0 +1,13 @@
+{
+  "schema_version": "mirrorproof.issuer.v0.1",
+  "id": "https://id.activemirror.ai/issuers/chetana/v1.json",
+  "name": "Chetana Scam Safety Runtime",
+  "operator": "N1 Intelligence (OPC) Private Limited",
+  "jurisdiction": "India",
+  "key_id": "did:web:id.activemirror.ai#chetana-2026-01",
+  "algorithm": "Ed25519",
+  "public_key_base64url": "lO6PfesIRBJ7ajj_wFglBi3nusCltG0MeNrLEOAAmbs",
+  "status_url": "https://id.activemirror.ai/status/chetana-v1.json",
+  "verification_url": "https://id.activemirror.ai/trust/",
+  "assurance_boundary": "A valid signature proves receipt integrity and issuer-key possession. It does not prove that submitted content or the assessment is factually true."
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "mirrorproof.key-status.v0.1",
+  "issuer": "https://id.activemirror.ai/issuers/chetana/v1.json",
+  "key_id": "did:web:id.activemirror.ai#chetana-2026-01",
+  "status": "active",
+  "valid_from": "2026-07-13T00:00:00Z",
+  "revoked_at": null,
+  "superseded_by": null,
+  "updated_at": "2026-07-13T00:00:00Z"
+}

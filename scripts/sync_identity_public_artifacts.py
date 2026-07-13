@@ -22,7 +22,17 @@ def sync_identity_public_artifacts(repo_root: Path) -> None:
         kind="static_site",
         builder="public_sync",
         served_path=["/version.json", "/.well-known/edge-truth.json"],
-        watch_path=["index.html", "docs/index.html", "package.json", "provenance.json"],
+        watch_path=[
+            "index.html",
+            "docs/index.html",
+            "docs/.well-known",
+            "docs/issuers",
+            "docs/schemas",
+            "docs/status",
+            "docs/trust",
+            "package.json",
+            "provenance.json",
+        ],
         note=[
             "Public root is docs/ for GitHub Pages.",
             "provenance.json is mirrored into docs/ before publishing.",

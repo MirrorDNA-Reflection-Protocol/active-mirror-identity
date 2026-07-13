@@ -13,6 +13,7 @@
     "test": "npx playwright test",
     "test:e2e": "npx playwright test tests/e2e/mirror-seed.spec.js",
     "test:monitor": "npx playwright test tests/e2e/monitoring.spec.js",
+    "test:trust": "npx playwright test tests/e2e/trust.spec.js",
     "test:headed": "npx playwright test --headed",
     "test:report": "npx playwright show-report"
   },

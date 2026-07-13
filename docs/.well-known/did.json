@@ -1,0 +1,29 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/jws-2020/v1"
+  ],
+  "id": "did:web:id.activemirror.ai",
+  "verificationMethod": [
+    {
+      "id": "did:web:id.activemirror.ai#chetana-2026-01",
+      "type": "JsonWebKey2020",
+      "controller": "did:web:id.activemirror.ai",
+      "publicKeyJwk": {
+        "kty": "OKP",
+        "crv": "Ed25519",
+        "x": "lO6PfesIRBJ7ajj_wFglBi3nusCltG0MeNrLEOAAmbs"
+      }
+    }
+  ],
+  "assertionMethod": [
+    "did:web:id.activemirror.ai#chetana-2026-01"
+  ],
+  "service": [
+    {
+      "id": "did:web:id.activemirror.ai#mirrorproof-verifier",
+      "type": "MirrorProofVerifier",
+      "serviceEndpoint": "https://id.activemirror.ai/trust/"
+    }
+  ]
+}

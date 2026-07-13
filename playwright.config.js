@@ -9,7 +9,7 @@ module.exports = defineConfig({
   retries: 1,
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
-    baseURL: 'https://id.activemirror.ai',
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'https://id.activemirror.ai',
     headless: true,
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
